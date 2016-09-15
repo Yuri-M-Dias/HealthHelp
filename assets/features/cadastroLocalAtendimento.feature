@@ -18,6 +18,7 @@ Funcionalidade: Cadastro de Local de Atendimento
 		E preencher <nome>, <endereço>, <telefone> e <horarioAtendimento>
 		Então eu terei inserido um novo local com sucesso
 		E terei uma agenda única para ele
+		E eu estarei associada ao local que criei
 		Exemplos:
 			| nome | endereço | telefone | horarioAtendimento |
 			| Hospital Santa Helena | Rua T-68, Nº3565 ao lado do restaurante Bom Sabor | (62) 9254-3421 | 08:00-12:00+14:00-18:00 |
