@@ -1,6 +1,6 @@
 #language: pt
 
-Funcionalidade: Visualizar agenda
+Funcionalidade: Editar agenda
 	#TODO: fazer genérico? Um visualizar agenda para loca, outro para profissional?
 	Como a Secretaria
 	Eu quero visualizar a agenda de um local de atendimento
@@ -15,10 +15,10 @@ Funcionalidade: Visualizar agenda
 
 	Esquema do Cenário: Visualizar agenda de hospital
 		Dado que eu posso selecionar diferentes agendas
-		E eu selecionei um hospital para visualizar a agenda
+		E eu selecionei a agenda de um hospital ao qual sou vinculado
 		Quando eu selecionar o hospital <nomeHospital>
 		E selecionar a data <dataDeVisualização>
-		Então eu irei visualizar os seguintes dados na agenda: <dadosAgenda>
+		Então eu irei visualizar dados na agenda conforme abaixo: <dadosAgenda>
 
 		Exemplos:
 			| nomeHospital | dataDeVisualização | dadosAgenda |
