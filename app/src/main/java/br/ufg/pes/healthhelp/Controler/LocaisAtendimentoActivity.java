@@ -33,4 +33,5 @@ public class LocaisAtendimentoActivity extends AppCompatActivity {
         Intent intent = new Intent(this, NovoLocalAtendimentoActivity.class);
         startActivity(intent);
     }
+
 }

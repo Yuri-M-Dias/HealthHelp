@@ -29,6 +29,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/botao_hospital"
         android:layout_marginTop="400dp"
         android:text="@string/hospital"
         android:background="#009688"
@@ -38,6 +39,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/botao_novo_local_atendimento"
         android:text="@string/novo_local"
         android:background="#009688"
         android:textColor="@android:color/background_light"
