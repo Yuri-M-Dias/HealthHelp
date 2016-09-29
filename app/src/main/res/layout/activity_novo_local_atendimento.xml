@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_novo_local_atendimento"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context="br.ufg.pes.healthhelp.Controler.NovoLocalAtendimentoActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolBarNovoLocalAtendimento"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#009688"
+        android:textAlignment="textStart"
+        app:subtitle="@string/novo_local"
+        app:subtitleTextColor="@android:color/background_light"
+        app:navigationIcon="@drawable/ic_arrow_back_black_24dp" >
+
+    </android.support.v7.widget.Toolbar>
+</LinearLayout>

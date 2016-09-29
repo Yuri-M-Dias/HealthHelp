@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">HealthHelp</string>
+    <string name="locais_atendimento">Locais de Atendimento</string>
+    <string name="novo_local">Novo Local de Atendimento</string>
+    <string name="hospital">Hospital</string>
+    <string name="salvar">SALVAR</string>
 </resources>
