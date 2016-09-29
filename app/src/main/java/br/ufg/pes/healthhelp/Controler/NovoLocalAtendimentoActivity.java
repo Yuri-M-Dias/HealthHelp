@@ -26,7 +26,6 @@ public class NovoLocalAtendimentoActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolBarNovoLocalAtendimento);
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
-
-
 }
