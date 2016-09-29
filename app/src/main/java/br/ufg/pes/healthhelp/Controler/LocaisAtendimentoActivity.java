@@ -17,6 +17,12 @@ public class LocaisAtendimentoActivity extends AppCompatActivity {
         initToolbar();
     }
 
+    private void initToolbar() {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolBarLocaisAtendimento);
+        toolbar.setTitle("");
+        setSupportActionBar(toolbar);
+    }
+
     public void hospital(View view){
         Intent intent = new Intent(this, HospitalActivity.class);
         startActivity(intent);
@@ -25,11 +31,5 @@ public class LocaisAtendimentoActivity extends AppCompatActivity {
     public void novoLocal(View view){
         Intent intent = new Intent(this, NovoLocalAtendimentoActivity.class);
         startActivity(intent);
-    }
-
-    private void initToolbar() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolBarLocaisAtendimento);
-        toolbar.setTitle("");
-        setSupportActionBar(toolbar);
     }
 }

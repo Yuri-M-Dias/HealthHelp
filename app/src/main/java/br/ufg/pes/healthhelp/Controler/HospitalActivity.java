@@ -16,15 +16,17 @@ public class HospitalActivity extends AppCompatActivity {
         initToolbar();
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        finish();
+        return super.onOptionsItemSelected(item);
+    }
+
     private void initToolbar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolBarHospital);
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        finish();
-        return super.onOptionsItemSelected(item);
-    }
+
 }

@@ -16,15 +16,17 @@ public class NovoLocalAtendimentoActivity extends AppCompatActivity {
         initToolbar();
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        finish();
+        return super.onOptionsItemSelected(item);
+    }
+
     private void initToolbar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolBarNovoLocalAtendimento);
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        finish();
-        return super.onOptionsItemSelected(item);
-    }
+
 }
