@@ -1,0 +1,18 @@
+{
+  "localAtendimento" : {
+    "-K2ib62mjHh34CAUbide" : {
+      "endereco" : "Rua T63",
+      "nome" : "Hospital Santa Cecilia",
+      "telefone" : "932441012",
+      "horariosFuncionamento" : {
+        "-K2ib62mjHh34CAUqwd" : {
+          "dataFim" : "Sep 26 2016",
+          "dataInicio" : "Sep 26 2016",
+          "horaFim" : 22,
+          "horaInicio" : 8,
+          "diasSemana" : 23456
+          }
+        }
+    }
+  }
+}
