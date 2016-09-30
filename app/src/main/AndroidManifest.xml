@@ -8,15 +8,15 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Controler.LocaisAtendimentoActivity">
+        <activity android:name=".controller.LocaisAtendimentoActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Controler.HospitalActivity" />
-        <activity android:name=".Controler.NovoLocalAtendimentoActivity"></activity>
+        <activity android:name=".controller.HospitalActivity" />
+        <activity android:name=".controller.NovoLocalAtendimentoActivity"></activity>
     </application>
 
 </manifest>

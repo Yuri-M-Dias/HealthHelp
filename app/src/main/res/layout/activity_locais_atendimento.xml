@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     android:layout_gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context="br.ufg.pes.healthhelp.Controler.LocaisAtendimentoActivity">
+    tools:context="br.ufg.pes.healthhelp.controller.LocaisAtendimentoActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolBarLocaisAtendimento"
@@ -16,6 +16,7 @@
         android:layout_height="wrap_content"
         android:background="#009688"
         android:textAlignment="textStart"
+        android:elevation="4dp"
         app:subtitle="@string/locais_atendimento"
         app:subtitleTextColor="@android:color/background_light"
         app:navigationIcon="@drawable/ic_arrow_back_black_24dp" >
@@ -24,20 +25,21 @@
 
     <ListView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="380dp"
+        android:layout_weight="@android:integer/status_bar_notification_info_maxnum"/>
 
     <Button
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/botao_hospital"
-        android:layout_marginTop="400dp"
+        android:layout_marginTop="8dp"
         android:text="@string/hospital"
         android:background="#009688"
         android:textColor="@android:color/background_light"
         android:onClick="hospital"/>
 
     <Button
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/botao_novo_local_atendimento"
         android:text="@string/novo_local"
