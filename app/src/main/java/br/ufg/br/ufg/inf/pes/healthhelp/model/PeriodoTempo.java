@@ -21,6 +21,18 @@ public class PeriodoTempo {
         this.diasSemana = diasSemana;
     }
 
+    public String getHoraInicio() {
+        return horaInicio;
+    }
+
+    public void setHoraInicio(String horaInicio) {
+        this.horaInicio = horaInicio;
+    }
+
+    public String getHoraFim() {
+        return horaFim;
+    }
+
     public String getDiasSemana() {
 
         return diasSemana;

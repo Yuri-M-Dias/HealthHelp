@@ -41,14 +41,15 @@ public class LocalAtendimentoDAO {
 
         horarios.add(
                 new PeriodoTempo(
-                        "8", "22",
+                        "8",
+                        "22",
                         cal.getTime(),
                         cal.getTime(),
                         "23456"
                 )
         );
         //inserindo mock de primeiro localAtendimento
-        criarLocalAtendimento(mFirebaseDatabaseReference, new LocalAtendimento("Hospital Santa Cecília", "Avenida T63", "62934012231", horarios));
+        //criarLocalAtendimento(mFirebaseDatabaseReference, new LocalAtendimento("Hospital Santa Cecília", "Avenida T63", "62934012231", horarios));
 
         obterLocaisAtendimento(mFirebaseDatabaseReference);
 
@@ -56,7 +57,7 @@ public class LocalAtendimentoDAO {
 
     private void criarLocalAtendimento(DatabaseReference mFirebaseDatabaseReference, LocalAtendimento localAtendimento) {
         //TODO: pegar o id do novo local atraves do ultimo id registrado do banco de dados
-        String idLocal = "1";
+        String idLocal = "0";
 
         mFirebaseDatabaseReference.child(HEALTHHELP_CHILD).child(idLocal).setValue(localAtendimento);
     }
