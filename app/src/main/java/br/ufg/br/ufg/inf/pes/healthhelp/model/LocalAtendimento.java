@@ -6,8 +6,8 @@ import java.util.List;
  * Created by deassisrosal on 9/29/16.
  */
 public class LocalAtendimento {
-    private String nome;
     private String endereco;
+    private String nome;
     private String telefone;
 
     private List<PeriodoTempo> horariosAtendimento;
@@ -34,6 +34,17 @@ public class LocalAtendimento {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
+    }
+
+    // construtor padrao para o firebase
+    public LocalAtendimento() {
+    }
+
+    public LocalAtendimento(String endereco, String nome, String telefone, List<PeriodoTempo> horariosAtendimento) {
+        this.endereco = endereco;
+        this.nome = nome;
+        this.telefone = telefone;
+        this.horariosAtendimento = horariosAtendimento;
     }
 
     public List<PeriodoTempo> getHorariosAtendimento() {

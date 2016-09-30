@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center_horizontal"
-    tools:context="br.ufg.pes.healthhelp.Controler.HospitalActivity">
+    tools:context="br.ufg.pes.healthhelp.controller.HospitalActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolBarHospital"
@@ -15,6 +15,7 @@
         android:layout_height="wrap_content"
         android:background="#009688"
         android:textAlignment="textStart"
+        android:elevation="4dp"
         app:subtitle="@string/hospital"
         app:subtitleTextColor="@android:color/background_light"
         app:navigationIcon="@drawable/ic_arrow_back_black_24dp" >
