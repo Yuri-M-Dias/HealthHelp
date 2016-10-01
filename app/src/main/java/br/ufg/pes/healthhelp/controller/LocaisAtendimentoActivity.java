@@ -6,15 +6,17 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import br.ufg.br.ufg.inf.pes.healthhelp.dao.LocalAtendimentoDAO;
 import br.ufg.pes.healthhelp.R;
 
 public class LocaisAtendimentoActivity extends AppCompatActivity {
-
+    private LocalAtendimentoDAO localAtendimentoDAO;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_locais_atendimento);
         initToolbar();
+        localAtendimentoDAO = new LocalAtendimentoDAO();
     }
 
     private void initToolbar() {

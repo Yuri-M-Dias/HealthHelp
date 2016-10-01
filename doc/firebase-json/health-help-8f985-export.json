@@ -1,0 +1,32 @@
+{
+  "localAtendimento" : [ null, {
+    "endereco" : "Hospital Santa Cecília",
+    "horariosAtendimento" : [ {
+      "dataFim" : {
+        "date" : 26,
+        "day" : 2,
+        "hours" : 12,
+        "minutes" : 59,
+        "month" : 0,
+        "seconds" : 0,
+        "time" : 1453820340083,
+        "timezoneOffset" : 120,
+        "year" : 116
+      },
+      "dataInicio" : {
+        "date" : 26,
+        "day" : 2,
+        "hours" : 12,
+        "minutes" : 59,
+        "month" : 0,
+        "seconds" : 0,
+        "time" : 1453820340083,
+        "timezoneOffset" : 120,
+        "year" : 116
+      },
+      "diasSemana" : "23456"
+    } ],
+    "nome" : "Avenida T63",
+    "telefone" : "62934012231"
+  } ]
+}
