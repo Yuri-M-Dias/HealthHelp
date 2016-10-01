@@ -9,8 +9,9 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import br.ufg.pes.healthhelp.Controler.HospitalActivity;
-import br.ufg.pes.healthhelp.Controler.LocaisAtendimentoActivity;
+import br.ufg.pes.healthhelp.controller.HospitalActivity;
+import br.ufg.pes.healthhelp.controller.LocaisAtendimentoActivity;
+import br.ufg.pes.healthhelp.controller.NovoLocalAtendimentoActivity;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
@@ -44,7 +45,7 @@ public class ExampleInstrumentedTest {
         mActivityRule.launchActivity(new Intent());
         onView(withId(R.id.botao_novo_local_atendimento))
                 .perform(click());
-        intended(hasComponent(LocaisAtendimentoActivity.class.getName()));
+        intended(hasComponent(NovoLocalAtendimentoActivity.class.getName()));
         release();
     }
 
