@@ -11,7 +11,8 @@ env:
       - build-tools-23.0.3
       - android-23
       - extra-android-m2repository
-      - sys-img-${ANDROID_ABI}-${ANDROID_TARGET}
+        #- sys-img-${ANDROID_ABI}-${ANDROID_TARGET}
+      - sys-img-armeabi-v7a-android-23
     licenses:
         - android-sdk-preview-license-52d11cd2
         - android-sdk-license-c81a61d9
