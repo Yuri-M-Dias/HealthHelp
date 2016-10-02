@@ -9,6 +9,7 @@ android:
     - extra-android-m2repository
       #- sys-img-${ANDROID_ABI}-${ANDROID_TARGET}
     - sys-img-armeabi-v7a-android-23
+    - extra-google-google_play_services
   licenses:
     - android-sdk-preview-license-52d11cd2
     - android-sdk-license-c81a61d9
