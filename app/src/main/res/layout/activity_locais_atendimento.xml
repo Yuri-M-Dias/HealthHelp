@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     android:layout_gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context="br.ufg.pes.healthhelp.controller.LocaisAtendimentoActivity">
+    tools:context="br.ufg.inf.pes.healthhelp.controller.LocaisAtendimentoActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolBarLocaisAtendimento"

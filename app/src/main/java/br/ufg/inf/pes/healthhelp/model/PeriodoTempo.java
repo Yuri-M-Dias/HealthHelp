@@ -1,4 +1,4 @@
-package br.ufg.br.ufg.inf.pes.healthhelp.model;
+package br.ufg.inf.pes.healthhelp.model;
 
 import java.util.Date;
 

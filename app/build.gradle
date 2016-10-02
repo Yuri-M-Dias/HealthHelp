@@ -5,7 +5,7 @@ android {
     compileSdkVersion 23
     buildToolsVersion "23.0.3"
     defaultConfig {
-        applicationId "br.ufg.pes.healthhelp"
+        applicationId "br.ufg.inf.pes.healthhelp"
         minSdkVersion 15
         targetSdkVersion 23
         versionCode 1
@@ -18,8 +18,8 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         debug {
-            applicationIdSuffix '.debug'
-            versionNameSuffix '-debug'
+            //applicationIdSuffix '.debug'
+            //versionNameSuffix '-debug'
             testCoverageEnabled true
         }
     }

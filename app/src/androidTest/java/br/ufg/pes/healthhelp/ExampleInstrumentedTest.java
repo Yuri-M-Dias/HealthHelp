@@ -9,9 +9,9 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import br.ufg.pes.healthhelp.controller.HospitalActivity;
-import br.ufg.pes.healthhelp.controller.LocaisAtendimentoActivity;
-import br.ufg.pes.healthhelp.controller.NovoLocalAtendimentoActivity;
+import br.ufg.inf.pes.healthhelp.controller.HospitalActivity;
+import br.ufg.inf.pes.healthhelp.controller.LocaisAtendimentoActivity;
+import br.ufg.inf.pes.healthhelp.controller.NovoLocalAtendimentoActivity;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;

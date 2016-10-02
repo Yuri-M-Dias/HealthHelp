@@ -1,4 +1,4 @@
-package br.ufg.br.ufg.inf.pes.healthhelp.dao;
+package br.ufg.inf.pes.healthhelp.dao;
 
 import android.util.Log;
 
@@ -13,8 +13,8 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-import br.ufg.br.ufg.inf.pes.healthhelp.model.LocalAtendimento;
-import br.ufg.br.ufg.inf.pes.healthhelp.model.PeriodoTempo;
+import br.ufg.inf.pes.healthhelp.model.LocalAtendimento;
+import br.ufg.inf.pes.healthhelp.model.PeriodoTempo;
 
 /**
  * Created by deassisrosal on 9/29/16.
