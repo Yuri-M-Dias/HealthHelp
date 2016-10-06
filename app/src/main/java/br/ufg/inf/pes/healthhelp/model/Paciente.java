@@ -1,4 +1,4 @@
-package br.ufg.pes.healthhelp.model;
+package br.ufg.inf.pes.healthhelp.model;
 
 /**
  * Created by gleibson on 29/09/16.

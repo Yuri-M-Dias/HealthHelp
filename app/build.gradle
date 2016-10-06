@@ -1,10 +1,11 @@
 apply plugin: 'com.android.application'
+apply plugin: 'jacoco-android'
 
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.3"
     defaultConfig {
-        applicationId "br.ufg.pes.healthhelp"
+        applicationId "br.ufg.inf.pes.healthhelp"
         minSdkVersion 15
         targetSdkVersion 23
         versionCode 1
@@ -16,13 +17,22 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
-    }
-    dexOptions {
-        incremental true
+        debug {
+//            applicationIdSuffix '.debug'
+//            versionNameSuffix '-debug'
+            testCoverageEnabled true
+        }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_7
         targetCompatibility JavaVersion.VERSION_1_7
+    }
+    lintOptions {
+        abortOnError false
+    }
+    adbOptions {
+        timeOutInMs 10 * 60 * 1000
+        installOptions "-d","-t"
     }
 }
 
@@ -36,11 +46,9 @@ dependencies {
     // Firebase
     compile 'com.google.firebase:firebase-core:9.4.0'
     compile 'com.google.firebase:firebase-database:9.4.0'
-    compile 'com.google.firebase:firebase-auth:9.4.0'
     compile 'com.google.firebase:firebase-config:9.4.0'
 
     testCompile 'junit:junit:4.12'
-    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
     androidTestCompile 'com.android.support.test.espresso:espresso-intents:2.2'
 }
 

@@ -1,8 +1,4 @@
-package br.ufg.pes.healthhelp.dao;
-
-import android.util.Log;
-
-import br.ufg.pes.healthhelp.model.Paciente;
+package br.ufg.inf.pes.healthhelp.dao;
 
 /**
  * Created by gleibson on 29/09/16.

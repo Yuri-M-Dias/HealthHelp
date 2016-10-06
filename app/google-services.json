@@ -8,17 +8,17 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:749889229630:android:92d5f939c97d8d2f",
+        "mobilesdk_app_id": "1:749889229630:android:200146fa4e9bfcd1",
         "android_client_info": {
-          "package_name": "br.ufg.pes.healthhelp"
+          "package_name": "br.ufg.inf.pes.healthhelp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "749889229630-26h73qdc0p9sl7hqi1kgdsqb1ajallbu.apps.googleusercontent.com",
+          "client_id": "749889229630-seluj8f74032ocvge3t0o79a9jvk99b1.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "br.ufg.pes.healthhelp",
+            "package_name": "br.ufg.inf.pes.healthhelp",
             "certificate_hash": "EB3C4746CA502F4A0090148AC105C45AA693165C"
           }
         },
