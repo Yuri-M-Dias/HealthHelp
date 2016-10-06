@@ -25,7 +25,7 @@ public class LocaisAtendimentoActivity extends AppCompatActivity {
     }
 
     public void hospital(View view){
-        Intent intent = new Intent(this, HospitalActivity.class);
+        Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
     }
 
