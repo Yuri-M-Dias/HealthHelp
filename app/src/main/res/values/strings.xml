@@ -4,4 +4,6 @@
     <string name="novo_local">Novo Local de Atendimento</string>
     <string name="hospital">Hospital</string>
     <string name="salvar">SALVAR</string>
+    <string name="endereco">Endereço</string>
+    <string name="telefone">Telefone</string>
 </resources>
