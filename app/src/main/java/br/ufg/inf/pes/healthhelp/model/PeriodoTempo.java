@@ -12,6 +12,8 @@ public class PeriodoTempo {
     private Date dataFim;
     private String diasSemana;
 
+    public PeriodoTempo() {
+    }
 
     public PeriodoTempo(String horaInicio, String horaFim, Date dataInicio, Date dataFim, String diasSemana) {
         this.horaInicio = horaInicio;

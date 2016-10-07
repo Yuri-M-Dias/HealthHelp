@@ -2,6 +2,7 @@ package br.ufg.inf.pes.healthhelp.dao;
 
 import android.util.Log;
 
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -15,6 +16,7 @@ import java.util.List;
 
 import br.ufg.inf.pes.healthhelp.model.LocalAtendimento;
 import br.ufg.inf.pes.healthhelp.model.PeriodoTempo;
+import br.ufg.inf.pes.healthhelp.service.LocalAtendimentoService;
 
 /**
  * Created by deassisrosal on 9/29/16.
@@ -25,19 +27,21 @@ public class LocalAtendimentoDAO {
 
     private static final String TAG = "LocalAtendimentoDao";
     private static final String HEALTHHELP_CHILD = "localAtendimento";
-    private List<LocalAtendimento> locaisAtendimento;
+    private List<LocalAtendimento> mLocaisAtendimento;
+    private LocalAtendimentoService mLocalAtendimentoService;
 
-    public List<LocalAtendimento> getLocaisAtendimento() {
-        return locaisAtendimento;
+    public List<LocalAtendimento> getmLocaisAtendimento() {
+        return mLocaisAtendimento;
     }
 
-    public void setLocaisAtendimento(List<LocalAtendimento> locaisAtendimento) {
-        this.locaisAtendimento = locaisAtendimento;
+    public void setmLocaisAtendimento(List<LocalAtendimento> mLocaisAtendimento) {
+        this.mLocaisAtendimento = mLocaisAtendimento;
     }
 
-    public LocalAtendimentoDAO() {
+    public LocalAtendimentoDAO(LocalAtendimentoService localAtendimentoService ) {
         mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
-
+        mLocalAtendimentoService = localAtendimentoService;
+        mLocaisAtendimento = new ArrayList<>();
         carregarLocaisAtendimento(mFirebaseDatabaseReference);
         // mock do primeiro registro de horariosAtendimento de um local
        /* ArrayList<PeriodoTempo> horarios = new ArrayList<>();
@@ -69,18 +73,38 @@ public class LocalAtendimentoDAO {
         mFirebaseDatabaseReference.child(HEALTHHELP_CHILD).setValue(localAtendimento);
     }
 
-    private List<LocalAtendimento> carregarLocaisAtendimento(DatabaseReference mFirebaseDatabaseReference) {
-        mFirebaseDatabaseReference.child(HEALTHHELP_CHILD).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                locaisAtendimento = (List<LocalAtendimento>) dataSnapshot.getValue();
-                Log.i(TAG,"os locais cadastrados sao: " + locaisAtendimento);
-            }
+    private void carregarLocaisAtendimento(DatabaseReference mFirebaseDatabaseReference) {
+        Log.w(TAG,"carregarLocaisAtendimento aberto. ");
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.e(TAG, "carregarLocaisAtendimento: onCancelled", databaseError.toException());
-            }
-        });
+        mFirebaseDatabaseReference.child(HEALTHHELP_CHILD).addChildEventListener(
+                new ChildEventListener() {
+                    @Override
+                    public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                        mLocaisAtendimento.add(dataSnapshot.getValue(LocalAtendimento.class));
+                        Log.w(TAG,"os locais cadastrados sao: " + mLocaisAtendimento);
+                        mLocalAtendimentoService.receberLocaisAtendimento(mLocaisAtendimento);
+                    }
+
+                    @Override
+                    public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+                    }
+
+                    @Override
+                    public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+                    }
+
+                    @Override
+                    public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        Log.e(TAG, "carregarLocaisAtendimento: onCancelled", databaseError.toException());
+                        mLocalAtendimentoService.receberLocaisAtendimento(null);
+                    }
+                });
     }
 }

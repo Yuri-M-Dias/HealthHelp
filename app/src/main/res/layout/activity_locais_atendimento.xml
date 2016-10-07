@@ -8,19 +8,7 @@
     android:layout_height="match_parent"
     android:layout_gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context="br.ufg.inf.pes.healthhelp.controller.LocaisAtendimentoActivity">
-
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolBarLocaisAtendimento"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#009688"
-        android:textAlignment="textStart"
-        android:elevation="4dp"
-        app:subtitle="@string/locais_atendimento"
-        app:subtitleTextColor="@android:color/background_light"
-        app:navigationIcon="@drawable/ic_arrow_back_black_24dp" >
-    </android.support.v7.widget.Toolbar>
+    tools:context="br.ufg.inf.pes.healthhelp.view.LocaisAtendimentoActivity">
 
     <com.github.clans.fab.FloatingActionButton
         android:id="@+id/fab"
@@ -44,9 +32,23 @@
         app:fab_label="Label">
     </com.github.clans.fab.FloatingActionButton>
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolBarLocaisAtendimento"
+        android:layout_width="381dp"
+        android:layout_height="wrap_content"
+        android:background="#009688"
+        android:textAlignment="textStart"
+        android:elevation="4dp"
+        app:subtitle="@string/locais_atendimento"
+        app:subtitleTextColor="@android:color/background_light"
+        app:navigationIcon="@drawable/ic_arrow_back_black_24dp">
+    </android.support.v7.widget.Toolbar>
+
     <ListView
+        android:id="@+id/list_locais_atendimento"
         android:layout_width="match_parent"
         android:layout_height="380dp"
         android:layout_weight="@android:integer/status_bar_notification_info_maxnum"/>
+
 
 </FrameLayout>

@@ -40,11 +40,12 @@ public class LocalAtendimento {
     public LocalAtendimento() {
     }
 
-    public LocalAtendimento(String endereco, String nome, String telefone, List<PeriodoTempo> horariosAtendimento) {
-        this.endereco = endereco;
-        this.nome = nome;
-        this.telefone = telefone;
+    public LocalAtendimento(List<PeriodoTempo> horariosAtendimento, String nome, String endereco, String telefone) {
         this.horariosAtendimento = horariosAtendimento;
+        this.nome = nome;
+        this.endereco = endereco;
+        this.telefone = telefone;
+
     }
 
     public List<PeriodoTempo> getHorariosAtendimento() {

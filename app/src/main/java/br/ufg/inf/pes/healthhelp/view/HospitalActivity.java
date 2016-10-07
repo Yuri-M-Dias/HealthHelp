@@ -1,4 +1,4 @@
-package br.ufg.inf.pes.healthhelp.controller;
+package br.ufg.inf.pes.healthhelp.view;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

@@ -8,15 +8,15 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="br.ufg.inf.pes.healthhelp.controller.LocaisAtendimentoActivity">
+        <activity android:name="br.ufg.inf.pes.healthhelp.view.LocaisAtendimentoActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="br.ufg.inf.pes.healthhelp.controller.HospitalActivity" />
-        <activity android:name="br.ufg.inf.pes.healthhelp.controller.NovoLocalAtendimentoActivity"></activity>
+        <activity android:name="br.ufg.inf.pes.healthhelp.view.HospitalActivity" />
+        <activity android:name="br.ufg.inf.pes.healthhelp.view.NovoLocalAtendimentoActivity"></activity>
     </application>
 
 </manifest>

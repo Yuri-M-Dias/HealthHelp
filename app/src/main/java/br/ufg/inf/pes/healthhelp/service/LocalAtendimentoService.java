@@ -1,9 +1,12 @@
 package br.ufg.inf.pes.healthhelp.service;
 
+import android.content.Context;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import br.ufg.inf.pes.healthhelp.view.LocaisAtendimentoActivity;
 import br.ufg.inf.pes.healthhelp.dao.LocalAtendimentoDAO;
 import br.ufg.inf.pes.healthhelp.model.LocalAtendimento;
 
@@ -13,20 +16,30 @@ import br.ufg.inf.pes.healthhelp.model.LocalAtendimento;
 
 public class LocalAtendimentoService {
     private LocalAtendimentoDAO localAtendimentoDAO;
+    private LocaisAtendimentoActivity locaisAtendimentoActivity;
 
     private static final String TAG = "LocalAtendimentoService";
 
-    public LocalAtendimentoService() {
-        localAtendimentoDAO = new LocalAtendimentoDAO();
+    public LocalAtendimentoService(LocaisAtendimentoActivity locaisAtendimentoActivity) {
+        this.localAtendimentoDAO = new LocalAtendimentoDAO(this);
+        this.locaisAtendimentoActivity = locaisAtendimentoActivity;
     }
 
-    public ArrayList<LocalAtendimento> obterLocaisAtendimento() {
-        ArrayList<LocalAtendimento> localAtendimentos = (ArrayList) localAtendimentoDAO.getLocaisAtendimento();
-        if( localAtendimentos != null) {
-            return localAtendimentos;
+    public void configuralocaisAtendimento(Context context) {
+
+    }
+
+    /**
+     * disparado pelo onStateChanged do firebase após uma requisição por dados no firebase é feita
+     * @param locaisAtendimento
+     */
+    public void receberLocaisAtendimento(List<LocalAtendimento> locaisAtendimento) {
+        if( locaisAtendimento != null) {
+            locaisAtendimentoActivity.loadLocaisAtendimentoFirebase(locaisAtendimento);
         }
         else{
-            Log.e(TAG, "obterLocaisAtendimento: local null" + localAtendimentos);
+            Log.e(TAG, "obterLocaisAtendimento: locais não obtidos: localAtendimentos: " + locaisAtendimento);
+            locaisAtendimentoActivity.loadLocaisAtendimentoFirebase(new ArrayList<LocalAtendimento>());
         }
     }
 }
