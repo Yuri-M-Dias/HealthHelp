@@ -33,8 +33,8 @@ public class ExampleInstrumentedTest {
     public void testBotaoHospital() throws Exception {
         init();
         mActivityRule.launchActivity(new Intent());
-        onView(withId(R.id.botao_hospital))
-                .perform(click());
+        //onView(withId(R.id.botao_hospital))
+        //        .perform(click());
         intended(hasComponent(HospitalActivity.class.getName()));
         release();
     }
@@ -43,8 +43,8 @@ public class ExampleInstrumentedTest {
     public void testBotaoNovoLocalDeAtendimento() throws Exception {
         init();
         mActivityRule.launchActivity(new Intent());
-        onView(withId(R.id.botao_novo_local_atendimento))
-                .perform(click());
+        //onView(withId(R.id.botao_novo_local_atendimento))
+        //        .perform(click());
         intended(hasComponent(NovoLocalAtendimentoActivity.class.getName()));
         release();
     }

@@ -41,7 +41,10 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+
     compile 'com.android.support:appcompat-v7:23.1.1'
+    compile 'com.github.clans:fab:1.6.4'
+
 
     // Firebase
     compile 'com.google.firebase:firebase-core:9.4.0'
