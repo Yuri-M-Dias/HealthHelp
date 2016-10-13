@@ -35,11 +35,11 @@ public class LocalAtendimentoService {
      */
     public void receberLocaisAtendimento(List<LocalAtendimento> locaisAtendimento) {
         if( locaisAtendimento != null) {
-            locaisAtendimentoActivity.loadLocaisAtendimentoFirebase(locaisAtendimento);
+            locaisAtendimentoActivity.carregar(locaisAtendimento);
         }
         else{
             Log.e(TAG, "obterLocaisAtendimento: locais não obtidos: localAtendimentos: " + locaisAtendimento);
-            locaisAtendimentoActivity.loadLocaisAtendimentoFirebase(new ArrayList<LocalAtendimento>());
+            locaisAtendimentoActivity.carregar(new ArrayList<LocalAtendimento>());
         }
     }
 }

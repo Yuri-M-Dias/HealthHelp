@@ -1,11 +1,12 @@
 package br.ufg.inf.pes.healthhelp.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by deassisrosal on 9/29/16.
  */
-public class PeriodoTempo {
+public class PeriodoTempo implements Serializable {
     private String horaInicio;
     private String horaFim;
     private Date dataInicio;

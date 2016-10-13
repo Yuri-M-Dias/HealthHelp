@@ -75,6 +75,8 @@ public class LocalAtendimentoDAO {
 
     private void carregarLocaisAtendimento(DatabaseReference mFirebaseDatabaseReference) {
         Log.w(TAG,"carregarLocaisAtendimento aberto. ");
+        DatabaseReference locaisAtendimentoDatabaseReference = mFirebaseDatabaseReference.child(HEALTHHELP_CHILD);
+
 
         mFirebaseDatabaseReference.child(HEALTHHELP_CHILD).addChildEventListener(
                 new ChildEventListener() {

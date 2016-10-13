@@ -10,12 +10,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import br.ufg.inf.pes.healthhelp.model.LocalAtendimento;
@@ -67,7 +66,7 @@ public class LocaisAtendimentoActivity extends AppCompatActivity {
      * cria um array adapter e converte cada item do arraylist para uma view
      * @param locaisAtendimento a lista de locais de atendimento retornada
      */
-    public void loadLocaisAtendimentoFirebase(List<LocalAtendimento> locaisAtendimento) {
+    public void carregar(List<LocalAtendimento> locaisAtendimento) {
         Log.w("LocaisAtendimentoAct","os locais cadastrados sao: " + locaisAtendimento);
 
         // R.layout.simple_list_item_1 é um layout simples de TextView
@@ -79,7 +78,18 @@ public class LocaisAtendimentoActivity extends AppCompatActivity {
         LocaisListAdapter adapter =  new LocaisListAdapter(this, locaisAtendimento);
 
         // anexa o adapter a uma ListView
-        ListView locaisAtendimentoView = (ListView) findViewById(R.id.list_locais_atendimento);
+        final ListView locaisAtendimentoView = (ListView) findViewById(R.id.list_locais_atendimento);
+
+        locaisAtendimentoView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent localAtendimentoIntent = new Intent(LocaisAtendimentoActivity.this, LocalAtendimentoActivity.class);
+                LocalAtendimento localAtendimento = (LocalAtendimento) locaisAtendimentoView.getItemAtPosition(i);
+                Log.i("Locais Atendimento", "Local de Atendimento selecionado: " + localAtendimento.getNome());
+                localAtendimentoIntent.putExtra(LocalAtendimentoActivity.LOCAL_ATENDIMENTO_INTENT_PARAMETER, localAtendimento);
+                startActivity(localAtendimentoIntent);
+            }
+        });
 
         locaisAtendimentoView.setAdapter(adapter);
 
@@ -93,7 +103,7 @@ public class LocaisAtendimentoActivity extends AppCompatActivity {
     }
 
     public void hospital(View view){
-        Intent intent = new Intent(this, HospitalActivity.class);
+        Intent intent = new Intent(this, LocalAtendimentoActivity.class);
         startActivity(intent);
     }
 

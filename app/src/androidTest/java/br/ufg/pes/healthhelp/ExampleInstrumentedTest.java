@@ -9,7 +9,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import br.ufg.inf.pes.healthhelp.view.HospitalActivity;
+import br.ufg.inf.pes.healthhelp.view.LocalAtendimentoActivity;
 import br.ufg.inf.pes.healthhelp.view.LocaisAtendimentoActivity;
 import br.ufg.inf.pes.healthhelp.view.NovoLocalAtendimentoActivity;
 
@@ -34,7 +34,7 @@ public class ExampleInstrumentedTest {
         mActivityRule.launchActivity(new Intent());
         //onView(withId(R.id.botao_hospital))
         //        .perform(click());
-        intended(hasComponent(HospitalActivity.class.getName()));
+        intended(hasComponent(LocalAtendimentoActivity.class.getName()));
         release();
     }
 

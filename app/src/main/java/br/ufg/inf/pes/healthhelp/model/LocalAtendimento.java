@@ -1,11 +1,12 @@
 package br.ufg.inf.pes.healthhelp.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by deassisrosal on 9/29/16.
  */
-public class LocalAtendimento {
+public class LocalAtendimento implements Serializable{
     private String endereco;
     private String nome;
     private String telefone;
