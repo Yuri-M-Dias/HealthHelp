@@ -1,4 +1,4 @@
-package br.ufg.pes.healthhelp;
+package br.ufg.inf.pes.healthhelp;
 
 import android.content.Intent;
 import android.support.test.filters.LargeTest;
@@ -9,16 +9,14 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import br.ufg.inf.pes.healthhelp.view.LocalAtendimentoActivity;
 import br.ufg.inf.pes.healthhelp.view.LocaisAtendimentoActivity;
+import br.ufg.inf.pes.healthhelp.view.LocalAtendimentoActivity;
 import br.ufg.inf.pes.healthhelp.view.NovoLocalAtendimentoActivity;
 
-import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.intent.Intents.init;
 import static android.support.test.espresso.intent.Intents.intended;
 import static android.support.test.espresso.intent.Intents.release;
 import static android.support.test.espresso.intent.matcher.IntentMatchers.hasComponent;
-import static android.support.test.espresso.matcher.ViewMatchers.withId;
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest

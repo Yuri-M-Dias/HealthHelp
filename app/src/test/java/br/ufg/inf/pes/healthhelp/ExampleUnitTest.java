@@ -1,4 +1,4 @@
-package br.ufg.pes.healthhelp;
+package br.ufg.inf.pes.healthhelp;
 
 import org.junit.Test;
 

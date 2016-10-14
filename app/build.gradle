@@ -10,8 +10,17 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testApplicationId "br.ufg.inf.pes.healthhelp.test"
+        testInstrumentationRunner "br.ufg.inf.pes.healthhelp.test.Instrumentation"
+        multiDexEnabled true
     }
+
+    sourceSets {
+        androidTest {
+            assets.srcDirs = ['src/androidTest/assets']
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -23,6 +32,7 @@ android {
             testCoverageEnabled true
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_7
         targetCompatibility JavaVersion.VERSION_1_7
@@ -38,13 +48,9 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
 
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.github.clans:fab:1.6.4'
-
 
     // Firebase
     compile 'com.google.firebase:firebase-core:9.4.0'
@@ -52,7 +58,14 @@ dependencies {
     compile 'com.google.firebase:firebase-config:9.4.0'
 
     testCompile 'junit:junit:4.12'
-    androidTestCompile 'com.android.support.test.espresso:espresso-intents:2.2'
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    androidTestCompile('com.android.support.test.espresso:espresso-intents:2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    androidTestCompile 'info.cukes:cucumber-android:1.2.0@jar'
+    androidTestCompile 'info.cukes:cucumber-picocontainer:1.2.0'
 }
 
 apply plugin: 'com.google.gms.google-services'
