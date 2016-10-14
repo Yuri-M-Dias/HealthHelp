@@ -1,18 +1,19 @@
+#language: pt
 Funcionalidade: Cadastro de pacientes
 	Como Paciente
 	Eu quero realizar cadastro dos meus dados pessoais.
-	Para que eu consiga realizar as operaÁıes no sistema. 
+	Para que eu consiga realizar as opera√ß√µes no sistema. 
 
-	RestriÁıes:
+	Restri√ß√µes:
 		1) O sistema deve estar acessivel. 
-		2) Somente ser„o aceitos dados v·lidos.
-		3) N„o permitir cadastros de pacientes com os mesmos dados.
+		2) Somente ser√£o aceitos dados v√°lidos.
+		3) N√£o permitir cadastros de pacientes com os mesmos dados.
 
 
-	Esquema do Cen·rio: Cadastrando um paciente
-		Quando eu inserir os dados v·lidos
-		E preencher <nome>, <telefones>, <email>, <data de nascimento>, <sexo> e <convÍnio>
-		Ent„o eu terei realizado o cadastro
+	Esquema do Cen√°rio: Cadastrando um paciente
+		Quando eu inserir os dados v√°lidos
+		E preencher <nome>, <telefones>, <email>, <data de nascimento>, <sexo> e <conv√™nio>
+		Ent√£o eu terei realizado o cadastro
 		Exemplos:
 			| nome | telefone | email | dataDeNascimento | sexo | convenio |
 			| Joao Barros | (62) 9331-1105 | joaobarros@gmail.com | 13/12/1995 | M | IPASGO |
