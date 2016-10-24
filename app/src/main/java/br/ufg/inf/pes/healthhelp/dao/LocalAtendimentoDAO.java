@@ -19,7 +19,7 @@ import br.ufg.inf.pes.healthhelp.service.LocalAtendimentoService;
 /**
  * Created by deassisrosal on 9/29/16.
  */
-public class LocalAtendimentoDAO extends AbstractDAO {
+public class LocalAtendimentoDAO extends AbstractDAO<LocalAtendimento> {
 
 
     // local atendimento fornecido a ser atualizado
@@ -127,12 +127,10 @@ public class LocalAtendimentoDAO extends AbstractDAO {
     }
 
     @Override
-    public void inserir(Object localAtendimento) {
+    public void inserir(LocalAtendimento localAtendimento) {
         getmFirebaseDatabaseReference().child(getDaoHealthHelpChild()).push().setValue(
                 (LocalAtendimento) localAtendimento);
-
     }
-
 
     /**
      * atualiza no firebase na mesma chave o novo local de atendimento.
@@ -183,8 +181,8 @@ public class LocalAtendimentoDAO extends AbstractDAO {
      * @param novoLocalAtendimento novo local com novos dados passados pelo usuario
      */
     @Override
-    public void alterar(String nomeLocal, Object novoLocalAtendimento) {
-        mLocalUpdate = (LocalAtendimento) novoLocalAtendimento;
+    public void alterar(String nomeLocal, LocalAtendimento novoLocalAtendimento) {
+        mLocalUpdate = novoLocalAtendimento;
 
         ValueEventListener buscaParaUpdateListener = new ValueEventListener() {
             @Override
@@ -215,5 +213,7 @@ public class LocalAtendimentoDAO extends AbstractDAO {
         };
 
         buscarPorNomeLocalAtendimento(nomeLocal, buscaParaUpdateListener);
+
     }
+    
 }

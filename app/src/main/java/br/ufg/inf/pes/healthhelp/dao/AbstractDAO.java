@@ -7,7 +7,7 @@ import com.google.firebase.database.DatabaseReference;
  * Created by deassisrosal on 10/18/16.
  */
 
-public abstract class AbstractDAO implements InterfaceDAO{
+public abstract class AbstractDAO<T> implements InterfaceDAO<T>{
     private String daoTag;
     private String daoHealthHelpChild;
 
