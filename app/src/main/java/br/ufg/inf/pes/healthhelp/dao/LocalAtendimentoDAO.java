@@ -21,30 +21,9 @@ import br.ufg.inf.pes.healthhelp.service.LocalAtendimentoService;
  */
 public class LocalAtendimentoDAO extends AbstractDAO<LocalAtendimento> {
 
-
-    // local atendimento fornecido a ser atualizado
-    private LocalAtendimento mLocalUpdate;
-
-    private List<LocalAtendimento> mLocaisAtendimento;
-    private LocalAtendimentoService mLocalAtendimentoService;
-
-    public LocalAtendimentoDAO(LocalAtendimentoService localAtendimentoService) {
-        setDaoTag("LocalAtendimentoDao");
-        setDaoHealthHelpChild("localAtendimento");
-        setmFirebaseDatabaseReference(FirebaseDatabase.getInstance().getReference());
-        mLocalAtendimentoService = localAtendimentoService;
-        mLocaisAtendimento = new ArrayList<>();
-        loadAll();
+    public LocalAtendimentoDAO(DatabaseCallback callback) {
+        super(LocalAtendimentoDAO.class.getCanonicalName(), "localAtendimento", callback);
     }
-
-    public List<LocalAtendimento> getmLocaisAtendimento() {
-        return mLocaisAtendimento;
-    }
-
-    public void setmLocaisAtendimento(List<LocalAtendimento> mLocaisAtendimento) {
-        this.mLocaisAtendimento = mLocaisAtendimento;
-    }
-
 
     /**
      * @param nomeLocal
@@ -63,6 +42,7 @@ public class LocalAtendimentoDAO extends AbstractDAO<LocalAtendimento> {
     @Override
     public void loadAll() {
         setmFirebaseChildEventListener(new ChildEventListener() {
+            List<LocalAtendimento> locaisAtendimento = new ArrayList<>();
             /**
              * retorna lista de locais cadastrados e sempre que um novo local for inserido
              *
@@ -71,9 +51,9 @@ public class LocalAtendimentoDAO extends AbstractDAO<LocalAtendimento> {
              */
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String keyIrmaoAnterior) {
-                mLocaisAtendimento.add(dataSnapshot.getValue(LocalAtendimento.class));
-                Log.w(getDaoTag(), "setChildListener: OnChildAdded: os locais cadastrados sao: " + mLocaisAtendimento);
-                mLocalAtendimentoService.receberLocaisAtendimento(mLocaisAtendimento);
+                locaisAtendimento.add(dataSnapshot.getValue(LocalAtendimento.class));
+                Log.w(getDaoTag(), "setChildListener: OnChildAdded: os locais cadastrados sao: " + locaisAtendimento);
+                getDatabaseCallback().onComplete(locaisAtendimento);
             }
 
             /**
@@ -106,7 +86,7 @@ public class LocalAtendimentoDAO extends AbstractDAO<LocalAtendimento> {
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 Log.e(getDaoTag(), "setChildListener: onCancelled:", databaseError.toException());
-                mLocalAtendimentoService.receberLocaisAtendimento(null);
+                getDatabaseCallback().onError(databaseError);
             }
 
         });
@@ -181,8 +161,7 @@ public class LocalAtendimentoDAO extends AbstractDAO<LocalAtendimento> {
      * @param novoLocalAtendimento novo local com novos dados passados pelo usuario
      */
     @Override
-    public void alterar(String nomeLocal, LocalAtendimento novoLocalAtendimento) {
-        mLocalUpdate = novoLocalAtendimento;
+    public void alterar(String nomeLocal, final LocalAtendimento novoLocalAtendimento) {
 
         ValueEventListener buscaParaUpdateListener = new ValueEventListener() {
             @Override
@@ -200,7 +179,7 @@ public class LocalAtendimentoDAO extends AbstractDAO<LocalAtendimento> {
                 String localUpdatekey = locAt.keySet().iterator().next();
 
                 // atualiza pela key buscada
-                getmFirebaseDatabaseReference().child(getDaoHealthHelpChild()).child(localUpdatekey).setValue(mLocalUpdate);
+                getmFirebaseDatabaseReference().child(getDaoHealthHelpChild()).child(localUpdatekey).setValue(novoLocalAtendimento);
             }
 
             /*
@@ -215,5 +194,5 @@ public class LocalAtendimentoDAO extends AbstractDAO<LocalAtendimento> {
         buscarPorNomeLocalAtendimento(nomeLocal, buscaParaUpdateListener);
 
     }
-    
+
 }

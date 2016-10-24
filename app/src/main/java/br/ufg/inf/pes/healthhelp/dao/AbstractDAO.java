@@ -2,6 +2,7 @@ package br.ufg.inf.pes.healthhelp.dao;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 /**
  * Created by deassisrosal on 10/18/16.
@@ -10,9 +11,17 @@ import com.google.firebase.database.DatabaseReference;
 public abstract class AbstractDAO<T> implements InterfaceDAO<T>{
     private String daoTag;
     private String daoHealthHelpChild;
+    private DatabaseCallback databaseCallback;
 
     private DatabaseReference mFirebaseDatabaseReference;
     private ChildEventListener mFirebaseChildEventListener;
+
+    public AbstractDAO(String daoTag, String daoHealthHelpChild, DatabaseCallback databaseCallback) {
+        this.daoTag = daoTag;
+        this.daoHealthHelpChild = daoHealthHelpChild;
+        this.databaseCallback = databaseCallback;
+        this.mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
+    }
 
     protected String getDaoHealthHelpChild() {
         return daoHealthHelpChild;
@@ -28,6 +37,14 @@ public abstract class AbstractDAO<T> implements InterfaceDAO<T>{
 
     protected void setDaoTag(String daoTag) {
         this.daoTag = daoTag;
+    }
+
+    public DatabaseCallback getDatabaseCallback() {
+        return databaseCallback;
+    }
+
+    public void setDatabaseCallback(DatabaseCallback databaseCallback) {
+        this.databaseCallback = databaseCallback;
     }
 
     protected DatabaseReference getmFirebaseDatabaseReference() {
