@@ -14,7 +14,6 @@ public abstract class AbstractDAO<T> implements InterfaceDAO<T>{
 
     private DatabaseCallback databaseCallback;
     private DatabaseReference databaseReference;
-    private ChildEventListener childEventListener;
 
     public AbstractDAO(String TAG, String DATABASE_CHILD) {
         this.TAG = TAG;
@@ -38,11 +37,4 @@ public abstract class AbstractDAO<T> implements InterfaceDAO<T>{
         this.databaseReference = getmFirebaseDatabaseReference;
     }
 
-    protected ChildEventListener getChildEventListener() {
-        return childEventListener;
-    }
-
-    protected void setChildEventListener(ChildEventListener childEventListener) {
-        this.childEventListener = childEventListener;
-    }
 }

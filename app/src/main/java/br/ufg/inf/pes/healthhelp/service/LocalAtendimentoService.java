@@ -12,10 +12,19 @@ public class LocalAtendimentoService {
 
     private static final String TAG = "LocalAtendimentoService";
 
+    public LocalAtendimentoService() {
+        localAtendimentoDAO = new LocalAtendimentoDAO();
+    }
+
     public void solicitarListaLocaisAtendimento(DatabaseCallback callback) {
-        localAtendimentoDAO = new LocalAtendimentoDAO(callback);
+        localAtendimentoDAO.setDatabaseCallback(callback);
         localAtendimentoDAO.carregarTodos();
 
+    }
+
+    public void solicitarBuscaLocalAtendimento(DatabaseCallback callback, String nomeLocal) {
+        localAtendimentoDAO.setDatabaseCallback(callback);
+        localAtendimentoDAO.buscarPorNome(nomeLocal);
     }
 
 }

@@ -12,7 +12,7 @@ public interface InterfaceDAO<T> {
 
     public void inserir( T objeto );
 
-    public void remover( String id );
+    public void remover( T objeto );
 
     public void atualizar(T objeto );
 }
