@@ -9,34 +9,17 @@ import com.google.firebase.database.FirebaseDatabase;
  */
 
 public abstract class AbstractDAO<T> implements InterfaceDAO<T>{
-    private String daoTag;
-    private String daoHealthHelpChild;
+    public final String TAG;
+    public final String DATABASE_CHILD;
+
     private DatabaseCallback databaseCallback;
+    private DatabaseReference databaseReference;
+    private ChildEventListener childEventListener;
 
-    private DatabaseReference mFirebaseDatabaseReference;
-    private ChildEventListener mFirebaseChildEventListener;
-
-    public AbstractDAO(String daoTag, String daoHealthHelpChild, DatabaseCallback databaseCallback) {
-        this.daoTag = daoTag;
-        this.daoHealthHelpChild = daoHealthHelpChild;
-        this.databaseCallback = databaseCallback;
-        this.mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
-    }
-
-    protected String getDaoHealthHelpChild() {
-        return daoHealthHelpChild;
-    }
-
-    protected void setDaoHealthHelpChild(String daoHealthHelpChild) {
-        this.daoHealthHelpChild = daoHealthHelpChild;
-    }
-
-    protected String getDaoTag() {
-        return daoTag;
-    }
-
-    protected void setDaoTag(String daoTag) {
-        this.daoTag = daoTag;
+    public AbstractDAO(String TAG, String DATABASE_CHILD) {
+        this.TAG = TAG;
+        this.DATABASE_CHILD = DATABASE_CHILD;
+        this.databaseReference = FirebaseDatabase.getInstance().getReference();
     }
 
     public DatabaseCallback getDatabaseCallback() {
@@ -47,19 +30,19 @@ public abstract class AbstractDAO<T> implements InterfaceDAO<T>{
         this.databaseCallback = databaseCallback;
     }
 
-    protected DatabaseReference getmFirebaseDatabaseReference() {
-        return mFirebaseDatabaseReference;
+    protected DatabaseReference getDatabaseReference() {
+        return databaseReference;
     }
 
-    protected void setmFirebaseDatabaseReference(DatabaseReference getmFirebaseDatabaseReference) {
-        this.mFirebaseDatabaseReference = getmFirebaseDatabaseReference;
+    protected void setDatabaseReference(DatabaseReference getmFirebaseDatabaseReference) {
+        this.databaseReference = getmFirebaseDatabaseReference;
     }
 
-    protected ChildEventListener getmFirebaseChildEventListener() {
-        return mFirebaseChildEventListener;
+    protected ChildEventListener getChildEventListener() {
+        return childEventListener;
     }
 
-    protected void setmFirebaseChildEventListener(ChildEventListener mFirebaseChildEventListener) {
-        this.mFirebaseChildEventListener = mFirebaseChildEventListener;
+    protected void setChildEventListener(ChildEventListener childEventListener) {
+        this.childEventListener = childEventListener;
     }
 }

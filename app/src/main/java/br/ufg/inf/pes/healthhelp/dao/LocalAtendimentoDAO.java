@@ -5,7 +5,6 @@ import android.util.Log;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
@@ -14,7 +13,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import br.ufg.inf.pes.healthhelp.model.LocalAtendimento;
-import br.ufg.inf.pes.healthhelp.service.LocalAtendimentoService;
 
 /**
  * Created by deassisrosal on 9/29/16.
@@ -22,16 +20,26 @@ import br.ufg.inf.pes.healthhelp.service.LocalAtendimentoService;
 public class LocalAtendimentoDAO extends AbstractDAO<LocalAtendimento> {
 
     public LocalAtendimentoDAO(DatabaseCallback callback) {
-        super(LocalAtendimentoDAO.class.getCanonicalName(), "localAtendimento", callback);
+        super(LocalAtendimentoDAO.class.getCanonicalName(), "localAtendimento");
+        setDatabaseCallback(callback);
     }
 
     /**
      * @param nomeLocal
-     * @param resultListener resultado da busca é retornado no result listener passado pelo método invocador
      */
-    public void buscarPorNomeLocalAtendimento(String nomeLocal, ValueEventListener resultListener) {
-        getmFirebaseDatabaseReference().child(getDaoHealthHelpChild()).
-                orderByChild("nome").equalTo(nomeLocal).addListenerForSingleValueEvent(resultListener);
+    public void buscarPorNome(String nomeLocal) {
+        getDatabaseReference().child(DATABASE_CHILD).
+                orderByChild("nome").equalTo(nomeLocal).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                //TODO
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                //TODO
+            }
+        });
 
     }
 
@@ -40,8 +48,8 @@ public class LocalAtendimentoDAO extends AbstractDAO<LocalAtendimento> {
      * os locais de atendimentos cadastrados quando este método é chamado
      */
     @Override
-    public void loadAll() {
-        setmFirebaseChildEventListener(new ChildEventListener() {
+    public void carregarTodos() {
+        setChildEventListener(new ChildEventListener() {
             List<LocalAtendimento> locaisAtendimento = new ArrayList<>();
             /**
              * retorna lista de locais cadastrados e sempre que um novo local for inserido
@@ -52,7 +60,7 @@ public class LocalAtendimentoDAO extends AbstractDAO<LocalAtendimento> {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String keyIrmaoAnterior) {
                 locaisAtendimento.add(dataSnapshot.getValue(LocalAtendimento.class));
-                Log.w(getDaoTag(), "setChildListener: OnChildAdded: os locais cadastrados sao: " + locaisAtendimento);
+                Log.w(TAG, "setChildListener: OnChildAdded: os locais cadastrados sao: " + locaisAtendimento);
                 getDatabaseCallback().onComplete(locaisAtendimento);
             }
 
@@ -85,15 +93,15 @@ public class LocalAtendimentoDAO extends AbstractDAO<LocalAtendimento> {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Log.e(getDaoTag(), "setChildListener: onCancelled:", databaseError.toException());
+                Log.e(TAG, "setChildListener: onCancelled:", databaseError.toException());
                 getDatabaseCallback().onError(databaseError);
             }
 
         });
 
         // aqui é setado como o listener para o que ocorrer em /localAtendimento/.
-        getmFirebaseDatabaseReference().child(
-                getDaoHealthHelpChild()).addChildEventListener(getmFirebaseChildEventListener());
+        getDatabaseReference().child(
+                DATABASE_CHILD).addChildEventListener(getChildEventListener());
     }
 
     /**
@@ -102,13 +110,13 @@ public class LocalAtendimentoDAO extends AbstractDAO<LocalAtendimento> {
      *           pelos usuarios dos metodos publicos de LocalAtendimentoDAO
      */
     @Override
-    public void loadById(String nomeLocal) {
+    public void carregarPelaId(int nomeLocal) {
         //TODO: criar metodo de carregar um unico local de atendimento
     }
 
     @Override
     public void inserir(LocalAtendimento localAtendimento) {
-        getmFirebaseDatabaseReference().child(getDaoHealthHelpChild()).push().setValue(
+        getDatabaseReference().child(DATABASE_CHILD).push().setValue(
                 (LocalAtendimento) localAtendimento);
     }
 
@@ -130,14 +138,14 @@ public class LocalAtendimentoDAO extends AbstractDAO<LocalAtendimento> {
                         new GenericTypeIndicator<HashMap<String, LocalAtendimento>>() {
                         };
                 HashMap<String, LocalAtendimento> locAt = dataSnapshot.getValue(t);
-                Log.w(getDaoTag(), "removerLocalAtendimento: OnDataChange: o local encontrado foi: " +
+                Log.w(TAG, "removerLocalAtendimento: OnDataChange: o local encontrado foi: " +
                         locAt.values().iterator().next().getNome());
 
                 // salva a firebase key do local buscado
                 String localUpdatekey = locAt.keySet().iterator().next();
 
                 // remove pela key
-                getmFirebaseDatabaseReference().child(getDaoHealthHelpChild()).child(localUpdatekey).removeValue();
+                getDatabaseReference().child(DATABASE_CHILD).child(localUpdatekey).removeValue();
             }
 
             /*
@@ -145,23 +153,22 @@ public class LocalAtendimentoDAO extends AbstractDAO<LocalAtendimento> {
             */
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Log.e(getDaoTag(), "removerLocalAtendimento: onCancelled:", databaseError.toException());
+                Log.e(TAG, "removerLocalAtendimento: onCancelled:", databaseError.toException());
             }
         };
 
-        buscarPorNomeLocalAtendimento(nomeLocal, buscaParaRemoverListener);
+        //TODO: Buscar outra forma de remoção sem ser pela busca do objeto. A id deveri ser suficiente pra isso.
+        //buscarPorNome(nomeLocal, buscaParaRemoverListener);
     }
 
     /**
      * atualiza no firebase na mesma chave o novo local de atendimento
      * Se mLocalUpdatekey for nula, o local a ser atualizado não foi encontrado no banco
      *
-     * @param nomeLocal            o nome do local a ser atualizado. Sendo o nome ques esta cadastrado no banco
-     *                             antes do update
      * @param novoLocalAtendimento novo local com novos dados passados pelo usuario
      */
     @Override
-    public void alterar(String nomeLocal, final LocalAtendimento novoLocalAtendimento) {
+    public void atualizar(final LocalAtendimento novoLocalAtendimento) {
 
         ValueEventListener buscaParaUpdateListener = new ValueEventListener() {
             @Override
@@ -172,14 +179,14 @@ public class LocalAtendimentoDAO extends AbstractDAO<LocalAtendimento> {
                         new GenericTypeIndicator<HashMap<String, LocalAtendimento>>() {
                         };
                 HashMap<String, LocalAtendimento> locAt = dataSnapshot.getValue(t);
-                Log.w(getDaoTag(), "atualizarLocalAtendimento: OnDataChange: o local encontrado foi: " +
+                Log.w(TAG, "atualizarLocalAtendimento: OnDataChange: o local encontrado foi: " +
                         locAt.values().iterator().next().getNome());
 
                 // salva a firebase key do local buscado
                 String localUpdatekey = locAt.keySet().iterator().next();
 
                 // atualiza pela key buscada
-                getmFirebaseDatabaseReference().child(getDaoHealthHelpChild()).child(localUpdatekey).setValue(novoLocalAtendimento);
+                getDatabaseReference().child(DATABASE_CHILD).child(localUpdatekey).setValue(novoLocalAtendimento);
             }
 
             /*
@@ -187,11 +194,12 @@ public class LocalAtendimentoDAO extends AbstractDAO<LocalAtendimento> {
              */
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Log.e(getDaoTag(), "atualizarLocalAtendimento: onCancelled:", databaseError.toException());
+                Log.e(TAG, "atualizarLocalAtendimento: onCancelled:", databaseError.toException());
             }
         };
 
-        buscarPorNomeLocalAtendimento(nomeLocal, buscaParaUpdateListener);
+        //TODO: buscar outra forma de atualização sem ser pela busca do objeto. A id deveri ser suficiente pra isso.
+        //buscarPorNome(nomeLocal, buscaParaUpdateListener);
 
     }
 

@@ -5,13 +5,14 @@ package br.ufg.inf.pes.healthhelp.dao;
  */
 
 public interface InterfaceDAO<T> {
-    public void loadAll();
 
-    public void loadById( String id );
+    public void carregarTodos();
 
-    public void inserir( T object );
+    public void carregarPelaId(int id );
+
+    public void inserir( T objeto );
 
     public void remover( String id );
 
-    public void alterar( String id , T object);
+    public void atualizar(T objeto );
 }

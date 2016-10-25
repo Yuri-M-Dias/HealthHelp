@@ -6,12 +6,21 @@ import java.util.List;
 /**
  * Created by deassisrosal on 9/29/16.
  */
-public class LocalAtendimento implements Serializable{
+public class LocalAtendimento implements Serializable {
+    private int id;
     private String endereco;
     private String nome;
     private String telefone;
 
     private List<PeriodoTempo> horariosAtendimento;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getNome() {
         return nome;
