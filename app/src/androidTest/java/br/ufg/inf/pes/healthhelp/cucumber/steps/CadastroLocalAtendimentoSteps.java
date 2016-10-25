@@ -1,22 +1,16 @@
-package br.ufg.inf.pes.healthhelp.test.steps;
+package br.ufg.inf.pes.healthhelp.cucumber.steps;
 
-import android.test.ActivityInstrumentationTestCase2;
-
-import br.ufg.inf.pes.healthhelp.view.NovoLocalAtendimentoActivity;
 import cucumber.api.PendingException;
 import cucumber.api.java.pt.Dado;
 import cucumber.api.java.pt.E;
 import cucumber.api.java.pt.Então;
 import cucumber.api.java.pt.Quando;
 
-public class CadastroLocalAtendimentoSteps extends ActivityInstrumentationTestCase2<NovoLocalAtendimentoActivity> {
+public class CadastroLocalAtendimentoSteps {
 
-    public CadastroLocalAtendimentoSteps(NovoLocalAtendimentoActivity activityClass) {
-        super(NovoLocalAtendimentoActivity.class);
-    }
-
-    @Quando("^eu selecionar o hospital <nomeHospital>$")
-    public void euSelecionarOHospitalNomeHospital() throws Throwable {
+    @Então("^eu terei inserido um novo local com sucesso$")
+    public void euTereiInseridoUmNovoLocalComSucesso() throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
         throw new PendingException();
     }
 
@@ -38,14 +32,8 @@ public class CadastroLocalAtendimentoSteps extends ActivityInstrumentationTestCa
         throw new PendingException();
     }
 
-    @E("^preencher <nome>, <endereço>, <telefone> e <horarioAtendimento>$")
-    public void preencherNomeEndereçoTelefoneEHorarioAtendimento() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
-    }
-
-    @Então("^eu terei inserido um novo local com sucesso$")
-    public void euTereiInseridoUmNovoLocalComSucesso() throws Throwable {
+    @E("^preencher \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\" e \"([^\"]*)\"$")
+    public void preencherE(String arg0, String arg1, String arg2, String arg3) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         throw new PendingException();
     }
@@ -61,5 +49,4 @@ public class CadastroLocalAtendimentoSteps extends ActivityInstrumentationTestCa
         // Write code here that turns the phrase above into concrete actions
         throw new PendingException();
     }
-
 }

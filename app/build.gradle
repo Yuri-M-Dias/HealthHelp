@@ -10,15 +10,9 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
-        testApplicationId "br.ufg.inf.pes.healthhelp.test"
-        testInstrumentationRunner "br.ufg.inf.pes.healthhelp.test.Instrumentation"
+        //testApplicationId "br.ufg.inf.pes.healthhelp.cucumber"
+        testInstrumentationRunner "br.ufg.inf.pes.healthhelp.cucumber.runner.Instrumentation"
         multiDexEnabled true
-    }
-
-    sourceSets {
-        androidTest {
-            assets.srcDirs = ['src/androidTest/assets']
-        }
     }
 
     buildTypes {
@@ -58,14 +52,39 @@ dependencies {
     compile 'com.google.firebase:firebase-config:9.4.0'
 
     testCompile 'junit:junit:4.12'
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+    // Espresso
+    androidTestCompile('com.android.support.test:runner:0.5') {
         exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    androidTestCompile('com.android.support.test.espresso:espresso-intents:2.2', {
+        exclude group: 'com.android.support', module: 'support-v4'
+        exclude group: 'com.android.support', module: 'recyclerview-v7'
+    }
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2') {
         exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    androidTestCompile 'info.cukes:cucumber-android:1.2.0@jar'
-    androidTestCompile 'info.cukes:cucumber-picocontainer:1.2.0'
+        exclude group: 'com.android.support', module: 'support-v4'
+        exclude group: 'com.android.support', module: 'recyclerview-v7'
+    }
+    androidTestCompile('com.android.support.test.espresso:espresso-intents:2.2.2') {
+        exclude group: 'com.android.support', module: 'support-annotations'
+        exclude group: 'com.android.support', module: 'support-v4'
+        exclude group: 'com.android.support', module: 'recyclerview-v7'
+    }
+    androidTestCompile('com.android.support.test.espresso:espresso-contrib:2.2.2') {
+        exclude group: 'com.android.support', module: 'support-annotations'
+        exclude group: 'com.android.support', module: 'support-v4'
+        exclude group: 'com.android.support', module: 'recyclerview-v7'
+        exclude group: 'com.android.support', module: 'appcompat-v7'
+        exclude group: 'com.android.support', module: 'design'
+    }
+    // Cucumber
+    androidTestCompile('info.cukes:cucumber-android:1.2.4') {
+        exclude module: 'cucumber-jvm-deps'
+    }
+    androidTestCompile('info.cukes:cucumber-picocontainer:1.2.4') {
+        exclude module: 'cucumber-jvm-deps'
+    }
+    androidTestCompile 'info.cukes:cucumber-jvm-deps:1.0.3'
+    // Screenshots
+    androidTestCompile 'com.squareup.spoon:spoon-client:1.2.0'
 }
 
 apply plugin: 'com.google.gms.google-services'
