@@ -18,8 +18,7 @@ public class LocalAtendimentoService {
 
     public void solicitarListaLocaisAtendimento(DatabaseCallback callback) {
         localAtendimentoDAO.setDatabaseCallback(callback);
-        localAtendimentoDAO.carregarTodos();
-
+        localAtendimentoDAO.buscarTodos();
     }
 
     public void solicitarBuscaLocalAtendimento(DatabaseCallback callback, String nomeLocal) {

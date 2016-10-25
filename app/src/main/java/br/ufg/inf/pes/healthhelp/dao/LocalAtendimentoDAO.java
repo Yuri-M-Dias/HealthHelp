@@ -2,9 +2,9 @@ package br.ufg.inf.pes.healthhelp.dao;
 
 import android.util.Log;
 
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
@@ -61,7 +61,7 @@ public class LocalAtendimentoDAO extends AbstractDAO<LocalAtendimento> {
      *  é adicionado, todos os locais de atendimentos cadastrados.
      */
     @Override
-    public void carregarTodos() {
+    public void buscarTodos() {
         // aqui é setado como o listener para o que ocorrer em /localAtendimento/.
         getDatabaseReference().child(DATABASE_CHILD).addListenerForSingleValueEvent(
                 new ValueEventListener() {
@@ -69,22 +69,22 @@ public class LocalAtendimentoDAO extends AbstractDAO<LocalAtendimento> {
 
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        Log.w(TAG,"carregarTodos.addValueListener: OnDataChange: Quantidade: "+dataSnapshot.getChildrenCount());
+                        Log.w(TAG,"buscarTodos.addValueListener: OnDataChange: Quantidade: "+dataSnapshot.getChildrenCount());
 
                         for (DataSnapshot localSnapshot: dataSnapshot.getChildren()) {
-                            LocalAtendimento local = localSnapshot.getValue(LocalAtendimento.class);
-                            locaisAtendimento.add(dataSnapshot.getValue(LocalAtendimento.class));
-                            Log.w(TAG,"carregarTodos.addValueListener: OnDataChange: Obtido:" + local.getNome());
+                            LocalAtendimento localAtendimentoRecebido = localSnapshot.getValue(LocalAtendimento.class);
+                            localAtendimentoRecebido.setId(localSnapshot.getKey());
+                            locaisAtendimento.add(localAtendimentoRecebido);
+                            Log.w(TAG,"Obtido: " + locaisAtendimento.get(locaisAtendimento.size()-1).getId());
                         }
 
-                        Log.w(TAG, "carregarTodos.addValueListener: OnDataChange: Os locais cadastrados sao: " + locaisAtendimento);
                         getDatabaseCallback().onComplete(locaisAtendimento);
                     }
 
 
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
-                        Log.e(TAG, "carregarTodos.setValueListener: onCancelled:", databaseError.toException());
+                        Log.e(TAG, "buscarTodos.setValueListener: onCancelled:", databaseError.toException());
                         getDatabaseCallback().onError(databaseError);
                     }
                 }
@@ -93,20 +93,17 @@ public class LocalAtendimentoDAO extends AbstractDAO<LocalAtendimento> {
 
     }
 
-    /**
-     * @param nomeLocal representa o nome do Local Atendimento. A key gerada pelo firebase não é utilizada
-     *                  pelos usuarios dos metodos publicos de LocalAtendimentoDAO
-     */
     @Override
-    public void carregarPelaId(int nomeLocal) {
+    public void buscarPelaId(String id) {
         //TODO: criar metodo de carregar um unico local de atendimento
     }
 
     @Override
     public void inserir(LocalAtendimento localAtendimento) {
-        getDatabaseReference().child(DATABASE_CHILD).child(
-                String.valueOf( localAtendimento.getId() ) ).push().setValue(
-                (LocalAtendimento) localAtendimento);
+        DatabaseReference registroLocalAtendimento = getDatabaseReference().child(DATABASE_CHILD).push();
+        Log.i(TAG, "Chave do novo local de atendimento: " + registroLocalAtendimento.getKey());
+        registroLocalAtendimento.setValue(localAtendimento);
+        localAtendimento.setId(registroLocalAtendimento.getKey());
     }
 
     /**
@@ -130,11 +127,10 @@ public class LocalAtendimentoDAO extends AbstractDAO<LocalAtendimento> {
      * @param novoLocalAtendimento novo local com novos dados passados pelo usuario
      */
     @Override
-    public void atualizar(final LocalAtendimento novoLocalAtendimento) {
+    public void atualizar(LocalAtendimento novoLocalAtendimento) {
 
         // atualiza pela id do local que corresponde a key no firebase
-        getDatabaseReference().child(DATABASE_CHILD).child(
-                String.valueOf( novoLocalAtendimento.getId() ) ).setValue(novoLocalAtendimento);
+        getDatabaseReference().child(DATABASE_CHILD).child(novoLocalAtendimento.getId()).setValue(novoLocalAtendimento);
 
     }
 

@@ -6,9 +6,9 @@ package br.ufg.inf.pes.healthhelp.dao;
 
 public interface InterfaceDAO<T> {
 
-    public void carregarTodos();
+    public void buscarTodos();
 
-    public void carregarPelaId(int id );
+    public void buscarPelaId(String id );
 
     public void inserir( T objeto );
 

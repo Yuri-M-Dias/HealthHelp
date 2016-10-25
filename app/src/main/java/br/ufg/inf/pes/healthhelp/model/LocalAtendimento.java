@@ -1,5 +1,7 @@
 package br.ufg.inf.pes.healthhelp.model;
 
+import com.google.firebase.database.Exclude;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -7,18 +9,22 @@ import java.util.List;
  * Created by deassisrosal on 9/29/16.
  */
 public class LocalAtendimento implements Serializable {
-    private int id;
+    @Exclude
+    private String id;
+
     private String endereco;
     private String nome;
     private String telefone;
 
     private List<PeriodoTempo> horariosAtendimento;
 
-    public int getId() {
+    @Exclude
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    @Exclude
+    public void setId(String id) {
         this.id = id;
     }
 
