@@ -1,0 +1,10 @@
+{
+  "name": "firebase-test-localhost-server",
+  "version": "0.1.0",
+  "dependencies": {
+    "firebase-server": "0.7.0"
+  },
+  "devDependencies": {
+    "firebase-server": "^0.7.0"
+  }
+}

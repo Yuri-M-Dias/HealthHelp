@@ -15,13 +15,17 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.firebase.database.DatabaseError;
+
 import java.util.List;
 
+import br.ufg.inf.pes.healthhelp.dao.DatabaseCallback;
 import br.ufg.inf.pes.healthhelp.model.LocalAtendimento;
 import br.ufg.inf.pes.healthhelp.service.LocalAtendimentoService;
 import br.ufg.pes.healthhelp.R;
 
 public class LocaisAtendimentoActivity extends AppCompatActivity {
+
     private LocalAtendimentoService localAtendimentoService;
 
     private class LocaisListAdapter extends ArrayAdapter<LocalAtendimento> {
@@ -57,7 +61,25 @@ public class LocaisAtendimentoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_locais_atendimento);
         initToolbar();
-        localAtendimentoService = new LocalAtendimentoService(this);
+        localAtendimentoService = new LocalAtendimentoService();
+
+        //TODO: Mostrar notificação de carregamento da lista para o usuário
+
+        localAtendimentoService.solicitarListaLocaisAtendimento(new DatabaseCallback<List<LocalAtendimento>>() {
+
+            @Override
+            public void onComplete(List<LocalAtendimento> object) {
+                carregar(object);
+                //TODO: Finalizar carregamento da lista
+            }
+
+            @Override
+            public void onError(DatabaseError exception) {
+                //TODO: Finalizar carregamento da lista
+                //TODO: Mostrar erro para o usuário
+            }
+        });
+
 
     }
 
@@ -66,7 +88,7 @@ public class LocaisAtendimentoActivity extends AppCompatActivity {
      * cria um array adapter e converte cada item do arraylist para uma view
      * @param locaisAtendimento a lista de locais de atendimento retornada
      */
-    public void carregar(List<LocalAtendimento> locaisAtendimento) {
+    private void carregar(List<LocalAtendimento> locaisAtendimento) {
         Log.w("LocaisAtendimentoAct","os locais cadastrados sao: " + locaisAtendimento);
 
         // R.layout.simple_list_item_1 é um layout simples de TextView
