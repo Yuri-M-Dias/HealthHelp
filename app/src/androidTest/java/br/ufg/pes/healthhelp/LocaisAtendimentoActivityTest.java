@@ -9,10 +9,9 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import br.ufg.inf.pes.healthhelp.view.LocalAtendimentoActivity;
 import br.ufg.inf.pes.healthhelp.view.LocaisAtendimentoActivity;
-import br.ufg.inf.pes.healthhelp.view.NovoLocalAtendimentoActivity;
 
+import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.intent.Intents.init;
 import static android.support.test.espresso.intent.Intents.intended;
@@ -22,7 +21,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest
-public class ExampleInstrumentedTest {
+public class LocaisAtendimentoActivityTest {
 
     @Rule
     public ActivityTestRule<LocaisAtendimentoActivity> mActivityRule =
@@ -32,19 +31,9 @@ public class ExampleInstrumentedTest {
     public void testBotaoHospital() throws Exception {
         init();
         mActivityRule.launchActivity(new Intent());
-        //onView(withId(R.id.botao_hospital))
-        //        .perform(click());
-        intended(hasComponent(LocalAtendimentoActivity.class.getName()));
-        release();
-    }
-
-    @Test
-    public void testBotaoNovoLocalDeAtendimento() throws Exception {
-        init();
-        mActivityRule.launchActivity(new Intent());
-        //onView(withId(R.id.botao_novo_local_atendimento))
-        //        .perform(click());
-        intended(hasComponent(NovoLocalAtendimentoActivity.class.getName()));
+        onView(withId(R.id.fab))
+                .perform(click());
+        intended(hasComponent(LocaisAtendimentoActivity.class.getName()));
         release();
     }
 
