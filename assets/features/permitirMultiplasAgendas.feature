@@ -21,7 +21,7 @@ Restrições:
  	E Posso cadastras locais de atendimentos em minhas agendas.
   E Posso criar agendas.
 
-yy
+
  Esquema do Cenário:
         Cadastrando local de atendimento na agenda
       	Quando eu abrir uma agenda,
