@@ -2,7 +2,7 @@ package br.ufg.inf.pes.healthhelp.model;
 
 import java.util.Date;
 
-public class Profissional extends Usuario {
+public class Profissional {
 
     private Date ultimoacesso;
     private String profissao;

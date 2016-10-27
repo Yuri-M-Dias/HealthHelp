@@ -1,6 +1,6 @@
 package br.ufg.inf.pes.healthhelp.model;
 
-public class Convenio extends Paciente{
+public class Convenio {
 
     String nomeconvenio;
 
