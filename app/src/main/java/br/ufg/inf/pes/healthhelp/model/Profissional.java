@@ -4,16 +4,16 @@ import java.util.Date;
 
 public class Profissional {
 
-    private Date ultimoacesso;
+    private Date ultimoAcesso;
     private String profissao;
 
 
     public Date getUltimoAceso() {
-        return ultimoacesso;
+        return ultimoAcesso;
     }
 
-    public void setUltimoacesso(Date ultimoacesso) {
-        this.ultimoacesso = ultimoacesso;
+    public void setUltimoacesso(Date ultimoAcesso) {
+        this.ultimoAcesso = ultimoAcesso;
     }
 
     public String getProfissao() {
