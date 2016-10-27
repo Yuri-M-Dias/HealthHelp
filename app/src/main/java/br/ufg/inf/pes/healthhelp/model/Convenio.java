@@ -1,8 +1,14 @@
 package br.ufg.inf.pes.healthhelp.model;
 
-/**
- * Created by cintia on 27/10/16.
- */
+public class Convenio extends Paciente{
 
-public class Convenio {
+    String nomeconvenio;
+
+    public String getNomeConvenio(){
+        return nomeconvenio;
+    }
+
+    public void setNomeConvenio(String nome){
+        this.nomeconvenio = nome;
+    }
 }

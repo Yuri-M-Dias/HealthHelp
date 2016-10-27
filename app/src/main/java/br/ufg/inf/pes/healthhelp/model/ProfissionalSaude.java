@@ -1,8 +1,14 @@
 package br.ufg.inf.pes.healthhelp.model;
 
-/**
- * Created by cintia on 27/10/16.
- */
+public class ProfissionalSaude extends Profissional {
 
-public class ProfissionalSaude {
+    private String crm;
+
+    public String getCrm() {
+        return crm;
+    }
+
+    public void setCrm(String crm) {
+        this.crm = crm;
+    }
 }

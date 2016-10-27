@@ -1,8 +1,26 @@
 package br.ufg.inf.pes.healthhelp.model;
 
-/**
- * Created by cintia on 27/10/16.
- */
+import java.util.Date;
 
-public abstract class Profissional {
+public class Profissional extends Usuario {
+
+    private Date ultimoacesso;
+    private String profissao;
+
+
+    public Date getUltimoAceso() {
+        return ultimoacesso;
+    }
+
+    public void setUltimoacesso(Date ultimoacesso) {
+        this.ultimoacesso = ultimoacesso;
+    }
+
+    public String getProfissao() {
+        return profissao;
+    }
+
+    public void setProfissao(String profissao) {
+        this.profissao = profissao;
+    }
 }
