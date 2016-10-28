@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class Profissional {
 
+    private String id;
     private Date ultimoAcesso;
     private String profissao;
 
@@ -22,5 +23,13 @@ public class Profissional {
 
     public void setProfissao(String profissao) {
         this.profissao = profissao;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

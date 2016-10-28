@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Usuario {
 
+    private String id;
     private String login;
     private String senha;
     private String nome;
@@ -13,6 +14,13 @@ public class Usuario {
     private char sexo;
     private Date dataNascimento;
 
+    public String getId(){
+        return id;
+    }
+
+    public void setId(String id){
+        this.id = id;
+    }
 
     public String getLogin() {
         return login;
