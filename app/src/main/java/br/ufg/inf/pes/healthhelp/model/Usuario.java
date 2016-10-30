@@ -10,9 +10,22 @@ public class Usuario {
     private String nome;
     private List<String> telefone;
     private List<String> email;
+    private List<String> telefones;
     private char sexo;
     private Date dataNascimento;
+    private List<Profissional> ocupacoes;
 
+    public List<Profissional> getOcupacoes() {
+        return ocupacoes;
+    }
+
+    public void setOcupacoes(List<Profissional> ocupacoes) {
+        this.ocupacoes = ocupacoes;
+    }
+
+    public List<String> getTelefones() { return telefones; }
+
+    public void setTelefones(List<String> telefones) { this.telefones = telefones; }
 
     public String getLogin() {
         return login;

@@ -2,13 +2,13 @@ package br.ufg.inf.pes.healthhelp.model;
 
 public class ProfissionalSaude extends Profissional {
 
-    private String crm;
+    private String numeroConselho;
 
-    public String getCrm() {
-        return crm;
+    public String getNumeroConselho() {
+        return numeroConselho;
     }
 
-    public void setCrm(String crm) {
-        this.crm = crm;
+    public void setNumeroConselho(String numeroConselho) {
+        this.numeroConselho = numeroConselho;
     }
 }
