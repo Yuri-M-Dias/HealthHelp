@@ -6,6 +6,7 @@ import br.ufg.inf.pes.healthhelp.model.enums.StatusProfissional;
 
 public class Profissional {
 
+    private String id;
     private Date ultimoAcesso;
     private String profissao;
     private StatusProfissional statusProfissional;
@@ -32,5 +33,13 @@ public class Profissional {
 
     public void setProfissao(String profissao) {
         this.profissao = profissao;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

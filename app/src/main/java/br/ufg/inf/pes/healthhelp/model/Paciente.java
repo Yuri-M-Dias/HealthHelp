@@ -2,6 +2,7 @@ package br.ufg.inf.pes.healthhelp.model;
 
 public class Paciente extends Usuario {
     Convenio convenio;
+    private String id;
 
     public Convenio getConvenio() {
         return convenio;
@@ -9,5 +10,13 @@ public class Paciente extends Usuario {
 
     public void setConvenio(Convenio convenio) {
         this.convenio = convenio;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }
