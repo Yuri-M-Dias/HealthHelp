@@ -10,28 +10,6 @@
     android:orientation="vertical"
     tools:context="br.ufg.inf.pes.healthhelp.view.LocaisAtendimentoActivity">
 
-    <com.github.clans.fab.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="bottom|right"
-        android:layout_marginBottom="8dp"
-        android:layout_marginRight="8dp"
-        android:src="@mipmap/ic_app"
-        app:fab_colorNormal="#DA4336"
-        app:fab_colorPressed="#E75043"
-        app:fab_colorRipple="#99FFFFFF"
-        app:fab_showShadow="true"
-        app:fab_shadowColor="#66000000"
-        app:fab_shadowRadius="4dp"
-        app:fab_shadowXOffset="1dp"
-        app:fab_shadowYOffset="3dp"
-        app:fab_size="normal"
-        app:fab_showAnimation="@anim/fab_scale_up"
-        app:fab_hideAnimation="@anim/fab_scale_down"
-        app:fab_label="Label">
-    </com.github.clans.fab.FloatingActionButton>
-
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolBarLocaisAtendimento"
         android:layout_width="381dp"
@@ -49,6 +27,32 @@
         android:layout_width="match_parent"
         android:layout_height="380dp"
         android:layout_weight="@android:integer/status_bar_notification_info_maxnum"/>
+
+    <com.github.clans.fab.FloatingActionMenu
+        android:id="@+id/fab"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="bottom|right"
+        android:layout_marginBottom="8dp"
+        android:layout_marginRight="8dp"
+        app:menu_icon="@mipmap/ic_app"
+        app:menu_colorNormal="#009688"
+        app:menu_colorPressed="#009688"
+        app:menu_colorRipple="#009688">
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fab_item_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_marginBottom="8dp"
+            android:layout_marginRight="8dp"
+            app:fab_label="Novo posto de atendimento"
+            app:fab_colorNormal="#ffffff"
+            app:fab_colorPressed="#ff0000"
+            app:fab_colorRipple="#ffffff"
+            android:onClick="novoLocal"
+            android:src="@drawable/ic_hospital"/>
+    </com.github.clans.fab.FloatingActionMenu>
 
 
 </FrameLayout>
