@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_autenticacao2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="br.ufg.inf.pes.healthhelp.view.Autenticacao2Activity"
+    android:background="@color/colorPrimary">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="7dp">
+
+        <ImageView
+            android:layout_width="match_parent"
+            app:srcCompat="@drawable/icone_branco"
+            android:id="@+id/imageView"
+            android:layout_height="150dp"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:layout_marginTop="@dimen/activity_vertical_margin" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/textfield_height"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/login"
+            android:background="@android:color/background_light"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:textAlignment="center"
+            android:hint="@string/prompt_login" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/textfield_height"
+            android:inputType="textPassword"
+            android:ems="10"
+            android:id="@+id/senha"
+            android:background="@android:color/background_light"
+            android:layout_marginBottom="10dp"
+            android:textAlignment="center"
+            android:hint="@string/prompt_password" />
+
+        <Button
+            android:text="Login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/botao_login"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:backgroundTint="@color/colorSecundary" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/botao_registrar"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:textAllCaps="false"
+            android:textColor="@android:color/background_light"
+            android:text="Ainda não é membro? Registre-se!" />
+    </LinearLayout>
+</RelativeLayout>
