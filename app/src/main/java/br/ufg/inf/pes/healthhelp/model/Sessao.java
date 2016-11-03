@@ -15,15 +15,23 @@ public class Sessao {
     public Sessao() {}
 
     public static Sessao getInstance() {
+        if (Sessao.sessao == null){
+            Sessao sessaoSing = new Sessao;
+            sessaoSing.usuario = null;
+            Sessao.sessao = sessaoSing;
+        }
         return Sessao.sessao;
     }
 
-    public void criarSessao(Usuario usuario) {}
+    public void criarSessao(Usuario usuario) {
+        this.usuario = usuario;
+    }
 
-    public void finalizarSessao(){}
+    public void finalizarSessao(){
+        this.usuario = null;
+    }
 
     public boolean estaAtiva(){
-        //TODO: implementação?
-        return true;
+        return (this.usuario != null);
     }
 }
