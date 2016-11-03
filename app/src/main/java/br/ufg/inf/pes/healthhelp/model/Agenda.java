@@ -9,7 +9,7 @@ import java.util.List;
 public class Agenda {
     private String id;
     private String nome;
-    private String tempoPadrao;
+    private int tempoPadrao;
     private List<PeriodoTempo> horariosAtendimento;
     private  List<PeriodoTempo> horariosBloqueados;
 
@@ -45,11 +45,11 @@ public class Agenda {
         this.nome = nome;
     }
 
-    public String getTempoPadrao() {
+    public int getTempoPadrao() {
         return tempoPadrao;
     }
 
-    public void setTempoPadrao(String tempoPadrao) {
+    public void setTempoPadrao(int tempoPadrao) {
         this.tempoPadrao = tempoPadrao;
     }
 }

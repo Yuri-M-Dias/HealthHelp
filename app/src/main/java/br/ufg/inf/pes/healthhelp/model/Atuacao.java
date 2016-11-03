@@ -3,17 +3,10 @@ package br.ufg.inf.pes.healthhelp.model;
 import java.util.Date;
 import java.util.List;
 
-import br.ufg.inf.pes.healthhelp.model.Agenda;
-import br.ufg.inf.pes.healthhelp.model.PeriodoTempo;
-
-/**
- * Created by deassisrosal on 10/30/16.
- */
-
 public class Atuacao {
     private String id;
-    private Date dataInicioAtuacao;
-    private Date dataFimAtuacao;
+    private Date dataInicio;
+    private Date dataFim;
 
     private List<Agenda> agendas;
     private List<PeriodoTempo> horariosAlmoco;
@@ -44,20 +37,20 @@ public class Atuacao {
         this.id = id;
     }
 
-    public Date getDataInicioAtuacao() {
-        return dataInicioAtuacao;
+    public Date getDataInicio() {
+        return dataInicio;
     }
 
-    public void setDataInicioAtuacao(Date dataInicioAtuacao) {
-        this.dataInicioAtuacao = dataInicioAtuacao;
+    public void setDataInicio(Date dataInicio) {
+        this.dataInicio = dataInicio;
     }
 
-    public Date getDataFimAtuacao() {
-        return dataFimAtuacao;
+    public Date getDataFim() {
+        return dataFim;
     }
 
-    public void setDataFimAtuacao(Date dataFimAtuacao) {
-        this.dataFimAtuacao = dataFimAtuacao;
+    public void setDataFim(Date dataFim) {
+        this.dataFim = dataFim;
     }
 
     public List<Agenda> getAgendas() {

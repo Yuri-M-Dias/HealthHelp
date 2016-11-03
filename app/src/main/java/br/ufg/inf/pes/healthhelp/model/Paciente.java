@@ -1,7 +1,7 @@
 package br.ufg.inf.pes.healthhelp.model;
 
 public class Paciente extends Usuario {
-    Convenio convenio;
+    private Convenio convenio;
     private String id;
 
     public Convenio getConvenio() {

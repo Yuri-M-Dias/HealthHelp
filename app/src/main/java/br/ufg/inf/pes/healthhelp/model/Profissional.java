@@ -4,7 +4,7 @@ import java.util.Date;
 
 import br.ufg.inf.pes.healthhelp.model.enums.StatusProfissional;
 
-public class Profissional {
+public abstract class Profissional {
 
     private String id;
     private Date ultimoAcesso;

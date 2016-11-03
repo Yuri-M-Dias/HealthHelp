@@ -3,14 +3,14 @@ package br.ufg.inf.pes.healthhelp.model;
 public class Convenio {
 
     private String id;
-    private String nomeConvenio;
+    private String nome;
 
-    public String getNomeConvenio() {
-        return nomeConvenio;
+    public String getNome() {
+        return nome;
     }
 
-    public void setNomeConvenio(String nome) {
-        this.nomeConvenio = nome;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public String getId() {
