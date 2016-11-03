@@ -1,11 +1,15 @@
 package br.ufg.inf.pes.healthhelp.model;
 
+import com.google.firebase.database.Exclude;
+
 import java.util.Date;
 import java.util.List;
 
 public class Usuario {
 
+    @Exclude
     private String id;
+
     private String login;
     private String senha;
     private String nome;
@@ -14,6 +18,16 @@ public class Usuario {
     private char sexo;
     private Date dataNascimento;
     private List<Profissional> ocupacoes;
+
+    @Exclude
+    public String getId(){
+        return id;
+    }
+
+    @Exclude
+    public void setId(String id){
+        this.id = id;
+    }
 
     public List<Profissional> getOcupacoes() {
         return ocupacoes;
@@ -26,14 +40,6 @@ public class Usuario {
     public List<String> getTelefones() { return telefones; }
 
     public void setTelefones(List<String> telefones) { this.telefones = telefones; }
-
-    public String getId(){
-        return id;
-    }
-
-    public void setId(String id){
-        this.id = id;
-    }
 
     public String getLogin() {
         return login;

@@ -1,10 +1,15 @@
 package br.ufg.inf.pes.healthhelp.model;
 
+import com.google.firebase.database.Exclude;
+
 import java.util.Date;
 import java.util.List;
 
 public class Atuacao {
+
+    @Exclude
     private String id;
+
     private Date dataInicio;
     private Date dataFim;
 
@@ -12,6 +17,16 @@ public class Atuacao {
     private List<PeriodoTempo> horariosAlmoco;
     private LocalAtendimento localAtendimento;
     private Profissional profissional;
+
+    @Exclude
+    public String getId() {
+        return id;
+    }
+
+    @Exclude
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public LocalAtendimento getLocalAtendimento() {
         return localAtendimento;
@@ -27,14 +42,6 @@ public class Atuacao {
 
     public void setProfissional(Profissional profissional) {
         this.profissional = profissional;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public Date getDataInicio() {

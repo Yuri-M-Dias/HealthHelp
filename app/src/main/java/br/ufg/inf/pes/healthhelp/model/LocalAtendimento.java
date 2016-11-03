@@ -9,6 +9,7 @@ import java.util.List;
  * Created by deassisrosal on 9/29/16.
  */
 public class LocalAtendimento implements Serializable {
+
     @Exclude
     private String id;
 
