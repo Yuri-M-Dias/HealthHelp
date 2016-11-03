@@ -12,16 +12,16 @@ public class Sessao {
         this.usuario = usuario;
     }
 
-    public Sessao() {
-        Sessao.sessao.usuario = null;
+    private Sessao() {
+        sessao.usuario = null;
     }
 
     public static Sessao getInstance() {
-        if (Sessao.sessao == null){
-            Sessao.sessao =  new Sessao();
+        if (sessao == null){
+            sessao =  new Sessao();
         }
 
-        return Sessao.sessao;
+        return sessao;
     }
 
     public void criarSessao(Usuario usuario) {
