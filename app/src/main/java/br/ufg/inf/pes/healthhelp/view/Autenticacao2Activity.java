@@ -7,14 +7,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
+import br.ufg.inf.pes.healthhelp.model.Usuario;
 import br.ufg.pes.healthhelp.R;
 
 public class Autenticacao2Activity extends AppCompatActivity {
 
-    private AutenticacaoService autenticacaoService;
+//     private AutenticacaoService autenticacaoService;
 
     public Autenticacao2Activity(){
-        autenticacaoService = new AutenticacaoService();
+//        autenticacaoService = new AutenticacaoService();
     }
 
     private EditText campoLogin;
@@ -44,7 +45,7 @@ public class Autenticacao2Activity extends AppCompatActivity {
     }
 
     private void autenticar() {
-        autenticacaoService.autenticar(campoLogin.getText(), campoSenha.getText());
+//        autenticacaoService.autenticar(campoLogin.getText(), campoSenha.getText());
         //TODO: Ativar carregamento
 
     }
