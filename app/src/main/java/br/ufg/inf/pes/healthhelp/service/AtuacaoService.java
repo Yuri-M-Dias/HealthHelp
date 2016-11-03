@@ -15,14 +15,14 @@ public class AtuacaoService {
         this.atuacaoDAO = new AtuacaoDAO();
     }
 
-    void solicitarLitaAtuacoes(){
+    void solicitarListaAtuacoes(){
         atuacaoDAO.buscarTodos();
     }
-    void salvar(Atuacao agenda) {
-        if(agenda.getId() == null) {
-            atuacaoDAO.inserir(agenda);
+    void salvar(Atuacao atuacao) {
+        if(atuacao.getId() == null) {
+            atuacaoDAO.inserir(atuacao);
         } else {
-            atuacaoDAO.atualizar(agenda);
+            atuacaoDAO.atualizar(atuacao);
         }
     }
 }
