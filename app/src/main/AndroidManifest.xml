@@ -22,7 +22,7 @@
         </activity>
         <activity android:name="br.ufg.inf.pes.healthhelp.view.LocalAtendimentoActivity" />
         <activity android:name="br.ufg.inf.pes.healthhelp.view.NovoLocalAtendimentoActivity" />
-        <activity android:name="br.ufg.inf.pes.healthhelp.view.Autenticacao2Activity"></activity>
+        <activity android:name="br.ufg.inf.pes.healthhelp.view.AutenticacaoActivity"></activity>
     </application>
 
 </manifest>

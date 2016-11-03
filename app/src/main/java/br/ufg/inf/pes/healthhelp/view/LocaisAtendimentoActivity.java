@@ -63,7 +63,7 @@ public class LocaisAtendimentoActivity extends AppCompatActivity {
         initToolbar();
         localAtendimentoService = new LocalAtendimentoService();
 
-        Intent intent = new Intent(this, Autenticacao2Activity.class);
+        Intent intent = new Intent(this, AutenticacaoActivity.class);
         startActivity(intent);
 
         //TODO: Mostrar notificação de carregamento da lista para o usuário
