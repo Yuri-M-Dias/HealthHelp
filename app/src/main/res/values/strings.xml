@@ -6,4 +6,5 @@
     <string name="salvar">SALVAR</string>
     <string name="endereco">Endereço</string>
     <string name="telefone">Telefone</string>
+    <string name="visitas_medicas">Visitas Medicas</string>
 </resources>
