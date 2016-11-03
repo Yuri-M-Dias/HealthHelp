@@ -29,7 +29,7 @@
         android:layout_weight="@android:integer/status_bar_notification_info_maxnum"/>
 
     <com.github.clans.fab.FloatingActionMenu
-        android:id="@+id/fab"
+        android:id="@+id/fab_list_locais_atendimento"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="bottom|right"
@@ -40,7 +40,7 @@
         app:menu_colorPressed="#009688"
         app:menu_colorRipple="#009688">
         <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/fab_item_1"
+            android:id="@+id/fab_list_locais_atendimento_novo_local"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"
