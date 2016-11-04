@@ -5,7 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -35,8 +35,6 @@ public class AutenticacaoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        EventBus.getDefault().register(this);
-
         setContentView(R.layout.activity_autenticacao);
 
         campoLogin = (EditText) findViewById(R.id.login);
@@ -59,11 +57,37 @@ public class AutenticacaoActivity extends AppCompatActivity {
         progressDialog = new ProgressDialog(this);
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
     private void autenticar() {
-        autenticacaoService.autenticar(campoLogin.getText().toString(), campoSenha.getText().toString());
-        Log.d("autenticacaoView", "depois de autenticar no serviço");
-        progressDialog = ProgressDialog.show(this, "Autenticação",
-                "Por favor, aguarde enquanto o sistema realiza sua autenticação...", true, true);
+        boolean cancelar = false;
+        View foco = null;
+
+        String login = campoLogin.getText().toString();
+        String senha = campoSenha.getText().toString();
+
+        if(TextUtils.isEmpty(login)) {
+            campoLogin.setError(getString(R.string.erro_campo_obrigatorio));
+            foco = campoLogin;
+            cancelar = true;
+        } else if (TextUtils.isEmpty(senha)) {
+            campoSenha.setError(getString(R.string.erro_campo_obrigatorio));
+            foco = campoSenha;
+            cancelar = true;
+        }
+
+        if(cancelar) {
+            foco.requestFocus();
+        } else {
+            autenticacaoService.autenticar(login, senha);
+            progressDialog = ProgressDialog.show(this, "Autenticação",
+                    "Por favor, aguarde enquanto o sistema realiza sua autenticação...", true, true);
+        }
+
     }
 
     @Override
