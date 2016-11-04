@@ -47,7 +47,7 @@ public class UsuarioDAO extends AbstractDAO<Usuario> {
         //TODO
     }
 
-    public void buscarPorLogin(String login, String senha) {
+    public void buscarPorLogin(final String login, final String senha) {
         //TODO
         //Stub implementation
         new Thread(new Runnable() {
@@ -62,9 +62,17 @@ public class UsuarioDAO extends AbstractDAO<Usuario> {
                     }
                 }
                 Usuario usuario = new Usuario();
-                usuario.setId("idfpodi");
+                usuario.setId("123");
                 usuario.setNome("Cleber Alcântara");
-                EventBus.getDefault().post(new ExternalDatabaseEvent<Usuario>(usuario));
+                usuario.setLogin("cleber");
+                usuario.setSenha("cleber");
+
+                if(usuario.getLogin().equals(login) && usuario.getSenha().equals(senha)) {
+                    EventBus.getDefault().post(new ExternalDatabaseEvent<>(usuario));
+                } else {
+                    EventBus.getDefault().post(new ExternalDatabaseEvent<Usuario>(new Exception("Usuário e/ou senha não inválidos")));
+                }
+
             }
         }).start();
     }

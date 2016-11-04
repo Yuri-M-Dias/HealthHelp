@@ -63,7 +63,7 @@ public class AutenticacaoActivity extends AppCompatActivity {
         autenticacaoService.autenticar(campoLogin.getText().toString(), campoSenha.getText().toString());
         Log.d("autenticacaoView", "depois de autenticar no serviço");
         progressDialog = ProgressDialog.show(this, "Autenticação",
-                "Por favor, aguarde enquanto o sistema realiza sua autenticação...", true);
+                "Por favor, aguarde enquanto o sistema realiza sua autenticação...", true, true);
     }
 
     @Override
@@ -72,16 +72,30 @@ public class AutenticacaoActivity extends AppCompatActivity {
         EventBus.getDefault().unregister(this);
     }
 
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
+    }
+
     private void registrar() {
-        Toast.makeText(this, "Não implementado ainda", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Não implementado ainda", Toast.LENGTH_SHORT).show();
         //TODO: Implementar quando a NovoUsuarioActivity estiver funcionando.
     }
 
     @Subscribe
-    public void processarResultadoAutenticacao(ExternalDatabaseEvent<Usuario> databaseEvent) {
+    public void processarResultadoAutenticacao(final ExternalDatabaseEvent<Usuario> databaseEvent) {
         progressDialog.dismiss();
+        final AutenticacaoActivity autenticacaoActivity = this;
         if(databaseEvent.getObjeto() == null) {
-            Toast.makeText(this, databaseEvent.getExcecao().getMessage(), Toast.LENGTH_LONG).show();
+            new Thread() {
+                public void run() {
+                    autenticacaoActivity.runOnUiThread(new Runnable() {
+                        public void run() {
+                            Toast.makeText(autenticacaoActivity, databaseEvent.getExcecao().getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                    });
+                }
+            }.start();
         } else {
             Sessao.getInstance().setUsuario(databaseEvent.getObjeto());
             finish();
