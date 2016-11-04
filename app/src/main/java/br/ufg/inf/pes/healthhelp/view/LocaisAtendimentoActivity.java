@@ -21,6 +21,7 @@ import java.util.List;
 
 import br.ufg.inf.pes.healthhelp.dao.DatabaseCallback;
 import br.ufg.inf.pes.healthhelp.model.LocalAtendimento;
+import br.ufg.inf.pes.healthhelp.model.Sessao;
 import br.ufg.inf.pes.healthhelp.service.LocalAtendimentoService;
 import br.ufg.pes.healthhelp.R;
 
@@ -59,13 +60,21 @@ public class LocaisAtendimentoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_locais_atendimento);
         initToolbar();
         localAtendimentoService = new LocalAtendimentoService();
 
-        Intent intent = new Intent(this, AutenticacaoActivity.class);
-        startActivity(intent);
+        if(!Sessao.getInstance().estaAtiva()) {
+            Intent intent = new Intent(this, AutenticacaoActivity.class);
+            startActivity(intent);
+            onPause();
+        }
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
         //TODO: Mostrar notificação de carregamento da lista para o usuário
 
         localAtendimentoService.solicitarListaLocaisAtendimento(new DatabaseCallback<List<LocalAtendimento>>() {
@@ -82,7 +91,6 @@ public class LocaisAtendimentoActivity extends AppCompatActivity {
                 //TODO: Mostrar erro para o usuário
             }
         });
-
 
     }
 

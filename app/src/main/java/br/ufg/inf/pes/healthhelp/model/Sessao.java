@@ -12,9 +12,7 @@ public class Sessao {
         this.usuario = usuario;
     }
 
-    private Sessao() {
-        sessao.usuario = null;
-    }
+    private Sessao() {}
 
     public static Sessao getInstance() {
         if (sessao == null){

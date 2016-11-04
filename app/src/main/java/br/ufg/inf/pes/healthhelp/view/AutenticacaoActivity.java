@@ -1,19 +1,28 @@
 package br.ufg.inf.pes.healthhelp.view;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
+import br.ufg.inf.pes.healthhelp.model.Sessao;
 import br.ufg.inf.pes.healthhelp.model.Usuario;
+import br.ufg.inf.pes.healthhelp.model.event.ExternalDatabaseEvent;
 import br.ufg.inf.pes.healthhelp.service.AutenticacaoService;
 import br.ufg.pes.healthhelp.R;
 
 public class AutenticacaoActivity extends AppCompatActivity {
 
-     private AutenticacaoService autenticacaoService;
+    private AutenticacaoService autenticacaoService;
+    private ProgressDialog progressDialog;
 
     public AutenticacaoActivity(){
         autenticacaoService = new AutenticacaoService();
@@ -25,6 +34,9 @@ public class AutenticacaoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        EventBus.getDefault().register(this);
+
         setContentView(R.layout.activity_autenticacao);
 
         campoLogin = (EditText) findViewById(R.id.login);
@@ -43,31 +55,42 @@ public class AutenticacaoActivity extends AppCompatActivity {
                 registrar();
             }
         });
+
+        progressDialog = new ProgressDialog(this);
     }
 
     private void autenticar() {
         autenticacaoService.autenticar(campoLogin.getText().toString(), campoSenha.getText().toString());
-        //TODO: Ativar carregamento
+        Log.d("autenticacaoView", "depois de autenticar no serviço");
+        progressDialog = ProgressDialog.show(this, "Autenticação",
+                "Por favor, aguarde enquanto o sistema realiza sua autenticação...", true);
+    }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
     }
 
     private void registrar() {
-        Intent intent = new Intent(this, NovoUsuarioActivity.class);
-        startActivity(intent);
+        Toast.makeText(this, "Não implementado ainda", Toast.LENGTH_LONG).show();
+        //TODO: Implementar quando a NovoUsuarioActivity estiver funcionando.
     }
 
-    private void processarResultadoAutenticacao(Usuario usuario) {
-        if(usuario == null) {
-            //TODO: Desativar carregamento
-            Intent intent = new Intent(this, NovoUsuarioActivity.class);
-            startActivity(intent);
+    @Subscribe
+    public void processarResultadoAutenticacao(ExternalDatabaseEvent<Usuario> databaseEvent) {
+        progressDialog.dismiss();
+        if(databaseEvent.getObjeto() == null) {
+            Toast.makeText(this, databaseEvent.getExcecao().getMessage(), Toast.LENGTH_LONG).show();
         } else {
-            //TODO: mostrar alerta de erro
+            Sessao.getInstance().setUsuario(databaseEvent.getObjeto());
+            finish();
         }
     }
 
+    //TODO: Revisar esse método para redirecionamento a partir de outras activities.
     private void redirecionar(Activity activity, Bundle extras) {
-        Intent intent = new Intent(this, Activity.class); //TODO: Review
+        Intent intent = new Intent(this, Activity.class);
         intent.putExtras(extras);
         startActivity(intent);
     }
