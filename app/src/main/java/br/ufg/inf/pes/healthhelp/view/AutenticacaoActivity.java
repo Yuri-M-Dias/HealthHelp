@@ -86,7 +86,7 @@ public class AutenticacaoActivity extends AppCompatActivity {
         } else {
             InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
             inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
-            
+
             autenticacaoService.autenticar(login, senha);
             progressDialog = ProgressDialog.show(this, getString(R.string.titulo_autenticando), getString(R.string.mensagem_autenticando), true, true);
         }
@@ -110,7 +110,7 @@ public class AutenticacaoActivity extends AppCompatActivity {
     }
 
     @Subscribe
-    public void processarResultadoAutenticacao(final ExternalDatabaseEvent<Usuario> databaseEvent) {
+    public void processarResultadoAutenticacaoBD(final ExternalDatabaseEvent<Usuario> databaseEvent) {
         progressDialog.dismiss();
         final AutenticacaoActivity autenticacaoActivity = this;
         if(databaseEvent.getObjeto() == null) {
@@ -124,7 +124,7 @@ public class AutenticacaoActivity extends AppCompatActivity {
                 }
             }.start();
         } else {
-            Sessao.getInstance().setUsuario(databaseEvent.getObjeto());
+            Log.i("Autenticacao", "Autenticou? " + Sessao.criarSessao(this, databaseEvent.getObjeto()));
             finish();
         }
     }
