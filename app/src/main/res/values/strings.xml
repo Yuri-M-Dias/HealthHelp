@@ -6,15 +6,16 @@
     <string name="salvar">SALVAR</string>
     <string name="endereco">Endereço</string>
     <string name="telefone">Telefone</string>
-    <string name="title_activity_autenticacao">Sign in</string>
 
     <!-- Strings relacionadas à autenticação -->
-    <string name="prompt_login">login</string>
-    <string name="prompt_password">senha</string>
+    <string name="hint_login">login</string>
+    <string name="hint_password">senha</string>
+    <string name="titulo_autenticando">Autenticação</string>
+    <string name="mensagem_autenticando">Por favor, aguarde enquanto o sistema realiza sua autenticação...</string>
 
     <!-- Strings relacionadas a formulários em geral -->
     <string name="erro_campo_obrigatorio">Este campo é obrigatório</string>
     <string name="botao_registrar">Ainda não é membro? Registre-se!</string>
     <string name="botao_login">Login</string>
-    <string name="logo_description">Health Help system logo</string>
+    <string name="descricao_logo">Health Help system logo</string>
 </resources>

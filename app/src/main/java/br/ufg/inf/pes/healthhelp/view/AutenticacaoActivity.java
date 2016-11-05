@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -83,9 +84,11 @@ public class AutenticacaoActivity extends AppCompatActivity {
         if(cancelar) {
             foco.requestFocus();
         } else {
+            InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+            
             autenticacaoService.autenticar(login, senha);
-            progressDialog = ProgressDialog.show(this, "Autenticação",
-                    "Por favor, aguarde enquanto o sistema realiza sua autenticação...", true, true);
+            progressDialog = ProgressDialog.show(this, getString(R.string.titulo_autenticando), getString(R.string.mensagem_autenticando), true, true);
         }
 
     }
