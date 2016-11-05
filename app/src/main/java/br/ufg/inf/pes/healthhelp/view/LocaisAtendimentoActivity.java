@@ -28,6 +28,7 @@ import br.ufg.pes.healthhelp.R;
 public class LocaisAtendimentoActivity extends AppCompatActivity {
 
     private LocalAtendimentoService localAtendimentoService;
+    private ListView locaisAtendimentoView;
 
     private class LocaisListAdapter extends ArrayAdapter<LocalAtendimento> {
 
@@ -63,20 +64,32 @@ public class LocaisAtendimentoActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_locais_atendimento);
         initToolbar();
+
+        locaisAtendimentoView = (ListView) findViewById(R.id.list_locais_atendimento);
+        locaisAtendimentoView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                exibir((LocalAtendimento) locaisAtendimentoView.getItemAtPosition(i));
+            }
+        });
+
         localAtendimentoService = new LocalAtendimentoService();
 
-        if(!Sessao.getInstance().estaAtiva()) {
-            Intent intent = new Intent(this, AutenticacaoActivity.class);
-            startActivity(intent);
-            onPause();
-        }
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        //TODO: Mostrar notificação de carregamento da lista para o usuário
+        if(!Sessao.getInstance().estaAtiva()) {
+            Intent intent = new Intent(this, AutenticacaoActivity.class);
+            startActivity(intent);
+        } else {
+            recarregarLocais();
+        }
+    }
 
+    private void recarregarLocais() {
+        //TODO: Mostrar notificação de carregamento da lista para o usuário
         localAtendimentoService.solicitarListaLocaisAtendimento(new DatabaseCallback<List<LocalAtendimento>>() {
 
             @Override
@@ -91,7 +104,6 @@ public class LocaisAtendimentoActivity extends AppCompatActivity {
                 //TODO: Mostrar erro para o usuário
             }
         });
-
     }
 
     /**
@@ -108,23 +120,9 @@ public class LocaisAtendimentoActivity extends AppCompatActivity {
                 locaisAtendimento);*/
 
         // Cria o adapter para converter o array para views
-        LocaisListAdapter adapter =  new LocaisListAdapter(this, locaisAtendimento);
+        LocaisListAdapter locaisListAdapter =  new LocaisListAdapter(this, locaisAtendimento);
 
-        // anexa o adapter a uma ListView
-        final ListView locaisAtendimentoView = (ListView) findViewById(R.id.list_locais_atendimento);
-
-        locaisAtendimentoView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent localAtendimentoIntent = new Intent(LocaisAtendimentoActivity.this, LocalAtendimentoActivity.class);
-                LocalAtendimento localAtendimento = (LocalAtendimento) locaisAtendimentoView.getItemAtPosition(i);
-                Log.i("Locais Atendimento", "Local de Atendimento selecionado: " + localAtendimento.getNome());
-                localAtendimentoIntent.putExtra(LocalAtendimentoActivity.LOCAL_ATENDIMENTO_INTENT_PARAMETER, localAtendimento);
-                startActivity(localAtendimentoIntent);
-            }
-        });
-
-        locaisAtendimentoView.setAdapter(adapter);
+        locaisAtendimentoView.setAdapter(locaisListAdapter);
 
     }
 
@@ -135,12 +133,13 @@ public class LocaisAtendimentoActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-    public void hospital(View view){
-        Intent intent = new Intent(this, LocalAtendimentoActivity.class);
-        startActivity(intent);
+    public void exibir(LocalAtendimento localAtendimento){
+        Intent localAtendimentoIntent = new Intent(LocaisAtendimentoActivity.this, LocalAtendimentoActivity.class);
+        localAtendimentoIntent.putExtra(LocalAtendimentoActivity.LOCAL_ATENDIMENTO_INTENT_PARAMETER, localAtendimento);
+        startActivity(localAtendimentoIntent);
     }
 
-    public void novoLocal(View view){
+    public void criarLocalAtendimento(View view){
         Intent intent = new Intent(this, NovoLocalAtendimentoActivity.class);
         startActivity(intent);
     }

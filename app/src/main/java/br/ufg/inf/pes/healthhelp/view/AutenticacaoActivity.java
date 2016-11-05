@@ -2,11 +2,13 @@ package br.ufg.inf.pes.healthhelp.view;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -46,15 +48,13 @@ public class AutenticacaoActivity extends AppCompatActivity {
                 autenticar();
             }
         });
-
+        
         findViewById(R.id.botao_registrar).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 registrar();
             }
         });
-
-        progressDialog = new ProgressDialog(this);
     }
 
     @Override

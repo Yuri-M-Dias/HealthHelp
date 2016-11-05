@@ -54,7 +54,7 @@ public class UsuarioDAO extends AbstractDAO<Usuario> {
             @Override
             public void run() {
                 for(int contador = 0; contador < 3; contador++){
-                    Log.i(TAG, "Aguardando contador " + (3 - contador));
+                    Log.i(TAG, "Contagem regressiva para autenticacao: " + (3 - contador));
                     try {
                         Thread.sleep(1000);
                     } catch (InterruptedException e) {
