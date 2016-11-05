@@ -48,7 +48,7 @@ public class AutenticacaoActivity extends AppCompatActivity {
                 autenticar();
             }
         });
-        
+
         findViewById(R.id.botao_registrar).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

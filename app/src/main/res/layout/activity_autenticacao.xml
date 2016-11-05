@@ -1,23 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_autenticacao2"
+    android:id="@+id/activity_autenticacao"
+    tools:context="br.ufg.inf.pes.healthhelp.view.AutenticacaoActivity"
+    android:background="@color/primary"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="br.ufg.inf.pes.healthhelp.view.AutenticacaoActivity"
-    android:background="@color/primary">
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentStart="true"
+    android:layout_alignParentRight="true"
+    android:layout_alignParentEnd="true"
+    android:fillViewport="true">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="7dp">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:gravity="center_vertical">
 
         <ImageView
             android:layout_width="match_parent"
@@ -25,7 +31,8 @@
             android:id="@+id/imageView"
             android:layout_height="150dp"
             android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:layout_marginTop="@dimen/activity_vertical_margin" />
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:contentDescription="@string/logo_description" />
 
         <EditText
             android:layout_width="match_parent"
@@ -51,12 +58,11 @@
             android:hint="@string/prompt_password" />
 
         <Button
-            android:text="Login"
+            android:text="@string/botao_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/botao_login"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:backgroundTint="@color/accent" />
+            style="@style/Widget.AppCompat.Button.Colored" />
 
         <Button
             android:layout_width="match_parent"
@@ -65,6 +71,8 @@
             style="@style/Widget.AppCompat.Button.Borderless"
             android:textAllCaps="false"
             android:textColor="@android:color/background_light"
-            android:text="Ainda não é membro? Registre-se!" />
+            android:text="@string/botao_registrar" />
+
     </LinearLayout>
-</RelativeLayout>
+</ScrollView>
+
