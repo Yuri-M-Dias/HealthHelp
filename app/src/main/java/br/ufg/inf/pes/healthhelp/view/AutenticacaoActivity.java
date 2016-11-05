@@ -125,11 +125,4 @@ public class AutenticacaoActivity extends AppCompatActivity {
             finish();
         }
     }
-
-    //TODO: Revisar esse método para redirecionamento a partir de outras activities.
-    private void redirecionar(Activity activity, Bundle extras) {
-        Intent intent = new Intent(this, Activity.class);
-        intent.putExtras(extras);
-        startActivity(intent);
-    }
 }
