@@ -14,9 +14,6 @@ import java.util.List;
 
 import br.ufg.inf.pes.healthhelp.model.LocalAtendimento;
 
-/**
- * Created by deassisrosal on 9/29/16.
- */
 public class LocalAtendimentoDAO extends AbstractDAO<LocalAtendimento> {
 
     public LocalAtendimentoDAO() {

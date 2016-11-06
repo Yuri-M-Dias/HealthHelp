@@ -2,10 +2,6 @@ package br.ufg.inf.pes.healthhelp.model;
 
 import java.util.List;
 
-/**
- * Created by deassisrosal on 10/30/16.
- */
-
 public class Agenda {
     private String id;
     private String nome;

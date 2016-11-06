@@ -2,7 +2,6 @@ package br.ufg.inf.pes.healthhelp.model.event;
 
 /**
  * Esta classe é responsável por definir eventos criados por operações do banco de dados.
- * Created by cleber on 04/11/16.
  */
 
 public class DatabaseEvent<T> {

@@ -1,9 +1,5 @@
 package br.ufg.inf.pes.healthhelp.dao;
 
-/**
- * Created by deassisrosal on 10/18/16.
- */
-
 public interface InterfaceDAO<T> {
 
     public void buscarTodos();

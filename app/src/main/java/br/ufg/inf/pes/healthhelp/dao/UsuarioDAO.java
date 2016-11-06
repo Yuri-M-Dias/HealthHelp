@@ -10,7 +10,6 @@ import br.ufg.inf.pes.healthhelp.model.event.DatabaseEvent;
 
 /**
  * Esta classe é responsável por operações de banco de dados relacionadas a um {@link Usuario}.
- * Created by cleber on 03/11/16.
  */
 
 public class UsuarioDAO extends AbstractDAO<Usuario> {
