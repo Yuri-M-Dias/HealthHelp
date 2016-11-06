@@ -62,12 +62,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/botao_login"
+            android:onClick="autenticar"
             style="@style/Widget.AppCompat.Button.Colored" />
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/botao_registrar"
+            android:onClick="registrar"
             style="@style/Widget.AppCompat.Button.Borderless"
             android:textAllCaps="false"
             android:textColor="@android:color/background_light"

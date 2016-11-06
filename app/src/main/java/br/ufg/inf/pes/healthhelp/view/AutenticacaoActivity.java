@@ -43,20 +43,6 @@ public class AutenticacaoActivity extends AppCompatActivity {
 
         campoLogin = (EditText) findViewById(R.id.login);
         campoSenha = (EditText) findViewById(R.id.senha);
-
-        findViewById(R.id.botao_login).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                autenticar();
-            }
-        });
-
-        findViewById(R.id.botao_registrar).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                registrar();
-            }
-        });
     }
 
     @Override
