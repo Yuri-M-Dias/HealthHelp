@@ -23,6 +23,11 @@
         <activity android:name="br.ufg.inf.pes.healthhelp.view.LocalAtendimentoActivity" />
         <activity android:name="br.ufg.inf.pes.healthhelp.view.NovoLocalAtendimentoActivity" />
         <activity android:name="br.ufg.inf.pes.healthhelp.view.AutenticacaoActivity" />
+        <activity
+            android:name="br.ufg.inf.pes.healthhelp.view.ListaLocalAtendimentoActivity"
+            android:label="@string/title_activity_lista_local_atendimento"
+            android:theme="@style/AppTheme">
+        </activity>
     </application>
 
 </manifest>

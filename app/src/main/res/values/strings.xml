@@ -19,4 +19,7 @@
     <!-- Strings relacionadas a formulários em geral -->
     <string name="erro_campo_obrigatorio">Este campo é obrigatório</string>
     <string name="descricao_logo">Health Help system logo</string>
+
+    <string name="title_activity_locais_atendimento2">LocaisAtendimento2Activity</string>
+    <string name="title_activity_lista_local_atendimento">ListaLocalAtendimentoActivity</string>
 </resources>

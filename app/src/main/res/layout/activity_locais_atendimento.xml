@@ -10,9 +10,11 @@
     android:orientation="vertical"
     tools:context="br.ufg.inf.pes.healthhelp.view.LocaisAtendimentoActivity">
 
+
+
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolBarLocaisAtendimento"
-        android:layout_width="381dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#009688"
         android:textAlignment="textStart"
@@ -24,8 +26,8 @@
 
     <ListView
         android:id="@+id/list_locais_atendimento"
-        android:layout_width="match_parent"
-        android:layout_height="380dp"
+        android:layout_width="363dp"
+        android:layout_height="497dp"
         android:layout_weight="@android:integer/status_bar_notification_info_maxnum"/>
 
     <com.github.clans.fab.FloatingActionMenu
@@ -53,6 +55,5 @@
             android:onClick="criarLocalAtendimento"
             android:src="@drawable/ic_hospital"/>
     </com.github.clans.fab.FloatingActionMenu>
-
 
 </FrameLayout>
