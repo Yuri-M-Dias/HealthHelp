@@ -72,7 +72,7 @@ public class UsuarioDAO extends AbstractDAO<Usuario> {
                                 if(usuario.getLogin().equals(login) && usuario.getSenha().equals(senha)) {
                                     EventBus.getDefault().post(new DatabaseEvent<>(usuario));
                                 } else {
-                                    throw new Exception("Usuário e/ou senha não inválidos");
+                                    throw new Exception("Usuário e/ou senha inválidos");
                                 }
                             }
                         }
