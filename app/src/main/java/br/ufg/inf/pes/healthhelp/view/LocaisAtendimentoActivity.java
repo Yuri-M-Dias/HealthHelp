@@ -46,11 +46,9 @@ public class LocaisAtendimentoActivity extends AppCompatActivity {
 
             TextView nomeLocal = (TextView) convertView.findViewById(R.id.nome_local);
             TextView enderecoLocal = (TextView) convertView.findViewById(R.id.endereco_local);
-            TextView telefoneLocal = (TextView) convertView.findViewById(R.id.telefone_local);
 
             nomeLocal.setText(getItem(position).getNome());
             enderecoLocal.setText(getItem(position).getEndereco());
-            telefoneLocal.setText(getItem(position).getTelefone());
 
             return  convertView;
         }

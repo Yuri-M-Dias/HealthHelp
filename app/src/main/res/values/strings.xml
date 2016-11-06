@@ -6,4 +6,6 @@
     <string name="salvar">SALVAR</string>
     <string name="endereco">Endereço</string>
     <string name="telefone">Telefone</string>
+    <string name="title_activity_locais_atendimento2">LocaisAtendimento2Activity</string>
+    <string name="title_activity_lista_local_atendimento">ListaLocalAtendimentoActivity</string>
 </resources>
