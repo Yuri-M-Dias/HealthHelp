@@ -28,7 +28,7 @@
         <ImageView
             android:layout_width="match_parent"
             app:srcCompat="@drawable/icone_branco"
-            android:id="@+id/imageView"
+            android:id="@+id/autenticacao_logo"
             android:layout_height="150dp"
             android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:layout_marginTop="@dimen/activity_vertical_margin"
@@ -39,7 +39,7 @@
             android:layout_height="@dimen/textfield_height"
             android:inputType="textPersonName"
             android:ems="10"
-            android:id="@+id/login"
+            android:id="@+id/autenticacao_campo_login"
             android:background="@android:color/background_light"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
@@ -51,7 +51,7 @@
             android:layout_height="@dimen/textfield_height"
             android:inputType="textPassword"
             android:ems="10"
-            android:id="@+id/senha"
+            android:id="@+id/autenticacao_campo_senha"
             android:background="@android:color/background_light"
             android:layout_marginBottom="10dp"
             android:textAlignment="center"
@@ -61,14 +61,14 @@
             android:text="@string/botao_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/botao_login"
+            android:id="@+id/autenticacao_botao_login"
             android:onClick="autenticar"
             style="@style/Widget.AppCompat.Button.Colored" />
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/botao_registrar"
+            android:id="@+id/autenticacao_botao_registrar"
             android:onClick="registrar"
             style="@style/Widget.AppCompat.Button.Borderless"
             android:textAllCaps="false"

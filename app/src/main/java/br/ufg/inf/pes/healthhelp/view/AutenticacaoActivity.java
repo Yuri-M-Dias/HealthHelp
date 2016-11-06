@@ -41,8 +41,8 @@ public class AutenticacaoActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_autenticacao);
 
-        campoLogin = (EditText) findViewById(R.id.login);
-        campoSenha = (EditText) findViewById(R.id.senha);
+        campoLogin = (EditText) findViewById(R.id.autenticacao_campo_login);
+        campoSenha = (EditText) findViewById(R.id.autenticacao_campo_senha);
     }
 
     @Override
@@ -51,7 +51,7 @@ public class AutenticacaoActivity extends AppCompatActivity {
         EventBus.getDefault().register(this);
     }
 
-    private void autenticar() {
+    public void autenticar(View view) {
         boolean cancelar = false;
         View foco = null;
 
@@ -91,7 +91,7 @@ public class AutenticacaoActivity extends AppCompatActivity {
         moveTaskToBack(true);
     }
 
-    private void registrar() {
+    public void registrar(View view) {
         //TODO: Implementar quando a NovoUsuarioActivity estiver funcionando.
         Toast.makeText(this, "Não implementado ainda", Toast.LENGTH_SHORT).show();
     }
