@@ -3,10 +3,10 @@ package br.ufg.inf.pes.healthhelp.dao;
 import android.util.Log;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.util.AsyncExecutor;
 
 import br.ufg.inf.pes.healthhelp.model.Usuario;
 import br.ufg.inf.pes.healthhelp.model.event.DatabaseEvent;
-import br.ufg.inf.pes.healthhelp.model.event.ExternalDatabaseEvent;
 
 /**
  * Esta classe é responsável por operações de banco de dados relacionadas a um {@link Usuario}.
@@ -48,8 +48,7 @@ public class UsuarioDAO extends AbstractDAO<Usuario> {
     }
 
     public void buscarPorLogin(final String login, final String senha) {
-        //TODO
-        //Stub implementation
+        //TODO: Substituir a implementação abaixo pela implementação utilizando Firebase
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -61,18 +60,24 @@ public class UsuarioDAO extends AbstractDAO<Usuario> {
                         Log.i(TAG, "Ops... Erro no Thread.sleep: " + e.getMessage());
                     }
                 }
-                Usuario usuario = new Usuario();
+                final Usuario usuario = new Usuario();
                 usuario.setId("123");
                 usuario.setNome("Cleber Alcântara");
                 usuario.setLogin("cleber");
                 usuario.setSenha("cleber");
 
-                if(usuario.getLogin().equals(login) && usuario.getSenha().equals(senha)) {
-                    EventBus.getDefault().post(new ExternalDatabaseEvent<>(usuario));
-                } else {
-                    EventBus.getDefault().post(new ExternalDatabaseEvent<Usuario>(new Exception("Usuário e/ou senha não inválidos")));
-                }
-
+                AsyncExecutor.create().execute(
+                        new AsyncExecutor.RunnableEx() {
+                            @Override
+                            public void run() throws Exception {
+                                if(usuario.getLogin().equals(login) && usuario.getSenha().equals(senha)) {
+                                    EventBus.getDefault().post(new DatabaseEvent<>(usuario));
+                                } else {
+                                    throw new Exception("Usuário e/ou senha não inválidos");
+                                }
+                            }
+                        }
+                );
             }
         }).start();
     }

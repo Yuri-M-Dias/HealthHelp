@@ -1,9 +1,7 @@
 package br.ufg.inf.pes.healthhelp.view;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -15,14 +13,17 @@ import android.widget.Toast;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+import org.greenrobot.eventbus.util.ThrowableFailureEvent;
 
 import br.ufg.inf.pes.healthhelp.model.Sessao;
 import br.ufg.inf.pes.healthhelp.model.Usuario;
-import br.ufg.inf.pes.healthhelp.model.event.ExternalDatabaseEvent;
+import br.ufg.inf.pes.healthhelp.model.event.DatabaseEvent;
 import br.ufg.inf.pes.healthhelp.service.AutenticacaoService;
 import br.ufg.pes.healthhelp.R;
 
 public class AutenticacaoActivity extends AppCompatActivity {
+    private final String TAG = AutenticacaoActivity.class.getCanonicalName();
 
     private AutenticacaoService autenticacaoService;
     private ProgressDialog progressDialog;
@@ -105,27 +106,21 @@ public class AutenticacaoActivity extends AppCompatActivity {
     }
 
     private void registrar() {
-        Toast.makeText(this, "Não implementado ainda", Toast.LENGTH_SHORT).show();
         //TODO: Implementar quando a NovoUsuarioActivity estiver funcionando.
+        Toast.makeText(this, "Não implementado ainda", Toast.LENGTH_SHORT).show();
     }
 
-    @Subscribe
-    public void processarResultadoAutenticacaoBD(final ExternalDatabaseEvent<Usuario> databaseEvent) {
+    @Subscribe (threadMode = ThreadMode.MAIN)
+    public void onDatabaseEvent(DatabaseEvent<Usuario> databaseEvent) {
         progressDialog.dismiss();
-        final AutenticacaoActivity autenticacaoActivity = this;
-        if(databaseEvent.getObjeto() == null) {
-            new Thread() {
-                public void run() {
-                    autenticacaoActivity.runOnUiThread(new Runnable() {
-                        public void run() {
-                            Toast.makeText(autenticacaoActivity, databaseEvent.getExcecao().getMessage(), Toast.LENGTH_LONG).show();
-                        }
-                    });
-                }
-            }.start();
-        } else {
-            Log.i("Autenticacao", "Autenticou? " + Sessao.criarSessao(this, databaseEvent.getObjeto()));
-            finish();
-        }
+        Toast.makeText(this, getString(R.string.mensagem_autenticacao_sucesso), Toast.LENGTH_SHORT).show();
+        Log.i(TAG, "Registrou autenticação? " + Sessao.criarSessao(this, databaseEvent.getObjeto()));
+        finish();
+    }
+
+    @Subscribe (threadMode = ThreadMode.MAIN)
+    public void onThrowableFailureEvent(ThrowableFailureEvent event) {
+        progressDialog.dismiss();
+        Toast.makeText(this, event.getThrowable().getMessage(), Toast.LENGTH_LONG).show();
     }
 }

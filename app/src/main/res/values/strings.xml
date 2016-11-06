@@ -12,6 +12,7 @@
     <string name="hint_password">senha</string>
     <string name="titulo_autenticando">Autenticação</string>
     <string name="mensagem_autenticando">Por favor, aguarde enquanto o sistema realiza sua autenticação...</string>
+    <string name="mensagem_autenticacao_sucesso">Autenticação bem sucedida</string>
 
     <!-- Strings relacionadas a formulários em geral -->
     <string name="erro_campo_obrigatorio">Este campo é obrigatório</string>
