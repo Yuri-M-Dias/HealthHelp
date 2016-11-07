@@ -1,23 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <GridLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/activity_vertical_margin">
+
+    <ImageView
+        app:srcCompat="@drawable/cruz_vermelha"
+        android:id="@+id/imageView"
+        android:layout_height="64dp"
+        android:layout_marginRight="@dimen/activity_vertical_margin"
+        android:layout_width="64dp" />
+
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:rowCount="2"
-        android:columnCount="2"
-        android:padding="@dimen/activity_vertical_margin">
-
-        <ImageView
-            android:layout_rowSpan="2"
-            app:srcCompat="@drawable/cruz_vermelha"
-            android:id="@+id/imageView"
-            android:layout_row="0"
-            android:layout_column="0"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:layout_marginRight="@dimen/activity_vertical_margin" />
+        android:layout_weight="1">
 
         <TextView
             android:text="Nome do Local"
@@ -27,15 +28,22 @@
             android:layout_column="1"
             android:layout_row="0"
             android:textSize="18sp"
-            android:textColor="?attr/editTextColor" />
+            android:textColor="?attr/editTextColor"
+            android:lines="1"
+            android:maxLines="1"
+            android:ellipsize="end" />
 
         <TextView
             android:text="Endereço"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:id="@+id/endereco_local"
             android:layout_column="1"
             android:layout_row="1"
-            android:textColor="?attr/editTextColor" />
-
-</GridLayout>
+            android:textColor="?attr/editTextColor"
+            android:lines="2"
+            android:layout_marginTop="5dp"
+            android:maxLines="2"
+            android:ellipsize="end" />
+    </LinearLayout>
+</LinearLayout>
