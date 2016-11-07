@@ -21,12 +21,12 @@ import br.ufg.pes.healthhelp.R;
  * Este adapter é responsável por controlar os locais de atendimento exibidos na {@link br.ufg.inf.pes.healthhelp.view.LocaisAtendimentoActivity}.
  */
 
-public class LocalAtendimentoAdapter extends ArrayAdapter<LocalAtendimento> {
+public class LocaisAtendimentoAdapter extends ArrayAdapter<LocalAtendimento> {
 
     private LocalAtendimento[] locaisAtendimento;
     private List<LocalAtendimento> locaisAtendimentoExibidos;
 
-    public LocalAtendimentoAdapter(Context context, int resource, List<LocalAtendimento> objects) {
+    public LocaisAtendimentoAdapter(Context context, int resource, List<LocalAtendimento> objects) {
         super(context, resource, objects);
         locaisAtendimentoExibidos = objects;
         locaisAtendimento = new LocalAtendimento[objects.size()];
@@ -73,13 +73,13 @@ public class LocalAtendimentoAdapter extends ArrayAdapter<LocalAtendimento> {
                 locaisAtendimentoExibidos = (List<LocalAtendimento>) filterResults.values;
                 Log.i(this.getClass().getName(), "exibidos: " + locaisAtendimentoExibidos.size());
                 Log.i(this.getClass().getName(), "original: " + locaisAtendimento.length);
-                Log.i(this.getClass().getName(), "adapter: " + LocalAtendimentoAdapter.this.getCount());
-                LocalAtendimentoAdapter.this.clear();
-                LocalAtendimentoAdapter.this.addAll(locaisAtendimentoExibidos);
-                LocalAtendimentoAdapter.this.notifyDataSetChanged();
+                Log.i(this.getClass().getName(), "adapter: " + LocaisAtendimentoAdapter.this.getCount());
+                LocaisAtendimentoAdapter.this.clear();
+                LocaisAtendimentoAdapter.this.addAll(locaisAtendimentoExibidos);
+                LocaisAtendimentoAdapter.this.notifyDataSetChanged();
                 Log.i(this.getClass().getName(), "exibidos: " + locaisAtendimentoExibidos.size());
                 Log.i(this.getClass().getName(), "original: " + locaisAtendimento.length);
-                Log.i(this.getClass().getName(), "adapter: " + LocalAtendimentoAdapter.this.getCount());
+                Log.i(this.getClass().getName(), "adapter: " + LocaisAtendimentoAdapter.this.getCount());
             }
         };
     }

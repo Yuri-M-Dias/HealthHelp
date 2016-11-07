@@ -1,19 +1,17 @@
 package br.ufg.inf.pes.healthhelp.view;
 
-import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.google.firebase.database.DatabaseError;
 
@@ -22,46 +20,41 @@ import java.util.List;
 import br.ufg.inf.pes.healthhelp.dao.DatabaseCallback;
 import br.ufg.inf.pes.healthhelp.model.LocalAtendimento;
 import br.ufg.inf.pes.healthhelp.service.LocalAtendimentoService;
+import br.ufg.inf.pes.healthhelp.view.adapters.LocaisAtendimentoAdapter;
 import br.ufg.pes.healthhelp.R;
 
 public class LocaisAtendimentoActivity extends AppCompatActivity {
 
     private LocalAtendimentoService localAtendimentoService;
-
-    private class LocaisListAdapter extends ArrayAdapter<LocalAtendimento> {
-
-        public LocaisListAdapter(Context context,List<LocalAtendimento> locaisAtendimento) {
-            super(context,R.layout.item_local, locaisAtendimento);
-        }
-
-        @NonNull
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            Log.w("LocaisListAdapter:","item na posicao: " + position + " para view de locais de atendimento: " + getItem(position).getNome());
-
-            // Check if an existing view is being reused, otherwise inflate the view
-            if (convertView == null) {
-                convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_local, parent, false);
-            }
-
-            TextView nomeLocal = (TextView) convertView.findViewById(R.id.nome_local);
-            TextView enderecoLocal = (TextView) convertView.findViewById(R.id.endereco_local);
-
-            nomeLocal.setText(getItem(position).getNome());
-            enderecoLocal.setText(getItem(position).getEndereco());
-
-            return  convertView;
-        }
-    }
+    private LocaisAtendimentoAdapter locaisAtendimentoAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_locais_atendimento);
-        initToolbar();
-        localAtendimentoService = new LocalAtendimentoService();
 
-        //TODO: Mostrar notificação de carregamento da lista para o usuário
+        setContentView(R.layout.activity_lista_local_atendimento);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
+        localAtendimentoService = new LocalAtendimentoService();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.so_pesquisa, menu);
+
+        MenuItem searchMenuItem = menu.findItem(R.id.acao_pesquisa);
+        configurarPesquisa((SearchView) MenuItemCompat.getActionView(searchMenuItem));
+
+        return true;
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
 
         localAtendimentoService.solicitarListaLocaisAtendimento(new DatabaseCallback<List<LocalAtendimento>>() {
 
@@ -77,17 +70,33 @@ public class LocaisAtendimentoActivity extends AppCompatActivity {
                 //TODO: Mostrar erro para o usuário
             }
         });
-
-
     }
 
-    /**
-     * disparado pelo LocalAtendimentoService após retorno do firebase dos registros de local de atendimento
-     * cria um array adapter e converte cada item do arraylist para uma view
-     * @param locaisAtendimento a lista de locais de atendimento retornada
-     */
+    private void configurarPesquisa(SearchView searchView) {
+        searchView.setQueryHint("Procurar local atendimento...");
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Log.i(this.getClass().getName(), "QUERY: " + query);
+                if(locaisAtendimentoAdapter != null) {
+                    locaisAtendimentoAdapter.getFilter().filter(query);
+                }
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                Log.i(this.getClass().getName(), "CHANGE QUERY: " + newText);
+                if(locaisAtendimentoAdapter != null) {
+                    locaisAtendimentoAdapter.getFilter().filter(newText);
+                }
+                return true;
+            }
+        });
+    }
+
     private void carregar(List<LocalAtendimento> locaisAtendimento) {
-        Log.w("LocaisAtendimentoAct","os locais cadastrados sao: " + locaisAtendimento);
+        Log.w("LocaisAtendimentoAct", "os locais cadastrados sao: " + locaisAtendimento);
 
         // R.layout.simple_list_item_1 é um layout simples de TextView
        /* adapter = new ArrayAdapter<LocalAtendimento>(this,
@@ -95,10 +104,11 @@ public class LocaisAtendimentoActivity extends AppCompatActivity {
                 locaisAtendimento);*/
 
         // Cria o adapter para converter o array para views
-        LocaisListAdapter adapter =  new LocaisListAdapter(this, locaisAtendimento);
+        locaisAtendimentoAdapter = new LocaisAtendimentoAdapter(this, R.layout.item_local, locaisAtendimento);
+
 
         // anexa o adapter a uma ListView
-        final ListView locaisAtendimentoView = (ListView) findViewById(R.id.list_locais_atendimento);
+        final ListView locaisAtendimentoView = (ListView) findViewById(R.id.listview_locais_atendimento);
 
         locaisAtendimentoView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -111,20 +121,8 @@ public class LocaisAtendimentoActivity extends AppCompatActivity {
             }
         });
 
-        locaisAtendimentoView.setAdapter(adapter);
+        locaisAtendimentoView.setAdapter(locaisAtendimentoAdapter);
 
-    }
-
-    private void initToolbar() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolBarLocaisAtendimento);
-        toolbar.setTitle("");
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-    }
-
-    public void hospital(View view){
-        Intent intent = new Intent(this, LocalAtendimentoActivity.class);
-        startActivity(intent);
     }
 
     public void novoLocal(View view){
