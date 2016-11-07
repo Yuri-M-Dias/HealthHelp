@@ -25,11 +25,13 @@ import java.util.List;
 import br.ufg.inf.pes.healthhelp.dao.DatabaseCallback;
 import br.ufg.inf.pes.healthhelp.model.LocalAtendimento;
 import br.ufg.inf.pes.healthhelp.service.LocalAtendimentoService;
+import br.ufg.inf.pes.healthhelp.view.adapters.LocalAtendimentoAdapter;
 import br.ufg.pes.healthhelp.R;
 
 public class ListaLocalAtendimentoActivity extends AppCompatActivity {
 
     private LocalAtendimentoService localAtendimentoService;
+    private LocalAtendimentoAdapter localAtendimentoAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,13 +83,15 @@ public class ListaLocalAtendimentoActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 Log.i(this.getClass().getName(), "QUERY: " + query);
-                return false;
+                localAtendimentoAdapter.getFilter().filter(query);
+                return true;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
                 Log.i(this.getClass().getName(), "CHANGE QUERY: " + newText);
-                return false;
+                localAtendimentoAdapter.getFilter().filter(newText);
+                return true;
             }
         });
     }
@@ -101,26 +105,7 @@ public class ListaLocalAtendimentoActivity extends AppCompatActivity {
                 locaisAtendimento);*/
 
         // Cria o adapter para converter o array para views
-        ArrayAdapter<LocalAtendimento> adapter = new ArrayAdapter<LocalAtendimento>(this, R.layout.item_local, locaisAtendimento){
-            @NonNull
-            @Override
-            public View getView(int position, View convertView, ViewGroup parent) {
-                Log.w("LocaisListAdapter:","item na posicao: " + position + " para view de locais de atendimento: " + getItem(position).getNome());
-
-                // Check if an existing view is being reused, otherwise inflate the view
-                if (convertView == null) {
-                    convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_local, parent, false);
-                }
-
-                TextView nomeLocal = (TextView) convertView.findViewById(R.id.nome_local);
-                TextView enderecoLocal = (TextView) convertView.findViewById(R.id.endereco_local);
-
-                nomeLocal.setText(getItem(position).getNome());
-                enderecoLocal.setText(getItem(position).getEndereco());
-
-                return  convertView;
-            }
-        };
+        localAtendimentoAdapter = new LocalAtendimentoAdapter(this, R.layout.item_local, locaisAtendimento);
 
 
         // anexa o adapter a uma ListView
@@ -137,7 +122,7 @@ public class ListaLocalAtendimentoActivity extends AppCompatActivity {
             }
         });
 
-        locaisAtendimentoView.setAdapter(adapter);
+        locaisAtendimentoView.setAdapter(localAtendimentoAdapter);
 
     }
 
