@@ -54,7 +54,12 @@ public class AgendaDAO extends AbstractDAO<Agenda> {
     public void buscarPelaId(String id) {
         // single value, pois precisamos buscar uma unica vez, mesmo quando não há alterações na agenda
         getDatabaseReference().child(DATABASE_CHILD).child(id).
-                addListenerForSingleValueEvent(criaAgendaValueEventListener());
+                addListenerForSingleValueEvent(criaValueEventListener());
+    }
+
+    public void buscarPeloNome(String nomeAgenda) {
+        getDatabaseReference().child(DATABASE_CHILD).
+                orderByChild("nome").equalTo(nomeAgenda).addListenerForSingleValueEvent(criaValueEventListener());
     }
 
     @Override
@@ -62,10 +67,10 @@ public class AgendaDAO extends AbstractDAO<Agenda> {
         // pega a referencia do caminho com a key gerada pelo firebase
         DatabaseReference registroAgenda = getDatabaseReference().child(DATABASE_CHILD).push();
         Log.i(TAG, "Chave da nova agenda: " + registroAgenda.getKey());
-
-        registroAgenda.addValueEventListener(criaAgendaValueEventListener());
-
         agenda.setId(registroAgenda.getKey());
+
+        registroAgenda.addValueEventListener(criaValueEventListener());
+
         // salva no firebase
         registroAgenda.setValue(agenda);
     }
@@ -74,7 +79,7 @@ public class AgendaDAO extends AbstractDAO<Agenda> {
     public void remover(Agenda agendaRemover) {
 
         getDatabaseReference().child(DATABASE_CHILD).child(agendaRemover.getId()).
-                addValueEventListener(criaAgendaValueEventListener());
+                addValueEventListener(criaValueEventListener());
 
         // remove pela key que corresponde a id da agenda
         getDatabaseReference().child(DATABASE_CHILD).child( agendaRemover.getId()  ).removeValue();
@@ -85,18 +90,21 @@ public class AgendaDAO extends AbstractDAO<Agenda> {
     public void atualizar(Agenda novaAgenda) {
 
         getDatabaseReference().child(DATABASE_CHILD).child(novaAgenda.getId()).
-                addValueEventListener( criaAgendaValueEventListener() );
+                addValueEventListener( criaValueEventListener() );
 
         // atualiza pela id da agenda que corresponde a key no firebase
         getDatabaseReference().child(DATABASE_CHILD).child(novaAgenda.getId()).setValue(novaAgenda);
 
     }
 
-    private ValueEventListener criaAgendaValueEventListener() {
+    private ValueEventListener criaValueEventListener() {
         return new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Agenda agenda = dataSnapshot.getValue(Agenda.class);
+
+                //Salva no objeto agenda o id do banco gerado pelo firebase
+                agenda.setId(dataSnapshot.getKey());
                 Log.w(TAG,"addValueListener Obtido: " + agenda.getId());
                 getDatabaseCallback().onComplete(agenda);
             }

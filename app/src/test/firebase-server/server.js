@@ -1,6 +1,6 @@
 var FirebaseServer = require('firebase-server');
 
-new FirebaseServer(5000, 'test.firebase.localhost', {
+new FirebaseServer(5000, '127.0.1', {
 
   localAtendimento : {
     KUQ87Pkpw3MoId84EU: {
