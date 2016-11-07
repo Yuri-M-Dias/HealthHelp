@@ -50,7 +50,7 @@
             app:fab_colorNormal="#ffffff"
             app:fab_colorPressed="#ff0000"
             app:fab_colorRipple="#ffffff"
-            android:onClick="novoLocal"
+            android:onClick="criarLocalAtendimento"
             android:src="@drawable/ic_hospital"/>
     </com.github.clans.fab.FloatingActionMenu>
 

@@ -19,7 +19,7 @@
         app:subtitle="@string/hospital"
         app:subtitleTextColor="@android:color/background_light"
         app:navigationIcon="@drawable/ic_arrow_back_black_24dp"
-        android:theme="@style/AppTheme">
+        android:theme="@style/HealthHelpTheme">
 
     </android.support.v7.widget.Toolbar>
 

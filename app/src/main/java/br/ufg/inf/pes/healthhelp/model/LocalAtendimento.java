@@ -5,9 +5,6 @@ import com.google.firebase.database.Exclude;
 import java.io.Serializable;
 import java.util.List;
 
-/**
- * Created by deassisrosal on 9/29/16.
- */
 public class LocalAtendimento implements Serializable {
     @Exclude
     private String id;

@@ -4,7 +4,6 @@ import br.ufg.inf.pes.healthhelp.dao.UsuarioDAO;
 
 /**
  * Esta classe é responsável por prover serviços relacionados a autenticação de usuário.
- * Created by cleber on 02/11/16.
  */
 
 public class AutenticacaoService {
