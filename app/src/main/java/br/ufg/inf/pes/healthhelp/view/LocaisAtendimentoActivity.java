@@ -132,7 +132,6 @@ public class LocaisAtendimentoActivity extends AppCompatActivity {
         });
 
         locaisAtendimentoView.setAdapter(locaisAtendimentoAdapter);
-
     }
 
     public void novoLocal(View view){

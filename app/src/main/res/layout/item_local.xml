@@ -8,7 +8,7 @@
     android:padding="@dimen/activity_vertical_margin">
 
     <ImageView
-        app:srcCompat="@drawable/cruz_vermelha"
+        app:srcCompat="@drawable/local_atendimento_azul"
         android:id="@+id/imageView"
         android:layout_height="64dp"
         android:layout_marginRight="@dimen/activity_vertical_margin"
