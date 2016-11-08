@@ -27,7 +27,7 @@
 
         <ImageView
             android:layout_width="267dp"
-            app:srcCompat="@drawable/health_help_icone_branco"
+            app:srcCompat="@drawable/health_help_logo_verde"
             android:id="@+id/autenticacao_logo"
             android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:layout_marginTop="@dimen/activity_vertical_margin"

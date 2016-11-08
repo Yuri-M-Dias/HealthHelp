@@ -34,9 +34,9 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         app:menu_icon="@mipmap/ic_app"
-        app:menu_colorNormal="#009688"
-        app:menu_colorPressed="#009688"
-        app:menu_colorRipple="#009688">
+        app:menu_colorNormal="@color/primary"
+        app:menu_colorPressed="@color/primary_dark"
+        app:menu_colorRipple="@color/primary">
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/fab_item_1"
             android:layout_width="wrap_content"
@@ -45,9 +45,9 @@
             android:layout_marginBottom="8dp"
             android:layout_marginRight="8dp"
             app:fab_label="Novo posto de atendimento"
-            app:fab_colorNormal="#ffffff"
-            app:fab_colorPressed="#ff0000"
-            app:fab_colorRipple="#ffffff"
+            app:fab_colorNormal="@color/icons"
+            app:fab_colorPressed="@color/accent"
+            app:fab_colorRipple="@color/icons"
             android:onClick="novoLocal"
             android:src="@drawable/ic_hospital"/>
     </com.github.clans.fab.FloatingActionMenu>

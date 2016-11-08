@@ -108,16 +108,8 @@ public class LocaisAtendimentoActivity extends AppCompatActivity {
     private void carregar(List<LocalAtendimento> locaisAtendimento) {
         Log.w("LocaisAtendimentoAct", "os locais cadastrados sao: " + locaisAtendimento);
 
-        // R.layout.simple_list_item_1 é um layout simples de TextView
-       /* adapter = new ArrayAdapter<LocalAtendimento>(this,
-                android.R.layout.simple_list_item_1,
-                locaisAtendimento);*/
-
-        // Cria o adapter para converter o array para views
         locaisAtendimentoAdapter = new LocaisAtendimentoAdapter(this, R.layout.item_local, locaisAtendimento);
 
-
-        // anexa o adapter a uma ListView
         final ListView locaisAtendimentoView = (ListView) findViewById(R.id.listview_locais_atendimento);
 
         locaisAtendimentoView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
