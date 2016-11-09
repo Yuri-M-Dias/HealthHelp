@@ -32,7 +32,7 @@
                 android:src="@drawable/maps_icon" />
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/textView_visitas"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingLeft="@dimen/padding_right_left_botton_textcard"
@@ -42,7 +42,7 @@
                 android:textSize="@dimen/primarytext" />
 
             <TextView
-                android:id="@+id/subtextView"
+                android:id="@+id/subtextView_visitas"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/padding_subtext"
@@ -64,6 +64,153 @@
                     android:textColor="@color/blue"
                     android:onClick="OnClick$Agendar"/>
             </LinearLayout>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+    android:id="@+id/card_visualizarAgenda"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/height_card"
+    android:layout_gravity="center"
+    android:layout_marginBottom="@dimen/space_cards"
+    android:layout_marginLeft="@dimen/space_margin_cards"
+    android:layout_marginRight="@dimen/space_margin_cards"
+    android:layout_marginTop="@dimen/space_margin_cards"
+
+    app:cardCornerRadius="@dimen/corner_radius_card"
+    app:cardElevation="@dimen/card_elevation"
+    android:onClick="OnClick$VisualizarAgenda">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_image_card"
+            android:scaleType="centerCrop"
+            android:src="@drawable/maps_icon" />
+
+        <TextView
+            android:id="@+id/textView_Agenda"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/padding_right_left_botton_textcard"
+            android:paddingRight="@dimen/padding_right_left_botton_textcard"
+            android:paddingTop="@dimen/padding_top_textcard"
+            android:text="@string/visitas_medicas"
+            android:textSize="@dimen/primarytext" />
+
+        <TextView
+            android:id="@+id/subtextView_Agenda"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_subtext"
+            android:paddingRight="@dimen/padding_right_left_botton_textcard"
+            android:text="@string/descricao_visitas_medicas"
+            android:textSize="@dimen/subtext" />
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_visualizarAtuacoes"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_card"
+        android:layout_gravity="center"
+        android:layout_marginBottom="@dimen/space_cards"
+        android:layout_marginLeft="@dimen/space_margin_cards"
+        android:layout_marginRight="@dimen/space_margin_cards"
+        android:layout_marginTop="@dimen/space_margin_cards"
+
+        app:cardCornerRadius="@dimen/corner_radius_card"
+        app:cardElevation="@dimen/card_elevation"
+        android:onClick="OnClick$VisualizarAtuacao">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_image_card"
+                android:scaleType="centerCrop"
+                android:src="@drawable/maps_icon" />
+
+            <TextView
+                android:id="@+id/textView_Atuacao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/padding_right_left_botton_textcard"
+                android:paddingRight="@dimen/padding_right_left_botton_textcard"
+                android:paddingTop="@dimen/padding_top_textcard"
+                android:text="@string/visitas_medicas"
+                android:textSize="@dimen/primarytext" />
+
+            <TextView
+                android:id="@+id/subtextView_Atuacao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/padding_subtext"
+                android:paddingRight="@dimen/padding_right_left_botton_textcard"
+                android:text="@string/descricao_visitas_medicas"
+                android:textSize="@dimen/subtext" />
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_locaisAtendimento"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_card"
+        android:layout_gravity="center"
+        android:layout_marginBottom="@dimen/space_cards"
+        android:layout_marginLeft="@dimen/space_margin_cards"
+        android:layout_marginRight="@dimen/space_margin_cards"
+        android:layout_marginTop="@dimen/space_margin_cards"
+
+        app:cardCornerRadius="@dimen/corner_radius_card"
+        app:cardElevation="@dimen/card_elevation"
+        android:onClick="OnClick$LocaisAtendimento">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_image_card"
+                android:scaleType="centerCrop"
+                android:src="@drawable/maps_icon" />
+
+            <TextView
+                android:id="@+id/textView_LocaisAtendimento"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/padding_right_left_botton_textcard"
+                android:paddingRight="@dimen/padding_right_left_botton_textcard"
+                android:paddingTop="@dimen/padding_top_textcard"
+                android:text="@string/visitas_medicas"
+                android:textSize="@dimen/primarytext" />
+
+            <TextView
+                android:id="@+id/subtextView_LocaisAtendimento"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/padding_subtext"
+                android:paddingRight="@dimen/padding_right_left_botton_textcard"
+                android:text="@string/descricao_visitas_medicas"
+                android:textSize="@dimen/subtext" />
 
         </LinearLayout>
 
