@@ -1,11 +1,14 @@
 <resources>
     <string name="app_name">Health Help</string>
     <string name="locais_atendimento">Locais de Atendimento</string>
-    <string name="novo_local">Novo Local de Atendimento</string>
+    <string name="activity_novo_local_atendimento">Novo Local de Atendimento</string>
     <string name="hospital">Local de Atendimento</string>
     <string name="salvar">SALVAR</string>
     <string name="endereco">Endereço</string>
     <string name="telefone">Telefone</string>
+
+    <!-- Strings relacionadas a formulários em geral -->
+    <string name="erro_campo_obrigatorio">Este campo é obrigatório</string>
 
     <!-- Strings relacionadas à autenticação -->
     <string name="hint_login">login</string>
@@ -16,8 +19,12 @@
     <string name="mensagem_autenticando">Por favor, aguarde enquanto o sistema realiza sua autenticação...</string>
     <string name="mensagem_autenticacao_sucesso">Autenticação bem sucedida</string>
 
-    <!-- Strings relacionadas a formulários em geral -->
-    <string name="erro_campo_obrigatorio">Este campo é obrigatório</string>
+    <!-- Strings relacionadas ao formulário de local de atendimento -->
+    <string name="botao_adicionar_horario_atendimento_local">Adicionar Horário de Atendimento</string>
+
+    <!-- Strings relacionadas ao fragment de período de tempo -->
+    <string name="botao_dias_semana">Dias da Semana</string>
+
 
     <string name="descricao_logo">Logo do Sistema Health Help</string>
 

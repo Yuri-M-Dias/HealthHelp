@@ -10,195 +10,223 @@
     android:orientation="vertical"
     tools:context="br.ufg.inf.pes.healthhelp.view.NovoLocalAtendimentoActivity">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolBarNovoLocalAtendimento"
+    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#009688"
-        android:textAlignment="textStart"
-        android:elevation="4dp"
-        app:subtitle="@string/novo_local"
-        app:subtitleTextColor="@android:color/background_light"
-        app:navigationIcon="@drawable/ic_arrow_back_black_24dp" >
+        android:theme="@style/AppTheme.AppBarOverlay">
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolBarNovoLocalAtendimento"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            android:elevation="4dp"
+            app:title="@string/activity_novo_local_atendimento"
+            app:subtitleTextColor="@android:color/background_light"
+            app:navigationIcon="@drawable/ic_arrow_back_black_24dp" >
+        </android.support.v7.widget.Toolbar>
 
-    </android.support.v7.widget.Toolbar>
+    </android.support.design.widget.AppBarLayout>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center_horizontal"
-        android:padding="16dp">
-
-        <EditText
-            android:id="@+id/edit_novo_local"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/novo_local"
-            android:textColorHint="#009688"
-            android:padding="16dp"/>
-
-        <EditText
-            android:id="@+id/edit_endereco"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/endereco"
-            android:textColorHint="#009688"
-            android:padding="16dp"/>
-
-        <EditText
-            android:id="@+id/edit_telefone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/telefone"
-            android:textColorHint="#009688"
-            android:padding="16dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:text="Horários de Atendimento"
-            android:textStyle="bold"/>
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
+            android:orientation="vertical"
+            android:padding="@dimen/activity_vertical_margin">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:id="@+id/edit_novo_local"
+                android:hint="@string/activity_novo_local_atendimento" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:ems="10"
+                android:id="@+id/edit_endereco"
+                android:hint="@string/endereco" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="phone"
+                android:ems="10"
+                android:id="@+id/edit_telefone"
+                android:hint="@string/telefone" />
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/spinner"
+                android:spinnerMode="dialog" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Horários de Atendimento:"
+                android:textStyle="bold"
+                android:paddingTop="@dimen/activity_vertical_margin"
+                android:textColor="@color/primary_text" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:gravity="center_vertical">
 
-                <CheckBox
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="D"
-                    android:clickable="true"/>
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
 
-                <CheckBox
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="S"
-                    android:clickable="true"
-                    android:checked="true"/>
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="D"
+                        android:clickable="true"/>
 
-                <CheckBox
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="T"
-                    android:clickable="true"/>
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="S"
+                        android:clickable="true"
+                        android:checked="true"/>
 
-                <CheckBox
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Q"
-                    android:clickable="true"/>
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="T"
+                        android:clickable="true"/>
 
-                <CheckBox
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Q"
-                    android:clickable="true"/>
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Q"
+                        android:clickable="true"/>
 
-                <CheckBox
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="S"
-                    android:clickable="true"/>
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Q"
+                        android:clickable="true"/>
 
-                <CheckBox
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="S"
+                        android:clickable="true"/>
+
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="S"
+                        android:clickable="true"/>
+
+                </LinearLayout>
+
+                <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="S"
-                    android:clickable="true"/>
+                    android:text="X"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:textSize="20dp"
+                    android:background="#C0C0C0"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="8 às 13"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="D"
+                        android:clickable="true"/>
+
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="S"
+                        android:clickable="true"
+                        android:checked="true"/>
+
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="T"
+                        android:clickable="true"/>
+
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Q"
+                        android:clickable="true"/>
+
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Q"
+                        android:clickable="true"/>
+
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="S"
+                        android:clickable="true"/>
+
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="S"
+                        android:clickable="true"/>
+
+                </LinearLayout>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="X"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:textSize="20dp"
+                    android:background="#C0C0C0"/>
 
             </LinearLayout>
 
             <Button
-                android:layout_width="wrap_content"
+                android:text="@string/botao_adicionar_horario_atendimento_local"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="X"
-                android:textColor="@android:color/holo_red_dark"
-                android:textSize="20dp"
-                android:background="#C0C0C0"/>
+                android:id="@+id/botao_adicionar_horario_atendimento_local"
+                android:textAllCaps="false" />
 
+            <fragment
+                android:id="@+id/list"
+                android:name="br.ufg.inf.pes.healthhelp.PeriodoTempoFragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
         </LinearLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="8 às 13"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
-
-                <CheckBox
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="D"
-                    android:clickable="true"/>
-
-                <CheckBox
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="S"
-                    android:clickable="true"
-                    android:checked="true"/>
-
-                <CheckBox
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="T"
-                    android:clickable="true"/>
-
-                <CheckBox
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Q"
-                    android:clickable="true"/>
-
-                <CheckBox
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Q"
-                    android:clickable="true"/>
-
-                <CheckBox
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="S"
-                    android:clickable="true"/>
-
-                <CheckBox
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="S"
-                    android:clickable="true"/>
-
-            </LinearLayout>
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="X"
-                android:textColor="@android:color/holo_red_dark"
-                android:textSize="20dp"
-                android:background="#C0C0C0"/>
-
-        </LinearLayout>
-
-    </LinearLayout>
+    </ScrollView>
 </LinearLayout>
