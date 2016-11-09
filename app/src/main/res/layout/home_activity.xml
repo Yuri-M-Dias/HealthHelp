@@ -1,11 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <Button
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_visitasmedicas"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:drawableRight=""/>
+        android:layout_height="@dimen/height_card"
+        android:layout_gravity="center"
+        android:layout_marginBottom="@dimen/space_cards"
+        android:layout_marginLeft="@dimen/space_margin_cards"
+        android:layout_marginRight="@dimen/space_margin_cards"
+        android:layout_marginTop="@dimen/space_margin_cards"
+
+        app:cardCornerRadius="@dimen/corner_radius_card"
+        app:cardElevation="@dimen/card_elevation"
+        android:onClick="OnClick$VisitasMedicas">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_image_card"
+                android:scaleType="centerCrop"
+                android:src="@drawable/maps_icon" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/padding_right_left_botton_textcard"
+                android:paddingRight="@dimen/padding_right_left_botton_textcard"
+                android:paddingTop="@dimen/padding_top_textcard"
+                android:text="@string/visitas_medicas"
+                android:textSize="@dimen/primarytext" />
+
+            <TextView
+                android:id="@+id/subtextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/padding_subtext"
+                android:paddingRight="@dimen/padding_right_left_botton_textcard"
+                android:text="@string/descricao_visitas_medicas"
+                android:textSize="@dimen/subtext" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="@dimen/padding_all_buttons">
+
+                <Button
+                    android:id="@+id/button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:text="@string/button_cards_Agendar"
+                    android:textColor="@color/blue"
+                    android:onClick="OnClick$Agendar"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
 </LinearLayout>

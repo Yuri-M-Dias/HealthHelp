@@ -7,4 +7,6 @@
     <string name="endereco">Endereço</string>
     <string name="telefone">Telefone</string>
     <string name="visitas_medicas">Visitas Medicas</string>
+    <string name="descricao_visitas_medicas">Veja visitas realizadas e futuras, e ainda agende novas visitas médicas</string>
+    <string name="button_cards_Agendar">Agendar</string>
 </resources>
