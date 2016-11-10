@@ -2,8 +2,8 @@ package br.ufg.inf.pes.healthhelp.view;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -23,12 +23,13 @@ import br.ufg.inf.pes.healthhelp.service.AutenticacaoService;
 import br.ufg.pes.healthhelp.R;
 
 public class AutenticacaoActivity extends AppCompatActivity {
+
     private final String TAG = AutenticacaoActivity.class.getCanonicalName();
 
     private AutenticacaoService autenticacaoService;
     private ProgressDialog progressDialog;
 
-    public AutenticacaoActivity(){
+    public AutenticacaoActivity() {
         autenticacaoService = new AutenticacaoService();
     }
 
@@ -58,7 +59,7 @@ public class AutenticacaoActivity extends AppCompatActivity {
         String login = campoLogin.getText().toString();
         String senha = campoSenha.getText().toString();
 
-        if(TextUtils.isEmpty(login)) {
+        if (TextUtils.isEmpty(login)) {
             campoLogin.setError(getString(R.string.erro_campo_obrigatorio));
             foco = campoLogin;
             cancelar = true;
@@ -68,10 +69,10 @@ public class AutenticacaoActivity extends AppCompatActivity {
             cancelar = true;
         }
 
-        if(cancelar) {
+        if (cancelar) {
             foco.requestFocus();
         } else {
-            InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
 
             autenticacaoService.autenticar(login, senha);
@@ -96,7 +97,7 @@ public class AutenticacaoActivity extends AppCompatActivity {
         Toast.makeText(this, "Não implementado ainda", Toast.LENGTH_SHORT).show();
     }
 
-    @Subscribe (threadMode = ThreadMode.MAIN)
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onDatabaseEvent(DatabaseEvent<Usuario> databaseEvent) {
         progressDialog.dismiss();
         Toast.makeText(this, getString(R.string.mensagem_autenticacao_sucesso), Toast.LENGTH_SHORT).show();
@@ -104,7 +105,7 @@ public class AutenticacaoActivity extends AppCompatActivity {
         finish();
     }
 
-    @Subscribe (threadMode = ThreadMode.MAIN)
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onThrowableFailureEvent(ThrowableFailureEvent event) {
         progressDialog.dismiss();
         Toast.makeText(this, event.getThrowable().getMessage(), Toast.LENGTH_LONG).show();

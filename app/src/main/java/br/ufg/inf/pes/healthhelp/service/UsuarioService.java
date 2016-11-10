@@ -16,7 +16,7 @@ public class UsuarioService {
 
     public void salvar(Usuario usuario) {
 
-        if(usuario.getId() == null) {
+        if (usuario.getId() == null) {
             usuarioDAO.inserir(usuario);
         } else {
             usuarioDAO.atualizar(usuario);

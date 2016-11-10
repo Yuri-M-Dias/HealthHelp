@@ -3,11 +3,12 @@ package br.ufg.inf.pes.healthhelp.model;
 import java.util.List;
 
 public class Agenda {
+
     private String id;
     private String nome;
     private int tempoPadrao;
     private List<PeriodoTempo> horariosAtendimento;
-    private  List<PeriodoTempo> horariosBloqueados;
+    private List<PeriodoTempo> horariosBloqueados;
 
     public List<PeriodoTempo> getHorariosBloqueados() {
         return horariosBloqueados;
@@ -48,4 +49,5 @@ public class Agenda {
     public void setTempoPadrao(int tempoPadrao) {
         this.tempoPadrao = tempoPadrao;
     }
+
 }

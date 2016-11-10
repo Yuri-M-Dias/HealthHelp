@@ -2,9 +2,9 @@ package br.ufg.inf.pes.healthhelp.view;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -32,14 +32,14 @@ public class LocaisAtendimentoActivity extends AppCompatActivity {
 
     private class LocaisListAdapter extends ArrayAdapter<LocalAtendimento> {
 
-        public LocaisListAdapter(Context context,List<LocalAtendimento> locaisAtendimento) {
-            super(context,R.layout.item_local, locaisAtendimento);
+        public LocaisListAdapter(Context context, List<LocalAtendimento> locaisAtendimento) {
+            super(context, R.layout.item_local, locaisAtendimento);
         }
 
         @NonNull
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            Log.w("LocaisListAdapter:","item na posicao: " + position + " para view de locais de atendimento: " + getItem(position).getNome());
+            Log.w("LocaisListAdapter:", "item na posicao: " + position + " para view de locais de atendimento: " + getItem(position).getNome());
 
             // Check if an existing view is being reused, otherwise inflate the view
             if (convertView == null) {
@@ -54,7 +54,7 @@ public class LocaisAtendimentoActivity extends AppCompatActivity {
             enderecoLocal.setText(getItem(position).getEndereco());
             telefoneLocal.setText(getItem(position).getTelefone());
 
-            return  convertView;
+            return convertView;
         }
     }
 
@@ -80,7 +80,7 @@ public class LocaisAtendimentoActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        if(!Sessao.estaAtiva(this)) {
+        if (!Sessao.estaAtiva(this)) {
             Intent intent = new Intent(this, AutenticacaoActivity.class);
             startActivity(intent);
         } else {
@@ -109,10 +109,11 @@ public class LocaisAtendimentoActivity extends AppCompatActivity {
     /**
      * disparado pelo LocalAtendimentoService após retorno do firebase dos registros de local de atendimento
      * cria um array adapter e converte cada item do arraylist para uma view
+     *
      * @param locaisAtendimento a lista de locais de atendimento retornada
      */
     private void carregar(List<LocalAtendimento> locaisAtendimento) {
-        Log.w("LocaisAtendimentoAct","os locais cadastrados sao: " + locaisAtendimento);
+        Log.w("LocaisAtendimentoAct", "os locais cadastrados sao: " + locaisAtendimento);
 
         // R.layout.simple_list_item_1 é um layout simples de TextView
        /* adapter = new ArrayAdapter<LocalAtendimento>(this,
@@ -120,7 +121,7 @@ public class LocaisAtendimentoActivity extends AppCompatActivity {
                 locaisAtendimento);*/
 
         // Cria o adapter para converter o array para views
-        LocaisListAdapter locaisListAdapter =  new LocaisListAdapter(this, locaisAtendimento);
+        LocaisListAdapter locaisListAdapter = new LocaisListAdapter(this, locaisAtendimento);
 
         locaisAtendimentoView.setAdapter(locaisListAdapter);
 
@@ -133,13 +134,13 @@ public class LocaisAtendimentoActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-    public void exibir(LocalAtendimento localAtendimento){
+    public void exibir(LocalAtendimento localAtendimento) {
         Intent localAtendimentoIntent = new Intent(LocaisAtendimentoActivity.this, LocalAtendimentoActivity.class);
         localAtendimentoIntent.putExtra(LocalAtendimentoActivity.LOCAL_ATENDIMENTO_INTENT_PARAMETER, localAtendimento);
         startActivity(localAtendimentoIntent);
     }
 
-    public void criarLocalAtendimento(View view){
+    public void criarLocalAtendimento(View view) {
         Intent intent = new Intent(this, NovoLocalAtendimentoActivity.class);
         startActivity(intent);
     }
