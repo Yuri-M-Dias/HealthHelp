@@ -1,22 +1,23 @@
 package br.ufg.inf.pes.healthhelp.model;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.util.List;
 
-/**
- * Created by deassisrosal on 9/29/16.
- */
+import br.ufg.inf.pes.healthhelp.model.enums.DayOfWeek;
+
 public class PeriodoTempo implements Serializable {
+
     private String horaInicio;
     private String horaFim;
     private String dataInicio; // dateFormat no estilo dd-MM-yyyy
     private String dataFim; // dateFormat no estilo dd-MM-yyyy
-    private String diasSemana;
+
+    private List<DayOfWeek> diasSemana;
 
     public PeriodoTempo() {
     }
 
-    public PeriodoTempo(String horaInicio, String horaFim, String dataInicio, String dataFim, String diasSemana) {
+    public PeriodoTempo(String horaInicio, String horaFim, String dataInicio, String dataFim, List<DayOfWeek> diasSemana) {
         this.horaInicio = horaInicio;
         this.horaFim = horaFim;
         this.dataInicio = dataInicio;
@@ -36,12 +37,11 @@ public class PeriodoTempo implements Serializable {
         return horaFim;
     }
 
-    public String getDiasSemana() {
-
+    public List<DayOfWeek> getDiasSemana() {
         return diasSemana;
     }
 
-    public void setDiasSemana(String diasSemana) {
+    public void setDiasSemana(List<DayOfWeek> diasSemana) {
         this.diasSemana = diasSemana;
     }
 
@@ -65,8 +65,5 @@ public class PeriodoTempo implements Serializable {
     public void setDataFim(String dataFim) {
         this.dataFim = dataFim;
     }
-
-
-
 
 }

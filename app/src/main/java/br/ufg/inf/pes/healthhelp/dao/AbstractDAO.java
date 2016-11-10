@@ -3,11 +3,8 @@ package br.ufg.inf.pes.healthhelp.dao;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-/**
- * Created by deassisrosal on 10/18/16.
- */
+public abstract class AbstractDAO<T> implements InterfaceDAO<T> {
 
-public abstract class AbstractDAO<T> implements InterfaceDAO<T>{
     public final String TAG;
     public final String DATABASE_CHILD;
 

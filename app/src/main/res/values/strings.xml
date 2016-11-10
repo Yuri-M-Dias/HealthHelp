@@ -9,4 +9,17 @@
     <string name="visitas_medicas">Visitas Medicas</string>
     <string name="descricao_visitas_medicas">Veja visitas realizadas e futuras, e ainda agende novas visitas médicas</string>
     <string name="button_cards_Agendar">Agendar</string>
+
+    <!-- Strings relacionadas à autenticação -->
+    <string name="hint_login">login</string>
+    <string name="hint_password">senha</string>
+    <string name="botao_login">Autenticar</string>
+    <string name="botao_registrar">Ainda não é membro? Registre-se!</string>
+    <string name="titulo_autenticando">Autenticação</string>
+    <string name="mensagem_autenticando">Por favor, aguarde enquanto o sistema realiza sua autenticação...</string>
+    <string name="mensagem_autenticacao_sucesso">Autenticação bem sucedida</string>
+
+    <!-- Strings relacionadas a formulários em geral -->
+    <string name="erro_campo_obrigatorio">Este campo é obrigatório</string>
+    <string name="descricao_logo">Health Help system logo</string>
 </resources>
