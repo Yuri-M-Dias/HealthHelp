@@ -62,12 +62,6 @@
                 android:id="@+id/edit_telefone"
                 android:hint="@string/telefone" />
 
-            <Spinner
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/spinner"
-                android:spinnerMode="dialog" />
-
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -5,6 +5,7 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,10 +14,16 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TimePicker;
 
+import com.afollestad.materialdialogs.MaterialDialog;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import br.ufg.inf.pes.healthhelp.model.PeriodoTempo;
+import br.ufg.inf.pes.healthhelp.model.enums.DayOfWeek;
 import br.ufg.pes.healthhelp.R;
 
 public class PeriodoTempoFragment extends Fragment {
@@ -153,6 +160,38 @@ public class PeriodoTempoFragment extends Fragment {
     }
 
     public void selecionarDiasSemana(){
-
+        ArrayList<Integer> indicesDialogDiasSemanaSelecionados = new ArrayList<>();
+        for(DayOfWeek diaSemana: periodoTempo.getDiasSemana()) {
+            indicesDialogDiasSemanaSelecionados.add(diaSemana.getValue() - 1);
+        }
+        new MaterialDialog.Builder(getActivity())
+                .title("Dias da Semana")
+                .items(Arrays.asList(DayOfWeek.values()))
+                .itemsCallbackMultiChoice(
+                        indicesDialogDiasSemanaSelecionados.toArray(new Integer[indicesDialogDiasSemanaSelecionados.size()]),
+                        new MaterialDialog.ListCallbackMultiChoice() {
+                            @Override
+                            public boolean onSelection(MaterialDialog dialog, Integer[] posicoesSelecionadas, CharSequence[] opcoesSelecionadas) {
+                                ArrayList<DayOfWeek> diasSemana = new ArrayList<>(posicoesSelecionadas.length);
+                                for(Integer posicaoSelecionada: posicoesSelecionadas){
+                                    diasSemana.add(DayOfWeek.of(posicaoSelecionada + 1));
+                                }
+                                Button botaoDiasSemana = (Button) getActivity().findViewById(R.id.botao_dias_semana);
+                                for(int posicao = 0; posicao < opcoesSelecionadas.length; posicao++){
+                                    opcoesSelecionadas[posicao] = opcoesSelecionadas[posicao].subSequence(0, 3);
+                                }
+                                String novoLabelBotao = TextUtils.join(" - ", opcoesSelecionadas);
+                                if("".equals(novoLabelBotao)) {
+                                    botaoDiasSemana.setText(getString(R.string.botao_dias_semana));
+                                } else {
+                                    botaoDiasSemana.setText(novoLabelBotao);
+                                }
+                                periodoTempo.setDiasSemana(diasSemana);
+                                return true;
+                            }
+                        })
+                .positiveText("Selecionar")
+                .negativeText("Cancelar")
+                .show();
     }
 }

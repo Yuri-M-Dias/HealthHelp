@@ -7,6 +7,7 @@ import com.google.firebase.database.Exclude;
 import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -22,6 +23,7 @@ public class PeriodoTempo implements Serializable {
     private List<DayOfWeek> diasSemana;
 
     public PeriodoTempo() {
+        diasSemana = new ArrayList<>();
     }
 
     public PeriodoTempo(Calendar horaInicio, Calendar horaFim, Calendar dataInicio, Calendar dataFim, List<DayOfWeek> diasSemana) {

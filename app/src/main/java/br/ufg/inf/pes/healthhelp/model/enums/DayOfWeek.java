@@ -1,10 +1,18 @@
 package br.ufg.inf.pes.healthhelp.model.enums;
 
 import java.security.InvalidParameterException;
+import java.util.Calendar;
 
 public enum DayOfWeek {
 
-    MONDAY(1, "Segunda"), TUESDAY(2, "Terça"), WEDNESDAY(3, "Quarta"), THURSDAY(4, "Quinta"), SATURDAY(5, "Sexta"), SUNDAY(6, "Sábado");
+    SUNDAY(Calendar.SUNDAY, "Domingo"),
+    MONDAY(Calendar.MONDAY, "Segunda"),
+    TUESDAY(Calendar.TUESDAY, "Terça"),
+    WEDNESDAY(Calendar.WEDNESDAY, "Quarta"),
+    THURSDAY(Calendar.THURSDAY, "Quinta"),
+    FRIDAY(Calendar.FRIDAY, "Sexta"),
+    SATURDAY(Calendar.SATURDAY, "Sábado");
+
     private int value;
     private String displayName;
 
@@ -20,7 +28,7 @@ public enum DayOfWeek {
     public String getDisplayName() {
         return displayName;
     }
-    public DayOfWeek of(final int dayOfWeek) {
+    public static DayOfWeek of(final int dayOfWeek) {
         DayOfWeek dayOfWeekReturn = null;
         for (DayOfWeek dayOfWeekFinder: DayOfWeek.values()) {
             if(dayOfWeekFinder.getValue() == dayOfWeek) {
@@ -35,5 +43,8 @@ public enum DayOfWeek {
 
     }
 
-
+    @Override
+    public String toString() {
+        return this.getDisplayName();
+    }
 }
