@@ -11,12 +11,12 @@ public class PeriodoTempo implements Serializable {
     private String dataInicio; // dateFormat no estilo dd-MM-yyyy
     private String dataFim; // dateFormat no estilo dd-MM-yyyy
 
-    private List<DayOfWeek> diasSemana;
+    private List<String> diasSemana;
 
     public PeriodoTempo() {
     }
 
-    public PeriodoTempo(String horaInicio, String horaFim, String dataInicio, String dataFim, List<DayOfWeek> diasSemana) {
+    public PeriodoTempo(String horaInicio, String horaFim, String dataInicio, String dataFim, List<String> diasSemana) {
         this.horaInicio = horaInicio;
         this.horaFim = horaFim;
         this.dataInicio = dataInicio;
@@ -36,11 +36,11 @@ public class PeriodoTempo implements Serializable {
         return horaFim;
     }
 
-    public List<DayOfWeek> getDiasSemana() {
+    public List<String> getDiasSemana() {
         return diasSemana;
     }
 
-    public void setDiasSemana(List<DayOfWeek> diasSemana) {
+    public void setDiasSemana(List<String> diasSemana) {
         this.diasSemana = diasSemana;
     }
 

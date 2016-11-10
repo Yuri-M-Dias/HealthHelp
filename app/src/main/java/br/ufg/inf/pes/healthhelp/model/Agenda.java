@@ -13,6 +13,9 @@ public class Agenda {
     private List<PeriodoTempo> horariosAtendimento;
     private  List<PeriodoTempo> horariosBloqueados;
 
+    public Agenda() {
+    }
+
     public List<PeriodoTempo> getHorariosBloqueados() {
         return horariosBloqueados;
     }

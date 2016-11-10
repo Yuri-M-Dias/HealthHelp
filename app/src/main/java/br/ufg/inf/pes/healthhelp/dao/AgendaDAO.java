@@ -5,6 +5,7 @@ import android.util.Log;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -15,6 +16,16 @@ import br.ufg.inf.pes.healthhelp.model.Agenda;
 public class AgendaDAO extends AbstractDAO<Agenda> {
     public AgendaDAO() {
         super(AgendaDAO.class.getCanonicalName(), "agenda");
+        setDatabaseReference(FirebaseDatabase.getInstance().getReference());
+    }
+
+    /**
+     * construtor usado para testes
+     * @param reference referencia do database do firebase
+     */
+    public AgendaDAO(DatabaseReference reference) {
+        super(AgendaDAO.class.getCanonicalName(), "agenda");
+        setDatabaseReference(reference);
     }
 
     @Override
@@ -69,7 +80,7 @@ public class AgendaDAO extends AbstractDAO<Agenda> {
         Log.i(TAG, "Chave da nova agenda: " + registroAgenda.getKey());
         agenda.setId(registroAgenda.getKey());
 
-        registroAgenda.addValueEventListener(criaValueEventListener());
+        registroAgenda.addListenerForSingleValueEvent(criaValueEventListener());
 
         // salva no firebase
         registroAgenda.setValue(agenda);
@@ -79,7 +90,7 @@ public class AgendaDAO extends AbstractDAO<Agenda> {
     public void remover(Agenda agendaRemover) {
 
         getDatabaseReference().child(DATABASE_CHILD).child(agendaRemover.getId()).
-                addValueEventListener(criaValueEventListener());
+                addListenerForSingleValueEvent(criaValueEventListener());
 
         // remove pela key que corresponde a id da agenda
         getDatabaseReference().child(DATABASE_CHILD).child( agendaRemover.getId()  ).removeValue();
@@ -90,7 +101,7 @@ public class AgendaDAO extends AbstractDAO<Agenda> {
     public void atualizar(Agenda novaAgenda) {
 
         getDatabaseReference().child(DATABASE_CHILD).child(novaAgenda.getId()).
-                addValueEventListener( criaValueEventListener() );
+                addListenerForSingleValueEvent( criaValueEventListener() );
 
         // atualiza pela id da agenda que corresponde a key no firebase
         getDatabaseReference().child(DATABASE_CHILD).child(novaAgenda.getId()).setValue(novaAgenda);
