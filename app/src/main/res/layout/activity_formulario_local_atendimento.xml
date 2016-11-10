@@ -43,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
                 android:ems="10"
-                android:id="@+id/edit_novo_local"
+                android:id="@+id/edit_nome_local"
                 android:hint="@string/hint_nome_local_atendimento" />
 
             <EditText

@@ -12,6 +12,8 @@ import android.widget.LinearLayout;
 import android.widget.TimePicker;
 import android.widget.ToggleButton;
 
+import com.afollestad.materialdialogs.MaterialDialog;
+
 import java.util.Calendar;
 
 import br.ufg.inf.pes.healthhelp.model.PeriodoTempo;
@@ -73,61 +75,6 @@ public class PeriodoTempoView extends LinearLayout {
         container.removeView(this);
     }
 
-    /*
-    public static PeriodoTempoFragment newInstance(PeriodoTempo periodoTempo) {
-        PeriodoTempoFragment fragment = new PeriodoTempoFragment();
-        Bundle args = new Bundle();
-        args.putSerializable(PERIODO_TEMPO_PARAM, periodoTempo);
-        fragment.setArguments(args);
-        return fragment;
-    }*/
-/*
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        if (getArguments() != null) {
-            periodoTempo = (PeriodoTempo) getArguments().getSerializable(PERIODO_TEMPO_PARAM);
-        } else {
-            periodoTempo = new PeriodoTempo();
-        }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.view_periodo_tempo, container, false);
-
-        View.OnClickListener onClickListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                pickDate(view);
-            }
-        };
-
-        view.findViewById(R.id.botao_data_inicio).setOnClickListener(onClickListener);
-        view.findViewById(R.id.botao_data_final).setOnClickListener(onClickListener);
-
-        onClickListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                pickTime(view);
-            }
-        };
-
-        view.findViewById(R.id.botao_hora_inicio).setOnClickListener(onClickListener);
-        view.findViewById(R.id.botao_hora_final).setOnClickListener(onClickListener);
-
-        return view;
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        configurarBotoesDiasSemana();
-    }
-    */
-
     public void pickDate(final View view){
         if(view.getId() == R.id.botao_data_inicio || view.getId() == R.id.botao_data_final) {
             final Calendar dataArmazenada;
@@ -149,6 +96,7 @@ public class PeriodoTempoView extends LinearLayout {
                         public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
                             ((Button) view).setText(i2 + "/" + i1 + "/" + i);
                             dataArmazenada.set(i, i1, i2);
+                            ((Button) view).setError(null);
                         }
                     },
                     dataArmazenada.get(Calendar.YEAR),
@@ -184,6 +132,7 @@ public class PeriodoTempoView extends LinearLayout {
                             horaArmazenada.set(horaArmazenada.get(Calendar.YEAR),
                                     horaArmazenada.get(Calendar.MONTH),
                                     horaArmazenada.get(Calendar.DAY_OF_MONTH), horas, minutos);
+                            ((Button) view).setError(null);
                         }
                     },
                     horaArmazenada.get(Calendar.HOUR_OF_DAY),
@@ -196,7 +145,6 @@ public class PeriodoTempoView extends LinearLayout {
     }
 
     private void configurarBotoesDiasSemana(){
-        Log.e(TAG, "Configurando botoes de dia da semana");
         View.OnClickListener acaoBotaoDiaSemana = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -226,15 +174,11 @@ public class PeriodoTempoView extends LinearLayout {
 
                 }
 
-                Log.i(TAG, "tamanho antes: " + periodoTempo.getDiasSemana().size());
                 if(((ToggleButton)view).isChecked()) {
-                    Log.i(TAG, "adicionando: " + diaSemana);
                     periodoTempo.getDiasSemana().add(diaSemana);
                 } else {
-                    Log.i(TAG, "removendo: " + diaSemana);
                     periodoTempo.getDiasSemana().remove(diaSemana);
                 }
-                Log.i(TAG, "tamanho depois: " + periodoTempo.getDiasSemana().size());
             }
         };
 
@@ -246,5 +190,33 @@ public class PeriodoTempoView extends LinearLayout {
                 botao.setOnClickListener(acaoBotaoDiaSemana);
             }
         }
+    }
+
+    public PeriodoTempo getPeriodoTempo() {
+        return periodoTempo;
+    }
+
+    public boolean validarFormulario() {
+        Button foco = null;
+        if(periodoTempo.getDiasSemana().isEmpty()) {
+            new MaterialDialog.Builder(getContext())
+                    .title(R.string.erro_titulo_horario_atendimento_incompleto)
+                    .content(R.string.erro_dias_semana_vazio)
+                    .positiveText("OK")
+                    .show();
+            return false;
+        } else if(periodoTempo.getHoraInicio() == null) {
+            foco = (Button) findViewById(R.id.botao_hora_inicio);
+            foco.requestFocus();
+            foco.setError(getContext().getString(R.string.erro_campo_obrigatorio));
+            return false;
+        } else if(periodoTempo.getHoraFim() == null) {
+            foco = (Button) findViewById(R.id.botao_hora_final);
+            foco.requestFocus();
+            foco.setError(getContext().getString(R.string.erro_campo_obrigatorio));
+            return false;
+        }
+
+        return true;
     }
 }
