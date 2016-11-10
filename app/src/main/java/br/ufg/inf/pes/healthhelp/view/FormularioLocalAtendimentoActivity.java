@@ -21,7 +21,7 @@ public class FormularioLocalAtendimentoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formulario_local_atendimento);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_formulario_novo_local_atendimento);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -41,6 +41,24 @@ public class FormularioLocalAtendimentoActivity extends AppCompatActivity {
             }
         });
         return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        Log.i(TAG, "back!");
+        super.onBackPressed();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                Log.i(TAG, "menu home!");
+                onBackPressed();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     public void adicionarHorarioAtendimentoAcaoBotao(View view) {
