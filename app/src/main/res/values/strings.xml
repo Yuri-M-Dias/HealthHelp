@@ -23,7 +23,22 @@
     <string name="botao_adicionar_horario_atendimento_local">Adicionar Horário de Atendimento</string>
 
     <!-- Strings relacionadas ao fragment de período de tempo -->
-    <string name="botao_dias_semana">Dias da Semana</string>
+    <string name="excluir_periodo_tempo">Excluir período de tempo</string>
+    <string name="botao_domingo">D</string>
+    <string name="botao_segunda">S</string>
+    <string name="botao_terca">T</string>
+    <string name="botao_quarta">Q</string>
+    <string name="botao_quinta">Q</string>
+    <string name="botao_sexta">S</string>
+    <string name="botao_sabado">S</string>
+    <string name="data_final">Data Final</string>
+    <string name="data_inicial">Data Inicial</string>
+    <string name="label_periodo_tempo_de">De</string>
+    <string name="label_periodo_tempo_hora_final">Hora Final</string>
+    <string name="label_periodo_tempo_a">a</string>
+    <string name="label_periodo_tempo_hora_inicial">hora inicial</string>
+    <string name="label_periodo_tempo_aas">às</string>
+
 
 
     <string name="descricao_logo">Logo do Sistema Health Help</string>
