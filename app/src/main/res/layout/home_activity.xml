@@ -29,7 +29,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/height_image_card"
                 android:scaleType="centerCrop"
-                android:src="@drawable/maps_icon" />
+                android:src="@drawable/maps_icone" />
 
             <TextView
                 android:id="@+id/textView_visitas"
@@ -59,9 +59,9 @@
                     android:id="@+id/button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
+                    android:background="@color/icons"
                     android:text="@string/button_cards_Agendar"
-                    android:textColor="@color/blue"
+                    android:textColor="@color/accent"
                     android:onClick="OnClick$Agendar"/>
             </LinearLayout>
 
@@ -93,7 +93,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/height_image_card"
             android:scaleType="centerCrop"
-            android:src="@drawable/maps_icon" />
+            android:src="@drawable/maps_icone" />
 
         <TextView
             android:id="@+id/textView_Agenda"
@@ -142,7 +142,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/height_image_card"
                 android:scaleType="centerCrop"
-                android:src="@drawable/maps_icon" />
+                android:src="@drawable/maps_icone" />
 
             <TextView
                 android:id="@+id/textView_Atuacao"
@@ -191,7 +191,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/height_image_card"
                 android:scaleType="centerCrop"
-                android:src="@drawable/maps_icon" />
+                android:src="@drawable/maps_icone" />
 
             <TextView
                 android:id="@+id/textView_LocaisAtendimento"
