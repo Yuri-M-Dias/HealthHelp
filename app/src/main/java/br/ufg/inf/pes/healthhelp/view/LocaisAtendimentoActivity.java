@@ -127,7 +127,7 @@ public class LocaisAtendimentoActivity extends AppCompatActivity {
     }
 
     public void novoLocal(View view){
-        Intent intent = new Intent(this, NovoLocalAtendimentoActivity.class);
+        Intent intent = new Intent(this, FormularioLocalAtendimentoActivity.class);
         startActivity(intent);
     }
 

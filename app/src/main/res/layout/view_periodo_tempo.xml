@@ -7,7 +7,7 @@
         android:layout_height="wrap_content"
     android:background="@drawable/borda_periodo_tempo"
     android:layout_marginTop="@dimen/md_button_frame_vertical_padding"
-    tools:context="br.ufg.inf.pes.healthhelp.view.NovoLocalAtendimentoActivity">
+    tools:context="br.ufg.inf.pes.healthhelp.view.FormularioLocalAtendimentoActivity">
 
         <LinearLayout
             android:orientation="horizontal"

@@ -9,19 +9,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import java.util.ArrayList;
-
 import br.ufg.inf.pes.healthhelp.model.PeriodoTempo;
 import br.ufg.pes.healthhelp.R;
 
-public class NovoLocalAtendimentoActivity extends AppCompatActivity {
+public class FormularioLocalAtendimentoActivity extends AppCompatActivity {
 
-    private static final String TAG = NovoLocalAtendimentoActivity.class.getCanonicalName();
+    private static final String TAG = FormularioLocalAtendimentoActivity.class.getCanonicalName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_novo_local_atendimento);
+        setContentView(R.layout.activity_formulario_local_atendimento);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

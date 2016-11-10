@@ -11,7 +11,7 @@ import org.junit.runner.RunWith;
 
 import br.ufg.inf.pes.healthhelp.view.LocalAtendimentoActivity;
 import br.ufg.inf.pes.healthhelp.view.LocaisAtendimentoActivity;
-import br.ufg.inf.pes.healthhelp.view.NovoLocalAtendimentoActivity;
+import br.ufg.inf.pes.healthhelp.view.FormularioLocalAtendimentoActivity;
 
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.intent.Intents.init;
@@ -44,7 +44,7 @@ public class ExampleInstrumentedTest {
         mActivityRule.launchActivity(new Intent());
         //onView(withId(R.id.botao_novo_local_atendimento))
         //        .perform(click());
-        intended(hasComponent(NovoLocalAtendimentoActivity.class.getName()));
+        intended(hasComponent(FormularioLocalAtendimentoActivity.class.getName()));
         release();
     }
 
