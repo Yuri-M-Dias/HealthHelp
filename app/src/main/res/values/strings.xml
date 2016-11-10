@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">Health Help</string>
+    <string name="descricao_logo">Logo do Sistema Health Help</string>
     <string name="locais_atendimento">Locais de Atendimento</string>
-    <string name="activity_novo_local_atendimento">Novo Local de Atendimento</string>
     <string name="hospital">Local de Atendimento</string>
-    <string name="salvar">SALVAR</string>
+    <string name="acao_salvar">Salvar</string>
     <string name="endereco">Endereço</string>
     <string name="telefone">Telefone</string>
 
@@ -20,9 +20,11 @@
     <string name="mensagem_autenticacao_sucesso">Autenticação bem sucedida</string>
 
     <!-- Strings relacionadas ao formulário de local de atendimento -->
+    <string name="activity_novo_local_atendimento">Novo Local de Atendimento</string>
+    <string name="hint_nome_local_atendimento">Nome do Local de Atendimento</string>
     <string name="botao_adicionar_horario_atendimento_local">Adicionar Horário de Atendimento</string>
 
-    <!-- Strings relacionadas ao fragment de período de tempo -->
+    <!-- Strings relacionadas à view de período de tempo -->
     <string name="excluir_periodo_tempo">Excluir período de tempo</string>
     <string name="botao_domingo">D</string>
     <string name="botao_segunda">S</string>
@@ -38,9 +40,4 @@
     <string name="label_periodo_tempo_a">a</string>
     <string name="label_periodo_tempo_hora_inicial">hora inicial</string>
     <string name="label_periodo_tempo_aas">às</string>
-
-
-
-    <string name="descricao_logo">Logo do Sistema Health Help</string>
-
 </resources>

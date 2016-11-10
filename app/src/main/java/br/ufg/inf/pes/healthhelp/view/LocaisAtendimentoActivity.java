@@ -37,7 +37,7 @@ public class LocaisAtendimentoActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
 
         localAtendimentoService = new LocalAtendimentoService();
@@ -45,7 +45,7 @@ public class LocaisAtendimentoActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.so_pesquisa, menu);
+        getMenuInflater().inflate(R.menu.menu_so_pesquisa, menu);
 
         MenuItem searchMenuItem = menu.findItem(R.id.acao_pesquisa);
         configurarPesquisa((SearchView) MenuItemCompat.getActionView(searchMenuItem));

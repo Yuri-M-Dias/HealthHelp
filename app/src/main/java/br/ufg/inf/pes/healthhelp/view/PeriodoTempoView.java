@@ -1,14 +1,9 @@
-package br.ufg.inf.pes.healthhelp;
+package br.ufg.inf.pes.healthhelp.view;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.text.TextUtils;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -17,36 +12,76 @@ import android.widget.LinearLayout;
 import android.widget.TimePicker;
 import android.widget.ToggleButton;
 
-import com.afollestad.materialdialogs.MaterialDialog;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
 
 import br.ufg.inf.pes.healthhelp.model.PeriodoTempo;
 import br.ufg.inf.pes.healthhelp.model.enums.DayOfWeek;
 import br.ufg.pes.healthhelp.R;
 
-public class PeriodoTempoFragment extends Fragment {
+public class PeriodoTempoView extends LinearLayout {
 
-    private static final String TAG = PeriodoTempoFragment.class.getCanonicalName();
+    private static final String TAG = PeriodoTempoView.class.getCanonicalName();
     private static final String PERIODO_TEMPO_PARAM = "column-count";
 
     private PeriodoTempo periodoTempo;
+    private ViewGroup container;
 
-    public PeriodoTempoFragment() {
+    public PeriodoTempoView(Context context, PeriodoTempo periodoTempo, ViewGroup container) {
+        super(context);
+        this.periodoTempo = periodoTempo;
+        this.container = container;
+
+        init();
     }
 
+    public void init(){
+        inflate(getContext(), R.layout.view_periodo_tempo, this);
+
+        configurarBotoesDiasSemana();
+
+        View.OnClickListener onClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                remover();
+            }
+        };
+
+        findViewById(R.id.botao_remover_horario_atendimento).setOnClickListener(onClickListener);
+
+        onClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pickDate(view);
+            }
+        };
+
+        findViewById(R.id.botao_data_inicio).setOnClickListener(onClickListener);
+        findViewById(R.id.botao_data_final).setOnClickListener(onClickListener);
+
+        onClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pickTime(view);
+            }
+        };
+
+        findViewById(R.id.botao_hora_inicio).setOnClickListener(onClickListener);
+        findViewById(R.id.botao_hora_final).setOnClickListener(onClickListener);
+    }
+
+    public void remover(){
+        container.removeView(this);
+    }
+
+    /*
     public static PeriodoTempoFragment newInstance(PeriodoTempo periodoTempo) {
         PeriodoTempoFragment fragment = new PeriodoTempoFragment();
         Bundle args = new Bundle();
         args.putSerializable(PERIODO_TEMPO_PARAM, periodoTempo);
         fragment.setArguments(args);
         return fragment;
-    }
-
+    }*/
+/*
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,7 +96,7 @@ public class PeriodoTempoFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.layout_periodo_tempo, container, false);
+        View view = inflater.inflate(R.layout.view_periodo_tempo, container, false);
 
         View.OnClickListener onClickListener = new View.OnClickListener() {
             @Override
@@ -91,6 +126,7 @@ public class PeriodoTempoFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         configurarBotoesDiasSemana();
     }
+    */
 
     public void pickDate(final View view){
         if(view.getId() == R.id.botao_data_inicio || view.getId() == R.id.botao_data_final) {
@@ -107,7 +143,7 @@ public class PeriodoTempoFragment extends Fragment {
                 dataArmazenada = periodoTempo.getDataFim();
             }
 
-            DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(),
+            DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(),
                     new DatePickerDialog.OnDateSetListener() {
                         @Override
                         public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
@@ -140,7 +176,7 @@ public class PeriodoTempoFragment extends Fragment {
                 horaArmazenada = periodoTempo.getHoraFim();
             }
 
-            TimePickerDialog timePickerDialog = new TimePickerDialog(getActivity(),
+            TimePickerDialog timePickerDialog = new TimePickerDialog(getContext(),
                     new TimePickerDialog.OnTimeSetListener() {
                         @Override
                         public void onTimeSet(TimePicker timePicker, int horas, int minutos) {
@@ -202,7 +238,7 @@ public class PeriodoTempoFragment extends Fragment {
             }
         };
 
-        LinearLayout containerDiasSemana = (LinearLayout) getView().findViewById(R.id.container_dias_semana);
+        LinearLayout containerDiasSemana = (LinearLayout) findViewById(R.id.container_dias_semana);
         for(int posicao = 0; posicao < containerDiasSemana.getChildCount(); posicao++){
             View botao = containerDiasSemana.getChildAt(posicao);
             Log.i(TAG, botao.getClass().getCanonicalName());
