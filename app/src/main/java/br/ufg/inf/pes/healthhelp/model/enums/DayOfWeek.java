@@ -20,14 +20,15 @@ public enum DayOfWeek {
     public String getDisplayName() {
         return displayName;
     }
+
     public DayOfWeek of(final int dayOfWeek) {
         DayOfWeek dayOfWeekReturn = null;
-        for (DayOfWeek dayOfWeekFinder: DayOfWeek.values()) {
-            if(dayOfWeekFinder.getValue() == dayOfWeek) {
+        for (DayOfWeek dayOfWeekFinder : DayOfWeek.values()) {
+            if (dayOfWeekFinder.getValue() == dayOfWeek) {
                 return dayOfWeekFinder;
             }
         }
-        if(dayOfWeekReturn == null) {
+        if (dayOfWeekReturn == null) {
             throw new InvalidParameterException("Unable to convert to a DayOfWeek");
         }
 

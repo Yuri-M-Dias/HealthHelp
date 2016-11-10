@@ -51,7 +51,7 @@ public class UsuarioDAO extends AbstractDAO<Usuario> {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                for(int contador = 0; contador < 3; contador++){
+                for (int contador = 0; contador < 3; contador++) {
                     Log.i(TAG, "Contagem regressiva para autenticacao: " + (3 - contador));
                     try {
                         Thread.sleep(1000);
@@ -66,18 +66,19 @@ public class UsuarioDAO extends AbstractDAO<Usuario> {
                 usuario.setSenha("cleber");
 
                 AsyncExecutor.create().execute(
-                        new AsyncExecutor.RunnableEx() {
-                            @Override
-                            public void run() throws Exception {
-                                if(usuario.getLogin().equals(login) && usuario.getSenha().equals(senha)) {
-                                    EventBus.getDefault().post(new DatabaseEvent<>(usuario));
-                                } else {
-                                    throw new Exception("Usuário e/ou senha inválidos");
-                                }
+                    new AsyncExecutor.RunnableEx() {
+                        @Override
+                        public void run() throws Exception {
+                            if (usuario.getLogin().equals(login) && usuario.getSenha().equals(senha)) {
+                                EventBus.getDefault().post(new DatabaseEvent<>(usuario));
+                            } else {
+                                throw new Exception("Usuário e/ou senha inválidos");
                             }
                         }
+                    }
                 );
             }
         }).start();
     }
+
 }
