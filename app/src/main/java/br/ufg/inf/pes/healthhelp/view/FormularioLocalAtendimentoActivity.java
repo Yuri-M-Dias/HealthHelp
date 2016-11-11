@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.MaterialDialog;
+
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -169,6 +171,14 @@ public class FormularioLocalAtendimentoActivity extends AppCompatActivity {
                 resultado = false;
                 break;
             }
+        }
+        if(containerLocaisAtendimento.getChildCount() == 0) {
+            new MaterialDialog.Builder(this)
+                .title(R.string.erro_titulo_horario_atendimento_incompleto)
+                .content("É necessário informar pelo menos um horário de atendimento.")
+                .positiveText("OK")
+                .show();
+            resultado = false;
         }
 
         //TODO: Verificar se diferentes horários de atendimento chocam horários. Em caso afirmativo, deve-se informar o erro e retornar false.
