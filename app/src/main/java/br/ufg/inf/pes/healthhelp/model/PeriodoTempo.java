@@ -101,6 +101,28 @@ public class PeriodoTempo implements Serializable {
     }
 
 
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for(int index = 0; index < diasSemana.size(); index++) {
+            stringBuilder.append(diasSemana.get(index).getDisplayName());
+            if(index < diasSemana.size() -1) {
+                stringBuilder.append(" - ");
+            }
+        }
+        if(!stringBuilder.toString().isEmpty()) {
+            stringBuilder.append(", d");
+        } else {
+            stringBuilder.append("D");
+        }
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm");
+        stringBuilder.append("as ");
+        stringBuilder.append(simpleDateFormat.format(getHoraInicio().getTime()));
+        stringBuilder.append(" às ");
+        stringBuilder.append(simpleDateFormat.format(getHoraFim().getTime()));
 
+        //TODO: Adiciona a data de início e fim à string.
 
+        return stringBuilder.toString();
+    }
 }

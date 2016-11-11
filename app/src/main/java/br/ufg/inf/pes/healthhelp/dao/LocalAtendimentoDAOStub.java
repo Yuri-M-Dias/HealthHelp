@@ -18,4 +18,16 @@ public class LocalAtendimentoDAOStub extends LocalAtendimentoDAO {
                 }
         );
     }
+    @Override
+    public void atualizar(final LocalAtendimento localAtendimento) {
+        AsyncExecutor.create().execute(
+                new AsyncExecutor.RunnableEx() {
+                    @Override
+                    public void run() throws Exception {
+                        EventBus.getDefault().post(new DatabaseEvent<>("Local de Atendimento salvo com sucesso"));
+                    }
+                }
+        );
+    }
+
 }

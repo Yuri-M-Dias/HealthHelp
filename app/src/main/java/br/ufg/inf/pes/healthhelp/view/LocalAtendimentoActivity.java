@@ -10,7 +10,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import java.util.Arrays;
+
 import br.ufg.inf.pes.healthhelp.model.LocalAtendimento;
+import br.ufg.inf.pes.healthhelp.model.PeriodoTempo;
 import br.ufg.pes.healthhelp.R;
 
 public class LocalAtendimentoActivity extends AppCompatActivity {
@@ -74,8 +77,7 @@ public class LocalAtendimentoActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        TextView enderecoTextView = (TextView) findViewById(R.id.endereco_hospital);
-        enderecoTextView.setText(enderecoTextView.getText() + localAtendimento.getEndereco());
+        ((TextView) findViewById(R.id.endereco_hospital)).setText(localAtendimento.getEndereco());
 
         findViewById(R.id.icone_telefone).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,8 +87,13 @@ public class LocalAtendimentoActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        TextView telefoneTextView = (TextView) findViewById(R.id.telefone_hospital);
-        telefoneTextView.setText(telefoneTextView.getText() + localAtendimento.getTelefone());
+        ((TextView) findViewById(R.id.telefone_hospital)).setText(localAtendimento.getTelefone());
+
+        String horariosAtendimentoLegivel = "";
+        for(PeriodoTempo periodoTempo: localAtendimento.getHorariosAtendimento()) {
+            horariosAtendimentoLegivel += periodoTempo.toString() + "\n";
+        }
+        ((TextView) findViewById(R.id.agendamento_hospital)).setText(horariosAtendimentoLegivel);
 
     }
 }
