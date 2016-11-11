@@ -14,11 +14,12 @@ public class AtuacaoService {
         this.atuacaoDAO = new AtuacaoDAO();
     }
 
-    void solicitarListaAtuacoes(){
+    void solicitarListaAtuacoes() {
         atuacaoDAO.buscarTodos();
     }
+
     void salvar(Atuacao atuacao) {
-        if(atuacao.getId() == null) {
+        if (atuacao.getId() == null) {
             atuacaoDAO.inserir(atuacao);
         } else {
             atuacaoDAO.atualizar(atuacao);

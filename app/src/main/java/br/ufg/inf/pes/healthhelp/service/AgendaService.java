@@ -15,10 +15,11 @@ public class AgendaService {
     }
 
     void salvar(Agenda agenda) {
-        if(agenda.getId() == null) {
+        if (agenda.getId() == null) {
             agendaDAO.inserir(agenda);
         } else {
             agendaDAO.atualizar(agenda);
         }
     }
+
 }

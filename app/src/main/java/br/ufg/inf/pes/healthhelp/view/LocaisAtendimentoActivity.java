@@ -68,7 +68,7 @@ public class LocaisAtendimentoActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        if(!Sessao.estaAtiva(this)) {
+        if (!Sessao.estaAtiva(this)) {
             Intent intent = new Intent(this, AutenticacaoActivity.class);
             startActivity(intent);
         } else {
@@ -149,7 +149,7 @@ public class LocaisAtendimentoActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void exibir(LocalAtendimento localAtendimento){
+    public void exibir(LocalAtendimento localAtendimento) {
         Intent localAtendimentoIntent = new Intent(LocaisAtendimentoActivity.this, LocalAtendimentoActivity.class);
         localAtendimentoIntent.putExtra(LocalAtendimentoActivity.LOCAL_ATENDIMENTO_INTENT_PARAMETER, localAtendimento);
         startActivity(localAtendimentoIntent);
