@@ -60,6 +60,8 @@ public class FormularioLocalAtendimentoActivity extends AppCompatActivity {
         localAtendimento = (LocalAtendimento) getIntent().getSerializableExtra(LocalAtendimentoActivity.LOCAL_ATENDIMENTO_INTENT_PARAMETER);
         if(localAtendimento == null) {
             localAtendimento = new LocalAtendimento();
+        } else {
+            preencherView();
         }
 
     }
@@ -95,6 +97,20 @@ public class FormularioLocalAtendimentoActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
+    }
+
+    private void preencherView(){
+        getSupportActionBar().setTitle("Editar " + localAtendimento.getNome());
+
+        campoNome.setText(localAtendimento.getNome());
+        campoEndereco.setText(localAtendimento.getEndereco());
+        campoTelefone.setText(localAtendimento.getTelefone());
+
+        for(PeriodoTempo periodoTempo: localAtendimento.getHorariosAtendimento()){
+            adicionarHorarioAtendimento(new PeriodoTempoView(this,
+                    periodoTempo,
+                    containerLocaisAtendimento));
+        }
     }
 
     public void adicionarHorarioAtendimentoAcaoBotao(View view) {

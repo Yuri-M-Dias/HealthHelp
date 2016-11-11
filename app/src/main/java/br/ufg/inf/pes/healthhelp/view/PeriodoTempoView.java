@@ -14,6 +14,7 @@ import android.widget.ToggleButton;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import br.ufg.inf.pes.healthhelp.model.PeriodoTempo;
@@ -69,6 +70,60 @@ public class PeriodoTempoView extends LinearLayout {
 
         findViewById(R.id.botao_hora_inicio).setOnClickListener(onClickListener);
         findViewById(R.id.botao_hora_final).setOnClickListener(onClickListener);
+
+        preencherView();
+    }
+
+    private void preencherView(){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        if(periodoTempo.getDataInicio() != null) {
+            ((Button) findViewById(R.id.botao_data_inicio)).setText(simpleDateFormat.format(
+                    periodoTempo.getDataInicio().getTime()));
+        }
+        if(periodoTempo.getDataFim() != null) {
+            ((Button) findViewById(R.id.botao_data_final)).setText(simpleDateFormat.format(
+                    periodoTempo.getDataFim().getTime()));
+        }
+
+        simpleDateFormat = new SimpleDateFormat("HH:mm");
+        if(periodoTempo.getHoraInicio() != null) {
+            ((Button) findViewById(R.id.botao_hora_inicio)).setText(simpleDateFormat.format(
+                    periodoTempo.getHoraInicio().getTime()));
+        }
+        if(periodoTempo.getHoraFim() != null) {
+            ((Button) findViewById(R.id.botao_hora_final)).setText(simpleDateFormat.format(
+                    periodoTempo.getHoraFim().getTime()));
+        }
+
+        for(DayOfWeek diaSemana : periodoTempo.getDiasSemana()) {
+            int recurso;
+            switch (diaSemana) {
+                case SUNDAY:
+                    recurso = R.id.botao_domingo;
+                    break;
+                case MONDAY:
+                    recurso = R.id.botao_segunda;
+                    break;
+                case TUESDAY:
+                    recurso = R.id.botao_terca;
+                    break;
+                case WEDNESDAY:
+                    recurso = R.id.botao_quarta;
+                    break;
+                case THURSDAY:
+                    recurso = R.id.botao_quinta;
+                    break;
+                case FRIDAY:
+                    recurso = R.id.botao_sexta;
+                    break;
+                default:
+                    recurso = R.id.botao_sabado;
+                    break;
+            }
+            ((ToggleButton) findViewById(recurso)).setChecked(true);
+
+        }
+
     }
 
     public void remover(){
