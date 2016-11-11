@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -21,14 +22,47 @@ public class LocalAtendimentoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_local_atendimento);
         localAtendimento = (LocalAtendimento) getIntent().getSerializableExtra(LOCAL_ATENDIMENTO_INTENT_PARAMETER);
-        initToolbar();
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_local_atendimento);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setTitle(localAtendimento.getNome());
+
         preencherView();
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_opcao_unica_simple, menu);
+
+        MenuItem salvarMenuItem = menu.findItem(R.id.acao_unica);
+        salvarMenuItem.setTitle("Editar");
+        salvarMenuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                editar();
+                return true;
+            }
+        });
+        return true;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        finish();
-        return super.onOptionsItemSelected(item);
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void editar() {
+        Intent formularioLocalAtendimento = new Intent(this, FormularioLocalAtendimentoActivity.class);
+        formularioLocalAtendimento.putExtra(LOCAL_ATENDIMENTO_INTENT_PARAMETER,
+                localAtendimento);
+        startActivity(formularioLocalAtendimento);
     }
 
     private void preencherView() {
@@ -54,14 +88,5 @@ public class LocalAtendimentoActivity extends AppCompatActivity {
         TextView telefoneTextView = (TextView) findViewById(R.id.telefone_hospital);
         telefoneTextView.setText(telefoneTextView.getText() + localAtendimento.getTelefone());
 
-    }
-
-    private void initToolbar() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolBarHospital);
-        toolbar.setTitle("");
-        //TODO: Definir título, não subtítulo, pois este é menor. O título, entretanto, está com a cor escura.
-        toolbar.setSubtitle(localAtendimento.getNome());
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 }

@@ -3,7 +3,9 @@
     <string name="descricao_logo">Logo do Sistema Health Help</string>
     <string name="locais_atendimento">Locais de Atendimento</string>
     <string name="hospital">Local de Atendimento</string>
+    <string name="acao_indefinida">Indefinido</string>
     <string name="acao_salvar">Salvar</string>
+    <string name="acao_editar">Editar</string>
     <string name="endereco">Endereço</string>
     <string name="telefone">Telefone</string>
 

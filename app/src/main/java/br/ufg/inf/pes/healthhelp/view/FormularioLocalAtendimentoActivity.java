@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,7 +26,6 @@ import br.ufg.pes.healthhelp.R;
 
 public class FormularioLocalAtendimentoActivity extends AppCompatActivity {
 
-    public static final String LOCAL_ATENDIMENTO_TAG = "localAtendimento";
     private static final String TAG = FormularioLocalAtendimentoActivity.class.getCanonicalName();
 
     private LocalAtendimento localAtendimento;
@@ -59,7 +57,7 @@ public class FormularioLocalAtendimentoActivity extends AppCompatActivity {
 
         localAtendimentoService = new LocalAtendimentoService();
 
-        localAtendimento = (LocalAtendimento) getIntent().getSerializableExtra(LOCAL_ATENDIMENTO_TAG);
+        localAtendimento = (LocalAtendimento) getIntent().getSerializableExtra(LocalAtendimentoActivity.LOCAL_ATENDIMENTO_INTENT_PARAMETER);
         if(localAtendimento == null) {
             localAtendimento = new LocalAtendimento();
         }
@@ -68,9 +66,10 @@ public class FormularioLocalAtendimentoActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_so_salvar, menu);
+        getMenuInflater().inflate(R.menu.menu_opcao_unica_simple, menu);
 
-        MenuItem salvarMenuItem = menu.findItem(R.id.acao_salvar);
+        MenuItem salvarMenuItem = menu.findItem(R.id.acao_unica);
+        salvarMenuItem.setTitle(R.string.acao_salvar);
         salvarMenuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {

@@ -9,19 +9,23 @@
     android:gravity="center_horizontal"
     tools:context="br.ufg.inf.pes.healthhelp.view.LocalAtendimentoActivity">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolBarHospital"
+    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#009688"
-        android:textAlignment="textStart"
-        android:elevation="4dp"
-        app:subtitle="@string/hospital"
-        app:subtitleTextColor="@android:color/background_light"
-        app:navigationIcon="@drawable/ic_arrow_back_black_24dp"
-        android:theme="@style/HealthHelpTheme">
+        android:theme="@style/AppTheme.AppBarOverlay">
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar_local_atendimento"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            android:elevation="4dp"
+            app:title="@string/hint_nome_local_atendimento"
+            app:subtitleTextColor="@android:color/background_light"
+            app:navigationIcon="@drawable/ic_arrow_back_black_24dp" >
+        </android.support.v7.widget.Toolbar>
 
-    </android.support.v7.widget.Toolbar>
+    </android.support.design.widget.AppBarLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

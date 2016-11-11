@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.github.clans.fab.FloatingActionMenu;
 import com.google.firebase.database.DatabaseError;
 
 import java.util.List;
@@ -37,7 +38,7 @@ public class LocaisAtendimentoActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
         localAtendimentoService = new LocalAtendimentoService();
@@ -62,6 +63,12 @@ public class LocaisAtendimentoActivity extends AppCompatActivity {
         } else {
             recarregarLocais();
         }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        ((FloatingActionMenu) findViewById(R.id.fab)).close(true);
     }
 
     private void recarregarLocais() {

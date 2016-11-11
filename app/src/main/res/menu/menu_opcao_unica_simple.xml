@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item android:id="@+id/acao_salvar"
-        android:title="@string/acao_salvar"
+    <item android:id="@+id/acao_unica"
+        android:title="@string/acao_indefinida"
         app:showAsAction="always"
         android:layout_width="wrap_content" />
 </menu>
