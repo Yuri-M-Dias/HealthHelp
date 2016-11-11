@@ -17,9 +17,9 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
+            app:navigationIcon="@drawable/ic_arrow_back_black_24dp"
             app:popupTheme="@style/AppTheme.PopupOverlay"
-            app:title="Locais de Atendimento"
-            app:navigationIcon="@drawable/ic_arrow_back_black_24dp" />
+            app:title="Locais de Atendimento" />
 
     </android.support.design.widget.AppBarLayout>
 
@@ -33,10 +33,11 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        app:menu_icon="@mipmap/ic_app"
         app:menu_colorNormal="@color/primary"
         app:menu_colorPressed="@color/primary_dark"
-        app:menu_colorRipple="@color/primary">
+        app:menu_colorRipple="@color/primary"
+        app:menu_icon="@mipmap/ic_app">
+
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/fab_item_1"
             android:layout_width="wrap_content"
@@ -44,12 +45,12 @@
             android:layout_gravity="bottom|right"
             android:layout_marginBottom="8dp"
             android:layout_marginRight="8dp"
-            app:fab_label="Novo posto de atendimento"
+            android:onClick="novoLocal"
+            android:src="@drawable/ic_hospital"
             app:fab_colorNormal="@color/icons"
             app:fab_colorPressed="@color/accent"
             app:fab_colorRipple="@color/icons"
-            android:onClick="novoLocal"
-            android:src="@drawable/ic_hospital"/>
+            app:fab_label="Novo posto de atendimento" />
     </com.github.clans.fab.FloatingActionMenu>
 
 </android.support.design.widget.CoordinatorLayout>

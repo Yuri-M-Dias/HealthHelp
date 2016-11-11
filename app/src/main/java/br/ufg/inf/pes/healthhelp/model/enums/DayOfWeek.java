@@ -21,13 +21,6 @@ public enum DayOfWeek {
         this.displayName = displayName;
     }
 
-    public int getValue() {
-        return value;
-    }
-
-    public String getDisplayName() {
-        return displayName;
-    }
     public static DayOfWeek of(final int dayOfWeek) {
         DayOfWeek dayOfWeekReturn = null;
         for (DayOfWeek dayOfWeekFinder : DayOfWeek.values()) {
@@ -41,6 +34,14 @@ public enum DayOfWeek {
 
         return dayOfWeekReturn;
 
+    }
+
+    public int getValue() {
+        return value;
+    }
+
+    public String getDisplayName() {
+        return displayName;
     }
 
     @Override

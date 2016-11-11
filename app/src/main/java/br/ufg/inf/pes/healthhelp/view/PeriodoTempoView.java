@@ -37,7 +37,7 @@ public class PeriodoTempoView extends LinearLayout {
         init();
     }
 
-    public void init(){
+    public void init() {
         inflate(getContext(), R.layout.view_periodo_tempo, this);
 
         configurarBotoesDiasSemana();
@@ -74,28 +74,28 @@ public class PeriodoTempoView extends LinearLayout {
         preencherView();
     }
 
-    private void preencherView(){
+    private void preencherView() {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        if(periodoTempo.getDataInicio() != null) {
+        if (periodoTempo.getDataInicio() != null) {
             ((Button) findViewById(R.id.botao_data_inicio)).setText(simpleDateFormat.format(
-                    periodoTempo.getDataInicio().getTime()));
+                periodoTempo.getDataInicio().getTime()));
         }
-        if(periodoTempo.getDataFim() != null) {
+        if (periodoTempo.getDataFim() != null) {
             ((Button) findViewById(R.id.botao_data_final)).setText(simpleDateFormat.format(
-                    periodoTempo.getDataFim().getTime()));
+                periodoTempo.getDataFim().getTime()));
         }
 
         simpleDateFormat = new SimpleDateFormat("HH:mm");
-        if(periodoTempo.getHoraInicio() != null) {
+        if (periodoTempo.getHoraInicio() != null) {
             ((Button) findViewById(R.id.botao_hora_inicio)).setText(simpleDateFormat.format(
-                    periodoTempo.getHoraInicio().getTime()));
+                periodoTempo.getHoraInicio().getTime()));
         }
-        if(periodoTempo.getHoraFim() != null) {
+        if (periodoTempo.getHoraFim() != null) {
             ((Button) findViewById(R.id.botao_hora_final)).setText(simpleDateFormat.format(
-                    periodoTempo.getHoraFim().getTime()));
+                periodoTempo.getHoraFim().getTime()));
         }
 
-        for(DayOfWeek diaSemana : periodoTempo.getDiasSemana()) {
+        for (DayOfWeek diaSemana : periodoTempo.getDiasSemana()) {
             int recurso;
             switch (diaSemana) {
                 case SUNDAY:
@@ -126,37 +126,37 @@ public class PeriodoTempoView extends LinearLayout {
 
     }
 
-    public void remover(){
+    public void remover() {
         container.removeView(this);
     }
 
-    public void pickDate(final View view){
-        if(view.getId() == R.id.botao_data_inicio || view.getId() == R.id.botao_data_final) {
+    public void pickDate(final View view) {
+        if (view.getId() == R.id.botao_data_inicio || view.getId() == R.id.botao_data_final) {
             final Calendar dataArmazenada;
-            if(view.getId() == R.id.botao_data_inicio) {
-                if(periodoTempo.getDataInicio() == null) {
+            if (view.getId() == R.id.botao_data_inicio) {
+                if (periodoTempo.getDataInicio() == null) {
                     periodoTempo.setDataInicio(Calendar.getInstance());
                 }
                 dataArmazenada = periodoTempo.getDataInicio();
             } else {
-                if(periodoTempo.getDataFim() == null) {
+                if (periodoTempo.getDataFim() == null) {
                     periodoTempo.setDataFim(Calendar.getInstance());
                 }
                 dataArmazenada = periodoTempo.getDataFim();
             }
 
             DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(),
-                    new DatePickerDialog.OnDateSetListener() {
-                        @Override
-                        public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-                            ((Button) view).setText(i2 + "/" + i1 + "/" + i);
-                            dataArmazenada.set(i, i1, i2);
-                            ((Button) view).setError(null);
-                        }
-                    },
-                    dataArmazenada.get(Calendar.YEAR),
-                    dataArmazenada.get(Calendar.MONTH),
-                    dataArmazenada.get(Calendar.DAY_OF_MONTH));
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+                        ((Button) view).setText(i2 + "/" + i1 + "/" + i);
+                        dataArmazenada.set(i, i1, i2);
+                        ((Button) view).setError(null);
+                    }
+                },
+                dataArmazenada.get(Calendar.YEAR),
+                dataArmazenada.get(Calendar.MONTH),
+                dataArmazenada.get(Calendar.DAY_OF_MONTH));
             datePickerDialog.show();
         } else {
             Log.e(TAG, "A view selecionado não é de definição de data e não pode selecionar tempo.");
@@ -164,47 +164,47 @@ public class PeriodoTempoView extends LinearLayout {
     }
 
 
-    public void pickTime(final View view){
-        if(view.getId() == R.id.botao_hora_inicio || view.getId() == R.id.botao_hora_final) {
+    public void pickTime(final View view) {
+        if (view.getId() == R.id.botao_hora_inicio || view.getId() == R.id.botao_hora_final) {
             final Calendar horaArmazenada;
-            if(view.getId() == R.id.botao_hora_inicio) {
-                if(periodoTempo.getHoraInicio() == null) {
+            if (view.getId() == R.id.botao_hora_inicio) {
+                if (periodoTempo.getHoraInicio() == null) {
                     periodoTempo.setHoraInicio(Calendar.getInstance());
                 }
                 horaArmazenada = periodoTempo.getHoraInicio();
             } else {
-                if(periodoTempo.getHoraFim() == null) {
+                if (periodoTempo.getHoraFim() == null) {
                     periodoTempo.setHoraFim(Calendar.getInstance());
                 }
                 horaArmazenada = periodoTempo.getHoraFim();
             }
 
             TimePickerDialog timePickerDialog = new TimePickerDialog(getContext(),
-                    new TimePickerDialog.OnTimeSetListener() {
-                        @Override
-                        public void onTimeSet(TimePicker timePicker, int horas, int minutos) {
-                            ((Button) view).setText(horas + ":" + minutos);
-                            horaArmazenada.set(horaArmazenada.get(Calendar.YEAR),
-                                    horaArmazenada.get(Calendar.MONTH),
-                                    horaArmazenada.get(Calendar.DAY_OF_MONTH), horas, minutos);
-                            ((Button) view).setError(null);
-                        }
-                    },
-                    horaArmazenada.get(Calendar.HOUR_OF_DAY),
-                    horaArmazenada.get(Calendar.MINUTE),
-                    true);
+                new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int horas, int minutos) {
+                        ((Button) view).setText(horas + ":" + minutos);
+                        horaArmazenada.set(horaArmazenada.get(Calendar.YEAR),
+                            horaArmazenada.get(Calendar.MONTH),
+                            horaArmazenada.get(Calendar.DAY_OF_MONTH), horas, minutos);
+                        ((Button) view).setError(null);
+                    }
+                },
+                horaArmazenada.get(Calendar.HOUR_OF_DAY),
+                horaArmazenada.get(Calendar.MINUTE),
+                true);
             timePickerDialog.show();
         } else {
             Log.e(TAG, "A view selecionada não é de definição de hora e não pode selecionar tempo.");
         }
     }
 
-    private void configurarBotoesDiasSemana(){
+    private void configurarBotoesDiasSemana() {
         View.OnClickListener acaoBotaoDiaSemana = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 DayOfWeek diaSemana = null;
-                switch (view.getId()){
+                switch (view.getId()) {
                     case R.id.botao_domingo:
                         diaSemana = DayOfWeek.SUNDAY;
                         break;
@@ -229,7 +229,7 @@ public class PeriodoTempoView extends LinearLayout {
 
                 }
 
-                if(((ToggleButton)view).isChecked()) {
+                if (((ToggleButton) view).isChecked()) {
                     periodoTempo.getDiasSemana().add(diaSemana);
                 } else {
                     periodoTempo.getDiasSemana().remove(diaSemana);
@@ -238,10 +238,10 @@ public class PeriodoTempoView extends LinearLayout {
         };
 
         LinearLayout containerDiasSemana = (LinearLayout) findViewById(R.id.container_dias_semana);
-        for(int posicao = 0; posicao < containerDiasSemana.getChildCount(); posicao++){
+        for (int posicao = 0; posicao < containerDiasSemana.getChildCount(); posicao++) {
             View botao = containerDiasSemana.getChildAt(posicao);
             Log.i(TAG, botao.getClass().getCanonicalName());
-            if(botao instanceof ToggleButton) {
+            if (botao instanceof ToggleButton) {
                 botao.setOnClickListener(acaoBotaoDiaSemana);
             }
         }
@@ -253,19 +253,19 @@ public class PeriodoTempoView extends LinearLayout {
 
     public boolean validarFormulario() {
         Button foco = null;
-        if(periodoTempo.getDiasSemana().isEmpty()) {
+        if (periodoTempo.getDiasSemana().isEmpty()) {
             new MaterialDialog.Builder(getContext())
-                    .title(R.string.erro_titulo_horario_atendimento_incompleto)
-                    .content(R.string.erro_dias_semana_vazio)
-                    .positiveText("OK")
-                    .show();
+                .title(R.string.erro_titulo_horario_atendimento_incompleto)
+                .content(R.string.erro_dias_semana_vazio)
+                .positiveText("OK")
+                .show();
             return false;
-        } else if(periodoTempo.getHoraInicio() == null) {
+        } else if (periodoTempo.getHoraInicio() == null) {
             foco = (Button) findViewById(R.id.botao_hora_inicio);
             foco.requestFocus();
             foco.setError(getContext().getString(R.string.erro_campo_obrigatorio));
             return false;
-        } else if(periodoTempo.getHoraFim() == null) {
+        } else if (periodoTempo.getHoraFim() == null) {
             foco = (Button) findViewById(R.id.botao_hora_final);
             foco.requestFocus();
             foco.setError(getContext().getString(R.string.erro_campo_obrigatorio));

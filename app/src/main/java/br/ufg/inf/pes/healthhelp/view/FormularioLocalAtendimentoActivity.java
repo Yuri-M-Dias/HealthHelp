@@ -1,8 +1,8 @@
 package br.ufg.inf.pes.healthhelp.view;
 
 import android.app.ProgressDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.Menu;
@@ -60,7 +60,7 @@ public class FormularioLocalAtendimentoActivity extends AppCompatActivity {
         localAtendimentoService = new LocalAtendimentoService();
 
         localAtendimento = (LocalAtendimento) getIntent().getSerializableExtra(LocalAtendimentoActivity.LOCAL_ATENDIMENTO_INTENT_PARAMETER);
-        if(localAtendimento == null) {
+        if (localAtendimento == null) {
             localAtendimento = new LocalAtendimento();
         } else {
             preencherView();
@@ -101,57 +101,57 @@ public class FormularioLocalAtendimentoActivity extends AppCompatActivity {
         EventBus.getDefault().unregister(this);
     }
 
-    private void preencherView(){
+    private void preencherView() {
         getSupportActionBar().setTitle("Editar " + localAtendimento.getNome());
 
         campoNome.setText(localAtendimento.getNome());
         campoEndereco.setText(localAtendimento.getEndereco());
         campoTelefone.setText(localAtendimento.getTelefone());
 
-        for(PeriodoTempo periodoTempo: localAtendimento.getHorariosAtendimento()){
+        for (PeriodoTempo periodoTempo : localAtendimento.getHorariosAtendimento()) {
             adicionarHorarioAtendimento(new PeriodoTempoView(this,
-                    periodoTempo,
-                    containerLocaisAtendimento));
+                periodoTempo,
+                containerLocaisAtendimento));
         }
     }
 
     public void adicionarHorarioAtendimentoAcaoBotao(View view) {
         adicionarHorarioAtendimento(new PeriodoTempoView(this,
-                new PeriodoTempo(),
-                containerLocaisAtendimento));
+            new PeriodoTempo(),
+            containerLocaisAtendimento));
     }
 
-    public void adicionarHorarioAtendimento(PeriodoTempoView periodoTempoView){
+    public void adicionarHorarioAtendimento(PeriodoTempoView periodoTempoView) {
         containerLocaisAtendimento.addView(periodoTempoView);
     }
 
-    public void salvar(){
+    public void salvar() {
         View foco = null;
 
         String nome = campoNome.getText().toString();
         String endereco = campoEndereco.getText().toString();
         String telefone = campoTelefone.getText().toString();
 
-        if(TextUtils.isEmpty(nome)) {
+        if (TextUtils.isEmpty(nome)) {
             campoNome.setError(getString(R.string.erro_campo_obrigatorio));
             foco = campoNome;
-        } else if(TextUtils.isEmpty(endereco)) {
+        } else if (TextUtils.isEmpty(endereco)) {
             campoEndereco.setError(getString(R.string.erro_campo_obrigatorio));
             foco = campoEndereco;
         } else if (TextUtils.isEmpty(telefone)) {
             campoTelefone.setError(getString(R.string.erro_campo_obrigatorio));
             foco = campoTelefone;
-        } else if(!horariosAtendimentoSaoValidos()){
+        } else if (!horariosAtendimentoSaoValidos()) {
             foco = getCurrentFocus();
         }
 
-        if(foco == null) {
+        if (foco == null) {
             localAtendimento.setNome(nome);
             localAtendimento.setEndereco(endereco);
             localAtendimento.setTelefone(telefone);
             localAtendimento.setHorariosAtendimento(new ArrayList<PeriodoTempo>());
 
-            for(int contadorPeriodosTempo = 0; contadorPeriodosTempo < containerLocaisAtendimento.getChildCount(); contadorPeriodosTempo++) {
+            for (int contadorPeriodosTempo = 0; contadorPeriodosTempo < containerLocaisAtendimento.getChildCount(); contadorPeriodosTempo++) {
                 PeriodoTempoView periodoTempoView = (PeriodoTempoView) containerLocaisAtendimento.getChildAt(contadorPeriodosTempo);
                 localAtendimento.getHorariosAtendimento().add(periodoTempoView.getPeriodoTempo());
             }
@@ -163,16 +163,16 @@ public class FormularioLocalAtendimentoActivity extends AppCompatActivity {
         }
     }
 
-    private boolean horariosAtendimentoSaoValidos(){
+    private boolean horariosAtendimentoSaoValidos() {
         boolean resultado = true;
-        for(int contadorPeriodosTempo = 0; contadorPeriodosTempo < containerLocaisAtendimento.getChildCount(); contadorPeriodosTempo++) {
+        for (int contadorPeriodosTempo = 0; contadorPeriodosTempo < containerLocaisAtendimento.getChildCount(); contadorPeriodosTempo++) {
             PeriodoTempoView periodoTempoView = (PeriodoTempoView) containerLocaisAtendimento.getChildAt(contadorPeriodosTempo);
-            if(!periodoTempoView.validarFormulario()) {
+            if (!periodoTempoView.validarFormulario()) {
                 resultado = false;
                 break;
             }
         }
-        if(containerLocaisAtendimento.getChildCount() == 0) {
+        if (containerLocaisAtendimento.getChildCount() == 0) {
             new MaterialDialog.Builder(this)
                 .title(R.string.erro_titulo_horario_atendimento_incompleto)
                 .content("É necessário informar pelo menos um horário de atendimento.")

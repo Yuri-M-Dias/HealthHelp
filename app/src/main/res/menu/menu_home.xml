@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" >
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <!-- "Mark Favorite", should appear as action button if possible -->
 
     <item
@@ -11,15 +11,17 @@
         android:id="@+id/acao_google"
         android:icon="@drawable/common_google_signin_btn_icon_dark_normal"
         android:title="Google :D"
-        app:showAsAction="ifRoom"/>
-    <item android:id="@+id/action_search"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_search"
         android:title="P"
-        app:showAsAction="ifRoom|collapseActionView"
-        app:actionViewClass="android.support.v7.widget.SearchView" />
+        app:actionViewClass="android.support.v7.widget.SearchView"
+        app:showAsAction="ifRoom|collapseActionView" />
     <!-- Settings, should always be in the overflow -->
-    <item android:id="@+id/acao_configuracoes"
+    <item
+        android:id="@+id/acao_configuracoes"
         android:title="Configurações"
-        app:showAsAction="never"/>
+        app:showAsAction="never" />
 
 
 </menu>

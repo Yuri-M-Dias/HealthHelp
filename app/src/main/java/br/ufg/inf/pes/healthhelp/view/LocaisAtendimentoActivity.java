@@ -106,7 +106,7 @@ public class LocaisAtendimentoActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 Log.i(this.getClass().getName(), "QUERY: " + query);
-                if(locaisAtendimentoAdapter != null) {
+                if (locaisAtendimentoAdapter != null) {
                     locaisAtendimentoAdapter.getFilter().filter(query);
                 }
                 return true;
@@ -115,7 +115,7 @@ public class LocaisAtendimentoActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextChange(String newText) {
                 Log.i(this.getClass().getName(), "CHANGE QUERY: " + newText);
-                if(locaisAtendimentoAdapter != null) {
+                if (locaisAtendimentoAdapter != null) {
                     locaisAtendimentoAdapter.getFilter().filter(newText);
                 }
                 return true;
@@ -144,7 +144,7 @@ public class LocaisAtendimentoActivity extends AppCompatActivity {
         locaisAtendimentoView.setAdapter(locaisAtendimentoAdapter);
     }
 
-    public void novoLocal(View view){
+    public void novoLocal(View view) {
         Intent intent = new Intent(this, FormularioLocalAtendimentoActivity.class);
         startActivity(intent);
     }

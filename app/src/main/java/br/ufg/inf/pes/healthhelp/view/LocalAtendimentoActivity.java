@@ -10,8 +10,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import java.util.Arrays;
-
 import br.ufg.inf.pes.healthhelp.model.LocalAtendimento;
 import br.ufg.inf.pes.healthhelp.model.PeriodoTempo;
 import br.ufg.pes.healthhelp.R;
@@ -64,7 +62,7 @@ public class LocalAtendimentoActivity extends AppCompatActivity {
     private void editar() {
         Intent formularioLocalAtendimento = new Intent(this, FormularioLocalAtendimentoActivity.class);
         formularioLocalAtendimento.putExtra(LOCAL_ATENDIMENTO_INTENT_PARAMETER,
-                localAtendimento);
+            localAtendimento);
         startActivity(formularioLocalAtendimento);
     }
 
@@ -90,7 +88,7 @@ public class LocalAtendimentoActivity extends AppCompatActivity {
         ((TextView) findViewById(R.id.telefone_hospital)).setText(localAtendimento.getTelefone());
 
         String horariosAtendimentoLegivel = "";
-        for(PeriodoTempo periodoTempo: localAtendimento.getHorariosAtendimento()) {
+        for (PeriodoTempo periodoTempo : localAtendimento.getHorariosAtendimento()) {
             horariosAtendimentoLegivel += periodoTempo.toString() + "\n";
         }
         ((TextView) findViewById(R.id.agendamento_hospital)).setText(horariosAtendimentoLegivel);

@@ -30,7 +30,7 @@ public class LocaisAtendimentoAdapter extends ArrayAdapter<LocalAtendimento> {
         super(context, resource, objects);
         locaisAtendimentoExibidos = objects;
         locaisAtendimento = new LocalAtendimento[objects.size()];
-        for(int index = 0; index < objects.size(); index++) {
+        for (int index = 0; index < objects.size(); index++) {
             locaisAtendimento[index] = objects.get(index);
         }
     }
@@ -38,7 +38,7 @@ public class LocaisAtendimentoAdapter extends ArrayAdapter<LocalAtendimento> {
     @NonNull
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        Log.w("LocaisListAdapter:","item na posicao: " + position + " para view de locais de atendimento: " + getItem(position).getNome());
+        Log.w("LocaisListAdapter:", "item na posicao: " + position + " para view de locais de atendimento: " + getItem(position).getNome());
 
         // Check if an existing view is being reused, otherwise inflates the view
         if (convertView == null) {
@@ -52,7 +52,7 @@ public class LocaisAtendimentoAdapter extends ArrayAdapter<LocalAtendimento> {
         enderecoLocal.setText(getItem(position).getEndereco());
 
 
-        return  convertView;
+        return convertView;
     }
 
     @NonNull
@@ -85,13 +85,13 @@ public class LocaisAtendimentoAdapter extends ArrayAdapter<LocalAtendimento> {
     }
 
     private List<LocalAtendimento> filtrarLocaisAtendimento(String queryBusca) {
-        List<LocalAtendimento> locaisAtendimentoFiltrados= new LinkedList<>();
+        List<LocalAtendimento> locaisAtendimentoFiltrados = new LinkedList<>();
 
-        if(queryBusca.isEmpty()) {
+        if (queryBusca.isEmpty()) {
             locaisAtendimentoFiltrados = new LinkedList<>(Arrays.asList(locaisAtendimento));
             Log.i(this.getClass().getName(), "procura vazia");
-        }else {
-            for (LocalAtendimento localAtendimento: locaisAtendimento) {
+        } else {
+            for (LocalAtendimento localAtendimento : locaisAtendimento) {
                 if (localAtendimento.getNome().toLowerCase().contains(queryBusca.toLowerCase())) {
                     locaisAtendimentoFiltrados.add(localAtendimento);
                 }

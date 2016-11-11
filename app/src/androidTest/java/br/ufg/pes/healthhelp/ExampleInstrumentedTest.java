@@ -9,16 +9,14 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import br.ufg.inf.pes.healthhelp.view.LocalAtendimentoActivity;
-import br.ufg.inf.pes.healthhelp.view.LocaisAtendimentoActivity;
 import br.ufg.inf.pes.healthhelp.view.FormularioLocalAtendimentoActivity;
+import br.ufg.inf.pes.healthhelp.view.LocaisAtendimentoActivity;
+import br.ufg.inf.pes.healthhelp.view.LocalAtendimentoActivity;
 
-import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.intent.Intents.init;
 import static android.support.test.espresso.intent.Intents.intended;
 import static android.support.test.espresso.intent.Intents.release;
 import static android.support.test.espresso.intent.matcher.IntentMatchers.hasComponent;
-import static android.support.test.espresso.matcher.ViewMatchers.withId;
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest
@@ -26,7 +24,7 @@ public class ExampleInstrumentedTest {
 
     @Rule
     public ActivityTestRule<LocaisAtendimentoActivity> mActivityRule =
-            new ActivityTestRule<>(LocaisAtendimentoActivity.class);
+        new ActivityTestRule<>(LocaisAtendimentoActivity.class);
 
     @Test
     public void testBotaoHospital() throws Exception {
