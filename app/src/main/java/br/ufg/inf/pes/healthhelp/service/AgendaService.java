@@ -8,7 +8,7 @@ import br.ufg.inf.pes.healthhelp.model.Agenda;
  */
 
 public class AgendaService {
-    AgendaDAO agendaDAO;
+    private AgendaDAO agendaDAO;
 
     public AgendaService() {
         this.agendaDAO = new AgendaDAO();

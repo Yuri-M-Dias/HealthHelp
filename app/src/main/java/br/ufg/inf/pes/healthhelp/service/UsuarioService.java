@@ -8,7 +8,7 @@ import br.ufg.inf.pes.healthhelp.model.Usuario;
  */
 
 public class UsuarioService {
-    UsuarioDAO usuarioDAO;
+    private UsuarioDAO usuarioDAO;
 
     public UsuarioService() {
         usuarioDAO = new UsuarioDAO();
