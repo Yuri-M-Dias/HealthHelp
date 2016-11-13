@@ -26,35 +26,35 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
-    public void OnClick$VisitasMedicas(View view){
+    public void visitasMedicas(View view){
 
         Context context = getApplicationContext();
         CharSequence text = "Visualizar visitas medicas nao implementado";
         MensagemNaoImplementado.MostraMensagemNaoImplementado(context, text);
     }
 
-    public void OnClick$Agendar(View view){
+    public void agendarVisitasMedicas(View view){
 
         Context context = getApplicationContext();
         CharSequence text = "Agendar visitas medicas nao implementado";
         MensagemNaoImplementado.MostraMensagemNaoImplementado(context, text);
     }
 
-    public void OnClick$VisualizarAgenda(View view){
+    public void visualizarAgenda(View view){
 
         Context context = getApplicationContext();
         CharSequence text = "Visualizar agenda nao implementado";
         MensagemNaoImplementado.MostraMensagemNaoImplementado(context, text);
     }
 
-    public void OnClick$VisualizarAtuacao(View view){
+    public void visualizarAtuacao(View view){
 
         Context context = getApplicationContext();
         CharSequence text = "Visualizar atuação nao implementado";
         MensagemNaoImplementado.MostraMensagemNaoImplementado(context, text);
     }
 
-    public void OnClick$LocaisAtendimento(View view){
+    public void visualizarLocaisAtendimento(View view){
 
         Context context = getApplicationContext();
         CharSequence text = "Visualizar locais de atendimento nao implementado";
