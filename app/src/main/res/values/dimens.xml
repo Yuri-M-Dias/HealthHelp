@@ -5,8 +5,9 @@
     <dimen name="corner_radius_card">2dp</dimen>
     <dimen name="space_margin_cards">10dp</dimen>
     <dimen name="space_cards">14dp</dimen>
-    <dimen name="height_image_card">150dp</dimen>
-    <dimen name="height_card">335dp</dimen>
+    <dimen name="height_image_card">130dp</dimen>
+    <dimen name="height_card_medic">315dp</dimen>
+    <dimen name="height_card_defaut">260dp</dimen>
     <dimen name="padding_top_textcard">24dp</dimen>
     <dimen name="padding_right_left_botton_textcard">16dp</dimen>
     <dimen name="subtext">14sp</dimen>

@@ -1,13 +1,10 @@
 <resources>
     <string name="app_name">HealthHelp</string>
-    <string name="locais_atendimento">Locais de Atendimento</string>
     <string name="novo_local">Novo Local de Atendimento</string>
     <string name="hospital">Local de Atendimento</string>
     <string name="salvar">SALVAR</string>
     <string name="endereco">Endereço</string>
     <string name="telefone">Telefone</string>
-    <string name="visitas_medicas">Visitas Medicas</string>
-    <string name="descricao_visitas_medicas">Veja visitas realizadas e futuras, e ainda agende novas visitas médicas</string>
     <string name="button_cards_Agendar">Agendar</string>
 
     <!-- Strings relacionadas à autenticação -->
@@ -22,4 +19,14 @@
     <!-- Strings relacionadas a formulários em geral -->
     <string name="erro_campo_obrigatorio">Este campo é obrigatório</string>
     <string name="descricao_logo">Health Help system logo</string>
+
+    <!-- Strings para cards -->
+    <string name="visitas_medicas">Visitas Medicas</string>
+    <string name="descricao_visitas_medicas">Veja visitas realizadas e futuras, e ainda agende novas visitas médicas</string>
+    <string name="agenda_card">Agendas</string>
+    <string name="descricao_agenda_card">Visualize suas agendas para diferentes intervalos de tempo</string>
+    <string name="atuacao_card">Atuações</string>
+    <string name="descricao_atuacao">Gerencie os locais onde você trabalha e as agendas para cada um deles</string>
+    <string name="locais_atendimento">Locais de Atendimento</string>
+    <string name="descricao_locais_atendimento">Gerencie os locais de atendimento disponíveis no sistema</string>
 </resources>
