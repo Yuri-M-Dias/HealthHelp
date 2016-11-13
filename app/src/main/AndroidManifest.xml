@@ -24,10 +24,8 @@
         <activity android:name="br.ufg.inf.pes.healthhelp.view.LocalAtendimentoActivity" />
         <activity android:name="br.ufg.inf.pes.healthhelp.view.NovoLocalAtendimentoActivity" />
         <activity android:name="br.ufg.inf.pes.healthhelp.view.HomeActivity" />
-
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
+        <activity android:name="br.ufg.inf.pes.healthhelp.view.AutenticacaoActivity" />
+        
     </application>
 
 </manifest>
