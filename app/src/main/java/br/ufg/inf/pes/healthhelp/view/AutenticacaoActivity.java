@@ -28,13 +28,12 @@ public class AutenticacaoActivity extends AppCompatActivity {
 
     private AutenticacaoService autenticacaoService;
     private ProgressDialog progressDialog;
+    private EditText campoLogin;
+    private EditText campoSenha;
 
     public AutenticacaoActivity() {
         autenticacaoService = new AutenticacaoService();
     }
-
-    private EditText campoLogin;
-    private EditText campoSenha;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

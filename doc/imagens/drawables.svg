@@ -29,8 +29,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="2.8284271"
-     inkscape:cx="192.46119"
-     inkscape:cy="368.08526"
+     inkscape:cx="130.94065"
+     inkscape:cy="144.83089"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -39,7 +39,7 @@
      inkscape:guide-bbox="true"
      inkscape:window-width="1920"
      inkscape:window-height="1056"
-     inkscape:window-x="1920"
+     inkscape:window-x="0"
      inkscape:window-y="24"
      inkscape:window-maximized="1"
      inkscape:object-paths="true"
@@ -832,59 +832,76 @@
          id="g5089-9-9" />
     </g>
     <g
-       id="g5253-1"
-       transform="translate(-169.49116,-120.87121)"
-       inkscape:export-filename="/home/cleber/git/HealthHelp-pr/app/src/main/res/drawable/health_help_logo_branco.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90">
+       id="g4435"
+       inkscape:export-filename="/home/cleber/git/HealthHelp/app/src/main/res/drawable/health_help_logo_branco.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300">
+      <rect
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/home/cleber/git/HealthHelp-pr/app/src/main/res/drawable/health_help_icone_branco.png"
+         ry="11.111111"
+         y="959.005"
+         x="-0.46897373"
+         height="100"
+         width="100"
+         id="rect4183-2-9-5"
+         style="opacity:1;fill:#4caf50;fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
       <g
-         transform="translate(-116.5,1.5)"
-         style="fill:#ffffff;fill-opacity:1"
-         id="g5214-4">
-        <rect
-           style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-           id="rect5144-7"
-           width="16"
-           height="50"
-           x="295.52219"
-           y="1088.3762"
-           ry="2.4530001" />
-        <rect
-           style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-           id="rect5144-9-63"
-           width="16"
-           height="80"
-           x="327.52219"
-           y="1088.3762"
-           ry="2.4530001" />
-        <rect
-           style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-           id="rect5144-0-1"
-           width="16"
-           height="50"
-           x="359.52219"
-           y="1118.3762"
-           ry="2.4530001" />
-        <circle
-           style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-           id="path5197-7"
-           cx="319.52219"
-           cy="1113.3762"
-           r="8" />
-        <circle
-           style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-           id="path5197-6-5"
-           cx="351.52219"
-           cy="1143.3762"
-           r="8" />
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/home/cleber/git/HealthHelp-pr/app/src/main/res/drawable/health_help_logo_branco.png"
+         transform="translate(-169.49116,-120.87121)"
+         id="g5253-1">
+        <g
+           id="g5214-4"
+           style="fill:#ffffff;fill-opacity:1"
+           transform="translate(-116.5,1.5)">
+          <rect
+             ry="2.4530001"
+             y="1088.3762"
+             x="295.52219"
+             height="50"
+             width="16"
+             id="rect5144-7"
+             style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+          <rect
+             ry="2.4530001"
+             y="1088.3762"
+             x="327.52219"
+             height="80"
+             width="16"
+             id="rect5144-9-63"
+             style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+          <rect
+             ry="2.4530001"
+             y="1118.3762"
+             x="359.52219"
+             height="50"
+             width="16"
+             id="rect5144-0-1"
+             style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+          <circle
+             r="8"
+             cy="1113.3762"
+             cx="319.52219"
+             id="path5197-7"
+             style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+          <circle
+             r="8"
+             cy="1143.3762"
+             cx="351.52219"
+             id="path5197-6-5"
+             style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+        </g>
       </g>
     </g>
     <g
        id="g4224-1"
        transform="matrix(0.91228441,0,0,0.91228441,55.066191,326.80545)"
-       inkscape:export-filename="/home/cleber/git/HealthHelp-pr/app/src/main/res/drawable/atuacao_vermelho.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90">
+       inkscape:export-filename="/home/cleber/git/HealthHelp/app/src/main/res/drawable/atuacao_vermelho.png"
+       inkscape:export-xdpi="149.625"
+       inkscape:export-ydpi="149.625">
       <g
          id="g4457-7"
          style="fill:#f44336;fill-opacity:1">
@@ -940,9 +957,9 @@
     <g
        id="g5303-8"
        transform="translate(7.8363517,-101.35713)"
-       inkscape:export-filename="/home/cleber/git/HealthHelp-pr/app/src/main/res/drawable/local_atendimento_azul.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90">
+       inkscape:export-filename="/home/cleber/git/HealthHelp/app/src/main/res/drawable/local_atendimento_azul.png"
+       inkscape:export-xdpi="149.62506"
+       inkscape:export-ydpi="149.62506">
       <path
          sodipodi:nodetypes="sssssscsscccsssscccsscssssss"
          inkscape:connector-curvature="0"
@@ -975,9 +992,9 @@
     <g
        id="g5330-0"
        transform="translate(7.4702796,-95.56317)"
-       inkscape:export-filename="/home/cleber/git/HealthHelp-pr/app/src/main/res/drawable/consulta_azul.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90">
+       inkscape:export-filename="/home/cleber/git/HealthHelp/app/src/main/res/drawable/consulta_azul.png"
+       inkscape:export-xdpi="149.60536"
+       inkscape:export-ydpi="149.60536">
       <path
          sodipodi:nodetypes="ssssscssscs"
          inkscape:connector-curvature="0"
@@ -994,9 +1011,9 @@
     <g
        id="g5336-9"
        transform="translate(17.599308,-96.89314)"
-       inkscape:export-filename="/home/cleber/git/HealthHelp-pr/app/src/main/res/drawable/agenda_azul.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90">
+       inkscape:export-filename="/home/cleber/git/HealthHelp/app/src/main/res/drawable/agenda_azul.png"
+       inkscape:export-xdpi="149.625"
+       inkscape:export-ydpi="149.625">
       <g
          id="g5951"
          style="fill:#448aff;fill-opacity:1">
@@ -1043,9 +1060,9 @@
     <g
        id="g5355-0"
        transform="translate(2.0000037,-92.43396)"
-       inkscape:export-filename="/home/cleber/git/HealthHelp-pr/app/src/main/res/drawable/almoco_azul.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90">
+       inkscape:export-filename="/home/cleber/git/HealthHelp/app/src/main/res/drawable/almoco_azul.png"
+       inkscape:export-xdpi="150"
+       inkscape:export-ydpi="150">
       <circle
          r="40"
          cy="916.90283"
@@ -1074,60 +1091,88 @@
       </g>
     </g>
     <g
-       id="g5253-7"
-       transform="translate(-169.49116,-305.40712)"
-       style="fill:#4caf50;fill-opacity:1"
-       inkscape:export-filename="/home/cleber/git/HealthHelp-pr/app/src/main/res/drawable/health_help_logo_verde.png"
-       inkscape:export-xdpi="300.38"
-       inkscape:export-ydpi="300.38">
+       id="g4410"
+       inkscape:export-filename="/home/cleber/git/HealthHelp/app/src/main/res/drawable/health_help_logo_verde.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300">
+      <rect
+         style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="rect4183-2-7"
+         width="100"
+         height="100"
+         x="-0.46897373"
+         y="774.46912"
+         ry="11.111111"
+         inkscape:export-filename="/home/cleber/git/HealthHelp-pr/app/src/main/res/drawable/health_help_icone_verde.png"
+         inkscape:export-xdpi="90"
+         inkscape:export-ydpi="90" />
       <g
-         transform="translate(-116.5,1.5)"
+         inkscape:export-ydpi="300.38"
+         inkscape:export-xdpi="300.38"
+         inkscape:export-filename="/home/cleber/git/HealthHelp/app/src/main/res/drawable/health_help_logo_verde.png"
          style="fill:#4caf50;fill-opacity:1"
-         id="g5214-9">
-        <rect
-           style="opacity:1;fill:#4caf50;fill-opacity:1;stroke:none;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-           id="rect5144-3"
-           width="16"
-           height="50"
-           x="295.52219"
-           y="1088.3762"
-           ry="2.4530001" />
-        <rect
-           style="opacity:1;fill:#4caf50;fill-opacity:1;stroke:none;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-           id="rect5144-9-68"
-           width="16"
-           height="80"
-           x="327.52219"
-           y="1088.3762"
-           ry="2.4530001" />
-        <rect
-           style="opacity:1;fill:#4caf50;fill-opacity:1;stroke:none;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-           id="rect5144-0-0"
-           width="16"
-           height="50"
-           x="359.52219"
-           y="1118.3762"
-           ry="2.4530001" />
-        <circle
-           style="opacity:1;fill:#4caf50;fill-opacity:1;stroke:none;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-           id="path5197-2"
-           cx="319.52219"
-           cy="1113.3762"
-           r="8" />
-        <circle
-           style="opacity:1;fill:#4caf50;fill-opacity:1;stroke:none;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-           id="path5197-6-1"
-           cx="351.52219"
-           cy="1143.3762"
-           r="8" />
+         transform="translate(-169.49116,-305.40712)"
+         id="g5253-7">
+        <g
+           id="g5214-9"
+           style="fill:#4caf50;fill-opacity:1"
+           transform="translate(-116.5,1.5)">
+          <rect
+             ry="2.4530001"
+             y="1088.3762"
+             x="295.52219"
+             height="50"
+             width="16"
+             id="rect5144-3"
+             style="opacity:1;fill:#4caf50;fill-opacity:1;stroke:none;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+          <rect
+             ry="2.4530001"
+             y="1088.3762"
+             x="327.52219"
+             height="80"
+             width="16"
+             id="rect5144-9-68"
+             style="opacity:1;fill:#4caf50;fill-opacity:1;stroke:none;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+          <rect
+             ry="2.4530001"
+             y="1118.3762"
+             x="359.52219"
+             height="50"
+             width="16"
+             id="rect5144-0-0"
+             style="opacity:1;fill:#4caf50;fill-opacity:1;stroke:none;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+          <circle
+             r="8"
+             cy="1113.3762"
+             cx="319.52219"
+             id="path5197-2"
+             style="opacity:1;fill:#4caf50;fill-opacity:1;stroke:none;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+          <circle
+             r="8"
+             cy="1143.3762"
+             cx="351.52219"
+             id="path5197-6-1"
+             style="opacity:1;fill:#4caf50;fill-opacity:1;stroke:none;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+        </g>
       </g>
     </g>
     <g
        id="g4396"
        transform="translate(-16.263456,-7.0208217)"
-       inkscape:export-filename="/home/cleber/git/HealthHelp-pr/app/src/main/res/drawable/health_help_icone_verde.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90">
+       inkscape:export-filename="/home/cleber/git/HealthHelp/app/src/main/res/drawable/health_help_icone_verde.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300">
+      <rect
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/home/cleber/git/HealthHelp-pr/app/src/main/res/drawable/health_help_icone_verde.png"
+         ry="11.111111"
+         y="671.56799"
+         x="29.175137"
+         height="100"
+         width="100"
+         id="rect4183-2-6"
+         style="opacity:1;fill:#bdbdbd;fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
       <rect
          inkscape:export-ydpi="90"
          inkscape:export-xdpi="90"
@@ -1192,9 +1237,20 @@
     <g
        id="g4458"
        transform="translate(26.516505,-4.2426407)"
-       inkscape:export-filename="/home/cleber/git/HealthHelp-pr/app/src/main/res/drawable/health_help_icone_branco.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90">
+       inkscape:export-filename="/home/cleber/git/HealthHelp/app/src/main/res/drawable/health_help_icone_branco.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300">
+      <rect
+         style="opacity:1;fill:#bdbdbd;fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="rect4183-2-9-3"
+         width="100"
+         height="100"
+         x="105.08862"
+         y="668.48651"
+         ry="11.111111"
+         inkscape:export-filename="/home/cleber/git/HealthHelp-pr/app/src/main/res/drawable/health_help_icone_branco.png"
+         inkscape:export-xdpi="90"
+         inkscape:export-ydpi="90" />
       <rect
          style="opacity:1;fill:#4caf50;fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
          id="rect4183-2-9"

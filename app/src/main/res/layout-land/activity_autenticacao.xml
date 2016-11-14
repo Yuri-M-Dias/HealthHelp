@@ -4,81 +4,81 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_autenticacao"
-    tools:context="br.ufg.inf.pes.healthhelp.view.AutenticacaoActivity"
-    android:background="@color/primary"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_alignParentLeft="true"
-    android:layout_alignParentStart="true"
-    android:layout_alignParentRight="true"
     android:layout_alignParentEnd="true"
-    android:fillViewport="true">
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentRight="true"
+    android:layout_alignParentStart="true"
+    android:background="@color/primary"
+    android:fillViewport="true"
+    tools:context="br.ufg.inf.pes.healthhelp.view.AutenticacaoActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
         android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:layout_marginBottom="@dimen/activity_vertical_margin">
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
         <ImageView
-            android:layout_width="267dp"
-            app:srcCompat="@drawable/health_help_icone_branco"
             android:id="@+id/autenticacao_logo"
+            android:layout_width="267dp"
+            android:layout_height="150dp"
             android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:layout_marginTop="@dimen/activity_vertical_margin"
             android:contentDescription="@string/descricao_logo"
-            android:layout_height="150dp" />
+            app:srcCompat="@drawable/health_help_logo_verde" />
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:orientation="vertical">
 
             <EditText
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/textfield_height"
-                android:inputType="textPersonName"
-                android:ems="10"
                 android:id="@+id/autenticacao_campo_login"
-                android:background="@android:color/background_light"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:textAlignment="center"
-                android:hint="@string/hint_login" />
-
-            <EditText
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/textfield_height"
-                android:inputType="textPassword"
-                android:ems="10"
-                android:id="@+id/autenticacao_campo_senha"
-                android:background="@android:color/background_light"
                 android:layout_marginBottom="10dp"
-                android:textAlignment="center"
-                android:hint="@string/hint_password" />
+                android:layout_marginTop="10dp"
+                android:background="@android:color/background_light"
+                android:ems="10"
+                android:hint="@string/hint_login"
+                android:inputType="textPersonName"
+                android:textAlignment="center" />
+
+            <EditText
+                android:id="@+id/autenticacao_campo_senha"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/textfield_height"
+                android:layout_marginBottom="10dp"
+                android:background="@android:color/background_light"
+                android:ems="10"
+                android:hint="@string/hint_password"
+                android:inputType="textPassword"
+                android:textAlignment="center" />
 
             <Button
-                android:text="@string/botao_login"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:id="@+id/autenticacao_botao_login"
-                android:onClick="autenticar"
-                style="@style/Widget.AppCompat.Button.Colored" />
-
-            <Button
+                style="@style/Widget.AppCompat.Button.Colored"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="autenticar"
+                android:text="@string/botao_login" />
+
+            <Button
                 android:id="@+id/autenticacao_botao_registrar"
-                android:onClick="registrar"
                 style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="registrar"
+                android:text="@string/botao_registrar"
                 android:textAllCaps="false"
-                android:textColor="@android:color/background_light"
-                android:text="@string/botao_registrar" />
+                android:textColor="@android:color/background_light" />
         </LinearLayout>
 
     </LinearLayout>
