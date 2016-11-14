@@ -80,12 +80,7 @@ public class LocaisAtendimentoActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        if (!Sessao.estaAtiva(this)) {
-            Intent intent = new Intent(this, AutenticacaoActivity.class);
-            startActivity(intent);
-        } else {
-            recarregarLocais();
-        }
+        recarregarLocais();
     }
 
     private void recarregarLocais() {

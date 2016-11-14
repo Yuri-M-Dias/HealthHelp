@@ -76,7 +76,7 @@ public class AutenticacaoActivity extends AppCompatActivity {
             inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
 
             autenticacaoService.autenticar(login, senha);
-            progressDialog = ProgressDialog.show(this, getString(R.string.titulo_autenticando), getString(R.string.mensagem_autenticando), true, true);
+                progressDialog = ProgressDialog.show(this, getString(R.string.titulo_autenticando), getString(R.string.mensagem_autenticando), true, true);
         }
 
     }
