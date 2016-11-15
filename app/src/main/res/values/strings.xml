@@ -23,7 +23,6 @@
 
     <!-- Strings relacionadas a formulários em geral -->
     <string name="erro_campo_obrigatorio">Este campo é obrigatório</string>
-    <string name="descricao_logo">Health Help system logo</string>
 
     <!-- Strings para cards -->
     <string name="visitas_medicas">Visitas Medicas</string>
@@ -32,7 +31,6 @@
     <string name="descricao_agenda_card">Visualize suas agendas para diferentes intervalos de tempo</string>
     <string name="atuacao_card">Atuações</string>
     <string name="descricao_atuacao">Gerencie os locais onde você trabalha e as agendas para cada um deles</string>
-    <string name="locais_atendimento">Locais de Atendimento</string>
     <string name="descricao_locais_atendimento">Gerencie os locais de atendimento disponíveis no sistema</string>
 
     <!-- Strings relacionadas ao formulário de local de atendimento -->
