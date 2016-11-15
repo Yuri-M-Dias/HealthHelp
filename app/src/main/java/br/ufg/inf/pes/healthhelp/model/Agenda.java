@@ -1,12 +1,12 @@
 package br.ufg.inf.pes.healthhelp.model;
 
+import com.google.firebase.database.Exclude;
+
 import java.util.List;
 
-/**
- * Created by deassisrosal on 10/30/16.
- */
 
 public class Agenda {
+    @Exclude
     private String id;
     private String nome;
     private int tempoPadrao;
@@ -32,10 +32,12 @@ public class Agenda {
         this.horariosAtendimento = horariosAtendimento;
     }
 
+    @Exclude
     public String getId() {
         return id;
     }
 
+    @Exclude
     public void setId(String id) {
         this.id = id;
     }

@@ -1,3 +1,7 @@
+/* para executar utilize node ./node_modules/.bin/firebase-server.
+ mais informações em
+ https://firebase.googleblog.com/2015/04/end-to-end-testing-with-firebase-server_16.html
+*/
 var FirebaseServer = require('firebase-server');
 
 new FirebaseServer(5000, 'test.firebase.localhost', {

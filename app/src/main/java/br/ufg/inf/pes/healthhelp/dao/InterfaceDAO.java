@@ -10,7 +10,7 @@ public interface InterfaceDAO<T> {
 
     public void buscarPelaId(String id );
 
-    public void inserir( T objeto );
+    public String inserir( T objeto );
 
     public void remover( T objeto );
 
