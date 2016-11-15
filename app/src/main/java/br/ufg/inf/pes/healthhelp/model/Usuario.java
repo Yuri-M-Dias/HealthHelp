@@ -37,9 +37,13 @@ public class Usuario {
         this.ocupacoes = ocupacoes;
     }
 
-    public List<String> getTelefones() { return telefones; }
+    public List<String> getTelefones() {
+        return telefones;
+    }
 
-    public void setTelefones(List<String> telefones) { this.telefones = telefones; }
+    public void setTelefones(List<String> telefones) {
+        this.telefones = telefones;
+    }
 
     public String getLogin() {
         return login;

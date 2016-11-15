@@ -1,9 +1,47 @@
 <resources>
-    <string name="app_name">HealthHelp</string>
+    <string name="app_name">Health Help</string>
+    <string name="descricao_logo">Logo do Sistema Health Help</string>
     <string name="locais_atendimento">Locais de Atendimento</string>
-    <string name="novo_local">Novo Local de Atendimento</string>
     <string name="hospital">Local de Atendimento</string>
-    <string name="salvar">SALVAR</string>
+    <string name="acao_indefinida">Indefinido</string>
+    <string name="acao_salvar">Salvar</string>
+    <string name="acao_editar">Editar</string>
     <string name="endereco">Endereço</string>
     <string name="telefone">Telefone</string>
+
+    <!-- Strings relacionadas a formulários em geral -->
+    <string name="erro_campo_obrigatorio">Este campo é obrigatório</string>
+
+    <!-- Strings relacionadas à autenticação -->
+    <string name="hint_login">login</string>
+    <string name="hint_password">senha</string>
+    <string name="botao_login">Autenticar</string>
+    <string name="botao_registrar">Ainda não é membro? Registre-se!</string>
+    <string name="titulo_autenticando">Autenticação</string>
+    <string name="mensagem_autenticando">Por favor, aguarde enquanto o sistema realiza sua autenticação...</string>
+    <string name="mensagem_autenticacao_sucesso">Autenticação bem sucedida</string>
+
+    <!-- Strings relacionadas ao formulário de local de atendimento -->
+    <string name="activity_novo_local_atendimento">Novo Local de Atendimento</string>
+    <string name="hint_nome_local_atendimento">Nome do Local de Atendimento</string>
+    <string name="botao_adicionar_horario_atendimento_local">Adicionar Horário de Atendimento</string>
+
+    <!-- Strings relacionadas à view de período de tempo -->
+    <string name="excluir_periodo_tempo">Excluir período de tempo</string>
+    <string name="botao_domingo">D</string>
+    <string name="botao_segunda">S</string>
+    <string name="botao_terca">T</string>
+    <string name="botao_quarta">Q</string>
+    <string name="botao_quinta">Q</string>
+    <string name="botao_sexta">S</string>
+    <string name="botao_sabado">S</string>
+    <string name="data_final">Data Final</string>
+    <string name="data_inicial">Data Inicial</string>
+    <string name="label_periodo_tempo_de">De</string>
+    <string name="label_periodo_tempo_hora_final">Hora Final</string>
+    <string name="label_periodo_tempo_a">a</string>
+    <string name="label_periodo_tempo_hora_inicial">hora inicial</string>
+    <string name="label_periodo_tempo_aas">às</string>
+    <string name="erro_titulo_horario_atendimento_incompleto">Horário de Atendimento Incompleto</string>
+    <string name="erro_dias_semana_vazio">É necessário informar pelo menos 1 dia da semana para cada horário de atendimento</string>
 </resources>

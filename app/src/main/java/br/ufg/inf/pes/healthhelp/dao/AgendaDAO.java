@@ -4,9 +4,9 @@ import br.ufg.inf.pes.healthhelp.model.Agenda;
 
 /**
  * Esta classe é responsável por operações de banco de dados relacionadas a uma {@link Agenda}.
- * Created by cleber on 02/11/16.
  */
-public class AgendaDAO extends AbstractDAO<Agenda>{
+public class AgendaDAO extends AbstractDAO<Agenda> {
+
     public AgendaDAO() {
         super(AgendaDAO.class.getCanonicalName(), "agenda");
     }
@@ -35,4 +35,5 @@ public class AgendaDAO extends AbstractDAO<Agenda>{
     public void atualizar(Agenda objeto) {
         //TODO
     }
+
 }

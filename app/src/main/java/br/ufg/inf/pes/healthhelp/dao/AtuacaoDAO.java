@@ -1,12 +1,12 @@
 package br.ufg.inf.pes.healthhelp.dao;
 
 import br.ufg.inf.pes.healthhelp.model.Atuacao;
+import br.ufg.inf.pes.healthhelp.model.Usuario;
 
 /**
  * Esta classe é responsável por operações de banco de dados relacionadas a uma {@link Atuacao}.
- * Created by cleber on 02/11/16.
  */
-public class AtuacaoDAO extends AbstractDAO<Atuacao>{
+public class AtuacaoDAO extends AbstractDAO<Atuacao> {
     public AtuacaoDAO() {
         super(AtuacaoDAO.class.getCanonicalName(), "atuacao");
     }
@@ -18,6 +18,14 @@ public class AtuacaoDAO extends AbstractDAO<Atuacao>{
 
     @Override
     public void buscarPelaId(String id) {
+        //TODO
+    }
+
+    /**
+     * Busca todas as atuações de um usuário.
+     * @param usuario usuário pelo qual as ocupações serão procuradas.
+     */
+    public void buscarPorUsuario(Usuario usuario){
         //TODO
     }
 
@@ -35,4 +43,5 @@ public class AtuacaoDAO extends AbstractDAO<Atuacao>{
     public void atualizar(Atuacao objeto) {
         //TODO
     }
+
 }

@@ -1,44 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/activity_agenda"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="center_horizontal"
-    android:orientation="vertical"
+    android:fitsSystemWindows="true"
     tools:context="br.ufg.inf.pes.healthhelp.view.LocaisAtendimentoActivity">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolBarLocaisAtendimento"
-        android:layout_width="381dp"
-        android:layout_height="wrap_content"
-        android:background="#009688"
-        android:textAlignment="textStart"
-        android:elevation="4dp"
-        app:subtitle="@string/locais_atendimento"
-        app:subtitleTextColor="@android:color/background_light"
-        app:navigationIcon="@drawable/ic_arrow_back_black_24dp">
-    </android.support.v7.widget.Toolbar>
-
-    <ListView
-        android:id="@+id/list_locais_atendimento"
+    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="380dp"
-        android:layout_weight="@android:integer/status_bar_notification_info_maxnum"/>
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:navigationIcon="@drawable/ic_arrow_back_black_24dp"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:title="Locais de Atendimento" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <include layout="@layout/content_locais_atendimento" />
+
+    <!-- <android.support.design.widget.FloatingActionButton -->
 
     <com.github.clans.fab.FloatingActionMenu
         android:id="@+id/fab"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="bottom|right"
-        android:layout_marginBottom="8dp"
-        android:layout_marginRight="8dp"
-        app:menu_icon="@mipmap/ic_app"
-        app:menu_colorNormal="#009688"
-        app:menu_colorPressed="#009688"
-        app:menu_colorRipple="#009688">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        app:menu_colorNormal="@color/primary"
+        app:menu_colorPressed="@color/primary_dark"
+        app:menu_colorRipple="@color/primary"
+        app:menu_icon="@mipmap/ic_app">
+
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/fab_item_1"
             android:layout_width="wrap_content"
@@ -46,13 +45,12 @@
             android:layout_gravity="bottom|right"
             android:layout_marginBottom="8dp"
             android:layout_marginRight="8dp"
-            app:fab_label="Novo posto de atendimento"
-            app:fab_colorNormal="#ffffff"
-            app:fab_colorPressed="#ff0000"
-            app:fab_colorRipple="#ffffff"
             android:onClick="novoLocal"
-            android:src="@drawable/ic_hospital"/>
+            android:src="@drawable/ic_hospital"
+            app:fab_colorNormal="@color/icons"
+            app:fab_colorPressed="@color/accent"
+            app:fab_colorRipple="@color/icons"
+            app:fab_label="Novo posto de atendimento" />
     </com.github.clans.fab.FloatingActionMenu>
 
-
-</FrameLayout>
+</android.support.design.widget.CoordinatorLayout>

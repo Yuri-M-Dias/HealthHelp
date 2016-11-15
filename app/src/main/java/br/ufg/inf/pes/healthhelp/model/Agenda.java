@@ -4,11 +4,8 @@ import com.google.firebase.database.Exclude;
 
 import java.util.List;
 
-/**
- * Created by deassisrosal on 10/30/16.
- */
-
 public class Agenda {
+
 
     @Exclude
     private String id;
@@ -59,4 +56,5 @@ public class Agenda {
     public void setTempoPadraoMinutos(int tempoPadraoMinutos) {
         this.tempoPadraoMinutos = tempoPadraoMinutos;
     }
+
 }

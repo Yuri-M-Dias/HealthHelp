@@ -5,11 +5,10 @@ import br.ufg.inf.pes.healthhelp.model.Usuario;
 
 /**
  * Esta classe é responsável por prover serviços relacionados a uma {@link Usuario}.
- * Created by cleber on 02/11/16.
  */
 
 public class UsuarioService {
-    UsuarioDAO usuarioDAO;
+    private UsuarioDAO usuarioDAO;
 
     public UsuarioService() {
         usuarioDAO = new UsuarioDAO();
@@ -17,7 +16,7 @@ public class UsuarioService {
 
     public void salvar(Usuario usuario) {
 
-        if(usuario.getId() == null) {
+        if (usuario.getId() == null) {
             usuarioDAO.inserir(usuario);
         } else {
             usuarioDAO.atualizar(usuario);
