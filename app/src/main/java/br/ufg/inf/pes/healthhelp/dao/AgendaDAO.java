@@ -32,9 +32,7 @@ public class AgendaDAO extends AbstractDAO<Agenda> {
     public AgendaDAO(DatabaseReference reference) {
         super(AgendaDAO.class.getCanonicalName(), "agenda");
         setDatabaseReference(reference);
-
     }
-
     @Override
     public void buscarTodos() {
         // aqui é setado como o listener para o que ocorrer em /agenda/.
@@ -211,4 +209,3 @@ public class AgendaDAO extends AbstractDAO<Agenda> {
 
     }
 }
-

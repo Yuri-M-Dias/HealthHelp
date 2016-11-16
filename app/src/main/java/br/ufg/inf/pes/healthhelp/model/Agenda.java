@@ -11,7 +11,7 @@ public class Agenda {
     private String nome;
     private int tempoPadrao;
     private List<PeriodoTempo> horariosAtendimento;
-    private  List<PeriodoTempo> horariosBloqueados;
+    private List<PeriodoTempo> horariosBloqueados;
 
     public Agenda() {
     }
@@ -57,4 +57,5 @@ public class Agenda {
     public void setTempoPadrao(int tempoPadrao) {
         this.tempoPadrao = tempoPadrao;
     }
+
 }
