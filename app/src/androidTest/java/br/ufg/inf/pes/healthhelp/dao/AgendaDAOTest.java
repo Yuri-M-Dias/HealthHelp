@@ -139,7 +139,6 @@ public class AgendaDAOTest {
                     // salva agenda salva ja com ID auto gerado
                     agendaCallback = (Agenda) object;
 
-                    System.out.println("nome da agenda de callback: " + agendaCallback.getNome());
                     if( !(agendaCallback.getNome().equals(agendaCriar.getNome())   ||
                             agendaCallback.getNome().equals(agendaAtualizar.getNome() ) ||
                             agendaCallback.getNome().equals( agendaRemover.getNome() ) ||
@@ -147,7 +146,6 @@ public class AgendaDAOTest {
                             agendaCallback.getNome().equals( agendaBuscarPorNome.getNome() ) ||
                             agendaCallback.getNome().contains("Agenda lista")
                     ) ) {
-                        System.out.println("nome da agenda de callback não listada: " + agendaCallback.getNome());
                         fail();
                     }
             }

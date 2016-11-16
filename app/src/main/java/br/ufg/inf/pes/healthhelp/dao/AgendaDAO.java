@@ -94,12 +94,10 @@ public class AgendaDAO extends AbstractDAO<Agenda> {
         // pega a referencia do caminho com a key gerada pelo firebase
         DatabaseReference registroAgenda = getDatabaseReference().child(DATABASE_CHILD).push();
         Log.i(TAG, "Chave da nova agenda: " + registroAgenda.getKey());
-        System.out.println(agenda.getNome());
 
         registroAgenda.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                System.out.println(dataSnapshot);
 
                 Agenda agenda = dataSnapshot.getValue(Agenda.class);
 
@@ -131,7 +129,6 @@ public class AgendaDAO extends AbstractDAO<Agenda> {
                 new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        System.out.println(dataSnapshot);
                         Agenda agenda = dataSnapshot.getValue(Agenda.class);
 
                         //Salva no objeto agenda o id do banco gerado pelo firebase
@@ -183,8 +180,6 @@ public class AgendaDAO extends AbstractDAO<Agenda> {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                System.out.println("------ snapshot de Busca: ------");
-                System.out.println(dataSnapshot);
 
                     for (DataSnapshot agendaSnapshot : dataSnapshot.getChildren()) {
                         Agenda agenda = agendaSnapshot.getValue(Agenda.class);
