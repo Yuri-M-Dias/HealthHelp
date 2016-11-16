@@ -86,7 +86,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="@color/icons"
-                            android:onClick="agendarVisitasMedicas"
+                            android:onClick="agendarVisitaMedica"
                             android:text="@string/button_cards_Agendar"
                             android:textColor="@color/accent" />
                     </LinearLayout>
@@ -105,7 +105,7 @@
                 android:layout_marginRight="@dimen/space_margin_cards"
                 android:layout_marginTop="@dimen/space_margin_cards"
 
-                android:onClick="visualizarAgenda"
+                android:onClick="visualizarAgendas"
                 app:cardCornerRadius="@dimen/corner_radius_card"
                 app:cardElevation="@dimen/card_elevation">
 
@@ -154,7 +154,7 @@
                 android:layout_marginRight="@dimen/space_margin_cards"
                 android:layout_marginTop="@dimen/space_margin_cards"
 
-                android:onClick="visualizarAtuacao"
+                android:onClick="visualizarAtuacoes"
                 app:cardCornerRadius="@dimen/corner_radius_card"
                 app:cardElevation="@dimen/card_elevation">
 

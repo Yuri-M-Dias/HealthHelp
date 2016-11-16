@@ -56,4 +56,7 @@
     <string name="label_periodo_tempo_aas">às</string>
     <string name="erro_titulo_horario_atendimento_incompleto">Horário de Atendimento Incompleto</string>
     <string name="erro_dias_semana_vazio">É necessário informar pelo menos 1 dia da semana para cada horário de atendimento</string>
+
+    <!-- Strings relacionados a menus -->
+    <string name="logout">Logout</string>
 </resources>

@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -41,6 +43,27 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+
+        getMenuInflater().inflate(R.menu.menu_homeactivity, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+
+        switch (item.getItemId()){
+
+            case R.id.logout:
+
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
     public void visitasMedicas(View view){
 
         Context context = getApplicationContext();
@@ -48,21 +71,21 @@ public class HomeActivity extends AppCompatActivity {
         MensagemNaoImplementado.MostraMensagemNaoImplementado(context, text);
     }
 
-    public void agendarVisitasMedicas(View view){
+    public void agendarVisitaMedica(View view){
 
         Context context = getApplicationContext();
         CharSequence text = "Agendar visitas medicas nao implementado";
         MensagemNaoImplementado.MostraMensagemNaoImplementado(context, text);
     }
 
-    public void visualizarAgenda(View view){
+    public void visualizarAgendas(View view){
 
         Context context = getApplicationContext();
         CharSequence text = "Visualizar agenda nao implementado";
         MensagemNaoImplementado.MostraMensagemNaoImplementado(context, text);
     }
 
-    public void visualizarAtuacao(View view){
+    public void visualizarAtuacoes(View view){
 
         Context context = getApplicationContext();
         CharSequence text = "Visualizar atuação nao implementado";
