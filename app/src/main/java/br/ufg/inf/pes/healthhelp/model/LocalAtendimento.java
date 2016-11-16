@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.util.List;
 
 public class LocalAtendimento implements Serializable {
+
     @Exclude
     private String id;
 
