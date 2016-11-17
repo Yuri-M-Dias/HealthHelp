@@ -1,5 +1,4 @@
 # HealthHelp
-========================================
 
 [![Build Status](https://travis-ci.org/Yuri-M-Dias/HealthHelp.svg?branch=master)](https://travis-ci.org/Yuri-M-Dias/HealthHelp)
 
