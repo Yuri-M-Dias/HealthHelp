@@ -1,5 +1,6 @@
 jdk: oraclejdk8
 language: android
+node_js: "0.12"
 android:
   components:
     - tools
@@ -24,8 +25,11 @@ before_script:
   - adb shell setprop dalvik.vm.dexopt-flags v=n,o=v
     #- adb shell input keyevent 82 &
 before_install:
-    - "chmod +x gradlew"
+  - "chmod +x gradlew"
+  - npm install -g nodemon
+  - npm install -g js/firebase-server
 script:
+  - nodemon js/firebase-server
   - ./gradlew build jacocoTestReport --stacktrace
 after_success:
   - bash <(curl -s https://codecov.io/bash)
