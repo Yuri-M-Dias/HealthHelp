@@ -14,6 +14,7 @@ import java.util.List;
 import br.ufg.inf.pes.healthhelp.model.enums.DayOfWeek;
 
 public class PeriodoTempo implements Serializable {
+
     private Calendar horaInicio;
     private Calendar horaFim;
     private Calendar dataInicio; // dateFormat no estilo dd-MM-yyyy

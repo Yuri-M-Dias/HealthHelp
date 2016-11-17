@@ -9,12 +9,9 @@ public class Agenda {
     @Exclude
     private String id;
     private String nome;
-    private int tempoPadrao;
+    private int tempoPadraoMinutos;
     private List<PeriodoTempo> horariosAtendimento;
     private List<PeriodoTempo> horariosBloqueados;
-
-    public Agenda() {
-    }
 
     public List<PeriodoTempo> getHorariosBloqueados() {
         return horariosBloqueados;
@@ -50,12 +47,12 @@ public class Agenda {
         this.nome = nome;
     }
 
-    public int getTempoPadrao() {
-        return tempoPadrao;
+    public int getTempoPadraoMinutos() {
+        return tempoPadraoMinutos;
     }
 
-    public void setTempoPadrao(int tempoPadrao) {
-        this.tempoPadrao = tempoPadrao;
+    public void setTempoPadraoMinutos(int tempoPadraoMinutos) {
+        this.tempoPadraoMinutos = tempoPadraoMinutos;
     }
 
 }
