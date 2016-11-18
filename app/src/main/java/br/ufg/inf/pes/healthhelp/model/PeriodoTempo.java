@@ -11,8 +11,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import br.ufg.inf.pes.healthhelp.model.enums.DayOfWeek;
-
 public class PeriodoTempo implements Serializable {
 
     private Calendar horaInicio;
@@ -105,7 +103,7 @@ public class PeriodoTempo implements Serializable {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
         for (int index = 0; index < diasSemana.size(); index++) {
-            stringBuilder.append(diasSemana.get(index).getDisplayName());
+            stringBuilder.append(diasSemana.get(index));
             if (index < diasSemana.size() - 1) {
                 stringBuilder.append(" - ");
             }

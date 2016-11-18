@@ -100,11 +100,12 @@ public class LocalAtendimentoDAO extends AbstractDAO<LocalAtendimento> {
     }
 
     @Override
-    public void inserir(LocalAtendimento localAtendimento) {
+    public String inserir(LocalAtendimento localAtendimento) {
         DatabaseReference registroLocalAtendimento = getDatabaseReference().child(DATABASE_CHILD).push();
         Log.i(TAG, "Chave do novo local de atendimento: " + registroLocalAtendimento.getKey());
         registroLocalAtendimento.setValue(localAtendimento);
         localAtendimento.setId(registroLocalAtendimento.getKey());
+        return registroLocalAtendimento.getKey();
     }
 
     /**

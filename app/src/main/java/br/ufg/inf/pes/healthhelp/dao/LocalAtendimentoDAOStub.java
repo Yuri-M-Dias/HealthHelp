@@ -8,7 +8,7 @@ import br.ufg.inf.pes.healthhelp.model.event.DatabaseEvent;
 
 public class LocalAtendimentoDAOStub extends LocalAtendimentoDAO {
     @Override
-    public void inserir(final LocalAtendimento localAtendimento) {
+    public String inserir(final LocalAtendimento localAtendimento) {
         AsyncExecutor.create().execute(
             new AsyncExecutor.RunnableEx() {
                 @Override
@@ -17,6 +17,7 @@ public class LocalAtendimentoDAOStub extends LocalAtendimentoDAO {
                 }
             }
         );
+        return null;
     }
 
     @Override
