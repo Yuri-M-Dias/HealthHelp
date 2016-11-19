@@ -24,41 +24,6 @@ public class LocalAtendimentoDAO extends AbstractDAO<LocalAtendimento> {
     }
 
     /**
-     * @param nomeLocal nome do local atendimento salvo no banco de dados
-     */
-    public void buscarPorNome(String nomeLocal) {
-        getDatabaseReference()
-            .child(DATABASE_CHILD)
-            .orderByChild("nome")
-            .equalTo(nomeLocal)
-            .addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    // firebase requer que seja um GenericTypeIndicator.
-                    // https://www.firebase.com/docs/java-api/javadoc/com/firebase/client/GenericTypeIndicator.html
-                    GenericTypeIndicator<HashMap<String, LocalAtendimento>> t =
-                        new GenericTypeIndicator<HashMap<String, LocalAtendimento>>() {
-                        };
-
-                    HashMap<String, LocalAtendimento> locAt = dataSnapshot.getValue(t);
-
-                    LocalAtendimento localEncontrado = locAt.values().iterator().next();
-                    Log.w(TAG, "buscaPorNome.OnDataChange: o local encontrado foi: " +
-                        localEncontrado.getNome());
-
-                    // chama de volta quem pediu o local que foi buscado
-                    getDatabaseCallback().onComplete(localEncontrado);
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-                    Log.e(TAG, "buscaPorNome: onCancelled:", databaseError.toException());
-                    getDatabaseCallback().onError(databaseError);
-                }
-            });
-    }
-
-    /**
      * define o listener para a subchave de /localAtendimento. Retorna, no momento em que o listener
      * é adicionado, todos os locais de atendimentos cadastrados.
      */

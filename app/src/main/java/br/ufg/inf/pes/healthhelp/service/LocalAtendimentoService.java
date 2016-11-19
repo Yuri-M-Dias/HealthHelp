@@ -1,8 +1,6 @@
 package br.ufg.inf.pes.healthhelp.service;
 
-import br.ufg.inf.pes.healthhelp.dao.DatabaseCallback;
 import br.ufg.inf.pes.healthhelp.dao.LocalAtendimentoDAO;
-import br.ufg.inf.pes.healthhelp.dao.LocalAtendimentoDAOStub;
 import br.ufg.inf.pes.healthhelp.model.LocalAtendimento;
 
 public class LocalAtendimentoService {

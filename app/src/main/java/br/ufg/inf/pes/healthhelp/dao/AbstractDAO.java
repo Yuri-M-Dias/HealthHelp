@@ -8,21 +8,12 @@ public abstract class AbstractDAO<T> implements InterfaceDAO<T> {
     public final String TAG;
     public final String DATABASE_CHILD;
 
-    private DatabaseCallback databaseCallback;
     private DatabaseReference databaseReference;
 
     public AbstractDAO(String TAG, String DATABASE_CHILD) {
         this.TAG = TAG;
         this.DATABASE_CHILD = DATABASE_CHILD;
         this.databaseReference = FirebaseDatabase.getInstance().getReference();
-    }
-
-    public DatabaseCallback getDatabaseCallback() {
-        return databaseCallback;
-    }
-
-    public void setDatabaseCallback(DatabaseCallback databaseCallback) {
-        this.databaseCallback = databaseCallback;
     }
 
     public DatabaseReference getDatabaseReference() {

@@ -23,7 +23,6 @@ import br.ufg.pes.healthhelp.R;
 public class PeriodoTempoView extends LinearLayout {
 
     private static final String TAG = PeriodoTempoView.class.getCanonicalName();
-    private static final String PERIODO_TEMPO_PARAM = "column-count";
 
     private PeriodoTempo periodoTempo;
     private ViewGroup container;
