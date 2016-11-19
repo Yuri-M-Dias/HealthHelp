@@ -8,11 +8,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import br.ufg.inf.pes.healthhelp.model.LocalAtendimento;
+import br.ufg.inf.pes.healthhelp.model.event.DatabaseEvent;
 
 public class LocalAtendimentoDAO extends AbstractDAO<LocalAtendimento> {
 
@@ -79,14 +82,14 @@ public class LocalAtendimentoDAO extends AbstractDAO<LocalAtendimento> {
                             Log.w(TAG, "Obtido: " + locaisAtendimento.get(locaisAtendimento.size() - 1).getId());
                         }
 
-                        getDatabaseCallback().onComplete(locaisAtendimento);
+                        EventBus.getDefault().post(new DatabaseEvent<>(locaisAtendimento));
                     }
 
 
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
                         Log.e(TAG, "buscarTodos.setValueListener: onCancelled:", databaseError.toException());
-                        getDatabaseCallback().onError(databaseError);
+                        throw databaseError.toException();
                     }
                 }
             );
@@ -102,9 +105,10 @@ public class LocalAtendimentoDAO extends AbstractDAO<LocalAtendimento> {
     @Override
     public void inserir(LocalAtendimento localAtendimento) {
         DatabaseReference registroLocalAtendimento = getDatabaseReference().child(DATABASE_CHILD).push();
-        Log.i(TAG, "Chave do novo local de atendimento: " + registroLocalAtendimento.getKey());
+        Log.i(TAG, "Chave do novo local de atendimento: " + registroLocalAtendimento);
         registroLocalAtendimento.setValue(localAtendimento);
         localAtendimento.setId(registroLocalAtendimento.getKey());
+        EventBus.getDefault().post(new DatabaseEvent<>("Local de atendimento salvo"));
     }
 
     /**

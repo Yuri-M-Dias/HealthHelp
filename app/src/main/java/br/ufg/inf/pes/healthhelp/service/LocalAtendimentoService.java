@@ -13,19 +13,11 @@ public class LocalAtendimentoService {
         localAtendimentoDAO = new LocalAtendimentoDAO();
     }
 
-    public void solicitarListaLocaisAtendimento(DatabaseCallback callback) {
-        localAtendimentoDAO.setDatabaseCallback(callback);
+    public void solicitarListaLocaisAtendimento() {
         localAtendimentoDAO.buscarTodos();
     }
 
-    public void solicitarBuscaLocalAtendimento(DatabaseCallback callback, String nomeLocal) {
-        localAtendimentoDAO.setDatabaseCallback(callback);
-        localAtendimentoDAO.buscarPorNome(nomeLocal);
-    }
-
     public void salvar(LocalAtendimento localAtendimento) {
-        localAtendimentoDAO = new LocalAtendimentoDAOStub();
-
         if (localAtendimento.getId() == null) {
             localAtendimentoDAO.inserir(localAtendimento);
         } else {

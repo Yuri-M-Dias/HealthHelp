@@ -19,9 +19,12 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
 import br.ufg.inf.pes.healthhelp.model.LocalAtendimento;
 import br.ufg.inf.pes.healthhelp.model.PeriodoTempo;
+import br.ufg.inf.pes.healthhelp.model.enums.DayOfWeek;
 import br.ufg.inf.pes.healthhelp.model.event.DatabaseEvent;
 import br.ufg.inf.pes.healthhelp.service.LocalAtendimentoService;
 import br.ufg.pes.healthhelp.R;
@@ -155,9 +158,8 @@ public class FormularioLocalAtendimentoActivity extends AppCompatActivity {
                 PeriodoTempoView periodoTempoView = (PeriodoTempoView) containerLocaisAtendimento.getChildAt(contadorPeriodosTempo);
                 localAtendimento.getHorariosAtendimento().add(periodoTempoView.getPeriodoTempo());
             }
+            progressDialog = ProgressDialog.show(this, "Salvando...", "Salvando local de atendimento", true, true);
             localAtendimentoService.salvar(localAtendimento);
-            progressDialog = ProgressDialog.show(this, getString(R.string.titulo_autenticando), getString(R.string.mensagem_autenticando), true, true);
-
         } else {
             foco.requestFocus();
         }

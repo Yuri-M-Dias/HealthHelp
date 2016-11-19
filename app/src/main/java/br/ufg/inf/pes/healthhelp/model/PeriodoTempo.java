@@ -1,5 +1,6 @@
 package br.ufg.inf.pes.healthhelp.model;
 
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.google.firebase.database.Exclude;
@@ -14,9 +15,12 @@ import java.util.List;
 import br.ufg.inf.pes.healthhelp.model.enums.DayOfWeek;
 
 public class PeriodoTempo implements Serializable {
+    private final SimpleDateFormat TIME_FORMAT = new SimpleDateFormat("HH:mm");
+    private final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy");
 
     private Calendar horaInicio;
     private Calendar horaFim;
+
     private Calendar dataInicio; // dateFormat no estilo dd-MM-yyyy
     private Calendar dataFim; // dateFormat no estilo dd-MM-yyyy
 
@@ -34,46 +38,80 @@ public class PeriodoTempo implements Serializable {
         this.diasSemana = diasSemana;
     }
 
-    public Calendar getHoraInicio() {
-        return horaInicio;
+    public String getHoraInicio() {
+        return TIME_FORMAT.format(horaInicio.getTime());
     }
 
     public void setHoraInicio(String horaInicio) {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm");
         try {
             if (this.horaInicio == null) {
                 this.horaInicio = Calendar.getInstance();
             }
-            this.horaInicio.setTime(simpleDateFormat.parse(horaInicio));
+            this.horaInicio.setTime(TIME_FORMAT.parse(horaInicio));
         } catch (ParseException e) {
             Log.i(getClass().getCanonicalName(), e.getMessage());
         }
     }
 
-    @Exclude
-    public void setHoraInicio(Calendar horaInicio) {
-        this.horaInicio = horaInicio;
-    }
-
-    public Calendar getHoraFim() {
-        return horaFim;
+    public String getHoraFim() {
+        return TIME_FORMAT.format(horaFim.getTime());
     }
 
     public void setHoraFim(String horaFim) {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm");
         try {
             if (this.horaFim == null) {
                 this.horaFim = Calendar.getInstance();
             }
-            this.horaFim.setTime(simpleDateFormat.parse(horaFim));
+            this.horaFim.setTime(TIME_FORMAT.parse(horaFim));
         } catch (ParseException e) {
             Log.i(getClass().getCanonicalName(), e.getMessage());
         }
     }
 
-    @Exclude
-    public void setHoraFim(Calendar horaFim) {
-        this.horaFim = horaFim;
+    public void setDataInicio(String dataInicio) {
+        if(TextUtils.isEmpty(dataInicio)) {
+            this.dataInicio = null;
+        } else {
+            try {
+                if (this.dataInicio == null) {
+                    this.dataInicio = Calendar.getInstance();
+                }
+                this.dataInicio.setTime(DATE_FORMAT.parse(dataInicio));
+            } catch (ParseException e) {
+                Log.i(getClass().getCanonicalName(), e.getMessage());
+            }
+        }
+    }
+
+    public String getDataInicio() {
+        if(dataInicio == null) {
+            return null;
+        } else {
+            return DATE_FORMAT.format(dataInicio.getTime());
+        }
+    }
+
+    public void setDataFim(String dataFim) {
+        if(TextUtils.isEmpty(dataFim)) {
+            this.dataFim = null;
+        } else {
+            try {
+                if (this.dataFim == null) {
+                    this.dataFim = Calendar.getInstance();
+                }
+                this.dataFim.setTime(DATE_FORMAT.parse(dataFim));
+            } catch (ParseException e) {
+                Log.i(getClass().getCanonicalName(), e.getMessage());
+            }
+        }
+    }
+
+    public String getDataFim() {
+        if(dataFim == null) {
+            return null;
+        } else {
+            return DATE_FORMAT.format(dataFim.getTime());
+        }
     }
 
     public List<DayOfWeek> getDiasSemana() {
@@ -84,22 +122,46 @@ public class PeriodoTempo implements Serializable {
         this.diasSemana = diasSemana;
     }
 
-    public Calendar getDataInicio() {
+
+    @Exclude
+    public Calendar getHoraInicioCalendar() {
+        return horaInicio;
+    }
+
+    @Exclude
+    public void setHoraInicio(Calendar horaInicio) {
+        this.horaInicio = horaInicio;
+    }
+
+    @Exclude
+    public Calendar getHoraFimCalendar() {
+        return horaFim;
+    }
+
+    @Exclude
+    public void setHoraFim(Calendar horaFim) {
+        this.horaFim = horaFim;
+    }
+
+    @Exclude
+    public Calendar getDataInicioCalendar() {
         return dataInicio;
     }
 
+    @Exclude
     public void setDataInicio(Calendar dataInicio) {
         this.dataInicio = dataInicio;
     }
 
-    public Calendar getDataFim() {
+    @Exclude
+    public Calendar getDataFimCalendar() {
         return dataFim;
     }
 
+    @Exclude
     public void setDataFim(Calendar dataFim) {
         this.dataFim = dataFim;
     }
-
 
     @Override
     public String toString() {
@@ -115,11 +177,10 @@ public class PeriodoTempo implements Serializable {
         } else {
             stringBuilder.append("D");
         }
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm");
         stringBuilder.append("as ");
-        stringBuilder.append(simpleDateFormat.format(getHoraInicio().getTime()));
+        stringBuilder.append(TIME_FORMAT.format(getHoraInicioCalendar().getTime()));
         stringBuilder.append(" às ");
-        stringBuilder.append(simpleDateFormat.format(getHoraFim().getTime()));
+        stringBuilder.append(TIME_FORMAT.format(getHoraFimCalendar().getTime()));
 
         //TODO: Adiciona a data de início e fim à string.
 

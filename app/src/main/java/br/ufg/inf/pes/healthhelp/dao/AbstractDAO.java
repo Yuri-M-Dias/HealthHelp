@@ -25,11 +25,11 @@ public abstract class AbstractDAO<T> implements InterfaceDAO<T> {
         this.databaseCallback = databaseCallback;
     }
 
-    protected DatabaseReference getDatabaseReference() {
+    public DatabaseReference getDatabaseReference() {
         return databaseReference;
     }
 
-    protected void setDatabaseReference(DatabaseReference getmFirebaseDatabaseReference) {
+    public void setDatabaseReference(DatabaseReference getmFirebaseDatabaseReference) {
         this.databaseReference = getmFirebaseDatabaseReference;
     }
 

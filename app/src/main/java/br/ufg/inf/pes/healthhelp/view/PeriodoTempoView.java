@@ -75,24 +75,18 @@ public class PeriodoTempoView extends LinearLayout {
     }
 
     private void preencherView() {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        if (periodoTempo.getDataInicio() != null) {
-            ((Button) findViewById(R.id.botao_data_inicio)).setText(simpleDateFormat.format(
-                periodoTempo.getDataInicio().getTime()));
+        if (periodoTempo.getDataInicioCalendar() != null) {
+            ((Button) findViewById(R.id.botao_data_inicio)).setText(periodoTempo.getDataInicio());
         }
-        if (periodoTempo.getDataFim() != null) {
-            ((Button) findViewById(R.id.botao_data_final)).setText(simpleDateFormat.format(
-                periodoTempo.getDataFim().getTime()));
+        if (periodoTempo.getDataFimCalendar() != null) {
+            ((Button) findViewById(R.id.botao_data_final)).setText(periodoTempo.getDataFim());
         }
 
-        simpleDateFormat = new SimpleDateFormat("HH:mm");
-        if (periodoTempo.getHoraInicio() != null) {
-            ((Button) findViewById(R.id.botao_hora_inicio)).setText(simpleDateFormat.format(
-                periodoTempo.getHoraInicio().getTime()));
+        if (periodoTempo.getHoraInicioCalendar() != null) {
+            ((Button) findViewById(R.id.botao_hora_inicio)).setText(periodoTempo.getHoraInicio());
         }
-        if (periodoTempo.getHoraFim() != null) {
-            ((Button) findViewById(R.id.botao_hora_final)).setText(simpleDateFormat.format(
-                periodoTempo.getHoraFim().getTime()));
+        if (periodoTempo.getHoraFimCalendar() != null) {
+            ((Button) findViewById(R.id.botao_hora_final)).setText(periodoTempo.getHoraFim());
         }
 
         for (DayOfWeek diaSemana : periodoTempo.getDiasSemana()) {
@@ -134,22 +128,22 @@ public class PeriodoTempoView extends LinearLayout {
         if (view.getId() == R.id.botao_data_inicio || view.getId() == R.id.botao_data_final) {
             final Calendar dataArmazenada;
             if (view.getId() == R.id.botao_data_inicio) {
-                if (periodoTempo.getDataInicio() == null) {
+                if (periodoTempo.getDataInicioCalendar() == null) {
                     periodoTempo.setDataInicio(Calendar.getInstance());
                 }
-                dataArmazenada = periodoTempo.getDataInicio();
+                dataArmazenada = periodoTempo.getDataInicioCalendar();
             } else {
-                if (periodoTempo.getDataFim() == null) {
+                if (periodoTempo.getDataFimCalendar() == null) {
                     periodoTempo.setDataFim(Calendar.getInstance());
                 }
-                dataArmazenada = periodoTempo.getDataFim();
+                dataArmazenada = periodoTempo.getDataFimCalendar();
             }
 
             DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(),
                 new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-                        ((Button) view).setText(i2 + "/" + i1 + "/" + i);
+                        ((Button) view).setText(i2 + "/" + (i1 + 1) + "/" + i);
                         dataArmazenada.set(i, i1, i2);
                         ((Button) view).setError(null);
                     }
@@ -168,15 +162,15 @@ public class PeriodoTempoView extends LinearLayout {
         if (view.getId() == R.id.botao_hora_inicio || view.getId() == R.id.botao_hora_final) {
             final Calendar horaArmazenada;
             if (view.getId() == R.id.botao_hora_inicio) {
-                if (periodoTempo.getHoraInicio() == null) {
+                if (periodoTempo.getHoraInicioCalendar() == null) {
                     periodoTempo.setHoraInicio(Calendar.getInstance());
                 }
-                horaArmazenada = periodoTempo.getHoraInicio();
+                horaArmazenada = periodoTempo.getHoraInicioCalendar();
             } else {
-                if (periodoTempo.getHoraFim() == null) {
+                if (periodoTempo.getHoraFimCalendar() == null) {
                     periodoTempo.setHoraFim(Calendar.getInstance());
                 }
-                horaArmazenada = periodoTempo.getHoraFim();
+                horaArmazenada = periodoTempo.getHoraFimCalendar();
             }
 
             TimePickerDialog timePickerDialog = new TimePickerDialog(getContext(),
@@ -260,12 +254,12 @@ public class PeriodoTempoView extends LinearLayout {
                 .positiveText("OK")
                 .show();
             return false;
-        } else if (periodoTempo.getHoraInicio() == null) {
+        } else if (periodoTempo.getHoraInicioCalendar() == null) {
             foco = (Button) findViewById(R.id.botao_hora_inicio);
             foco.requestFocus();
             foco.setError(getContext().getString(R.string.erro_campo_obrigatorio));
             return false;
-        } else if (periodoTempo.getHoraFim() == null) {
+        } else if (periodoTempo.getHoraFimCalendar() == null) {
             foco = (Button) findViewById(R.id.botao_hora_final);
             foco.requestFocus();
             foco.setError(getContext().getString(R.string.erro_campo_obrigatorio));
