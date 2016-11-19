@@ -48,8 +48,6 @@ public class FormularioLocalAtendimentoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formulario_local_atendimento);
 
-        EventBus.getDefault().register(this);
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_formulario_novo_local_atendimento);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -69,6 +67,12 @@ public class FormularioLocalAtendimentoActivity extends AppCompatActivity {
             preencherView();
         }
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
     }
 
     @Override
@@ -99,8 +103,8 @@ public class FormularioLocalAtendimentoActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
+    protected void onStop() {
+        super.onStop();
         EventBus.getDefault().unregister(this);
     }
 

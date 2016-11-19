@@ -51,7 +51,8 @@ public class LocaisAtendimentoActivity extends AppCompatActivity {
 
         localAtendimentoService = new LocalAtendimentoService();
 
-        EventBus.getDefault().register(this);
+        Log.i("ksjdhksjdhksjdhksjdh", "On create!!!!!!!!!!!!!!!!!!!!!!!!!!!!1");
+
     }
 
     @Override
@@ -78,6 +79,7 @@ public class LocaisAtendimentoActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        EventBus.getDefault().register(this);
         if (!Sessao.estaAtiva(this)) {
             Intent intent = new Intent(this, AutenticacaoActivity.class);
             startActivity(intent);
@@ -93,8 +95,8 @@ public class LocaisAtendimentoActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
+    protected void onStop() {
+        super.onStop();
         EventBus.getDefault().unregister(this);
     }
 
