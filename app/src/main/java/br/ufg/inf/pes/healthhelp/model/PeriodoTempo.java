@@ -42,6 +42,11 @@ public class PeriodoTempo implements Serializable {
         return TIME_FORMATTER.format(horaInicio.getTime());
     }
 
+    @Exclude
+    public void setHoraInicio(Calendar horaInicio) {
+        this.horaInicio = horaInicio;
+    }
+
     public void setHoraInicio(String horaInicio) {
         try {
             if (this.horaInicio == null) {
@@ -57,6 +62,11 @@ public class PeriodoTempo implements Serializable {
         return TIME_FORMATTER.format(horaFim.getTime());
     }
 
+    @Exclude
+    public void setHoraFim(Calendar horaFim) {
+        this.horaFim = horaFim;
+    }
+
     public void setHoraFim(String horaFim) {
         try {
             if (this.horaFim == null) {
@@ -69,7 +79,7 @@ public class PeriodoTempo implements Serializable {
     }
 
     public void setDataInicio(String dataInicio) {
-        if(TextUtils.isEmpty(dataInicio)) {
+        if (TextUtils.isEmpty(dataInicio)) {
             this.dataInicio = null;
         } else {
             try {
@@ -84,15 +94,20 @@ public class PeriodoTempo implements Serializable {
     }
 
     public String getDataInicio() {
-        if(dataInicio == null) {
+        if (dataInicio == null) {
             return null;
         } else {
             return DATE_FORMATTER.format(dataInicio.getTime());
         }
     }
 
+    @Exclude
+    public void setDataInicio(Calendar dataInicio) {
+        this.dataInicio = dataInicio;
+    }
+
     public void setDataFim(String dataFim) {
-        if(TextUtils.isEmpty(dataFim)) {
+        if (TextUtils.isEmpty(dataFim)) {
             this.dataFim = null;
         } else {
             try {
@@ -107,11 +122,16 @@ public class PeriodoTempo implements Serializable {
     }
 
     public String getDataFim() {
-        if(dataFim == null) {
+        if (dataFim == null) {
             return null;
         } else {
             return DATE_FORMATTER.format(dataFim.getTime());
         }
+    }
+
+    @Exclude
+    public void setDataFim(Calendar dataFim) {
+        this.dataFim = dataFim;
     }
 
     public List<DayOfWeek> getDiasSemana() {
@@ -122,15 +142,9 @@ public class PeriodoTempo implements Serializable {
         this.diasSemana = diasSemana;
     }
 
-
     @Exclude
     public Calendar getHoraInicioCalendar() {
         return horaInicio;
-    }
-
-    @Exclude
-    public void setHoraInicio(Calendar horaInicio) {
-        this.horaInicio = horaInicio;
     }
 
     @Exclude
@@ -139,28 +153,13 @@ public class PeriodoTempo implements Serializable {
     }
 
     @Exclude
-    public void setHoraFim(Calendar horaFim) {
-        this.horaFim = horaFim;
-    }
-
-    @Exclude
     public Calendar getDataInicioCalendar() {
         return dataInicio;
     }
 
     @Exclude
-    public void setDataInicio(Calendar dataInicio) {
-        this.dataInicio = dataInicio;
-    }
-
-    @Exclude
     public Calendar getDataFimCalendar() {
         return dataFim;
-    }
-
-    @Exclude
-    public void setDataFim(Calendar dataFim) {
-        this.dataFim = dataFim;
     }
 
     @Override

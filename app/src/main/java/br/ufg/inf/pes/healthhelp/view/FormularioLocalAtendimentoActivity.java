@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,12 +19,9 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
 
 import br.ufg.inf.pes.healthhelp.model.LocalAtendimento;
 import br.ufg.inf.pes.healthhelp.model.PeriodoTempo;
-import br.ufg.inf.pes.healthhelp.model.enums.DayOfWeek;
 import br.ufg.inf.pes.healthhelp.model.event.DatabaseEvent;
 import br.ufg.inf.pes.healthhelp.service.LocalAtendimentoService;
 import br.ufg.pes.healthhelp.R;

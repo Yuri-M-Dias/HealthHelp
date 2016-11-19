@@ -3,6 +3,9 @@ package br.ufg.inf.pes.healthhelp.service;
 import br.ufg.inf.pes.healthhelp.dao.LocalAtendimentoDAO;
 import br.ufg.inf.pes.healthhelp.model.LocalAtendimento;
 
+/**
+ * Esta classe é responsável por prover serviços relacionados a um {@link LocalAtendimento}.
+ */
 public class LocalAtendimentoService {
     private static final String TAG = "LocalAtendimentoService";
     private LocalAtendimentoDAO localAtendimentoDAO;
