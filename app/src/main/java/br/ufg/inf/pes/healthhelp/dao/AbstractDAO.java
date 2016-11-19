@@ -16,12 +16,12 @@ public abstract class AbstractDAO<T> implements InterfaceDAO<T> {
         this.databaseReference = FirebaseDatabase.getInstance().getReference();
     }
 
-    public DatabaseReference getDatabaseReference() {
+    protected DatabaseReference getDatabaseReference() {
         return databaseReference;
     }
 
-    public void setDatabaseReference(DatabaseReference getmFirebaseDatabaseReference) {
-        this.databaseReference = getmFirebaseDatabaseReference;
+    protected void setDatabaseReference(DatabaseReference databaseReference) {
+        this.databaseReference = databaseReference;
     }
 
 }

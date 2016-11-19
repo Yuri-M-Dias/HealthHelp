@@ -21,8 +21,8 @@ public class PeriodoTempo implements Serializable {
     private Calendar horaInicio;
     private Calendar horaFim;
 
-    private Calendar dataInicio; // dateFormat no estilo dd-MM-yyyy
-    private Calendar dataFim; // dateFormat no estilo dd-MM-yyyy
+    private Calendar dataInicio;
+    private Calendar dataFim;
 
     private List<DayOfWeek> diasSemana;
 
