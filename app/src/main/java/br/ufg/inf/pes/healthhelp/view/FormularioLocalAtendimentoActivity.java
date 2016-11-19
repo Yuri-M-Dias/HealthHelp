@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -104,8 +105,8 @@ public class FormularioLocalAtendimentoActivity extends AppCompatActivity {
 
     @Override
     protected void onStop() {
-        super.onStop();
         EventBus.getDefault().unregister(this);
+        super.onStop();
     }
 
     private void preencherView() {
@@ -196,6 +197,7 @@ public class FormularioLocalAtendimentoActivity extends AppCompatActivity {
     public void onDatabaseEvent(DatabaseEvent<String> databaseEvent) {
         progressDialog.dismiss();
         Toast.makeText(this, databaseEvent.getObjeto(), Toast.LENGTH_SHORT).show();
+        EventBus.getDefault().unregister(this);
         finish();
     }
 }
