@@ -14,7 +14,6 @@ import android.widget.ToggleButton;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import br.ufg.inf.pes.healthhelp.model.PeriodoTempo;
@@ -143,8 +142,8 @@ public class PeriodoTempoView extends LinearLayout {
                 new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-                        ((Button) view).setText(i2 + "/" + (i1 + 1) + "/" + i);
                         dataArmazenada.set(i, i1, i2);
+                        ((Button) view).setText(PeriodoTempo.DATE_FORMATTER.format(dataArmazenada.getTime()));
                         ((Button) view).setError(null);
                     }
                 },
@@ -177,10 +176,10 @@ public class PeriodoTempoView extends LinearLayout {
                 new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int horas, int minutos) {
-                        ((Button) view).setText(horas + ":" + minutos);
                         horaArmazenada.set(horaArmazenada.get(Calendar.YEAR),
                             horaArmazenada.get(Calendar.MONTH),
                             horaArmazenada.get(Calendar.DAY_OF_MONTH), horas, minutos);
+                        ((Button) view).setText(PeriodoTempo.TIME_FORMATTER.format(horaArmazenada.getTime()));
                         ((Button) view).setError(null);
                     }
                 },

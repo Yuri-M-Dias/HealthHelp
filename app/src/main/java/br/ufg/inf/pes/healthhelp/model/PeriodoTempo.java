@@ -15,8 +15,8 @@ import java.util.List;
 import br.ufg.inf.pes.healthhelp.model.enums.DayOfWeek;
 
 public class PeriodoTempo implements Serializable {
-    private final SimpleDateFormat TIME_FORMAT = new SimpleDateFormat("HH:mm");
-    private final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy");
+    public static final SimpleDateFormat TIME_FORMATTER = new SimpleDateFormat("HH:mm");
+    public static final SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat("dd/MM/yyyy");
 
     private Calendar horaInicio;
     private Calendar horaFim;
@@ -39,7 +39,7 @@ public class PeriodoTempo implements Serializable {
     }
 
     public String getHoraInicio() {
-        return TIME_FORMAT.format(horaInicio.getTime());
+        return TIME_FORMATTER.format(horaInicio.getTime());
     }
 
     public void setHoraInicio(String horaInicio) {
@@ -47,14 +47,14 @@ public class PeriodoTempo implements Serializable {
             if (this.horaInicio == null) {
                 this.horaInicio = Calendar.getInstance();
             }
-            this.horaInicio.setTime(TIME_FORMAT.parse(horaInicio));
+            this.horaInicio.setTime(TIME_FORMATTER.parse(horaInicio));
         } catch (ParseException e) {
             Log.i(getClass().getCanonicalName(), e.getMessage());
         }
     }
 
     public String getHoraFim() {
-        return TIME_FORMAT.format(horaFim.getTime());
+        return TIME_FORMATTER.format(horaFim.getTime());
     }
 
     public void setHoraFim(String horaFim) {
@@ -62,7 +62,7 @@ public class PeriodoTempo implements Serializable {
             if (this.horaFim == null) {
                 this.horaFim = Calendar.getInstance();
             }
-            this.horaFim.setTime(TIME_FORMAT.parse(horaFim));
+            this.horaFim.setTime(TIME_FORMATTER.parse(horaFim));
         } catch (ParseException e) {
             Log.i(getClass().getCanonicalName(), e.getMessage());
         }
@@ -76,7 +76,7 @@ public class PeriodoTempo implements Serializable {
                 if (this.dataInicio == null) {
                     this.dataInicio = Calendar.getInstance();
                 }
-                this.dataInicio.setTime(DATE_FORMAT.parse(dataInicio));
+                this.dataInicio.setTime(DATE_FORMATTER.parse(dataInicio));
             } catch (ParseException e) {
                 Log.i(getClass().getCanonicalName(), e.getMessage());
             }
@@ -87,7 +87,7 @@ public class PeriodoTempo implements Serializable {
         if(dataInicio == null) {
             return null;
         } else {
-            return DATE_FORMAT.format(dataInicio.getTime());
+            return DATE_FORMATTER.format(dataInicio.getTime());
         }
     }
 
@@ -99,7 +99,7 @@ public class PeriodoTempo implements Serializable {
                 if (this.dataFim == null) {
                     this.dataFim = Calendar.getInstance();
                 }
-                this.dataFim.setTime(DATE_FORMAT.parse(dataFim));
+                this.dataFim.setTime(DATE_FORMATTER.parse(dataFim));
             } catch (ParseException e) {
                 Log.i(getClass().getCanonicalName(), e.getMessage());
             }
@@ -110,7 +110,7 @@ public class PeriodoTempo implements Serializable {
         if(dataFim == null) {
             return null;
         } else {
-            return DATE_FORMAT.format(dataFim.getTime());
+            return DATE_FORMATTER.format(dataFim.getTime());
         }
     }
 
@@ -178,9 +178,9 @@ public class PeriodoTempo implements Serializable {
             stringBuilder.append("D");
         }
         stringBuilder.append("as ");
-        stringBuilder.append(TIME_FORMAT.format(getHoraInicioCalendar().getTime()));
+        stringBuilder.append(TIME_FORMATTER.format(getHoraInicioCalendar().getTime()));
         stringBuilder.append(" às ");
-        stringBuilder.append(TIME_FORMAT.format(getHoraFimCalendar().getTime()));
+        stringBuilder.append(TIME_FORMATTER.format(getHoraFimCalendar().getTime()));
 
         //TODO: Adiciona a data de início e fim à string.
 

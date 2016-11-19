@@ -138,6 +138,7 @@ public class LocalAtendimentoDAO extends AbstractDAO<LocalAtendimento> {
             .child(DATABASE_CHILD)
             .child(novoLocalAtendimento.getId())
             .setValue(novoLocalAtendimento);
+        EventBus.getDefault().post(new DatabaseEvent<>("Local de atendimento salvo"));
     }
 
 }
