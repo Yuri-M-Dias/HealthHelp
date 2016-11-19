@@ -41,7 +41,7 @@
                 android:layout_marginRight="@dimen/space_margin_cards"
                 android:layout_marginTop="@dimen/space_margin_cards"
 
-                android:onClick="visitasMedicas"
+                android:onClick="visualizarVisitasMedicas"
                 app:cardCornerRadius="@dimen/corner_radius_card"
                 app:cardElevation="@dimen/card_elevation">
 

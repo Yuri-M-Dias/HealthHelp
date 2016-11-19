@@ -64,7 +64,7 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
-    public void visitasMedicas(View view){
+    public void visualizarVisitasMedicas(View view){
 
         Context context = getApplicationContext();
         CharSequence text = "Visualizar visitas medicas nao implementado";
