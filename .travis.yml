@@ -31,6 +31,7 @@ before_script:
 before_install:
     - "chmod +x gradlew"
 script:
+  - android list target
   - ./gradlew build jacocoTestReport --stacktrace
 after_success:
   - bash <(curl -s https://codecov.io/bash)
