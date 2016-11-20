@@ -17,7 +17,6 @@ android:
     - extra-google-m2repository
     - extra-android-support
 before_script:
-  - android list targets
   - echo no | android create avd --force -n test -t android-21 --abi $ANDROID_ABI
   - emulator -avd test -no-skin -no-audio -no-window &
   - android-wait-for-emulator
@@ -26,9 +25,11 @@ before_script:
 before_install:
   - "chmod +x gradlew"
   - npm install -g nodemon
-  - npm install -g js/firebase-server
+  - "cd js/firebase-server"
+  - npm install
+  - nodemon server.js &
+  - "cd -"
 script:
-  - android list target
-  - ./gradlew build jacocoTestReport --stacktrace
+  - ./gradlew build connectedCheck jacocoTestReport --stacktrace
 after_success:
   - bash <(curl -s https://codecov.io/bash)
