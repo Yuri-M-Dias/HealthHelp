@@ -1,6 +1,5 @@
 jdk: oraclejdk8
 language: android
-
 env:
   global:
     - ANDROID_API_LEVEL=23
@@ -29,11 +28,7 @@ before_install:
   - npm install -g nodemon
   - npm install -g js/firebase-server
 script:
-<<<<<<< HEAD
-  - nodemon js/firebase-server
-=======
   - android list target
->>>>>>> master
   - ./gradlew build jacocoTestReport --stacktrace
 after_success:
   - bash <(curl -s https://codecov.io/bash)
