@@ -48,4 +48,8 @@
     <!-- Strings relacionadas à view de lista de locais de atendimento -->
     <string name="titulo_carregamento_locais">Carregando...</string>
     <string name="mensagem_carregamento_locais">Carregando lista de locais de atendimento</string>
+
+    <string name="title_activity_agenda_disponivel">AgendaDisponivelActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
 </resources>
