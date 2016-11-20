@@ -44,4 +44,8 @@
     <string name="label_periodo_tempo_aas">às</string>
     <string name="erro_titulo_horario_atendimento_incompleto">Horário de Atendimento Incompleto</string>
     <string name="erro_dias_semana_vazio">É necessário informar pelo menos 1 dia da semana para cada horário de atendimento</string>
+
+    <!-- Strings relacionadas à view de lista de locais de atendimento -->
+    <string name="titulo_carregamento_locais">Carregando...</string>
+    <string name="mensagem_carregamento_locais">Carregando lista de locais de atendimento</string>
 </resources>
