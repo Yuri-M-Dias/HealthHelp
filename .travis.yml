@@ -11,8 +11,8 @@ android:
     - tools
     - platform-tools
     - build-tools-$ANDROID_BUILD_TOOLS_VERSION
-    - android-ANDROID_ABI
-    - sys-img-armeabi-v7a-google_apis-23
+    - android-$ANDROID_API_LEVEL
+    - sys-img-$ANDROID_ABI-google_apis-23
     - extra-google-google_play_services
     - extra-android-m2repository
     - extra-google-m2repository
