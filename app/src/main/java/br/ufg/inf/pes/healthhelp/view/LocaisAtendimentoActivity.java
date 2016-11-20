@@ -48,11 +48,7 @@ public class LocaisAtendimentoActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-
         localAtendimentoService = new LocalAtendimentoService();
-
-        Log.i("ksjdhksjdhksjdhksjdh", "On create!!!!!!!!!!!!!!!!!!!!!!!!!!!!1");
-
     }
 
     @Override
@@ -171,6 +167,5 @@ public class LocaisAtendimentoActivity extends AppCompatActivity {
         localAtendimentoIntent.putExtra(LocalAtendimentoActivity.LOCAL_ATENDIMENTO_INTENT_PARAMETER, localAtendimento);
         startActivity(localAtendimentoIntent);
     }
-
 
 }
