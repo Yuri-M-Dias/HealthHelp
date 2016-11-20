@@ -31,8 +31,8 @@ public class AtuacaoDAO extends AbstractDAO<Atuacao> {
     }
 
     @Override
-    public String inserir(Atuacao objeto) {
-        return null;
+    public void inserir(Atuacao objeto) {
+
     }
 
     @Override

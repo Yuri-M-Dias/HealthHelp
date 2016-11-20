@@ -101,14 +101,12 @@ public class AgendaDAO extends AbstractDAO<Agenda> {
         registroAgenda.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
+                Log.w(TAG, "SNAPSHOT: " + dataSnapshot);
                 Agenda agenda = dataSnapshot.getValue(Agenda.class);
-
                 //Salva no objeto agenda o id do banco gerado pelo firebase
                 agenda.setId(dataSnapshot.getKey().toString());
                 Log.w(TAG, "agenda adicionada: " + agenda.getId());
-
-                EventBus.getDefault().post(new DatabaseEvent<>("Agenda salva"));
+                EventBus.getDefault().post(new DatabaseEvent<>("Agenda adicionada " + agenda.getNome()));
             }
 
             @Override
@@ -136,7 +134,7 @@ public class AgendaDAO extends AbstractDAO<Agenda> {
                         //Salva no objeto agenda o id do banco gerado pelo firebase
                         agenda.setId(dataSnapshot.getKey());
                         Log.w(TAG,"agenda removida: " + agenda.getId());
-                        EventBus.getDefault().post(new DatabaseEvent<>("Agenda removida"));
+                        EventBus.getDefault().post(new DatabaseEvent<>("Agenda removida" + agenda.getNome()));
                     }
 
                     @Override
@@ -164,7 +162,7 @@ public class AgendaDAO extends AbstractDAO<Agenda> {
                         //Salva no objeto agenda o id do banco gerado pelo firebase
                         agenda.setId(dataSnapshot.getKey());
                         Log.w(TAG,"agenda atualizada: " + agenda.getId());
-                        EventBus.getDefault().post(new DatabaseEvent<>("Agenda atualizada"));
+                        EventBus.getDefault().post(new DatabaseEvent<>("Agenda atualizada" + agenda.getNome()));
                     }
 
                     @Override

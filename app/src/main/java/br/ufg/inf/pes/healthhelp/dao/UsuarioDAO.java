@@ -28,8 +28,8 @@ public class UsuarioDAO extends AbstractDAO<Usuario> {
     }
 
     @Override
-    public String inserir(Usuario objeto) {
-        return null;
+    public void inserir(Usuario objeto) {
+
     }
 
     @Override
