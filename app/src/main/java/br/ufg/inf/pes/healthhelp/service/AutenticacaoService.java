@@ -21,12 +21,9 @@ public class AutenticacaoService {
         usuarioDAO = new UsuarioDAO();
     }
 
-    public void autenticar(String login, String senha) {
-        usuarioDAO.buscarPorLogin(login, senha);
-    }
-
     /**
      * Codifica uma senha para propósitos como ocultação de informação e armazenamento seguro no banco de dados.
+     *
      * @param senha Senha a ser codificada.
      * @return senha codificada, em caso de sucesso, ou uma string vazia caso não seja possível codificar a senha.
      */
@@ -45,5 +42,9 @@ public class AutenticacaoService {
             Log.e(TAG, "Não foi possível codificar a senha informada. A senha codificada será vazia! Erro: " + e.getMessage());
         }
         return senhaCodificada;
+    }
+
+    public void autenticar(String login, String senha) {
+        usuarioDAO.buscarPorLogin(login, senha);
     }
 }

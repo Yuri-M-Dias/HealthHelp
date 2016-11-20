@@ -45,8 +45,6 @@ public class FormularioLocalAtendimentoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formulario_local_atendimento);
 
-        EventBus.getDefault().register(this);
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_formulario_novo_local_atendimento);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -66,6 +64,12 @@ public class FormularioLocalAtendimentoActivity extends AppCompatActivity {
             preencherView();
         }
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
     }
 
     @Override
@@ -96,9 +100,9 @@ public class FormularioLocalAtendimentoActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
+    protected void onStop() {
         EventBus.getDefault().unregister(this);
+        super.onStop();
     }
 
     private void preencherView() {
@@ -155,9 +159,8 @@ public class FormularioLocalAtendimentoActivity extends AppCompatActivity {
                 PeriodoTempoView periodoTempoView = (PeriodoTempoView) containerLocaisAtendimento.getChildAt(contadorPeriodosTempo);
                 localAtendimento.getHorariosAtendimento().add(periodoTempoView.getPeriodoTempo());
             }
+            progressDialog = ProgressDialog.show(this, "Salvando...", "Salvando local de atendimento", true, true);
             localAtendimentoService.salvar(localAtendimento);
-            progressDialog = ProgressDialog.show(this, getString(R.string.titulo_autenticando), getString(R.string.mensagem_autenticando), true, true);
-
         } else {
             foco.requestFocus();
         }
@@ -190,6 +193,7 @@ public class FormularioLocalAtendimentoActivity extends AppCompatActivity {
     public void onDatabaseEvent(DatabaseEvent<String> databaseEvent) {
         progressDialog.dismiss();
         Toast.makeText(this, databaseEvent.getObjeto(), Toast.LENGTH_SHORT).show();
+        EventBus.getDefault().unregister(this);
         finish();
     }
 }

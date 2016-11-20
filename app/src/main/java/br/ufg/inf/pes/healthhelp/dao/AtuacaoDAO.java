@@ -23,9 +23,10 @@ public class AtuacaoDAO extends AbstractDAO<Atuacao> {
 
     /**
      * Busca todas as atuações de um usuário.
+     *
      * @param usuario usuário pelo qual as ocupações serão procuradas.
      */
-    public void buscarPorUsuario(Usuario usuario){
+    public void buscarPorUsuario(Usuario usuario) {
         //TODO
     }
 
