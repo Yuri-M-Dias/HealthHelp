@@ -1,10 +1,10 @@
 package br.ufg.inf.pes.healthhelp.view.adapters;
 
-import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.ViewGroup;
 
@@ -24,6 +24,9 @@ public class PaginadorDiasAdapter extends FragmentStatePagerAdapter {
 
     private LinkedList<Calendar> intervaloVisualizacao;
     private boolean permiteVerPassado;
+    private final int numeroAbasAAdicionar = 7;
+    private Calendar dataMudanca;
+    private boolean precisaNovoCarregamento = false;
 
     public PaginadorDiasAdapter(FragmentManager fm, boolean permiteVerPassado, Calendar contextoTemporal) {
         super(fm);
@@ -60,6 +63,10 @@ public class PaginadorDiasAdapter extends FragmentStatePagerAdapter {
 
     }
 
+    public Calendar getDataMudanca() {
+        return dataMudanca;
+    }
+
     @Override
     public int getItemPosition(Object object) {
         int posicao = super.getItemPosition(object);
@@ -76,6 +83,89 @@ public class PaginadorDiasAdapter extends FragmentStatePagerAdapter {
         }
 
         return posicao;
+    }
+
+
+    @Override
+    public Object instantiateItem(ViewGroup container, int position) {
+        analisarNovoCarregamento(position);
+        return super.instantiateItem(container, position);
+    }
+
+    private void analisarNovoCarregamento(int ultimaPosicaoCarregada){
+        if (ultimaPosicaoCarregada >= intervaloVisualizacao.size() - 1) {
+            precisaNovoCarregamento = true;
+        } else if (ultimaPosicaoCarregada == 0 && permiteVerPassado) {
+            precisaNovoCarregamento = true;
+        }
+    }
+
+    @Override
+    public void finishUpdate(ViewGroup container) {
+        Log.i(TAG, "Updating 1");
+        super.finishUpdate(container);
+        Log.i(TAG, "Updating 2");
+        if(precisaNovoCarregamento) {
+            precisaNovoCarregamento = false;
+            Log.i(TAG, "Precisa de carregamento");
+            ViewPager viewPager = (ViewPager) container;
+            viewPager.getCurrentItem();
+            int currentItem = ((ViewPager) container).getCurrentItem();
+            Log.i(TAG, "Item atual = " + currentItem);
+            dataMudanca = intervaloVisualizacao.get(currentItem);
+            if(carregarNovasDatas(currentItem)){
+                Log.i(TAG, "Notificando a galera");
+                notifyDataSetChanged();
+            }
+            /*
+            if(currentItem >= intervaloVisualizacao.size() - 2){
+                Log.i(TAG, "Adicionando abas ao futuro");
+                dataMudanca = intervaloVisualizacao.get(currentItem);
+                Calendar ultimaData = (Calendar) intervaloVisualizacao.getLast().clone();
+                for (int contadorPosicao = 0; contadorPosicao < numeroAbasAAdicionar; contadorPosicao++) {
+                    ultimaData.add(Calendar.DAY_OF_MONTH, 1);
+                    intervaloVisualizacao.addLast((Calendar) ultimaData.clone());
+                }
+                Log.i(TAG, "Notificando a galera");
+                notifyDataSetChanged();
+            } else if (currentItem < 1) {
+                Log.i(TAG, "Adicionando abas ao passado");
+                dataMudanca = intervaloVisualizacao.get(posicaoRequisitada + 1);
+                Calendar primeiraData = (Calendar) intervaloVisualizacao.getFirst().clone();
+                for (int contadorPosicao = 0; contadorPosicao < numeroAbasAAdicionar; contadorPosicao++) {
+                    primeiraData.add(Calendar.DAY_OF_MONTH, -1);
+                    intervaloVisualizacao.addFirst((Calendar) primeiraData.clone());
+                }
+                Log.i(TAG, "Notificando a galera");
+                notifyDataSetChanged();
+            }*/
+        }
+    }
+
+    private boolean carregarNovasDatas(int indiceDataAtual){
+        boolean resultado;
+        if(indiceDataAtual >= intervaloVisualizacao.size() - 2){
+            Log.i(TAG, "Adicionando abas ao futuro");
+            Calendar ultimaData = (Calendar) intervaloVisualizacao.getLast().clone();
+            for (int contadorPosicao = 0; contadorPosicao < numeroAbasAAdicionar; contadorPosicao++) {
+                ultimaData.add(Calendar.DAY_OF_MONTH, 1);
+                intervaloVisualizacao.addLast((Calendar) ultimaData.clone());
+            }
+            resultado = true;
+        } else if (indiceDataAtual < 1) {
+            Log.i(TAG, "Adicionando abas ao passado");
+            Calendar primeiraData = (Calendar) intervaloVisualizacao.getFirst().clone();
+            for (int contadorPosicao = 0; contadorPosicao < numeroAbasAAdicionar; contadorPosicao++) {
+                primeiraData.add(Calendar.DAY_OF_MONTH, -1);
+                intervaloVisualizacao.addFirst((Calendar) primeiraData.clone());
+            }
+            resultado = true;
+        }else {
+            Log.i(TAG, "De acordo com o item atual, não é necessário carregar novas datas.");
+            resultado = false;
+        }
+
+        return resultado;
     }
 
     @Override
