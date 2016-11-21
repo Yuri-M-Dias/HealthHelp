@@ -169,6 +169,24 @@ public class PaginadorDiasAdapter extends FragmentStatePagerAdapter {
     }
 
     @Override
+    public int getItemPosition(Object object) {
+        int posicao = super.getItemPosition(object);
+        if(object instanceof Calendar) {
+            Calendar dataProcurada = (Calendar) object;
+            for(Calendar data: intervaloVisualizacao) {
+                if(dataProcurada.get(Calendar.YEAR) == data.get(Calendar.YEAR)
+                    && dataProcurada.get(Calendar.MONTH) == data.get(Calendar.MONTH)
+                    && dataProcurada.get(Calendar.DAY_OF_MONTH) == data.get(Calendar.DAY_OF_MONTH)){
+                    posicao = intervaloVisualizacao.indexOf(data);
+                    break;
+                }
+            }
+        }
+
+        return posicao;
+    }
+
+    @Override
     public int getCount() {
         return intervaloVisualizacao.size();
     }
