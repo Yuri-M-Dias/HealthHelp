@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.DatePicker;
@@ -140,6 +141,7 @@ public class AgendaDisponivelActivity extends AppCompatActivity {
                 mViewPager.setAdapter(mSectionsPagerAdapter);
                 TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
                 tabLayout.setupWithViewPager(mViewPager);
+                mViewPager.setCurrentItem(mSectionsPagerAdapter.getItemPosition(dataSelecionada));
             }
         }, dataSelecionada.get(Calendar.YEAR), dataSelecionada.get(Calendar.MONTH), dataSelecionada.get(Calendar.DAY_OF_MONTH));
         datePickerDialog.getDatePicker().setMinDate(Calendar.getInstance().getTimeInMillis());
