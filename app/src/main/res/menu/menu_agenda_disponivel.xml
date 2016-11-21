@@ -2,9 +2,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="br.ufg.inf.pes.healthhelp.view.AgendaDisponivelActivity">
+    <item android:title="@string/acao_selecionar_data"
+        android:showAsAction="always"
+        android:icon="@android:drawable/ic_menu_month"
+        android:id="@+id/acao_selecao_data" />
     <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="never" />
+        android:showAsAction="always"
+        android:icon="@android:drawable/ic_menu_save"
+        android:title="@string/acao_salvar"
+        android:id="@+id/acao_salva" />
 </menu>

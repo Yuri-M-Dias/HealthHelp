@@ -1,13 +1,11 @@
 package br.ufg.inf.pes.healthhelp.view.adapters;
 
 import android.content.Context;
-import android.support.design.widget.TabItem;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.util.Log;
-import android.view.View;
 import android.view.ViewGroup;
 
 import java.text.SimpleDateFormat;
@@ -26,28 +24,39 @@ public class PaginadorDiasAdapter extends FragmentStatePagerAdapter {
 
     private LinkedList<Calendar> intervaloVisualizacao;
     private boolean permiteVerPassado;
-    private int tamanhoPadraoIntervaloVisualizao = 4;
-    private int limiteParaRequisicao = 1;
-    private final int numeroAbasAAdicionar = 2;
 
-    public PaginadorDiasAdapter(FragmentManager fm, boolean permiteVerPassado, Context contexto) {
+    public PaginadorDiasAdapter(FragmentManager fm, boolean permiteVerPassado, Calendar contextoTemporal) {
         super(fm);
         this.permiteVerPassado = permiteVerPassado;
-        construirIntervaloAtualizao();
+        construirIntervaloVisualizacao(contextoTemporal);
     }
 
-    private void construirIntervaloAtualizao() {
-        Calendar dataCorrente = Calendar.getInstance();
+    private void construirIntervaloVisualizacao(Calendar contextoTemporal) {
+        Log.i(TAG, "Construindo intervalo...");
         intervaloVisualizacao = new LinkedList<>();
+        Calendar dataInicial = (Calendar) contextoTemporal.clone();
+        int diaFinal = contextoTemporal.getActualMaximum(Calendar.DAY_OF_MONTH);
 
-        if(permiteVerPassado) {
-            dataCorrente.add(Calendar.DAY_OF_MONTH, -(tamanhoPadraoIntervaloVisualizao / 2));
+        if(contextoTemporal.get(Calendar.YEAR) == Calendar.getInstance().get(Calendar.YEAR)
+            && contextoTemporal.get(Calendar.MONTH) == Calendar.getInstance().get(Calendar.MONTH)) {
+            if(permiteVerPassado) {
+                dataInicial.set(Calendar.DAY_OF_MONTH, contextoTemporal.getActualMinimum(Calendar.DAY_OF_MONTH));
+            }
+        } else if(contextoTemporal.before(Calendar.getInstance())) {
+            if(permiteVerPassado) {
+                dataInicial.set(Calendar.DAY_OF_MONTH, contextoTemporal.getActualMinimum(Calendar.DAY_OF_MONTH));
+            } else {
+                diaFinal = 0;
+            }
+        } else {
+            dataInicial.set(Calendar.DAY_OF_MONTH, contextoTemporal.getActualMinimum(Calendar.DAY_OF_MONTH));
         }
 
-        for(int diaCorrente = 0; diaCorrente < tamanhoPadraoIntervaloVisualizao; diaCorrente++) {
-            intervaloVisualizacao.add((Calendar) dataCorrente.clone());
-            dataCorrente.add(Calendar.DAY_OF_MONTH, 1);
+        for(int diaCorrente = dataInicial.get(Calendar.DAY_OF_MONTH); diaCorrente <= diaFinal; diaCorrente++) {
+            intervaloVisualizacao.add((Calendar) dataInicial.clone());
+            dataInicial.add(Calendar.DAY_OF_MONTH, 1);
         }
+
     }
 
     @Override
@@ -57,36 +66,8 @@ public class PaginadorDiasAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        AgendaFragment agendaFragment = AgendaFragment.newInstance(intervaloVisualizacao.get(position));
-        return agendaFragment;
+        return AgendaFragment.newInstance(intervaloVisualizacao.get(position));
     }
-
-    @Override
-    public Object instantiateItem(ViewGroup container, int position) {
-        Object object = super.instantiateItem(container, position);
-        processarMudanca(container, position);
-        return object;
-    }
-
-    private void processarMudanca(ViewGroup container, int novaPosicao){
-
-        if (novaPosicao + limiteParaRequisicao >= intervaloVisualizacao.size()) {
-            Calendar ultimaData = (Calendar) intervaloVisualizacao.getLast().clone();
-            for (int contadorPosicao = 0; contadorPosicao < numeroAbasAAdicionar; contadorPosicao++) {
-                ultimaData.add(Calendar.DAY_OF_MONTH, 1);
-                intervaloVisualizacao.addLast((Calendar) ultimaData.clone());
-            }
-            notifyDataSetChanged();
-        } else if (permiteVerPassado && novaPosicao - limiteParaRequisicao <= 0) {
-            Calendar primeiraData = (Calendar) intervaloVisualizacao.getFirst().clone();
-            for (int contadorPosicao = 0; contadorPosicao < numeroAbasAAdicionar; contadorPosicao++) {
-                primeiraData.add(Calendar.DAY_OF_MONTH, -1);
-                intervaloVisualizacao.addFirst((Calendar) primeiraData.clone());
-            }
-            notifyDataSetChanged();
-        }
-    }
-
 
     @Override
     public CharSequence getPageTitle(int position) {
