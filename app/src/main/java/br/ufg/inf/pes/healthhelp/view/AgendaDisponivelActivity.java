@@ -1,24 +1,17 @@
 package br.ufg.inf.pes.healthhelp.view;
 
+import android.app.DatePickerDialog;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
+import android.widget.DatePicker;
 
-import android.widget.TextView;
-
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -48,6 +41,8 @@ public class AgendaDisponivelActivity extends AppCompatActivity {
 
     private Agenda agenda;
 
+    private Calendar dataSelecionada;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +51,8 @@ public class AgendaDisponivelActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        mSectionsPagerAdapter = new PaginadorDiasAdapter(getSupportFragmentManager(), false, this);
+        Calendar contexto = Calendar.getInstance();
+        mSectionsPagerAdapter = new PaginadorDiasAdapter(getSupportFragmentManager(), false, contexto);
 
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
@@ -119,7 +115,10 @@ public class AgendaDisponivelActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.acao_salva) {
+            return true;
+        } else if (id == R.id.acao_selecao_data) {
+            definirDataBusca();
             return true;
         }
 
@@ -127,6 +126,25 @@ public class AgendaDisponivelActivity extends AppCompatActivity {
     }
 
 
+    public void definirDataBusca(){
+        if (dataSelecionada == null) {
+            dataSelecionada = Calendar.getInstance();
+        }
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+                dataSelecionada.set(Calendar.YEAR, i);
+                dataSelecionada.set(Calendar.MONTH, i1);
+                dataSelecionada.set(Calendar.DAY_OF_MONTH, i2);
+                mSectionsPagerAdapter = new PaginadorDiasAdapter(getSupportFragmentManager(), false, dataSelecionada);
+                mViewPager.setAdapter(mSectionsPagerAdapter);
+                TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+                tabLayout.setupWithViewPager(mViewPager);
+            }
+        }, dataSelecionada.get(Calendar.YEAR), dataSelecionada.get(Calendar.MONTH), dataSelecionada.get(Calendar.DAY_OF_MONTH));
+        datePickerDialog.getDatePicker().setMinDate(Calendar.getInstance().getTimeInMillis());
+        datePickerDialog.show();
+    }
 
 
 }
