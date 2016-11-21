@@ -32,7 +32,6 @@ public class PaginadorDiasAdapter extends FragmentStatePagerAdapter {
     }
 
     private void construirIntervaloVisualizacao(Calendar contextoTemporal) {
-        Log.i(TAG, "Construindo intervalo...");
         intervaloVisualizacao = new LinkedList<>();
         Calendar dataInicial = (Calendar) contextoTemporal.clone();
         int diaFinal = contextoTemporal.getActualMaximum(Calendar.DAY_OF_MONTH);
@@ -41,6 +40,8 @@ public class PaginadorDiasAdapter extends FragmentStatePagerAdapter {
             && contextoTemporal.get(Calendar.MONTH) == Calendar.getInstance().get(Calendar.MONTH)) {
             if(permiteVerPassado) {
                 dataInicial.set(Calendar.DAY_OF_MONTH, contextoTemporal.getActualMinimum(Calendar.DAY_OF_MONTH));
+            } else {
+                dataInicial.set(Calendar.DAY_OF_MONTH, Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
             }
         } else if(contextoTemporal.before(Calendar.getInstance())) {
             if(permiteVerPassado) {
@@ -57,6 +58,24 @@ public class PaginadorDiasAdapter extends FragmentStatePagerAdapter {
             dataInicial.add(Calendar.DAY_OF_MONTH, 1);
         }
 
+    }
+
+    @Override
+    public int getItemPosition(Object object) {
+        int posicao = super.getItemPosition(object);
+        if(object instanceof Calendar) {
+            Calendar dataProcurada = (Calendar) object;
+            for(Calendar data: intervaloVisualizacao) {
+                if(dataProcurada.get(Calendar.YEAR) == data.get(Calendar.YEAR)
+                    && dataProcurada.get(Calendar.MONTH) == data.get(Calendar.MONTH)
+                    && dataProcurada.get(Calendar.DAY_OF_MONTH) == data.get(Calendar.DAY_OF_MONTH)){
+                    posicao = intervaloVisualizacao.indexOf(data);
+                    break;
+                }
+            }
+        }
+
+        return posicao;
     }
 
     @Override
