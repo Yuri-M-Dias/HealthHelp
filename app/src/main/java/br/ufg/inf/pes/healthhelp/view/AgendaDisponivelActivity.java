@@ -1,6 +1,7 @@
 package br.ufg.inf.pes.healthhelp.view;
 
 import android.app.DatePickerDialog;
+import android.database.DataSetObserver;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -59,9 +60,18 @@ public class AgendaDisponivelActivity extends AppCompatActivity {
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        final TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
 
+        mSectionsPagerAdapter.registerDataSetObserver(new DataSetObserver() {
+            @Override
+            public void onChanged() {
+                mViewPager.setAdapter(mSectionsPagerAdapter);
+                int novaPosicao = mSectionsPagerAdapter.getItemPosition(mSectionsPagerAdapter.getDataMudanca());
+                mViewPager.setCurrentItem(novaPosicao - 1);
+                mViewPager.setCurrentItem(novaPosicao);
+            }
+        });
         criarAgenda();
 
     }
