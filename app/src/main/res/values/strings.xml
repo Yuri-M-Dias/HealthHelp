@@ -59,4 +59,8 @@
 
     <!-- Strings relacionados a menus -->
     <string name="logout">Logout</string>
+
+    <!-- Strings relacionadas à view de lista de locais de atendimento -->
+    <string name="titulo_carregamento_locais">Carregando...</string>
+    <string name="mensagem_carregamento_locais">Carregando lista de locais de atendimento</string>
 </resources>
