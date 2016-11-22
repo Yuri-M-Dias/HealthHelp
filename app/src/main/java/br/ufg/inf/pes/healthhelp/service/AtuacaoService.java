@@ -17,6 +17,7 @@ public class AtuacaoService {
 
     /**
      * Solicita a lista de atuações de um usuário.
+     *
      * @param usuario usuário pelo qual as ocupações serão procuradas.
      */
     void solicitarListaAtuacoes(Usuario usuario) {

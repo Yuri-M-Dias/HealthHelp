@@ -1,5 +1,6 @@
 package br.ufg.inf.pes.healthhelp.view;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
@@ -12,15 +13,20 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.github.clans.fab.FloatingActionMenu;
-import com.google.firebase.database.DatabaseError;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+import org.greenrobot.eventbus.util.ThrowableFailureEvent;
 
 import java.util.List;
 
-import br.ufg.inf.pes.healthhelp.dao.DatabaseCallback;
 import br.ufg.inf.pes.healthhelp.model.LocalAtendimento;
 import br.ufg.inf.pes.healthhelp.model.Sessao;
+import br.ufg.inf.pes.healthhelp.model.event.DatabaseEvent;
 import br.ufg.inf.pes.healthhelp.service.LocalAtendimentoService;
 import br.ufg.inf.pes.healthhelp.view.adapters.LocaisAtendimentoAdapter;
 import br.ufg.pes.healthhelp.R;
@@ -29,6 +35,8 @@ public class LocaisAtendimentoActivity extends AppCompatActivity {
 
     private LocalAtendimentoService localAtendimentoService;
     private LocaisAtendimentoAdapter locaisAtendimentoAdapter;
+
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +47,6 @@ public class LocaisAtendimentoActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
 
         localAtendimentoService = new LocalAtendimentoService();
     }
@@ -68,7 +75,13 @@ public class LocaisAtendimentoActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        recarregarLocais();
+        EventBus.getDefault().register(this);
+        if (!Sessao.estaAtiva(this)) {
+            Intent intent = new Intent(this, AutenticacaoActivity.class);
+            startActivity(intent);
+        } else {
+            recarregarLocais();
+        }
     }
 
     @Override
@@ -77,22 +90,27 @@ public class LocaisAtendimentoActivity extends AppCompatActivity {
         ((FloatingActionMenu) findViewById(R.id.fab)).close(true);
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
+
     private void recarregarLocais() {
-        //TODO: Mostrar notificação de carregamento da lista para o usuário
-        localAtendimentoService.solicitarListaLocaisAtendimento(new DatabaseCallback<List<LocalAtendimento>>() {
+        progressDialog = ProgressDialog.show(this, getString(R.string.titulo_carregamento_locais), getString(R.string.mensagem_carregamento_locais), true, true);
+        localAtendimentoService.solicitarListaLocaisAtendimento();
+    }
 
-            @Override
-            public void onComplete(List<LocalAtendimento> object) {
-                carregar(object);
-                //TODO: Finalizar carregamento da lista
-            }
+    @Subscribe
+    public void onDatabaseEvent(DatabaseEvent<List<LocalAtendimento>> databaseEvent) {
+        progressDialog.dismiss();
+        carregar(databaseEvent.getObjeto());
+    }
 
-            @Override
-            public void onError(DatabaseError exception) {
-                //TODO: Finalizar carregamento da lista
-                //TODO: Mostrar erro para o usuário
-            }
-        });
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onThrowableFailureEvent(ThrowableFailureEvent event) {
+        progressDialog.dismiss();
+        Toast.makeText(this, event.getThrowable().getMessage(), Toast.LENGTH_LONG).show();
     }
 
     private void configurarPesquisa(SearchView searchView) {
@@ -149,6 +167,5 @@ public class LocaisAtendimentoActivity extends AppCompatActivity {
         localAtendimentoIntent.putExtra(LocalAtendimentoActivity.LOCAL_ATENDIMENTO_INTENT_PARAMETER, localAtendimento);
         startActivity(localAtendimentoIntent);
     }
-
 
 }

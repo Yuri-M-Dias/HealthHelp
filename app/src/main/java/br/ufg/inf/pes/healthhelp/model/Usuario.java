@@ -20,12 +20,12 @@ public class Usuario {
     private List<Profissional> ocupacoes;
 
     @Exclude
-    public String getId(){
+    public String getId() {
         return id;
     }
 
     @Exclude
-    public void setId(String id){
+    public void setId(String id) {
         this.id = id;
     }
 
