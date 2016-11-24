@@ -3,13 +3,11 @@ package br.ufg.inf.pes.healthhelp.view;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.database.DataSetObserver;
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.DatePicker;
@@ -181,7 +179,7 @@ public class AgendaDisponivelActivity extends AppCompatActivity {
     /**
      * Conclui o processo de seleção de um horário de atendimento para um agendamente, enviando um valor de retorno para a classe que chamou essa classe.
      */
-    public void concluirSelecaoAtendimento(){
+    public void concluirSelecaoAtendimento() {
         Intent intent = new Intent();
         intent.putExtra(ARG_ATENDIMENTO_AGENDADO, atendimento);
         setResult(RESULT_OK, intent);
@@ -192,7 +190,7 @@ public class AgendaDisponivelActivity extends AppCompatActivity {
     /**
      * Executa o processo de seleção de data para a marcar uma consulta através da seleção no calendário de um dia específico.
      */
-    public void definirDataBusca(){
+    public void definirDataBusca() {
         if (dataSelecionada == null) {
             dataSelecionada = Calendar.getInstance();
         }

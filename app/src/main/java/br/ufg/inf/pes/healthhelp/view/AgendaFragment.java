@@ -87,14 +87,14 @@ public class AgendaFragment extends Fragment {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onDatabaseEvent(PaginadorDiasEvent<List<Atendimento>> paginadorDiasEvent) {
         final LinkedList<Atendimento> listaAtendimentosDisponiveis = criarListaAtendimentos(agendas);
-        if(paginadorDiasEvent.getFiltro().equals(data)){
+        if (paginadorDiasEvent.getFiltro().equals(data)) {
 
             //TODO: Implementar adição e remoção de períodos de tempo baseado nos horários bloqueados e liberados.
 
             eliminarHorariosAgendados(listaAtendimentosDisponiveis, paginadorDiasEvent.getObjeto());
 
             getView().findViewById(R.id.carregamento_horarios_disponiveis).setVisibility(View.GONE);
-            if(listaAtendimentosDisponiveis.isEmpty()) {
+            if (listaAtendimentosDisponiveis.isEmpty()) {
                 getView().findViewById(R.id.textview_sem_horarios_disponiveis).setVisibility(View.VISIBLE);
                 getView().findViewById(R.id.imagem_sem_horarios_disponiveis).setVisibility(View.VISIBLE);
             } else {
@@ -118,13 +118,14 @@ public class AgendaFragment extends Fragment {
 
     /**
      * Cria uma lista de horários disponíveis para atendimento com base nos períodos de tempo das agendas de uma atuação.
+     *
      * @param agendas Agendas a serem utilizadas para criar a lista de atendimentos disponíveis.
      * @return Lista de atendimentos disponíveis para marcação.
      */
-    private LinkedList<Atendimento> criarListaAtendimentos(Agenda[] agendas){
+    private LinkedList<Atendimento> criarListaAtendimentos(Agenda[] agendas) {
         LinkedList<Atendimento> atendimentosVazios = new LinkedList<>();
 
-        for(Agenda agenda : agendas) {
+        for (Agenda agenda : agendas) {
             for (PeriodoTempo periodoTempo : agenda.getHorariosAtendimento()) {
                 Calendar horaInicial = (Calendar) data.clone();
 
@@ -154,20 +155,21 @@ public class AgendaFragment extends Fragment {
 
     /**
      * Elimina dos horários de atendimento que estão disponíveis, os horários de atendimento que já tem atendimentos marcados pra eles.
+     *
      * @param atendimentosDisponiveis Lista de atendimentos com horário disponível a ser modificada.
-     * @param atendimentosAgendados Lista de atendimentos já marcados.
+     * @param atendimentosAgendados   Lista de atendimentos já marcados.
      */
     private void eliminarHorariosAgendados(List<Atendimento> atendimentosDisponiveis, List<Atendimento> atendimentosAgendados) {
         List<Atendimento> atendimentosARemover = new ArrayList<>();
-        for(Atendimento atendimentoMarcado: atendimentosAgendados) {
+        for (Atendimento atendimentoMarcado : atendimentosAgendados) {
             for (Atendimento atendimentoDisponivel : atendimentosDisponiveis) {
-                if(atendimentoMarcado.getHoraInicio().equals(atendimentoDisponivel.getHoraInicio())){
+                if (atendimentoMarcado.getHoraInicio().equals(atendimentoDisponivel.getHoraInicio())) {
                     atendimentosARemover.add(atendimentoDisponivel);
                 }
             }
         }
 
-        for(Atendimento atendimentoARemover : atendimentosARemover) {
+        for (Atendimento atendimentoARemover : atendimentosARemover) {
             atendimentosDisponiveis.remove(atendimentoARemover);
         }
     }

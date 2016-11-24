@@ -23,10 +23,9 @@ import br.ufg.inf.pes.healthhelp.view.AgendaFragment;
 public class PaginadorDiasAdapter extends FragmentStatePagerAdapter {
 
     private final String TAG = PaginadorDiasAdapter.class.getName();
-
+    private final int numeroAbasAAdicionar = 7;
     private LinkedList<Calendar> intervaloVisualizacao;
     private boolean permiteVerPassado;
-    private final int numeroAbasAAdicionar = 7;
     private Calendar dataMudanca;
     private boolean precisaNovoCarregamento = false;
     private List<Agenda> agendas;
@@ -43,15 +42,15 @@ public class PaginadorDiasAdapter extends FragmentStatePagerAdapter {
         Calendar dataInicial = (Calendar) contextoTemporal.clone();
         int diaFinal = contextoTemporal.getActualMaximum(Calendar.DAY_OF_MONTH);
 
-        if(contextoTemporal.get(Calendar.YEAR) == Calendar.getInstance().get(Calendar.YEAR)
+        if (contextoTemporal.get(Calendar.YEAR) == Calendar.getInstance().get(Calendar.YEAR)
             && contextoTemporal.get(Calendar.MONTH) == Calendar.getInstance().get(Calendar.MONTH)) {
-            if(permiteVerPassado) {
+            if (permiteVerPassado) {
                 dataInicial.set(Calendar.DAY_OF_MONTH, contextoTemporal.getActualMinimum(Calendar.DAY_OF_MONTH));
             } else {
                 dataInicial.set(Calendar.DAY_OF_MONTH, Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
             }
-        } else if(contextoTemporal.before(Calendar.getInstance())) {
-            if(permiteVerPassado) {
+        } else if (contextoTemporal.before(Calendar.getInstance())) {
+            if (permiteVerPassado) {
                 dataInicial.set(Calendar.DAY_OF_MONTH, contextoTemporal.getActualMinimum(Calendar.DAY_OF_MONTH));
             } else {
                 diaFinal = 0;
@@ -60,7 +59,7 @@ public class PaginadorDiasAdapter extends FragmentStatePagerAdapter {
             dataInicial.set(Calendar.DAY_OF_MONTH, contextoTemporal.getActualMinimum(Calendar.DAY_OF_MONTH));
         }
 
-        for(int diaCorrente = dataInicial.get(Calendar.DAY_OF_MONTH); diaCorrente <= diaFinal; diaCorrente++) {
+        for (int diaCorrente = dataInicial.get(Calendar.DAY_OF_MONTH); diaCorrente <= diaFinal; diaCorrente++) {
             intervaloVisualizacao.add((Calendar) dataInicial.clone());
             dataInicial.add(Calendar.DAY_OF_MONTH, 1);
         }
@@ -74,12 +73,12 @@ public class PaginadorDiasAdapter extends FragmentStatePagerAdapter {
     @Override
     public int getItemPosition(Object object) {
         int posicao = super.getItemPosition(object);
-        if(object instanceof Calendar) {
+        if (object instanceof Calendar) {
             Calendar dataProcurada = (Calendar) object;
-            for(Calendar data: intervaloVisualizacao) {
-                if(dataProcurada.get(Calendar.YEAR) == data.get(Calendar.YEAR)
+            for (Calendar data : intervaloVisualizacao) {
+                if (dataProcurada.get(Calendar.YEAR) == data.get(Calendar.YEAR)
                     && dataProcurada.get(Calendar.MONTH) == data.get(Calendar.MONTH)
-                    && dataProcurada.get(Calendar.DAY_OF_MONTH) == data.get(Calendar.DAY_OF_MONTH)){
+                    && dataProcurada.get(Calendar.DAY_OF_MONTH) == data.get(Calendar.DAY_OF_MONTH)) {
                     posicao = intervaloVisualizacao.indexOf(data);
                     break;
                 }
@@ -96,7 +95,7 @@ public class PaginadorDiasAdapter extends FragmentStatePagerAdapter {
         return super.instantiateItem(container, position);
     }
 
-    private void analisarNovoCarregamento(int ultimaPosicaoCarregada){
+    private void analisarNovoCarregamento(int ultimaPosicaoCarregada) {
         if (ultimaPosicaoCarregada >= intervaloVisualizacao.size() - 1) {
             precisaNovoCarregamento = true;
         } else if (ultimaPosicaoCarregada == 0 && permiteVerPassado) {
@@ -107,21 +106,21 @@ public class PaginadorDiasAdapter extends FragmentStatePagerAdapter {
     @Override
     public void finishUpdate(ViewGroup container) {
         super.finishUpdate(container);
-        if(precisaNovoCarregamento) {
+        if (precisaNovoCarregamento) {
             precisaNovoCarregamento = false;
             ViewPager viewPager = (ViewPager) container;
             viewPager.getCurrentItem();
             int currentItem = ((ViewPager) container).getCurrentItem();
             dataMudanca = intervaloVisualizacao.get(currentItem);
-            if(carregarNovasDatas(currentItem)){
+            if (carregarNovasDatas(currentItem)) {
                 notifyDataSetChanged();
             }
         }
     }
 
-    private boolean carregarNovasDatas(int indiceDataAtual){
+    private boolean carregarNovasDatas(int indiceDataAtual) {
         boolean resultado;
-        if(indiceDataAtual >= intervaloVisualizacao.size() - 2){
+        if (indiceDataAtual >= intervaloVisualizacao.size() - 2) {
             Calendar ultimaData = (Calendar) intervaloVisualizacao.getLast().clone();
             for (int contadorPosicao = 0; contadorPosicao < numeroAbasAAdicionar; contadorPosicao++) {
                 ultimaData.add(Calendar.DAY_OF_MONTH, 1);
@@ -135,7 +134,7 @@ public class PaginadorDiasAdapter extends FragmentStatePagerAdapter {
                 intervaloVisualizacao.addFirst((Calendar) primeiraData.clone());
             }
             resultado = true;
-        }else {
+        } else {
             Log.i(TAG, "De acordo com o item atual, não é necessário carregar novas datas.");
             resultado = false;
         }
