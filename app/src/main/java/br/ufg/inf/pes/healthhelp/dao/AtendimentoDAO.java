@@ -66,21 +66,21 @@ public class AtendimentoDAO extends AbstractDAO {
                     }
 
                     atendimento = new Atendimento();
-                    atendimento.setAgenda(agendas[0]);
+                    atendimento.setAgenda(agendas[1]);
                     atendimento.setPaciente(new Paciente());
                     atendimento.setHoraInicio(Calendar.getInstance());
-                    atendimento.getHoraInicioCalendar().set(Calendar.HOUR_OF_DAY, 9);
-                    atendimento.getHoraInicioCalendar().set(Calendar.MINUTE, 40);
+                    atendimento.getHoraInicioCalendar().set(Calendar.HOUR_OF_DAY, 15);
+                    atendimento.getHoraInicioCalendar().set(Calendar.MINUTE, 00);
 
                     atendimento.setHoraFim(Calendar.getInstance());
-                    atendimento.getHoraFimCalendar().set(Calendar.HOUR_OF_DAY, 10);
+                    atendimento.getHoraFimCalendar().set(Calendar.HOUR_OF_DAY, 16);
                     atendimento.getHoraFimCalendar().set(Calendar.MINUTE, 00);
 
                     if(atendimento.mesmaDataInicio(diaOcorrencia)) {
                         atendimentos.add(atendimento);
                     }
 
-                    Thread.sleep(3000);
+                    Thread.sleep(2000);
 
                     EventBus.getDefault().post(new PaginadorDiasEvent<>(atendimentos, diaOcorrencia));
                 }

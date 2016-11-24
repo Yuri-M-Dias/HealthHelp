@@ -1,7 +1,6 @@
 package br.ufg.inf.pes.healthhelp.view;
 
 import android.app.DatePickerDialog;
-import android.content.Intent;
 import android.database.DataSetObserver;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -10,7 +9,6 @@ import android.support.v7.widget.Toolbar;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.DatePicker;
@@ -21,6 +19,7 @@ import java.util.List;
 
 import br.ufg.inf.pes.healthhelp.model.Agenda;
 import br.ufg.inf.pes.healthhelp.model.Atendimento;
+import br.ufg.inf.pes.healthhelp.model.Atuacao;
 import br.ufg.inf.pes.healthhelp.model.PeriodoTempo;
 import br.ufg.inf.pes.healthhelp.model.enums.DayOfWeek;
 import br.ufg.inf.pes.healthhelp.service.AtendimentoService;
@@ -29,22 +28,12 @@ import br.ufg.pes.healthhelp.R;
 
 public class AgendaDisponivelActivity extends AppCompatActivity {
 
-    /**
-     * The {@link android.support.v4.view.PagerAdapter} that will provide
-     * fragments for each of the sections. We use a
-     * {@link FragmentPagerAdapter} derivative, which will keep every
-     * loaded fragment in memory. If this becomes too memory intensive, it
-     * may be best to switch to a
-     * {@link android.support.v4.app.FragmentStatePagerAdapter}.
-     */
-    private PaginadorDiasAdapter mSectionsPagerAdapter;
+    public static final String ARG_ATUACAO = "atuacao";
 
-    /**
-     * The {@link ViewPager} that will host the section contents.
-     */
+    private PaginadorDiasAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
 
-    private List<Agenda> agendas;
+    private Atuacao atuacao;
 
     private Calendar dataSelecionada;
     private Atendimento atendimento;
@@ -62,16 +51,19 @@ public class AgendaDisponivelActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Calendar contexto = Calendar.getInstance();
-        criarAgenda();
+
+        atuacao = (Atuacao) getIntent().getSerializableExtra(ARG_ATUACAO);
+        criarAtuacao(); //Remover essa chamada e o método quando a linhaa acima retornar algo válido.
+
         atendimentoService = new AtendimentoService();
         setContentView(R.layout.activity_agenda_disponivel);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        //TODO: definir título da agenda.
+        setTitle("Selecionar horário de atendimento");
 
-        mSectionsPagerAdapter = new PaginadorDiasAdapter(getSupportFragmentManager(), false, contexto, agendas);
+        mSectionsPagerAdapter = new PaginadorDiasAdapter(getSupportFragmentManager(), false, contexto, atuacao.getAgendas());
 
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
@@ -91,8 +83,10 @@ public class AgendaDisponivelActivity extends AppCompatActivity {
 
     }
 
-    private void criarAgenda() {
-        agendas = new ArrayList<>();
+    //TODO: Remover a implementação abaixo quando as classes que chamam essa aqui estiverem prontas.
+    private void criarAtuacao() {
+        atuacao = new Atuacao();
+        atuacao.setAgendas(new ArrayList<Agenda>());
         Agenda agenda = new Agenda();
         agenda.setNome("Atendimento Geral");
         agenda.setId("id_agenda_atendimento_geral");
@@ -127,13 +121,13 @@ public class AgendaDisponivelActivity extends AppCompatActivity {
 
         agenda.setHorariosAtendimento(horariosAtendimento);
 
-        agendas.add(agenda);
+        atuacao.getAgendas().add(agenda);
 
         agenda = new Agenda();
         agenda.setNome("Cirurgias");
         agenda.setId("id_agenda_cirurgias");
         agenda.setHorariosBloqueados(new ArrayList<PeriodoTempo>());
-        agenda.setTempoPadraoMinutos(20);
+        agenda.setTempoPadraoMinutos(60);
 
         horariosAtendimento = new ArrayList<>();
 
@@ -151,7 +145,7 @@ public class AgendaDisponivelActivity extends AppCompatActivity {
         periodo.setDiasSemana(diasSemana);
         horariosAtendimento.add(periodo);
 
-        agendas.add(agenda);
+        atuacao.getAgendas().add(agenda);
 
         agenda.setHorariosAtendimento(horariosAtendimento);
 
@@ -198,7 +192,7 @@ public class AgendaDisponivelActivity extends AppCompatActivity {
                 dataSelecionada.set(Calendar.YEAR, i);
                 dataSelecionada.set(Calendar.MONTH, i1);
                 dataSelecionada.set(Calendar.DAY_OF_MONTH, i2);
-                mSectionsPagerAdapter = new PaginadorDiasAdapter(getSupportFragmentManager(), false, dataSelecionada, agendas);
+                mSectionsPagerAdapter = new PaginadorDiasAdapter(getSupportFragmentManager(), false, dataSelecionada, atuacao.getAgendas());
                 mViewPager.setAdapter(mSectionsPagerAdapter);
                 TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
                 tabLayout.setupWithViewPager(mViewPager);
