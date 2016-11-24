@@ -40,18 +40,9 @@ public class AgendaDiariaAdapter extends ArrayAdapter<Atendimento> {
         horarioCompletoAtendimento.setText(TIME_FORMATTER.format(getItem(position).getHoraInicioCalendar().getTime())
             + "\n" + TIME_FORMATTER.format(getItem(position).getHoraFimCalendar().getTime()));
 
-        preencherTextoDisponibilidade((TextView) convertView.findViewById(R.id.disponibilidade_item_atendimento), position);
+        ((TextView) convertView.findViewById(R.id.disponibilidade_item_atendimento)).setText("[" + getItem(position).getAgenda().getNome() + "]");
 
         return convertView;
     }
 
-    private void preencherTextoDisponibilidade(TextView disponibilidade, int position) {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("[");
-        stringBuilder.append(getItem(position).getAgenda().getNome());
-        stringBuilder.append("] ");
-
-        disponibilidade.setText(stringBuilder.toString());
-
-    }
 }

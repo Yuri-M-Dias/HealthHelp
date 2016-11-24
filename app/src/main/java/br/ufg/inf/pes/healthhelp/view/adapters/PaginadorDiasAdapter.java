@@ -37,6 +37,10 @@ public class PaginadorDiasAdapter extends FragmentStatePagerAdapter {
         construirIntervaloVisualizacao(contextoTemporal);
     }
 
+    /**
+     * Constrói o intervalo de tempo em dias que serão visualizados nas abas.
+     * @param contextoTemporal Dia dado como referência para construção do intervalo de tempo de visualização.
+     */
     private void construirIntervaloVisualizacao(Calendar contextoTemporal) {
         intervaloVisualizacao = new LinkedList<>();
         Calendar dataInicial = (Calendar) contextoTemporal.clone();
@@ -95,6 +99,10 @@ public class PaginadorDiasAdapter extends FragmentStatePagerAdapter {
         return super.instantiateItem(container, position);
     }
 
+    /**
+     * Verifica se é necessário carregar mais abas de datas.
+     * @param ultimaPosicaoCarregada Índice da aba da última data visualizada.
+     */
     private void analisarNovoCarregamento(int ultimaPosicaoCarregada) {
         if (ultimaPosicaoCarregada >= intervaloVisualizacao.size() - 1) {
             precisaNovoCarregamento = true;
@@ -118,6 +126,11 @@ public class PaginadorDiasAdapter extends FragmentStatePagerAdapter {
         }
     }
 
+    /**
+     * Carrega novas abas com novas datas.
+     * @param indiceDataAtual Índice da aba da última data visualizada.
+     * @return TRUE se as abas foram carregadas com sucesso, FALSE caso contrário.
+     */
     private boolean carregarNovasDatas(int indiceDataAtual) {
         boolean resultado;
         if (indiceDataAtual >= intervaloVisualizacao.size() - 2) {
