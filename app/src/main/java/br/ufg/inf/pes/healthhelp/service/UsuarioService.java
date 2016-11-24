@@ -23,7 +23,8 @@ public class UsuarioService {
         }
     }
 
-    public void inativar(Usuario usuario) {
-        usuarioDAO.inativar(usuario);
-    }
+//    public void inativar(Usuario usuario) {
+//        usuarioDAO.inativar(usuario);
+//    }
+
 }

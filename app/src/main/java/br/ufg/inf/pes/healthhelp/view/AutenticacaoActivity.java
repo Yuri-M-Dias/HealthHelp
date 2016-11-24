@@ -16,7 +16,7 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 import org.greenrobot.eventbus.util.ThrowableFailureEvent;
 
-import br.ufg.inf.pes.healthhelp.model.Sessao;
+import br.ufg.inf.pes.healthhelp.util.Sessao;
 import br.ufg.inf.pes.healthhelp.model.Usuario;
 import br.ufg.inf.pes.healthhelp.model.event.DatabaseEvent;
 import br.ufg.inf.pes.healthhelp.service.AutenticacaoService;
@@ -81,12 +81,6 @@ public class AutenticacaoActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onStop() {
-        super.onStop();
-        EventBus.getDefault().unregister(this);
-    }
-
-    @Override
     public void onBackPressed() {
         moveTaskToBack(true);
     }
@@ -109,4 +103,5 @@ public class AutenticacaoActivity extends AppCompatActivity {
         progressDialog.dismiss();
         Toast.makeText(this, event.getThrowable().getMessage(), Toast.LENGTH_LONG).show();
     }
+
 }

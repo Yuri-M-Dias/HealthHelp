@@ -8,32 +8,7 @@ import br.ufg.inf.pes.healthhelp.model.Agenda;
 public class AgendaDAO extends AbstractDAO<Agenda> {
 
     public AgendaDAO() {
-        super(AgendaDAO.class.getCanonicalName(), "agenda");
-    }
-
-    @Override
-    public void buscarTodos() {
-        //TODO
-    }
-
-    @Override
-    public void buscarPelaId(String id) {
-        //TODO
-    }
-
-    @Override
-    public void inserir(Agenda objeto) {
-        //TODO
-    }
-
-    @Override
-    public void remover(Agenda objeto) {
-        //TODO
-    }
-
-    @Override
-    public void atualizar(Agenda objeto) {
-        //TODO
+        super(AgendaDAO.class.getCanonicalName(), "agenda", Agenda.class);
     }
 
 }

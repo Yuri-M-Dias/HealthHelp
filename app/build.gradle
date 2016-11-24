@@ -34,6 +34,9 @@ android {
         timeOutInMs 10 * 60 * 1000
         installOptions "-d", "-t"
     }
+    dexOptions {
+        javaMaxHeapSize "4g"
+    }
 }
 
 dependencies {
@@ -42,9 +45,11 @@ dependencies {
     compile 'com.google.code.gson:gson:2.8.0'
     compile 'com.android.support:appcompat-v7:23.4.0'
     compile 'com.github.clans:fab:1.6.4'
+
     compile 'com.google.firebase:firebase-core:9.8.0'
     compile 'com.google.firebase:firebase-database:9.8.0'
     compile 'com.google.firebase:firebase-config:9.8.0'
+
     compile 'com.android.support:design:23.4.0'
     compile 'org.greenrobot:eventbus:3.0.0'
     compile 'com.afollestad.material-dialogs:core:0.8.5.9'

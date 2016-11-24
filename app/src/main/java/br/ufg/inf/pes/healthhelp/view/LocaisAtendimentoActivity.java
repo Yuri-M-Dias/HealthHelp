@@ -25,7 +25,7 @@ import org.greenrobot.eventbus.util.ThrowableFailureEvent;
 import java.util.List;
 
 import br.ufg.inf.pes.healthhelp.model.LocalAtendimento;
-import br.ufg.inf.pes.healthhelp.model.Sessao;
+import br.ufg.inf.pes.healthhelp.util.Sessao;
 import br.ufg.inf.pes.healthhelp.model.event.DatabaseEvent;
 import br.ufg.inf.pes.healthhelp.service.LocalAtendimentoService;
 import br.ufg.inf.pes.healthhelp.view.adapters.LocaisAtendimentoAdapter;

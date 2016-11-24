@@ -1,29 +1,14 @@
 package br.ufg.inf.pes.healthhelp.model;
 
-import com.google.firebase.database.Exclude;
-
 import java.util.Date;
 
 import br.ufg.inf.pes.healthhelp.model.enums.StatusProfissional;
 
-public abstract class Profissional {
-
-    @Exclude
-    private String id;
+public abstract class Profissional extends BaseObject {
 
     private Date ultimoAcesso;
     private String profissao;
     private StatusProfissional statusProfissional;
-
-    @Exclude
-    public String getId() {
-        return id;
-    }
-
-    @Exclude
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public Date getUltimoAcesso() {
         return ultimoAcesso;
