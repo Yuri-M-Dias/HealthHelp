@@ -2,9 +2,10 @@ package br.ufg.inf.pes.healthhelp.model;
 
 import com.google.firebase.database.Exclude;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Agenda {
+public class Agenda implements Serializable {
 
 
     @Exclude
