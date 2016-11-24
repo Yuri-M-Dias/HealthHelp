@@ -2,22 +2,16 @@ package br.ufg.inf.pes.healthhelp.view.adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Filter;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.LinkedList;
 import java.util.List;
 
 import br.ufg.inf.pes.healthhelp.model.Atendimento;
-import br.ufg.inf.pes.healthhelp.model.LocalAtendimento;
 import br.ufg.pes.healthhelp.R;
 
 /**
@@ -26,8 +20,8 @@ import br.ufg.pes.healthhelp.R;
 
 public class AgendaDiariaAdapter extends ArrayAdapter<Atendimento> {
 
-    private List<Atendimento> locaisAtendimentoExibidos;
     public final SimpleDateFormat TIME_FORMATTER = new SimpleDateFormat("HH:mm");
+    private List<Atendimento> locaisAtendimentoExibidos;
 
     public AgendaDiariaAdapter(Context context, int resource, List<Atendimento> objects) {
         super(context, resource, objects);

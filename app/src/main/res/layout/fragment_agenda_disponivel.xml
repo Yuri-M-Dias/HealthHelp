@@ -7,29 +7,29 @@
     tools:context="br.ufg.inf.pes.healthhelp.view.AgendaFragment">
 
     <ProgressBar
+        android:id="@+id/carregamento_horarios_disponiveis"
         style="@android:style/Widget.Material.Light.ProgressBar.Large"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/carregamento_horarios_disponiveis" />
+        android:layout_height="wrap_content" />
 
     <TextView
-        android:text="@string/mensagem_sem_horarios_disponiveis"
+        android:id="@+id/textview_sem_horarios_disponiveis"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textview_sem_horarios_disponiveis"
-        android:textAlignment="center"
-        android:padding="@dimen/activity_vertical_margin" />
+        android:padding="@dimen/activity_vertical_margin"
+        android:text="@string/mensagem_sem_horarios_disponiveis"
+        android:textAlignment="center" />
 
     <ImageView
+        android:id="@+id/imagem_sem_horarios_disponiveis"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/sem_horario_disponivel"
-        android:id="@+id/imagem_sem_horarios_disponiveis"
+        android:contentDescription="Ícone representando a não existência de horários disponíveis para marcação de atendimentos"
         android:padding="@dimen/activity_vertical_margin"
-        android:contentDescription="Ícone representando a não existência de horários disponíveis para marcação de atendimentos" />
+        app:srcCompat="@drawable/sem_horario_disponivel" />
 
     <ListView
+        android:id="@+id/listview_horarios"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/listview_horarios" />
+        android:layout_height="match_parent" />
 </LinearLayout>

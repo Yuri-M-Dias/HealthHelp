@@ -61,7 +61,7 @@ public class AtendimentoDAO extends AbstractDAO {
                     atendimento.getHoraFimCalendar().set(Calendar.HOUR_OF_DAY, 9);
                     atendimento.getHoraFimCalendar().set(Calendar.MINUTE, 20);
 
-                    if(atendimento.mesmaDataInicio(diaOcorrencia)) {
+                    if (atendimento.mesmaDataInicio(diaOcorrencia)) {
                         atendimentos.add(atendimento);
                     }
 
@@ -76,7 +76,7 @@ public class AtendimentoDAO extends AbstractDAO {
                     atendimento.getHoraFimCalendar().set(Calendar.HOUR_OF_DAY, 16);
                     atendimento.getHoraFimCalendar().set(Calendar.MINUTE, 00);
 
-                    if(atendimento.mesmaDataInicio(diaOcorrencia)) {
+                    if (atendimento.mesmaDataInicio(diaOcorrencia)) {
                         atendimentos.add(atendimento);
                     }
 
