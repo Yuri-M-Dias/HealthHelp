@@ -26,7 +26,7 @@ import br.ufg.pes.healthhelp.R;
 public class AgendaDiariaAdapter extends ArrayAdapter<Atendimento> {
 
     private List<Atendimento> locaisAtendimentoExibidos;
-    public final SimpleDateFormat TIME_FORMATTER = new SimpleDateFormat("hh:mm a");
+    public final SimpleDateFormat TIME_FORMATTER = new SimpleDateFormat("HH:mm");
 
     public AgendaDiariaAdapter(Context context, int resource, List<Atendimento> objects) {
         super(context, resource, objects);

@@ -2,10 +2,14 @@ package br.ufg.inf.pes.healthhelp.view;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.view.menu.ActionMenuItemView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import java.text.SimpleDateFormat;
@@ -49,19 +53,32 @@ public class AgendaFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_agenda_disponivel, container, false);
-        ListView listaHorarios = (ListView) rootView.findViewById(R.id.listview_horarios);
+        LinearLayout rootView = (LinearLayout) inflater.inflate(R.layout.fragment_agenda_disponivel, container, false);
 
         data = (Calendar) getArguments().getSerializable(ARG_DATA);
         agenda = (Agenda) getArguments().getSerializable(ARG_AGENDA);
 
-        LinkedList<Atendimento> listaAtendimentos = criarListaAtendimentos(agenda);
-        Log.i("qualquer", "Tamanho da lista: " + listaAtendimentos.size());
+        final LinkedList<Atendimento> listaAtendimentos = criarListaAtendimentos(agenda);
+        if(listaAtendimentos.isEmpty()){
+            rootView.removeView(rootView.findViewById(R.id.listview_horarios));
+        } else {
+            rootView.removeView(rootView.findViewById(R.id.textview_sem_horarios_disponiveis));
+            rootView.removeView(rootView.findViewById(R.id.imagem_sem_horarios_disponiveis));
+            final AgendaDisponivelActivity agendaDisponivelActivity = ((AgendaDisponivelActivity) getActivity());
 
-        AgendaDiariaAdapter agendaDiariaAdapter = new AgendaDiariaAdapter(getActivity(), R.layout.item_atendimento, listaAtendimentos);
+            final ListView listaHorarios = (ListView) rootView.findViewById(R.id.listview_horarios);
+            listaHorarios.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    agendaDisponivelActivity.setAtendimento(listaAtendimentos.get(i));
+                    agendaDisponivelActivity.concluirSelecaoAtendimento();
+                }
+            });
 
-        listaHorarios.setAdapter(agendaDiariaAdapter);
+            AgendaDiariaAdapter agendaDiariaAdapter = new AgendaDiariaAdapter(getActivity(), R.layout.item_atendimento, listaAtendimentos);
 
+            listaHorarios.setAdapter(agendaDiariaAdapter);
+        }
         return rootView;
     }
 
