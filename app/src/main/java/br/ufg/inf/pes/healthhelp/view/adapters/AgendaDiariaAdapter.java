@@ -55,8 +55,7 @@ public class AgendaDiariaAdapter extends ArrayAdapter<Atendimento> {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("[");
         stringBuilder.append(getItem(position).getAgenda().getNome());
-        stringBuilder.append("]: ");
-        stringBuilder.append((getItem(position).getPaciente() == null)? "Disponível": "Indisponível");
+        stringBuilder.append("] ");
 
         disponibilidade.setText(stringBuilder.toString());
 
