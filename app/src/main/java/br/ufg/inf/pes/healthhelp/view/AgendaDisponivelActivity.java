@@ -44,7 +44,7 @@ public class AgendaDisponivelActivity extends AppCompatActivity {
      */
     private ViewPager mViewPager;
 
-    private Agenda agenda;
+    private List<Agenda> agendas;
 
     private Calendar dataSelecionada;
     private Atendimento atendimento;
@@ -71,7 +71,7 @@ public class AgendaDisponivelActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         //TODO: definir título da agenda.
 
-        mSectionsPagerAdapter = new PaginadorDiasAdapter(getSupportFragmentManager(), false, contexto, agenda);
+        mSectionsPagerAdapter = new PaginadorDiasAdapter(getSupportFragmentManager(), false, contexto, agendas);
 
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
@@ -92,9 +92,10 @@ public class AgendaDisponivelActivity extends AppCompatActivity {
     }
 
     private void criarAgenda() {
-        agenda = new Agenda();
+        agendas = new ArrayList<>();
+        Agenda agenda = new Agenda();
         agenda.setNome("Atendimento Geral");
-        agenda.setId("minha_id_personalizada");
+        agenda.setId("id_agenda_atendimento_geral");
         agenda.setHorariosBloqueados(new ArrayList<PeriodoTempo>());
         agenda.setTempoPadraoMinutos(20);
 
@@ -104,7 +105,7 @@ public class AgendaDisponivelActivity extends AppCompatActivity {
         periodo.setDataInicio("25/11/2016");
         periodo.setDataFim("25/12/2016");
         periodo.setHoraInicio("08:00");
-        periodo.setHoraFim("22:00");
+        periodo.setHoraFim("12:00");
         List<DayOfWeek> diasSemana = new ArrayList<>();
         diasSemana.add(DayOfWeek.MONDAY);
         diasSemana.add(DayOfWeek.TUESDAY);
@@ -125,6 +126,35 @@ public class AgendaDisponivelActivity extends AppCompatActivity {
         horariosAtendimento.add(periodo);
 
         agenda.setHorariosAtendimento(horariosAtendimento);
+
+        agendas.add(agenda);
+
+        agenda = new Agenda();
+        agenda.setNome("Cirurgias");
+        agenda.setId("id_agenda_cirurgias");
+        agenda.setHorariosBloqueados(new ArrayList<PeriodoTempo>());
+        agenda.setTempoPadraoMinutos(20);
+
+        horariosAtendimento = new ArrayList<>();
+
+        periodo = new PeriodoTempo();
+        periodo.setDataInicio("25/11/2016");
+        periodo.setDataFim("25/12/2016");
+        periodo.setHoraInicio("14:00");
+        periodo.setHoraFim("20:00");
+        diasSemana = new ArrayList<>();
+        diasSemana.add(DayOfWeek.MONDAY);
+        diasSemana.add(DayOfWeek.TUESDAY);
+        diasSemana.add(DayOfWeek.WEDNESDAY);
+        diasSemana.add(DayOfWeek.THURSDAY);
+        diasSemana.add(DayOfWeek.FRIDAY);
+        periodo.setDiasSemana(diasSemana);
+        horariosAtendimento.add(periodo);
+
+        agendas.add(agenda);
+
+        agenda.setHorariosAtendimento(horariosAtendimento);
+
     }
 
     @Override
@@ -168,7 +198,7 @@ public class AgendaDisponivelActivity extends AppCompatActivity {
                 dataSelecionada.set(Calendar.YEAR, i);
                 dataSelecionada.set(Calendar.MONTH, i1);
                 dataSelecionada.set(Calendar.DAY_OF_MONTH, i2);
-                mSectionsPagerAdapter = new PaginadorDiasAdapter(getSupportFragmentManager(), false, dataSelecionada, agenda);
+                mSectionsPagerAdapter = new PaginadorDiasAdapter(getSupportFragmentManager(), false, dataSelecionada, agendas);
                 mViewPager.setAdapter(mSectionsPagerAdapter);
                 TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
                 tabLayout.setupWithViewPager(mViewPager);

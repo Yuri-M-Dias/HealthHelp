@@ -30,10 +30,10 @@ import br.ufg.pes.healthhelp.R;
 public class AgendaFragment extends Fragment {
 
     private static final String ARG_DATA = "data";
-    private static final String ARG_AGENDA = "agenda";
+    private static final String ARG_AGENDAS = "agenda";
 
     private Calendar data;
-    private Agenda agenda;
+    private Agenda[] agendas;
 
     private AgendaDisponivelActivity agendaDisponivelActivity;
 
@@ -44,11 +44,11 @@ public class AgendaFragment extends Fragment {
      * Returns a new instance of this fragment for the given section
      * number.
      */
-    public static AgendaFragment newInstance(Calendar data, Agenda agenda) {
+    public static AgendaFragment newInstance(Calendar data, Agenda[] agendas) {
         AgendaFragment fragment = new AgendaFragment();
         Bundle args = new Bundle();
         args.putSerializable(ARG_DATA, data);
-        args.putSerializable(ARG_AGENDA, agenda);
+        args.putSerializable(ARG_AGENDAS, agendas);
         fragment.setArguments(args);
         return fragment;
     }
@@ -73,46 +73,44 @@ public class AgendaFragment extends Fragment {
         LinearLayout rootView = (LinearLayout) inflater.inflate(R.layout.fragment_agenda_disponivel, container, false);
 
         data = (Calendar) getArguments().getSerializable(ARG_DATA);
-        agenda = (Agenda) getArguments().getSerializable(ARG_AGENDA);
+        agendas = (Agenda[]) getArguments().getSerializable(ARG_AGENDAS);
 
         rootView.findViewById(R.id.listview_horarios).setVisibility(View.GONE);
+        rootView.findViewById(R.id.textview_sem_horarios_disponiveis).setVisibility(View.GONE);
+        rootView.findViewById(R.id.imagem_sem_horarios_disponiveis).setVisibility(View.GONE);
 
-        final LinkedList<Atendimento> listaAtendimentos = criarListaAtendimentos(agenda);
-        if(listaAtendimentos.isEmpty()){
-            rootView.findViewById(R.id.carregamento_horarios_disponiveis).setVisibility(View.GONE);
-        } else {
-            rootView.findViewById(R.id.textview_sem_horarios_disponiveis).setVisibility(View.GONE);
-            rootView.findViewById(R.id.imagem_sem_horarios_disponiveis).setVisibility(View.GONE);
+        agendaDisponivelActivity.getAtendimentoService().buscarAtendimentos(agendas, data);
 
-            agendaDisponivelActivity.getAtendimentoService().buscarAtendimentos(agenda, data);
-        }
         return rootView;
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onDatabaseEvent(PaginadorDiasEvent<List<Atendimento>> paginadorDiasEvent) {
-        final LinkedList<Atendimento> listaAtendimentosDisponiveis = criarListaAtendimentos(agenda);
+        final LinkedList<Atendimento> listaAtendimentosDisponiveis = criarListaAtendimentos(agendas);
         if(paginadorDiasEvent.getFiltro().equals(data)){
 
             //TODO: Implementar adição e remoção de períodos de tempo baseado nos horários bloqueados e liberados.
 
             eliminarHorariosAgendados(listaAtendimentosDisponiveis, paginadorDiasEvent.getObjeto());
 
-            final ListView listaHorarios = (ListView) getView().findViewById(R.id.listview_horarios);
-            listaHorarios.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                    agendaDisponivelActivity.setAtendimento(listaAtendimentosDisponiveis.get(i));
-                    agendaDisponivelActivity.concluirSelecaoAtendimento();
-                }
-            });
-
-            AgendaDiariaAdapter agendaDiariaAdapter = new AgendaDiariaAdapter(getActivity(), R.layout.item_atendimento, listaAtendimentosDisponiveis);
-
-            listaHorarios.setAdapter(agendaDiariaAdapter);
-
             getView().findViewById(R.id.carregamento_horarios_disponiveis).setVisibility(View.GONE);
-            listaHorarios.setVisibility(View.VISIBLE);
+            if(listaAtendimentosDisponiveis.isEmpty()) {
+                getView().findViewById(R.id.textview_sem_horarios_disponiveis).setVisibility(View.VISIBLE);
+                getView().findViewById(R.id.imagem_sem_horarios_disponiveis).setVisibility(View.VISIBLE);
+            } else {
+                AgendaDiariaAdapter agendaDiariaAdapter = new AgendaDiariaAdapter(getActivity(), R.layout.item_atendimento, listaAtendimentosDisponiveis);
+
+                final ListView listaHorarios = (ListView) getView().findViewById(R.id.listview_horarios);
+                listaHorarios.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        agendaDisponivelActivity.setAtendimento(listaAtendimentosDisponiveis.get(i));
+                        agendaDisponivelActivity.concluirSelecaoAtendimento();
+                    }
+                });
+                listaHorarios.setAdapter(agendaDiariaAdapter);
+                listaHorarios.setVisibility(View.VISIBLE);
+            }
 
         }
 
@@ -120,32 +118,34 @@ public class AgendaFragment extends Fragment {
 
     /**
      * Cria uma lista de horários disponíveis para atendimento com base nos períodos de tempo das agendas de uma atuação.
-     * @param agenda Agenda a ser utililzada para criar oa lista de atendimentos.
+     * @param agendas Agendas a serem utilizadas para criar a lista de atendimentos disponíveis.
      * @return Lista de atendimentos disponíveis para marcação.
      */
-    private LinkedList<Atendimento> criarListaAtendimentos(Agenda agenda){
+    private LinkedList<Atendimento> criarListaAtendimentos(Agenda[] agendas){
         LinkedList<Atendimento> atendimentosVazios = new LinkedList<>();
 
-        for(PeriodoTempo periodoTempo: agenda.getHorariosAtendimento()) {
-            Calendar horaInicial = (Calendar) data.clone();
+        for(Agenda agenda : agendas) {
+            for (PeriodoTempo periodoTempo : agenda.getHorariosAtendimento()) {
+                Calendar horaInicial = (Calendar) data.clone();
 
-            if(periodoTempo.getDiasSemana().contains(DayOfWeek.of(data.get(Calendar.DAY_OF_WEEK)))) {
-                for (Calendar contador = (Calendar) periodoTempo.getHoraInicioCalendar().clone();
-                     !contador.after(periodoTempo.getHoraFimCalendar());
-                     contador.add(Calendar.MINUTE, agenda.getTempoPadraoMinutos())) {
+                if (periodoTempo.getDiasSemana().contains(DayOfWeek.of(data.get(Calendar.DAY_OF_WEEK)))) {
+                    for (Calendar contador = (Calendar) periodoTempo.getHoraInicioCalendar().clone();
+                         !contador.after(periodoTempo.getHoraFimCalendar());
+                         contador.add(Calendar.MINUTE, agenda.getTempoPadraoMinutos())) {
 
-                    horaInicial.set(Calendar.HOUR_OF_DAY, contador.get(Calendar.HOUR_OF_DAY));
-                    horaInicial.set(Calendar.MINUTE, contador.get(Calendar.MINUTE));
+                        horaInicial.set(Calendar.HOUR_OF_DAY, contador.get(Calendar.HOUR_OF_DAY));
+                        horaInicial.set(Calendar.MINUTE, contador.get(Calendar.MINUTE));
 
-                    Atendimento atendimento = new Atendimento();
-                    atendimento.setAgenda(agenda);
+                        Atendimento atendimento = new Atendimento();
+                        atendimento.setAgenda(agenda);
 
-                    atendimento.setHoraInicio((Calendar) horaInicial.clone());
+                        atendimento.setHoraInicio((Calendar) horaInicial.clone());
 
-                    horaInicial.add(Calendar.MINUTE, agenda.getTempoPadraoMinutos());
-                    atendimento.setHoraFim((Calendar) horaInicial.clone());
+                        horaInicial.add(Calendar.MINUTE, agenda.getTempoPadraoMinutos());
+                        atendimento.setHoraFim((Calendar) horaInicial.clone());
 
-                    atendimentosVazios.add(atendimento);
+                        atendimentosVazios.add(atendimento);
+                    }
                 }
             }
         }

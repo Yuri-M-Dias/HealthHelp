@@ -24,7 +24,7 @@ public class AtendimentoService {
         atendimentoDAO = new AtendimentoDAO();
     }
 
-    public void buscarAtendimentos(final Agenda agenda, final Calendar diaOcorrencia) {
-        atendimentoDAO.buscarAtendimentos(agenda, diaOcorrencia);
+    public void buscarAtendimentos(Agenda[] agendas, Calendar diaOcorrencia) {
+        atendimentoDAO.buscarAtendimentos(agendas, diaOcorrencia);
     }
 }
