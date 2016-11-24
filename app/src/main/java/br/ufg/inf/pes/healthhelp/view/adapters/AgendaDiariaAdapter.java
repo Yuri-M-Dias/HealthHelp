@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -42,8 +43,8 @@ public class AgendaDiariaAdapter extends ArrayAdapter<Atendimento> {
         }
 
         TextView horarioCompletoAtendimento = (TextView) convertView.findViewById(R.id.horario_atendimento_agenda);
-        horarioCompletoAtendimento.setText(TIME_FORMATTER.format(getItem(position).getHoraInicio().getTime())
-            + "\n" + TIME_FORMATTER.format(getItem(position).getHoraFim().getTime()));
+        horarioCompletoAtendimento.setText(TIME_FORMATTER.format(getItem(position).getHoraInicioCalendar().getTime())
+            + "\n" + TIME_FORMATTER.format(getItem(position).getHoraFimCalendar().getTime()));
 
         preencherTextoDisponibilidade((TextView) convertView.findViewById(R.id.disponibilidade_item_atendimento), position);
 
