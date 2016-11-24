@@ -4,11 +4,12 @@ import android.util.Log;
 
 import com.google.firebase.database.Exclude;
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-public class Atendimento {
+public class Atendimento implements Serializable {
     public static final SimpleDateFormat DATETIME_FORMATTER = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
     @Exclude

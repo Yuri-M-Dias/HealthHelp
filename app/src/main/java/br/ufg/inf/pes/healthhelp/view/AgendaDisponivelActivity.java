@@ -1,6 +1,7 @@
 package br.ufg.inf.pes.healthhelp.view;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.database.DataSetObserver;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -29,6 +30,7 @@ import br.ufg.pes.healthhelp.R;
 public class AgendaDisponivelActivity extends AppCompatActivity {
 
     public static final String ARG_ATUACAO = "atuacao";
+    public static final String ARG_ATENDIMENTO_AGENDADO = "atendimento-agendado";
 
     private PaginadorDiasAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
@@ -176,12 +178,20 @@ public class AgendaDisponivelActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Conclui o processo de seleção de um horário de atendimento para um agendamente, enviando um valor de retorno para a classe que chamou essa classe.
+     */
     public void concluirSelecaoAtendimento(){
-        //TODO: Enviar retorno para activity que chamou essa. Referência: http://stackoverflow.com/questions/14292398/how-to-pass-data-from-2nd-activity-to-1st-activity-when-pressed-back-android
+        Intent intent = new Intent();
+        intent.putExtra(ARG_ATENDIMENTO_AGENDADO, atendimento);
+        setResult(RESULT_OK, intent);
         finish();
     }
 
 
+    /**
+     * Executa o processo de seleção de data para a marcar uma consulta através da seleção no calendário de um dia específico.
+     */
     public void definirDataBusca(){
         if (dataSelecionada == null) {
             dataSelecionada = Calendar.getInstance();
