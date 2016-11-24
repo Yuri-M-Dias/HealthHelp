@@ -5,13 +5,11 @@ import android.util.Log;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import br.ufg.inf.pes.healthhelp.model.Paciente;
@@ -102,6 +100,5 @@ public class PacienteDAO extends AbstractDAO<Paciente> {
             .setValue(novoPaciente);
         EventBus.getDefault().post(new DatabaseEvent<>("Paciente salvo"));
     }
-
 
 }
