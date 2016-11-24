@@ -42,14 +42,22 @@ public class AgendaDiariaAdapter extends ArrayAdapter<Atendimento> {
         }
 
         TextView horarioCompletoAtendimento = (TextView) convertView.findViewById(R.id.horario_atendimento_agenda);
-        TextView disponibilidade = (TextView) convertView.findViewById(R.id.disponibilidade_item_atendimento);
-
-
         horarioCompletoAtendimento.setText(TIME_FORMATTER.format(getItem(position).getHoraInicio().getTime())
             + "\n" + TIME_FORMATTER.format(getItem(position).getHoraFim().getTime()));
-        disponibilidade.setText((getItem(position).getPaciente() == null)? "Disponível": "Indisponível");
 
+        preencherTextoDisponibilidade((TextView) convertView.findViewById(R.id.disponibilidade_item_atendimento), position);
 
         return convertView;
+    }
+
+    private void preencherTextoDisponibilidade(TextView disponibilidade, int position) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("[");
+        stringBuilder.append(getItem(position).getAgenda().getNome());
+        stringBuilder.append("]: ");
+        stringBuilder.append((getItem(position).getPaciente() == null)? "Disponível": "Indisponível");
+
+        disponibilidade.setText(stringBuilder.toString());
+
     }
 }
