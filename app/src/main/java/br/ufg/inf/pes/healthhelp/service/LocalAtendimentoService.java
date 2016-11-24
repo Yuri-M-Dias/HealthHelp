@@ -1,45 +1,28 @@
 package br.ufg.inf.pes.healthhelp.service;
 
-import android.content.Context;
-import android.util.Log;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import br.ufg.inf.pes.healthhelp.view.LocaisAtendimentoActivity;
 import br.ufg.inf.pes.healthhelp.dao.LocalAtendimentoDAO;
 import br.ufg.inf.pes.healthhelp.model.LocalAtendimento;
 
 /**
- * Created by deassisrosal on 10/6/16.
+ * Esta classe é responsável por prover serviços relacionados a um {@link LocalAtendimento}.
  */
-
 public class LocalAtendimentoService {
-    private LocalAtendimentoDAO localAtendimentoDAO;
-    private LocaisAtendimentoActivity locaisAtendimentoActivity;
-
     private static final String TAG = "LocalAtendimentoService";
+    private LocalAtendimentoDAO localAtendimentoDAO;
 
-    public LocalAtendimentoService(LocaisAtendimentoActivity locaisAtendimentoActivity) {
-        this.localAtendimentoDAO = new LocalAtendimentoDAO(this);
-        this.locaisAtendimentoActivity = locaisAtendimentoActivity;
+    public LocalAtendimentoService() {
+        localAtendimentoDAO = new LocalAtendimentoDAO();
     }
 
-    public void configuralocaisAtendimento(Context context) {
-
+    public void solicitarListaLocaisAtendimento() {
+        localAtendimentoDAO.buscarTodos();
     }
 
-    /**
-     * disparado pelo onStateChanged do firebase após uma requisição por dados no firebase é feita
-     * @param locaisAtendimento
-     */
-    public void receberLocaisAtendimento(List<LocalAtendimento> locaisAtendimento) {
-        if( locaisAtendimento != null) {
-            locaisAtendimentoActivity.carregar(locaisAtendimento);
-        }
-        else{
-            Log.e(TAG, "obterLocaisAtendimento: locais não obtidos: localAtendimentos: " + locaisAtendimento);
-            locaisAtendimentoActivity.carregar(new ArrayList<LocalAtendimento>());
+    public void salvar(LocalAtendimento localAtendimento) {
+        if (localAtendimento.getId() == null) {
+            localAtendimentoDAO.inserir(localAtendimento);
+        } else {
+            localAtendimentoDAO.atualizar(localAtendimento);
         }
     }
 }

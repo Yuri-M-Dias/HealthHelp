@@ -2,111 +2,104 @@ package br.ufg.inf.pes.healthhelp.dao;
 
 import android.util.Log;
 
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 import br.ufg.inf.pes.healthhelp.model.LocalAtendimento;
-import br.ufg.inf.pes.healthhelp.model.PeriodoTempo;
-import br.ufg.inf.pes.healthhelp.service.LocalAtendimentoService;
+import br.ufg.inf.pes.healthhelp.model.event.DatabaseEvent;
 
-/**
- * Created by deassisrosal on 9/29/16.
- */
-public class LocalAtendimentoDAO {
+public class LocalAtendimentoDAO extends AbstractDAO<LocalAtendimento> {
 
-    private DatabaseReference mFirebaseDatabaseReference;
-
-    private static final String TAG = "LocalAtendimentoDao";
-    private static final String HEALTHHELP_CHILD = "localAtendimento";
-    private List<LocalAtendimento> mLocaisAtendimento;
-    private LocalAtendimentoService mLocalAtendimentoService;
-
-    public List<LocalAtendimento> getmLocaisAtendimento() {
-        return mLocaisAtendimento;
+    public LocalAtendimentoDAO() {
+        super(LocalAtendimentoDAO.class.getCanonicalName(), "localAtendimento");
     }
 
-    public void setmLocaisAtendimento(List<LocalAtendimento> mLocaisAtendimento) {
-        this.mLocaisAtendimento = mLocaisAtendimento;
-    }
-
-    public LocalAtendimentoDAO(LocalAtendimentoService localAtendimentoService ) {
-        mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
-        mLocalAtendimentoService = localAtendimentoService;
-        mLocaisAtendimento = new ArrayList<>();
-        carregarLocaisAtendimento(mFirebaseDatabaseReference);
-        // mock do primeiro registro de horariosAtendimento de um local
-       /* ArrayList<PeriodoTempo> horarios = new ArrayList<>();
-        Calendar cal = new GregorianCalendar();
-
-        cal.set(Calendar.YEAR, 2016);
-        cal.set(Calendar.MONTH, 8);
-        cal.set(Calendar.DAY_OF_YEAR, 26);
-
-        horarios.add(
-                new PeriodoTempo(
-                        "8",
-                        "22",
-                        cal.getTime(),
-                        cal.getTime(),
-                        "23456"
-                )
-        );*/
-        //inserindo mock de primeiro localAtendimento
-        //criarLocalAtendimento(mFirebaseDatabaseReference, new LocalAtendimento("Hospital Santa Cecília", "Avenida T63", "62934012231", horarios));
-
-
-    }
-
-    public void criarLocalAtendimento(DatabaseReference mFirebaseDatabaseReference, LocalAtendimento localAtendimento) {
-        //TODO: pegar o id do novo local atraves do ultimo id registrado do banco de dados?
-        //String idLocal = "0";
-
-        mFirebaseDatabaseReference.child(HEALTHHELP_CHILD).setValue(localAtendimento);
-    }
-
-    private void carregarLocaisAtendimento(DatabaseReference mFirebaseDatabaseReference) {
-        Log.w(TAG,"carregarLocaisAtendimento aberto. ");
-        DatabaseReference locaisAtendimentoDatabaseReference = mFirebaseDatabaseReference.child(HEALTHHELP_CHILD);
-
-
-        mFirebaseDatabaseReference.child(HEALTHHELP_CHILD).addChildEventListener(
-                new ChildEventListener() {
-                    @Override
-                    public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                        mLocaisAtendimento.add(dataSnapshot.getValue(LocalAtendimento.class));
-                        Log.w(TAG,"os locais cadastrados sao: " + mLocaisAtendimento);
-                        mLocalAtendimentoService.receberLocaisAtendimento(mLocaisAtendimento);
-                    }
+    @Override
+    public void buscarTodos() {
+        getDatabaseReference()
+            .child(DATABASE_CHILD)
+            .addListenerForSingleValueEvent(
+                new ValueEventListener() {
+                    List<LocalAtendimento> locaisAtendimento = new ArrayList<>();
 
                     @Override
-                    public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        Log.w(TAG, "buscarTodos.addValueListener: OnDataChange: Quantidade: " + dataSnapshot.getChildrenCount());
 
+                        for (DataSnapshot localSnapshot : dataSnapshot.getChildren()) {
+                            LocalAtendimento localAtendimentoRecebido = localSnapshot.getValue(LocalAtendimento.class);
+                            localAtendimentoRecebido.setId(localSnapshot.getKey());
+                            locaisAtendimento.add(localAtendimentoRecebido);
+                            Log.w(TAG, "Obtido: " + locaisAtendimento.get(locaisAtendimento.size() - 1).getId());
+                        }
+
+                        EventBus.getDefault().post(new DatabaseEvent<>(locaisAtendimento));
                     }
 
-                    @Override
-                    public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-                    }
-
-                    @Override
-                    public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-                    }
 
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
-                        Log.e(TAG, "carregarLocaisAtendimento: onCancelled", databaseError.toException());
-                        mLocalAtendimentoService.receberLocaisAtendimento(null);
+                        Log.e(TAG, "buscarTodos.setValueListener: onCancelled:", databaseError.toException());
+                        throw databaseError.toException();
                     }
-                });
+                }
+            );
+
+
     }
+
+    @Override
+    public void buscarPelaId(String id) {
+        getDatabaseReference()
+            .child(DATABASE_CHILD).child(id)
+            .addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    LocalAtendimento localEncontrado = dataSnapshot.getValue(LocalAtendimento.class);
+                    Log.w(TAG, "buscaPorNome.OnDataChange: o local encontrado foi: " +
+                        localEncontrado.getNome());
+                    EventBus.getDefault().post(localEncontrado);
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    Log.e(TAG, "buscaPorNome: onCancelled:", databaseError.toException());
+                    throw databaseError.toException();
+                }
+            });
+    }
+
+    @Override
+    public void inserir(LocalAtendimento localAtendimento) {
+        DatabaseReference registroLocalAtendimento = getDatabaseReference().child(DATABASE_CHILD).push();
+        Log.i(TAG, "Chave do novo local de atendimento: " + registroLocalAtendimento);
+        registroLocalAtendimento.setValue(localAtendimento);
+        localAtendimento.setId(registroLocalAtendimento.getKey());
+        EventBus.getDefault().post(new DatabaseEvent<>("Local de atendimento salvo"));
+    }
+
+    @Override
+    public void remover(LocalAtendimento localAtendimentoRemover) {
+        getDatabaseReference()
+            .child(DATABASE_CHILD)
+            .child(String.valueOf(localAtendimentoRemover.getId()))
+            .removeValue();
+    }
+
+    @Override
+    public void atualizar(LocalAtendimento novoLocalAtendimento) {
+        getDatabaseReference()
+            .child(DATABASE_CHILD)
+            .child(novoLocalAtendimento.getId())
+            .setValue(novoLocalAtendimento);
+        EventBus.getDefault().post(new DatabaseEvent<>("Local de atendimento salvo"));
+    }
+
 }

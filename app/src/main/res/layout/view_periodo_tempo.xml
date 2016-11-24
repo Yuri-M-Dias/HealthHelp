@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/md_button_frame_vertical_padding"
+    android:background="@drawable/borda_periodo_tempo"
+    android:orientation="vertical"
+    tools:context="br.ufg.inf.pes.healthhelp.view.FormularioLocalAtendimentoActivity">
+
+    <LinearLayout
+        android:id="@+id/container_dias_semana"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <ToggleButton
+            android:id="@+id/botao_domingo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/botao_domingo"
+            android:textOff="@string/botao_domingo"
+            android:textOn="@string/botao_domingo" />
+
+        <ToggleButton
+            android:id="@+id/botao_segunda"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/botao_segunda"
+            android:textOff="@string/botao_segunda"
+            android:textOn="@string/botao_segunda" />
+
+        <ToggleButton
+            android:id="@+id/botao_terca"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/botao_terca"
+            android:textOff="@string/botao_terca"
+            android:textOn="@string/botao_terca" />
+
+        <ToggleButton
+            android:id="@+id/botao_quarta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/botao_quarta"
+            android:textOff="@string/botao_quarta"
+            android:textOn="@string/botao_quarta" />
+
+        <ToggleButton
+            android:id="@+id/botao_quinta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/botao_quinta"
+            android:textOff="@string/botao_quinta"
+            android:textOn="@string/botao_quinta" />
+
+        <ToggleButton
+            android:id="@+id/botao_sexta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/botao_sexta"
+            android:textOff="@string/botao_sexta"
+            android:textOn="@string/botao_sexta" />
+
+        <ToggleButton
+            android:id="@+id/botao_sabado"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/botao_sabado"
+            android:textOff="@string/botao_sabado"
+            android:textOn="@string/botao_sabado" />
+
+        <ImageButton
+            android:id="@+id/botao_remover_horario_atendimento"
+            android:layout_width="@dimen/md_button_height"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/excluir_periodo_tempo"
+            android:tint="@color/md_edittext_error"
+            app:srcCompat="@android:drawable/ic_menu_close_clear_cancel" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0"
+            android:gravity="center"
+            android:paddingLeft="@dimen/md_button_frame_vertical_padding"
+            android:paddingRight="@dimen/md_button_frame_vertical_padding"
+            android:text="@string/label_periodo_tempo_de" />
+
+        <Button
+            android:id="@+id/botao_data_inicio"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:text="@string/data_inicial" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0"
+            android:gravity="center"
+            android:paddingLeft="@dimen/md_button_frame_vertical_padding"
+            android:paddingRight="@dimen/md_button_frame_vertical_padding"
+            android:text="@string/label_periodo_tempo_aas" />
+
+        <Button
+            android:id="@+id/botao_hora_inicio"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:text="@string/label_periodo_tempo_hora_inicial" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:paddingLeft="@dimen/md_button_frame_vertical_padding"
+            android:paddingRight="@dimen/md_button_frame_vertical_padding"
+            android:text="@string/label_periodo_tempo_a" />
+
+        <Button
+            android:id="@+id/botao_data_final"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:text="@string/data_final" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0"
+            android:gravity="center"
+            android:paddingLeft="@dimen/md_button_frame_vertical_padding"
+            android:paddingRight="@dimen/md_button_frame_vertical_padding"
+            android:text="@string/label_periodo_tempo_aas" />
+
+        <Button
+            android:id="@+id/botao_hora_final"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:text="@string/label_periodo_tempo_hora_final" />
+
+    </LinearLayout>
+
+</LinearLayout>
