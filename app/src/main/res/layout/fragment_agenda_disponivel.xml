@@ -6,6 +6,12 @@
     android:orientation="vertical"
     tools:context="br.ufg.inf.pes.healthhelp.view.AgendaFragment">
 
+    <ProgressBar
+        style="@android:style/Widget.Material.Light.ProgressBar.Large"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/carregamento_horarios_disponiveis" />
+
     <TextView
         android:text="@string/mensagem_sem_horarios_disponiveis"
         android:layout_width="match_parent"

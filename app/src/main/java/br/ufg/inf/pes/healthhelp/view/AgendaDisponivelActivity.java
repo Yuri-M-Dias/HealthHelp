@@ -23,6 +23,7 @@ import br.ufg.inf.pes.healthhelp.model.Agenda;
 import br.ufg.inf.pes.healthhelp.model.Atendimento;
 import br.ufg.inf.pes.healthhelp.model.PeriodoTempo;
 import br.ufg.inf.pes.healthhelp.model.enums.DayOfWeek;
+import br.ufg.inf.pes.healthhelp.service.AtendimentoService;
 import br.ufg.inf.pes.healthhelp.view.adapters.PaginadorDiasAdapter;
 import br.ufg.pes.healthhelp.R;
 
@@ -47,9 +48,14 @@ public class AgendaDisponivelActivity extends AppCompatActivity {
 
     private Calendar dataSelecionada;
     private Atendimento atendimento;
+    private AtendimentoService atendimentoService;
 
     public void setAtendimento(Atendimento atendimento) {
         this.atendimento = atendimento;
+    }
+
+    public AtendimentoService getAtendimentoService() {
+        return atendimentoService;
     }
 
     @Override
@@ -57,7 +63,7 @@ public class AgendaDisponivelActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Calendar contexto = Calendar.getInstance();
         criarAgenda();
-
+        atendimentoService = new AtendimentoService();
         setContentView(R.layout.activity_agenda_disponivel);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
