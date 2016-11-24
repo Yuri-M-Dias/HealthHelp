@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.LinkedList;
+import java.util.List;
 
 import br.ufg.inf.pes.healthhelp.model.Agenda;
 import br.ufg.inf.pes.healthhelp.view.AgendaFragment;
@@ -28,12 +29,12 @@ public class PaginadorDiasAdapter extends FragmentStatePagerAdapter {
     private final int numeroAbasAAdicionar = 7;
     private Calendar dataMudanca;
     private boolean precisaNovoCarregamento = false;
-    private Agenda agenda;
+    private List<Agenda> agendas;
 
-    public PaginadorDiasAdapter(FragmentManager fm, boolean permiteVerPassado, Calendar contextoTemporal, Agenda agenda) {
+    public PaginadorDiasAdapter(FragmentManager fm, boolean permiteVerPassado, Calendar contextoTemporal, List<Agenda> agendas) {
         super(fm);
         this.permiteVerPassado = permiteVerPassado;
-        this.agenda = agenda;
+        this.agendas = agendas;
         construirIntervaloVisualizacao(contextoTemporal);
     }
 
@@ -149,7 +150,7 @@ public class PaginadorDiasAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        return AgendaFragment.newInstance(intervaloVisualizacao.get(position), agenda);
+        return AgendaFragment.newInstance(intervaloVisualizacao.get(position), agendas.toArray(new Agenda[agendas.size()]));
     }
 
     @Override
