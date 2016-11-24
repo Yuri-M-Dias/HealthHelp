@@ -92,10 +92,10 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="right"
                             android:layout_marginRight="@dimen/margin_button_right"
-                            android:background="@color/icons"
+                            android:background="@color/accent"
                             android:onClick="agendarVisitaMedica"
                             android:text="@string/button_cards_Agendar"
-                            android:textColor="@color/accent" />
+                            android:textColor="@color/icons" />
                     </LinearLayout>
 
                 </LinearLayout>
