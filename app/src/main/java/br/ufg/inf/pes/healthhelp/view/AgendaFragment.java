@@ -3,10 +3,7 @@ package br.ufg.inf.pes.healthhelp.view;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.view.menu.ActionMenuItemView;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -17,9 +14,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
@@ -28,14 +23,10 @@ import br.ufg.inf.pes.healthhelp.model.Agenda;
 import br.ufg.inf.pes.healthhelp.model.Atendimento;
 import br.ufg.inf.pes.healthhelp.model.PeriodoTempo;
 import br.ufg.inf.pes.healthhelp.model.enums.DayOfWeek;
-import br.ufg.inf.pes.healthhelp.model.event.AtendimentoEvent;
-import br.ufg.inf.pes.healthhelp.model.event.DatabaseEvent;
+import br.ufg.inf.pes.healthhelp.model.event.PaginadorDiasEvent;
 import br.ufg.inf.pes.healthhelp.view.adapters.AgendaDiariaAdapter;
 import br.ufg.pes.healthhelp.R;
 
-/**
- * A placeholder fragment containing a simple view.
- */
 public class AgendaFragment extends Fragment {
 
     private static final String ARG_DATA = "data";
@@ -99,25 +90,15 @@ public class AgendaFragment extends Fragment {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onDatabaseEvent(AtendimentoEvent<List<Atendimento>> atendimentosMarcados) {
+    public void onDatabaseEvent(PaginadorDiasEvent<List<Atendimento>> paginadorDiasEvent) {
         final LinkedList<Atendimento> listaAtendimentosDisponiveis = criarListaAtendimentos(agenda);
-        if(atendimentosMarcados.getDiaOcorrencia().equals(data)){
+        if(paginadorDiasEvent.getFiltro().equals(data)){
 
-            List<Atendimento> atendimentosARemover = new ArrayList<>();
-            for(Atendimento atendimentoMarcado: atendimentosMarcados.getObjeto()) {
-                for (Atendimento atendimentoDisponivel : listaAtendimentosDisponiveis) {
-                    if(atendimentoMarcado.getHoraInicio().equals(atendimentoDisponivel.getHoraInicio())){
-                        atendimentosARemover.add(atendimentoDisponivel);
-                    }
-                }
-            }
+            //TODO: Implementar adição e remoção de períodos de tempo baseado nos horários bloqueados e liberados.
 
-            for(Atendimento atendimentoARemover : atendimentosARemover) {
-                listaAtendimentosDisponiveis.remove(atendimentoARemover);
-            }
+            eliminarHorariosAgendados(listaAtendimentosDisponiveis, paginadorDiasEvent.getObjeto());
 
             final ListView listaHorarios = (ListView) getView().findViewById(R.id.listview_horarios);
-            //final ListView listaHorarios = new ListView(getActivity());
             listaHorarios.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -137,6 +118,11 @@ public class AgendaFragment extends Fragment {
 
     }
 
+    /**
+     * Cria uma lista de horários disponíveis para atendimento com base nos períodos de tempo das agendas de uma atuação.
+     * @param agenda Agenda a ser utililzada para criar oa lista de atendimentos.
+     * @return Lista de atendimentos disponíveis para marcação.
+     */
     private LinkedList<Atendimento> criarListaAtendimentos(Agenda agenda){
         LinkedList<Atendimento> atendimentosVazios = new LinkedList<>();
 
@@ -165,4 +151,25 @@ public class AgendaFragment extends Fragment {
         }
         return atendimentosVazios;
     }
+
+    /**
+     * Elimina dos horários de atendimento que estão disponíveis, os horários de atendimento que já tem atendimentos marcados pra eles.
+     * @param atendimentosDisponiveis Lista de atendimentos com horário disponível a ser modificada.
+     * @param atendimentosAgendados Lista de atendimentos já marcados.
+     */
+    private void eliminarHorariosAgendados(List<Atendimento> atendimentosDisponiveis, List<Atendimento> atendimentosAgendados) {
+        List<Atendimento> atendimentosARemover = new ArrayList<>();
+        for(Atendimento atendimentoMarcado: atendimentosAgendados) {
+            for (Atendimento atendimentoDisponivel : atendimentosDisponiveis) {
+                if(atendimentoMarcado.getHoraInicio().equals(atendimentoDisponivel.getHoraInicio())){
+                    atendimentosARemover.add(atendimentoDisponivel);
+                }
+            }
+        }
+
+        for(Atendimento atendimentoARemover : atendimentosARemover) {
+            atendimentosDisponiveis.remove(atendimentoARemover);
+        }
+    }
+
 }
