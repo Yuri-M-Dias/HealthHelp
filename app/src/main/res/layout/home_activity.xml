@@ -57,7 +57,7 @@
                         android:layout_marginBottom="@dimen/margin_image_bottom"
                         android:layout_marginLeft="@dimen/margin_image_left"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/maps_icone" />
+                        android:src="@drawable/consulta_azul" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -128,7 +128,7 @@
                         android:layout_height="@dimen/height_image_card"
                         android:layout_marginLeft="@dimen/margin_image_left"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/maps_icone" />
+                        android:src="@drawable/agenda_azul" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -184,7 +184,7 @@
                         android:layout_height="@dimen/height_image_card"
                         android:layout_marginLeft="@dimen/margin_image_left"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/maps_icone" />
+                        android:src="@drawable/atuacao_vermelho" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -240,7 +240,7 @@
                         android:layout_height="@dimen/height_image_card"
                         android:layout_marginLeft="@dimen/margin_image_left"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/maps_icone" />
+                        android:src="@drawable/local_atendimento_azul" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
