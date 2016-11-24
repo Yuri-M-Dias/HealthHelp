@@ -12,6 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.LinkedList;
 
+import br.ufg.inf.pes.healthhelp.model.Agenda;
 import br.ufg.inf.pes.healthhelp.view.AgendaFragment;
 
 /**
@@ -27,10 +28,12 @@ public class PaginadorDiasAdapter extends FragmentStatePagerAdapter {
     private final int numeroAbasAAdicionar = 7;
     private Calendar dataMudanca;
     private boolean precisaNovoCarregamento = false;
+    private Agenda agenda;
 
-    public PaginadorDiasAdapter(FragmentManager fm, boolean permiteVerPassado, Calendar contextoTemporal) {
+    public PaginadorDiasAdapter(FragmentManager fm, boolean permiteVerPassado, Calendar contextoTemporal, Agenda agenda) {
         super(fm);
         this.permiteVerPassado = permiteVerPassado;
+        this.agenda = agenda;
         construirIntervaloVisualizacao(contextoTemporal);
     }
 
@@ -102,50 +105,22 @@ public class PaginadorDiasAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public void finishUpdate(ViewGroup container) {
-        Log.i(TAG, "Updating 1");
         super.finishUpdate(container);
-        Log.i(TAG, "Updating 2");
         if(precisaNovoCarregamento) {
             precisaNovoCarregamento = false;
-            Log.i(TAG, "Precisa de carregamento");
             ViewPager viewPager = (ViewPager) container;
             viewPager.getCurrentItem();
             int currentItem = ((ViewPager) container).getCurrentItem();
-            Log.i(TAG, "Item atual = " + currentItem);
             dataMudanca = intervaloVisualizacao.get(currentItem);
             if(carregarNovasDatas(currentItem)){
-                Log.i(TAG, "Notificando a galera");
                 notifyDataSetChanged();
             }
-            /*
-            if(currentItem >= intervaloVisualizacao.size() - 2){
-                Log.i(TAG, "Adicionando abas ao futuro");
-                dataMudanca = intervaloVisualizacao.get(currentItem);
-                Calendar ultimaData = (Calendar) intervaloVisualizacao.getLast().clone();
-                for (int contadorPosicao = 0; contadorPosicao < numeroAbasAAdicionar; contadorPosicao++) {
-                    ultimaData.add(Calendar.DAY_OF_MONTH, 1);
-                    intervaloVisualizacao.addLast((Calendar) ultimaData.clone());
-                }
-                Log.i(TAG, "Notificando a galera");
-                notifyDataSetChanged();
-            } else if (currentItem < 1) {
-                Log.i(TAG, "Adicionando abas ao passado");
-                dataMudanca = intervaloVisualizacao.get(posicaoRequisitada + 1);
-                Calendar primeiraData = (Calendar) intervaloVisualizacao.getFirst().clone();
-                for (int contadorPosicao = 0; contadorPosicao < numeroAbasAAdicionar; contadorPosicao++) {
-                    primeiraData.add(Calendar.DAY_OF_MONTH, -1);
-                    intervaloVisualizacao.addFirst((Calendar) primeiraData.clone());
-                }
-                Log.i(TAG, "Notificando a galera");
-                notifyDataSetChanged();
-            }*/
         }
     }
 
     private boolean carregarNovasDatas(int indiceDataAtual){
         boolean resultado;
         if(indiceDataAtual >= intervaloVisualizacao.size() - 2){
-            Log.i(TAG, "Adicionando abas ao futuro");
             Calendar ultimaData = (Calendar) intervaloVisualizacao.getLast().clone();
             for (int contadorPosicao = 0; contadorPosicao < numeroAbasAAdicionar; contadorPosicao++) {
                 ultimaData.add(Calendar.DAY_OF_MONTH, 1);
@@ -153,7 +128,6 @@ public class PaginadorDiasAdapter extends FragmentStatePagerAdapter {
             }
             resultado = true;
         } else if (indiceDataAtual < 1) {
-            Log.i(TAG, "Adicionando abas ao passado");
             Calendar primeiraData = (Calendar) intervaloVisualizacao.getFirst().clone();
             for (int contadorPosicao = 0; contadorPosicao < numeroAbasAAdicionar; contadorPosicao++) {
                 primeiraData.add(Calendar.DAY_OF_MONTH, -1);
@@ -175,7 +149,7 @@ public class PaginadorDiasAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        return AgendaFragment.newInstance(intervaloVisualizacao.get(position));
+        return AgendaFragment.newInstance(intervaloVisualizacao.get(position), agenda);
     }
 
     @Override

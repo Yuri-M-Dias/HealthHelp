@@ -54,7 +54,8 @@ public class AgendaDisponivelActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         Calendar contexto = Calendar.getInstance();
-        mSectionsPagerAdapter = new PaginadorDiasAdapter(getSupportFragmentManager(), false, contexto);
+        criarAgenda();
+        mSectionsPagerAdapter = new PaginadorDiasAdapter(getSupportFragmentManager(), false, contexto, agenda);
 
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
@@ -72,7 +73,6 @@ public class AgendaDisponivelActivity extends AppCompatActivity {
                 mViewPager.setCurrentItem(novaPosicao);
             }
         });
-        criarAgenda();
 
     }
 
@@ -89,7 +89,7 @@ public class AgendaDisponivelActivity extends AppCompatActivity {
         periodo.setDataInicio("25/11/2016");
         periodo.setDataFim("25/12/2016");
         periodo.setHoraInicio("08:00");
-        periodo.setHoraInicio("22:00");
+        periodo.setHoraFim("22:00");
         List<DayOfWeek> diasSemana = new ArrayList<>();
         diasSemana.add(DayOfWeek.MONDAY);
         diasSemana.add(DayOfWeek.TUESDAY);
@@ -103,9 +103,10 @@ public class AgendaDisponivelActivity extends AppCompatActivity {
         periodo.setDataInicio("25/11/2016");
         periodo.setDataFim("25/12/2016");
         periodo.setHoraInicio("10:00");
-        periodo.setHoraInicio("16:00");
+        periodo.setHoraFim("16:00");
         diasSemana = new ArrayList<>();
         diasSemana.add(DayOfWeek.SATURDAY);
+        periodo.setDiasSemana(diasSemana);
         horariosAtendimento.add(periodo);
 
         agenda.setHorariosAtendimento(horariosAtendimento);
@@ -147,7 +148,7 @@ public class AgendaDisponivelActivity extends AppCompatActivity {
                 dataSelecionada.set(Calendar.YEAR, i);
                 dataSelecionada.set(Calendar.MONTH, i1);
                 dataSelecionada.set(Calendar.DAY_OF_MONTH, i2);
-                mSectionsPagerAdapter = new PaginadorDiasAdapter(getSupportFragmentManager(), false, dataSelecionada);
+                mSectionsPagerAdapter = new PaginadorDiasAdapter(getSupportFragmentManager(), false, dataSelecionada, agenda);
                 mViewPager.setAdapter(mSectionsPagerAdapter);
                 TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
                 tabLayout.setupWithViewPager(mViewPager);
