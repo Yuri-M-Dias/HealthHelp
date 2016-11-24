@@ -90,6 +90,7 @@
                             android:id="@+id/button"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_top_button"
                             android:layout_gravity="right"
                             android:layout_marginRight="@dimen/margin_button_right"
                             android:background="@color/accent"

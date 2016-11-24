@@ -22,7 +22,7 @@
     <dimen name="space_margin_cards">10dp</dimen>
     <dimen name="space_cards">4dp</dimen>
     <dimen name="height_image_card">130dp</dimen>
-    <dimen name="height_card_medic">230dp</dimen>
+    <dimen name="height_card_medic">215dp</dimen>
     <dimen name="height_card_defaut">170dp</dimen>
     <dimen name="padding_top_textcard">10dp</dimen>
     <dimen name="padding_top_textcard_default">24dp</dimen>
@@ -30,5 +30,6 @@
     <dimen name="margin_button_right">16dp</dimen>
     <dimen name="card_elevation">2dp</dimen>
     <dimen name="margin_image_bottom">20dp</dimen>
+    <dimen name="margin_top_button">10dp</dimen>
 
 </resources>
