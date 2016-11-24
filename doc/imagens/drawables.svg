@@ -29,17 +29,17 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="2.8284271"
-     inkscape:cx="130.94065"
-     inkscape:cy="144.83089"
+     inkscape:cx="504.64659"
+     inkscape:cy="356.96292"
      inkscape:document-units="px"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="g5336-9-2"
      showgrid="false"
      inkscape:object-nodes="false"
      showguides="true"
      inkscape:guide-bbox="true"
      inkscape:window-width="1920"
      inkscape:window-height="1056"
-     inkscape:window-x="0"
+     inkscape:window-x="1920"
      inkscape:window-y="24"
      inkscape:window-maximized="1"
      inkscape:object-paths="true"
@@ -1309,6 +1309,80 @@
              id="path5197-6-5-6"
              style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
         </g>
+      </g>
+    </g>
+    <g
+       id="g5336-9-2"
+       transform="translate(211.59931,-96.893138)"
+       inkscape:export-filename="/home/cleber/git/HealthHelp/app/src/main/res/drawable/agenda_azul.png"
+       inkscape:export-xdpi="149.625"
+       inkscape:export-ydpi="149.625">
+      <g
+         id="g5951-9"
+         style="fill:#bdbdbd;fill-opacity:1"
+         inkscape:export-filename="/home/cleber/git/HealthHelp/app/src/main/res/drawable/sem_horario_disponivel.png"
+         inkscape:export-xdpi="150"
+         inkscape:export-ydpi="150">
+        <rect
+           style="opacity:1;fill:#bdbdbd;fill-opacity:1;stroke:none;stroke-width:10;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           id="rect4739-3-1"
+           width="10"
+           height="15.733149"
+           x="390.24652"
+           y="881.36218"
+           ry="2.2379999" />
+        <rect
+           style="opacity:1;fill:#bdbdbd;fill-opacity:1;stroke:none;stroke-width:10;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           id="rect4739-1-0-2"
+           width="10"
+           height="15.733149"
+           x="428.25351"
+           y="881.36218"
+           ry="2.2379999" />
+        <rect
+           style="opacity:1;fill:#bdbdbd;fill-opacity:1;stroke:none;stroke-width:1.43851948;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           id="rect4195-9-30-7"
+           width="80"
+           height="70"
+           x="374.25"
+           y="891.36218"
+           ry="2.2378337" />
+      </g>
+      <rect
+         ry="2.2378337"
+         y="906.36218"
+         x="384.25"
+         height="45"
+         width="60"
+         id="rect4195-9-3-2-0"
+         style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1.43851948;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         style="opacity:1;fill:#bdbdbd;fill-opacity:1;stroke:none;stroke-width:10;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m 435.17578,922.25391 c -1.23985,0 -2.23828,0.99843 -2.23828,2.23828 l 0,15.52343 c 0,1.23986 0.99843,2.23829 2.23828,2.23829 l 20.52344,0 c 1.23985,0 2.23828,-0.99843 2.23828,-2.23829 l 0,-15.52343 c 0,-1.23985 -0.99843,-2.23828 -2.23828,-2.23828 l -20.52344,0 z m 7.5,5 5.52344,0 c 1.23985,0 2.23828,0.99843 2.23828,2.23828 l 0,5.52343 c 0,1.23986 -0.99843,2.23829 -2.23828,2.23829 l -5.52344,0 c -1.23985,0 -2.23828,-0.99843 -2.23828,-2.23829 l 0,-5.52343 c 0,-1.23985 0.99843,-2.23828 2.23828,-2.23828 z"
+         id="rect4739-9-4-9"
+         transform="translate(-17.599304,4.893141)" />
+      <g
+         id="g4214-0-3-6"
+         transform="matrix(0.71606535,-0.71606535,0.71606535,0.71606535,-54.929864,577.32163)"
+         style="fill:#f44336;fill-opacity:1">
+        <rect
+           ry="2.4530001"
+           y="550.57648"
+           x="74.64286"
+           height="45"
+           width="15"
+           id="rect4178-9-8-2"
+           style="opacity:1;fill:#f44336;fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+        <rect
+           ry="2.4530001"
+           transform="matrix(0,1,-1,0,0,0)"
+           y="-104.64286"
+           x="565.57648"
+           height="45"
+           width="15"
+           id="rect4178-3-3-6-6"
+           style="opacity:1;fill:#f44336;fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
       </g>
     </g>
   </g>

@@ -1,15 +1,29 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="br.ufg.inf.pes.healthhelp.view.AgendaFragment">
 
+    <TextView
+        android:text="@string/mensagem_sem_horarios_disponiveis"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textview_sem_horarios_disponiveis"
+        android:textAlignment="center"
+        android:padding="@dimen/activity_vertical_margin" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/sem_horario_disponivel"
+        android:id="@+id/imagem_sem_horarios_disponiveis"
+        android:padding="@dimen/activity_vertical_margin"
+        android:contentDescription="Ícone representando a não existência de horários disponíveis para marcação de atendimentos" />
+
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
         android:id="@+id/listview_horarios" />
 </LinearLayout>

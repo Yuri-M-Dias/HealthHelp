@@ -1,6 +1,7 @@
 package br.ufg.inf.pes.healthhelp.view;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.database.DataSetObserver;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -19,6 +20,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import br.ufg.inf.pes.healthhelp.model.Agenda;
+import br.ufg.inf.pes.healthhelp.model.Atendimento;
 import br.ufg.inf.pes.healthhelp.model.PeriodoTempo;
 import br.ufg.inf.pes.healthhelp.model.enums.DayOfWeek;
 import br.ufg.inf.pes.healthhelp.view.adapters.PaginadorDiasAdapter;
@@ -44,20 +46,27 @@ public class AgendaDisponivelActivity extends AppCompatActivity {
     private Agenda agenda;
 
     private Calendar dataSelecionada;
+    private Atendimento atendimento;
+
+    public void setAtendimento(Atendimento atendimento) {
+        this.atendimento = atendimento;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Calendar contexto = Calendar.getInstance();
+        criarAgenda();
+
         setContentView(R.layout.activity_agenda_disponivel);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //TODO: definir título da agenda.
 
-        Calendar contexto = Calendar.getInstance();
-        criarAgenda();
         mSectionsPagerAdapter = new PaginadorDiasAdapter(getSupportFragmentManager(), false, contexto, agenda);
 
-        // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
@@ -115,26 +124,31 @@ public class AgendaDisponivelActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_agenda_disponivel, menu);
+        getMenuInflater().inflate(R.menu.menu_opcao_unica_simple, menu);
+        MenuItem menuItem = menu.getItem(0);
+        menuItem.setTitle(getText(R.string.acao_selecionar_data));
+        menuItem.setIcon(R.drawable.agenda_branco);
+        menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.acao_salva) {
-            return true;
-        } else if (id == R.id.acao_selecao_data) {
-            definirDataBusca();
-            return true;
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            case R.id.acao_unica:
+                definirDataBusca();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
+    }
 
-        return super.onOptionsItemSelected(item);
+    public void concluirSelecaoAtendimento(){
+        //TODO: Enviar retorno para activity que chamou essa. Referência: http://stackoverflow.com/questions/14292398/how-to-pass-data-from-2nd-activity-to-1st-activity-when-pressed-back-android
+        finish();
     }
 
 
