@@ -1,7 +1,9 @@
 package br.ufg.inf.pes.healthhelp.dao;
 
+import android.os.SystemClock;
 import android.support.test.espresso.base.MainThread;
 import android.support.test.runner.AndroidJUnit4;
+import android.util.Log;
 
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseException;
@@ -18,6 +20,8 @@ import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import br.ufg.inf.pes.healthhelp.model.Agenda;
 import br.ufg.inf.pes.healthhelp.model.PeriodoTempo;
@@ -34,10 +38,7 @@ public class AgendaDAOTest {
     private AgendaDAO agendaDAO;
 
     private Agenda agendaCriar;
-    /*private Agenda agendaAtualizar;
-    private Agenda agendaRemover;
-    private Agenda agendaBuscarPorId;
-    private Agenda agendaBuscarPorNome;*/
+    private Object eventoDao;
     private ArrayList<Agenda> agendasBusca;
 
     public AgendaDAOTest() {
@@ -50,7 +51,7 @@ public class AgendaDAOTest {
 
         agendaDAO = new AgendaDAO(
                 FirebaseDatabase.getInstance().getReferenceFromUrl(
-                        "ws://test.firebase.localhost:5000/") );
+                        "https://health-help-8f985.firebaseio.com/") );
 
 
 
@@ -58,16 +59,9 @@ public class AgendaDAOTest {
         agendaCriar = preencheAgenda();
         agendaCriar.setNome("Agenda Criar 1");
 
-
         agendasBusca = new ArrayList<>();
+        eventoDao = null;
 
-        for (int i =0; i <4; i ++ ){
-            agendasBusca.add(preencheAgenda());
-            agendasBusca.get(i).setNome("Agenda lista " + (i+1));
-            agendaDAO.inserir(agendasBusca.get(i));
-        }
-
-        agendaDAO.buscarTodos();
 
         /*agendaAtualizar = preencheAgenda();
         agendaAtualizar.setNome("Agenda Atualizar 1");
@@ -87,11 +81,11 @@ public class AgendaDAOTest {
         Agenda agendaPreenche = new Agenda();
         ArrayList horariosAt = new ArrayList<PeriodoTempo>();
         ArrayList diasSemana = new ArrayList<String>();
-        diasSemana.add(DayOfWeek.SUNDAY.getValue());
-        diasSemana.add(DayOfWeek.MONDAY.getValue());
-        diasSemana.add(DayOfWeek.TUESDAY.getValue());
-        diasSemana.add(DayOfWeek.WEDNESDAY.getValue());
-        diasSemana.add(DayOfWeek.SATURDAY.getValue());
+        diasSemana.add(String.valueOf(DayOfWeek.SUNDAY.getValue()));
+        diasSemana.add(String.valueOf(DayOfWeek.MONDAY.getValue()));
+        diasSemana.add(String.valueOf(DayOfWeek.TUESDAY.getValue()));
+        diasSemana.add(String.valueOf(DayOfWeek.WEDNESDAY.getValue()));
+        diasSemana.add(String.valueOf(DayOfWeek.SATURDAY.getValue()));
 
         horariosAt.add( new PeriodoTempo("10:00", "17:00", "06/11/2016","12/11/2016", diasSemana ));
 
@@ -108,40 +102,84 @@ public class AgendaDAOTest {
     @Test
     public void daoIsCorrect() {
         agendaDAO.inserir(agendaCriar);
-        agendaDAO.atualizar(agendaCriar);
+        esperarEvento();
+        assertEquals("Agenda"+ agendaCriar.getId(), eventoDao);
+        eventoDao = null;
 
-        agendaDAO.remover(agendaCriar);
-        // pega da DAO de agenda a agenda recem inserida com o ID gerado pelo firebase, pois não se tem ele aqui
         agendaDAO.buscarPelaId(agendaCriar.getId());
+        esperarEvento();
+        assertEquals(agendaCriar.getId(), ((Agenda)eventoDao).getId());
+        eventoDao = null;
 
-        agendaDAO.buscarPeloNome(agendaCriar.getNome());
+        Agenda agendaAtualizar = agendaCriar;
+        agendaAtualizar.setNome("Agenda Atualizar 1");
+        agendaDAO.atualizar(agendaAtualizar);
+        esperarEvento();
+        assertEquals("Agenda"+ agendaAtualizar.getId(), eventoDao);
+        eventoDao = null;
+
+        agendaDAO.remover(agendaAtualizar);
+        esperarEvento();
+        assertEquals("Agenda" + agendaAtualizar.getId(), eventoDao);
+        eventoDao = null;
+
+
+
+        for (int i =0; i <4; i ++ ){
+            agendasBusca.add(preencheAgenda());
+            agendasBusca.get(i).setNome("Agenda lista " + (i+1));
+            agendaDAO.inserir(agendasBusca.get(i));
+            esperarEvento();
+            eventoDao = null;
+        }
 
         agendaDAO.buscarTodos();
+        esperarEvento();
+
+        assertTrue(buscouComSucesso());
+
 
     }
-    @Subscribe
-    public void onDatabaseEventAgenda(DatabaseEvent<Agenda> databaseEvent){
-        assertTrue(databaseEvent.getObjeto().getNome().equals(agendaCriar.getNome()));
+
+    private boolean buscouComSucesso() {
+        boolean contemTodos = true;
+
+        for (Agenda agendaInserida:agendasBusca) {
+            // checa se cada elemento inserido foi buscado no firebase database
+            for (Agenda agenda :
+                (ArrayList<Agenda>) eventoDao) {
+                contemTodos = false;
+                if(agendaInserida.getId().equals(agenda.getId()))
+                    contemTodos = true;
+            }
+
+        }
+
+        return contemTodos;
+    }
+
+    private void esperarEvento() {
+        while (eventoDao == null){
+            Log.w("esperarEvento", "esperando eventBus" );
+            SystemClock.sleep(500);
+
+        }
     }
 
     @Subscribe
     public void onDatabaseEvent(DatabaseEvent<String> databaseEvent) {
-        assertTrue(
-            databaseEvent.getObjeto().equals("Agenda adicionada " +agendaCriar.getNome()) ||
-                databaseEvent.getObjeto().contains("Agenda adicionada Agenda lista ") ||
-                databaseEvent.getObjeto().equals("Agenda removida " +agendaCriar.getNome()) ||
-                databaseEvent.getObjeto().equals("Agenda atualizada " +agendaCriar.getNome()));
+        eventoDao = databaseEvent.getObjeto();
+    }
 
+
+    @Subscribe
+    public void onDatabaseEventBuscaAgenda(Agenda databaseEvent) {
+        eventoDao = databaseEvent;
     }
 
     @Subscribe
-    public void onDatabaseListEvent(DatabaseEvent<ArrayList<Agenda>> databaseEvent) {
-        assertTrue(databaseEvent.getObjeto().containsAll(agendasBusca));
-    }
-
-    @Subscribe
-    public void onDatabaseErrorEvent(DatabaseEvent<DatabaseError> databaseError) {
-        throw databaseError.getObjeto().toException();
+    public void onDatabaseEventBuscaLista(ArrayList<Agenda> databaseEvent) {
+        eventoDao = databaseEvent;
     }
 
     @After

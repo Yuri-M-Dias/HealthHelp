@@ -53,9 +53,15 @@ public class AgendaDAO extends AbstractDAO<Agenda> {
                                 Agenda agenda = dataSnapshot.getValue(Agenda.class);
 
                                 //Salva no objeto agenda o id do banco gerado pelo firebase
-                                agenda.setId(dataSnapshot.getKey());
-                                Log.w(TAG,"agenda buscada pela ID: " + agenda.getId());
-                                EventBus.getDefault().post(new DatabaseEvent<>(agenda));
+                                if(agenda == null)
+                                    Log.w(TAG,"agenda não encontrada: ");
+
+                                else{
+                                    agenda.setId(dataSnapshot.getKey());
+                                    Log.w(TAG,"agenda buscada pela ID: " + agenda.getId());
+                                }
+
+                                EventBus.getDefault().post(agenda);
                     }
 
                     @Override
@@ -67,30 +73,6 @@ public class AgendaDAO extends AbstractDAO<Agenda> {
 
     }
 
-    public void buscarPeloNome(String nomeAgenda) {
-        getDatabaseReference().child(DATABASE_CHILD).
-                orderByChild("nome").equalTo(nomeAgenda).addListenerForSingleValueEvent(
-                new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        Agenda agenda = dataSnapshot.getValue(Agenda.class);
-
-                        //Salva no objeto agenda o id do banco gerado pelo firebase
-                        agenda.setId(dataSnapshot.getKey());
-                        Log.w(TAG,"agenda buscada pelo nome: " + agenda.getId());
-                        EventBus.getDefault().post(new DatabaseEvent<>(agenda));
-
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                        Log.e(TAG, "ValueListener: onCancelled:", databaseError.toException());
-                        EventBus.getDefault().post(new DatabaseEvent<>(databaseError));
-                    }
-                }
-        );
-    }
 
     @Override
     public void inserir(Agenda agenda) {
@@ -98,15 +80,20 @@ public class AgendaDAO extends AbstractDAO<Agenda> {
         DatabaseReference registroAgenda = getDatabaseReference().child(DATABASE_CHILD).push();
         Log.i(TAG, "Chave da nova agenda: " + registroAgenda.getKey());
 
-        registroAgenda.addListenerForSingleValueEvent(new ValueEventListener() {
+        // salva no firebase
+        registroAgenda.setValue(agenda);
+        //Salva no objeto agenda o id do banco gerado pelo firebase
+        agenda.setId(registroAgenda.getKey());
+
+        registroAgenda.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Log.w(TAG, "SNAPSHOT: " + dataSnapshot);
                 Agenda agenda = dataSnapshot.getValue(Agenda.class);
-                //Salva no objeto agenda o id do banco gerado pelo firebase
-                agenda.setId(dataSnapshot.getKey().toString());
-                Log.w(TAG, "agenda adicionada: " + agenda.getId());
-                EventBus.getDefault().post(new DatabaseEvent<>("Agenda adicionada " + agenda.getNome()));
+                // agenda == null quando é uma remoção
+                if(agenda != null)
+                    agenda.setId(dataSnapshot.getKey().toString());
+                EventBus.getDefault().post(new DatabaseEvent<>("Agenda" + dataSnapshot.getKey().toString()));
             }
 
             @Override
@@ -116,35 +103,12 @@ public class AgendaDAO extends AbstractDAO<Agenda> {
                 EventBus.getDefault().post(new DatabaseEvent<>(databaseError));
             }
         });
-        // salva no firebase
-        registroAgenda.setValue(agenda);
-        agenda.setId(registroAgenda.getKey());
 
     }
 
     @Override
     public void remover(Agenda agendaRemover) {
 
-        getDatabaseReference().child(DATABASE_CHILD).child( agendaRemover.getId()  ).addListenerForSingleValueEvent(
-                new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        Agenda agenda = dataSnapshot.getValue(Agenda.class);
-
-                        //Salva no objeto agenda o id do banco gerado pelo firebase
-                        agenda.setId(dataSnapshot.getKey());
-                        Log.w(TAG,"agenda removida: " + agenda.getId());
-                        EventBus.getDefault().post(new DatabaseEvent<>("Agenda removida" + agenda.getNome()));
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                        Log.e(TAG, "ValueListener: onCancelled:", databaseError.toException());
-                        EventBus.getDefault().post(new DatabaseEvent<>(databaseError));
-
-                    }
-                }
-        );
         // remove pela key que corresponde a id da agenda
         getDatabaseReference().child(DATABASE_CHILD).child( agendaRemover.getId()  ).removeValue();
 
@@ -153,26 +117,6 @@ public class AgendaDAO extends AbstractDAO<Agenda> {
     @Override
     public void atualizar(Agenda novaAgenda) {
 
-        getDatabaseReference().child(DATABASE_CHILD).child(novaAgenda.getId()).addListenerForSingleValueEvent(
-                new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        Agenda agenda = dataSnapshot.getValue(Agenda.class);
-
-                        //Salva no objeto agenda o id do banco gerado pelo firebase
-                        agenda.setId(dataSnapshot.getKey());
-                        Log.w(TAG,"agenda atualizada: " + agenda.getId());
-                        EventBus.getDefault().post(new DatabaseEvent<>("Agenda atualizada" + agenda.getNome()));
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                        Log.e(TAG, "ValueListener: onCancelled:", databaseError.toException());
-                        EventBus.getDefault().post(new DatabaseEvent<>(databaseError));
-
-                    }
-                }
-        );
         // atualiza pela id da agenda que corresponde a key no firebase
         getDatabaseReference().child(DATABASE_CHILD).child(novaAgenda.getId()).setValue(novaAgenda);
 
@@ -184,8 +128,9 @@ public class AgendaDAO extends AbstractDAO<Agenda> {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                Log.w(TAG, "SNAPSHOT: " + dataSnapshot);
 
-                    for (DataSnapshot agendaSnapshot : dataSnapshot.getChildren()) {
+                for (DataSnapshot agendaSnapshot : dataSnapshot.getChildren()) {
                         Agenda agenda = agendaSnapshot.getValue(Agenda.class);
                         agenda.setId(agendaSnapshot.getKey());
                         agendas.add(agenda);
@@ -193,7 +138,7 @@ public class AgendaDAO extends AbstractDAO<Agenda> {
                     }
 
 
-                    EventBus.getDefault().post(new DatabaseEvent<>(agendas));
+                    EventBus.getDefault().post(agendas);
 
             }
 
