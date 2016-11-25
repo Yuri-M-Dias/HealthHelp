@@ -1,26 +1,23 @@
 package br.ufg.inf.pes.healthhelp.view;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
+import br.ufg.inf.pes.healthhelp.model.Profissional;
+import br.ufg.inf.pes.healthhelp.model.ProfissionalSaude;
+import br.ufg.inf.pes.healthhelp.model.Secretaria;
 import br.ufg.inf.pes.healthhelp.model.Sessao;
-import br.ufg.inf.pes.healthhelp.service.MensagemNaoImplementado;
+import br.ufg.inf.pes.healthhelp.model.Usuario;
 import br.ufg.pes.healthhelp.R;
 
 
 public class HomeActivity extends AppCompatActivity {
-
-    private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +52,7 @@ public class HomeActivity extends AppCompatActivity {
         switch (item.getItemId()) {
 
             case R.id.logout:
-                logout(this);
+                logout();
                 return true;
 
             default:
@@ -65,30 +62,26 @@ public class HomeActivity extends AppCompatActivity {
 
     public void visualizarVisitasMedicas(View view) {
 
-        Context context = getApplicationContext();
         CharSequence text = "Visualizar visitas medicas nao implementado";
-        MensagemNaoImplementado.MostraMensagemNaoImplementado(context, text);
+        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
     }
 
     public void agendarVisitaMedica(View view) {
 
-        Context context = getApplicationContext();
         CharSequence text = "Agendar visitas medicas nao implementado";
-        MensagemNaoImplementado.MostraMensagemNaoImplementado(context, text);
+        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
     }
 
     public void visualizarAgendas(View view) {
 
-        Context context = getApplicationContext();
         CharSequence text = "Visualizar agenda nao implementado";
-        MensagemNaoImplementado.MostraMensagemNaoImplementado(context, text);
+        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
     }
 
     public void visualizarAtuacoes(View view) {
 
-        Context context = getApplicationContext();
         CharSequence text = "Visualizar atuação nao implementado";
-        MensagemNaoImplementado.MostraMensagemNaoImplementado(context, text);
+        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
     }
 
     public void visualizarLocaisAtendimento(View view) {
@@ -97,11 +90,11 @@ public class HomeActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void logout(Context context) {
+    private void logout() {
 
-        Sessao.finalizarSessao(context);
+        Sessao.finalizarSessao(this);
 
-        Intent intent = new Intent(context, AutenticacaoActivity.class);
+        Intent intent = new Intent(this, AutenticacaoActivity.class);
         startActivity(intent);
     }
 }
