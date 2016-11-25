@@ -26,7 +26,7 @@
 
     <!-- Strings para cards -->
     <string name="visitas_medicas">Visitas Medicas</string>
-    <string name="descricao_visitas_medicas">Veja visitas realizadas e futuras, e ainda agende novas visitas médicas</string>
+    <string name="descricao_visitas_medicas">Veja visitas realizadas e futuras, e ainda agende novas</string>
     <string name="agenda_card">Agendas</string>
     <string name="descricao_agenda_card">Visualize suas agendas para diferentes intervalos de tempo</string>
     <string name="atuacao_card">Atuações</string>

@@ -34,7 +34,7 @@
             <android.support.v7.widget.CardView
                 android:id="@+id/card_visitasmedicas"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/height_card_medic"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginBottom="@dimen/space_cards"
                 android:layout_marginLeft="@dimen/space_margin_cards"
@@ -47,23 +47,22 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/height_card_medic"
+                    android:layout_height="wrap_content"
                     android:gravity="center"
                     android:orientation="horizontal">
 
                     <ImageView
                         android:layout_width="@dimen/width_image_card"
                         android:layout_height="@dimen/height_image_card"
-                        android:layout_marginBottom="@dimen/margin_image_bottom"
-                        android:layout_marginLeft="@dimen/margin_image_left"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/consulta_vermelho" />
+                        android:src="@drawable/consulta_vermelho"
+                        android:padding="@dimen/activity_vertical_margin"
+                        android:layout_marginLeft="@dimen/margin_image_left" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="@dimen/padding_all_buttons">
+                        android:orientation="vertical">
 
                         <TextView
                             android:id="@+id/textView_visitas"
@@ -89,14 +88,13 @@
                         <Button
                             android:id="@+id/button"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/margin_top_button"
+                            android:layout_height="@dimen/md_button_height"
                             android:layout_gravity="right"
                             android:layout_marginRight="@dimen/margin_button_right"
-                            android:background="@color/accent"
                             android:onClick="agendarVisitaMedica"
                             android:text="@string/button_cards_Agendar"
-                            android:textColor="@color/icons" />
+                            android:textColor="@color/accent"
+                            style="@style/Widget.AppCompat.Button.Borderless.Colored" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -106,7 +104,7 @@
             <android.support.v7.widget.CardView
                 android:id="@+id/card_visualizarAgenda"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/height_card_defaut"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginBottom="@dimen/space_cards"
                 android:layout_marginLeft="@dimen/space_margin_cards"
@@ -119,7 +117,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/height_card_defaut"
+                    android:layout_height="wrap_content"
                     android:gravity="center"
                     android:orientation="horizontal">
 
@@ -128,7 +126,8 @@
                         android:layout_height="@dimen/height_image_card"
                         android:layout_marginLeft="@dimen/margin_image_left"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/agenda_azul" />
+                        android:src="@drawable/agenda_azul"
+                        android:padding="@dimen/activity_vertical_margin" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -162,7 +161,7 @@
             <android.support.v7.widget.CardView
                 android:id="@+id/card_visualizarAtuacoes"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/height_card_defaut"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginBottom="@dimen/space_cards"
                 android:layout_marginLeft="@dimen/space_margin_cards"
@@ -175,7 +174,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/height_card_defaut"
+                    android:layout_height="wrap_content"
                     android:gravity="center"
                     android:orientation="horizontal">
 
@@ -184,7 +183,8 @@
                         android:layout_height="@dimen/height_image_card"
                         android:layout_marginLeft="@dimen/margin_image_left"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/atuacao_vermelho" />
+                        android:src="@drawable/atuacao_vermelho"
+                        android:padding="@dimen/activity_vertical_margin" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -218,7 +218,7 @@
             <android.support.v7.widget.CardView
                 android:id="@+id/card_locaisAtendimento"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/height_card_defaut"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginBottom="@dimen/space_cards"
                 android:layout_marginLeft="@dimen/space_margin_cards"
@@ -231,7 +231,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/height_card_defaut"
+                    android:layout_height="wrap_content"
                     android:gravity="center"
                     android:orientation="horizontal">
 
@@ -240,7 +240,8 @@
                         android:layout_height="@dimen/height_image_card"
                         android:layout_marginLeft="@dimen/margin_image_left"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/local_atendimento_azul" />
+                        android:src="@drawable/local_atendimento_azul"
+                        android:padding="@dimen/activity_vertical_margin" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
