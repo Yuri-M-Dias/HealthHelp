@@ -9,11 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import br.ufg.inf.pes.healthhelp.model.Profissional;
-import br.ufg.inf.pes.healthhelp.model.ProfissionalSaude;
-import br.ufg.inf.pes.healthhelp.model.Secretaria;
 import br.ufg.inf.pes.healthhelp.model.Sessao;
-import br.ufg.inf.pes.healthhelp.model.Usuario;
 import br.ufg.pes.healthhelp.R;
 
 

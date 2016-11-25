@@ -54,10 +54,10 @@
                     <ImageView
                         android:layout_width="@dimen/width_image_card"
                         android:layout_height="@dimen/height_image_card"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/consulta_vermelho"
+                        android:layout_marginLeft="@dimen/margin_image_left"
                         android:padding="@dimen/activity_vertical_margin"
-                        android:layout_marginLeft="@dimen/margin_image_left" />
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/consulta_vermelho" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -87,14 +87,14 @@
 
                         <Button
                             android:id="@+id/button"
+                            style="@style/Widget.AppCompat.Button.Borderless.Colored"
                             android:layout_width="wrap_content"
                             android:layout_height="@dimen/md_button_height"
                             android:layout_gravity="right"
                             android:layout_marginRight="@dimen/margin_button_right"
                             android:onClick="agendarVisitaMedica"
                             android:text="@string/button_cards_Agendar"
-                            android:textColor="@color/accent"
-                            style="@style/Widget.AppCompat.Button.Borderless.Colored" />
+                            android:textColor="@color/accent" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -125,9 +125,9 @@
                         android:layout_width="@dimen/width_image_card"
                         android:layout_height="@dimen/height_image_card"
                         android:layout_marginLeft="@dimen/margin_image_left"
+                        android:padding="@dimen/activity_vertical_margin"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/agenda_azul"
-                        android:padding="@dimen/activity_vertical_margin" />
+                        android:src="@drawable/agenda_azul" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -182,9 +182,9 @@
                         android:layout_width="@dimen/width_image_card"
                         android:layout_height="@dimen/height_image_card"
                         android:layout_marginLeft="@dimen/margin_image_left"
+                        android:padding="@dimen/activity_vertical_margin"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/atuacao_vermelho"
-                        android:padding="@dimen/activity_vertical_margin" />
+                        android:src="@drawable/atuacao_vermelho" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -239,9 +239,9 @@
                         android:layout_width="@dimen/width_image_card"
                         android:layout_height="@dimen/height_image_card"
                         android:layout_marginLeft="@dimen/margin_image_left"
+                        android:padding="@dimen/activity_vertical_margin"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/local_atendimento_azul"
-                        android:padding="@dimen/activity_vertical_margin" />
+                        android:src="@drawable/local_atendimento_azul" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
