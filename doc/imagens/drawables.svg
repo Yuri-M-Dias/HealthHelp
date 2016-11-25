@@ -29,8 +29,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="2.8284271"
-     inkscape:cx="130.94065"
-     inkscape:cy="144.83089"
+     inkscape:cx="300.64628"
+     inkscape:cy="187.2573"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -992,7 +992,7 @@
     <g
        id="g5330-0"
        transform="translate(7.4702796,-95.56317)"
-       inkscape:export-filename="/home/cleber/git/HealthHelp/app/src/main/res/drawable/consulta_azul.png"
+       inkscape:export-filename="/home/cleber/git/HealthHelp-pr/app/src/main/res/drawable/consulta_vermelho.png"
        inkscape:export-xdpi="149.60536"
        inkscape:export-ydpi="149.60536">
       <path
@@ -1000,7 +1000,7 @@
          inkscape:connector-curvature="0"
          id="path4536-8"
          d="m 311.30469,880.03125 c -12.42641,-0.002 -22.88515,10.07956 -22.5,22.5 0.17663,5.69595 2.02591,10.43735 5.0625,14.19922 10.72659,13.28859 31.07472,36.38095 34.51643,43.05026 0,0 0.19752,0.25248 0.42107,0.25247 0.22465,-10e-6 0.4231,-0.25504 0.4231,-0.25504 10.15801,-14.62682 22.74918,-28.38466 34.12377,-42.57699 3.32349,-4.14679 5.43585,-10.18928 5.45313,-14.66992 0.0479,-12.42631 -10.07359,-22.50477 -22.5,-22.5 -6.79803,0.003 -13.22826,3.08789 -17.49414,8.38086 -4.26846,-5.29616 -10.70373,-8.3795 -17.50586,-8.38086 z"
-         style="opacity:1;fill:#448aff;fill-opacity:1;stroke:none;stroke-width:0.65521049;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+         style="opacity:1;fill:#f44336;fill-opacity:1;stroke:none;stroke-width:0.65521049;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
       <path
          sodipodi:nodetypes="ssccccscczccssss"
          inkscape:connector-curvature="0"

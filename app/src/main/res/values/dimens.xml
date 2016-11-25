@@ -2,7 +2,34 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="subtext">14sp</dimen>
+    <dimen name="padding_subtext">16dp</dimen>
+    <dimen name="padding_subtext_top">13dp</dimen>
+    <dimen name="padding_subtext_bottom">10dp</dimen>
+    <dimen name="primarytext">24sp</dimen>
+    <dimen name="padding_all_buttons">8dp</dimen>
+    <dimen name="padding_button_right">8dp</dimen>
+
     <dimen name="textfield_height">42dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="text_margin">16dp</dimen>
+    <dimen name="elevation">4dp</dimen>
+
+    <!-- valores das dimensões dos cards -->
+    <dimen name="width_image_card">130dp</dimen>
+    <dimen name="margin_image_left">10dp</dimen>
+    <dimen name="corner_radius_card">2dp</dimen>
+    <dimen name="space_margin_cards">10dp</dimen>
+    <dimen name="space_cards">4dp</dimen>
+    <dimen name="height_image_card">130dp</dimen>
+    <dimen name="height_card_medic">215dp</dimen>
+    <dimen name="height_card_defaut">170dp</dimen>
+    <dimen name="padding_top_textcard">10dp</dimen>
+    <dimen name="padding_top_textcard_default">24dp</dimen>
+    <dimen name="padding_right_left_textcard">16dp</dimen>
+    <dimen name="margin_button_right">16dp</dimen>
+    <dimen name="card_elevation">2dp</dimen>
+    <dimen name="margin_image_bottom">20dp</dimen>
+    <dimen name="margin_top_button">14dp</dimen>
+
 </resources>
