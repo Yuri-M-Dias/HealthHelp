@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/md_button_frame_vertical_padding">
+
+    <TextView
+        android:id="@+id/textView_separador"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_row="0"
+        android:ellipsize="end"
+        android:text="TextView"
+        android:maxLines="1"
+        android:textStyle="normal|bold"
+        android:paddingLeft="@dimen/md_button_frame_vertical_padding"
+        android:paddingRight="@dimen/md_button_frame_vertical_padding"
+        android:paddingTop="@dimen/md_button_frame_vertical_padding"
+        android:background="@color/md_divider_black" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="@dimen/md_button_frame_vertical_padding"
+        android:paddingRight="@dimen/md_button_frame_vertical_padding"
+        android:paddingTop="@dimen/md_button_frame_vertical_padding">
+
+        <ImageView
+            android:id="@+id/icone_item_generico"
+            android:layout_width="@android:dimen/app_icon_size"
+            android:layout_height="@android:dimen/app_icon_size"
+            app:srcCompat="@drawable/agenda_azul"
+            android:layout_weight="0"
+            android:layout_marginRight="@dimen/md_button_frame_vertical_padding"
+            android:layout_marginLeft="@dimen/md_button_frame_vertical_padding" />
+
+        <TextView
+            android:id="@+id/textView_descricao_item_generico"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="fill_vertical"
+
+            android:ellipsize="end"
+            android:gravity="fill_vertical"
+            android:maxLines="2"
+            android:text="TextView"
+            android:textColor="@color/primary_text"
+            android:textSize="18sp"
+            android:layout_weight="1"
+            android:textAppearance="@style/TextAppearance.AppCompat" />
+    </LinearLayout>
+</LinearLayout>
