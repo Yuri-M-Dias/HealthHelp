@@ -55,7 +55,12 @@ public class AtuacaoDAO extends AbstractDAO<Atuacao> {
     }
 
 
+    /**
+     * Busca todos todas as atuações de profissionais de saúde que trabalham em determinados locais de atendimento.
+     * @param locaisAtendimento Lista de locais de atendimento que será utilizada para se buscar as atuações de profissionais de saúde.
+     */
     public void buscarPorLocais(final List<LocalAtendimento> locaisAtendimento){
+        //TODO: Substituir a implementação stub abaixo pela implementação correta quando a DAO for desenvolvida.
         AsyncExecutor.create().execute(
             new AsyncExecutor.RunnableEx() {
                 @Override
@@ -103,7 +108,9 @@ public class AtuacaoDAO extends AbstractDAO<Atuacao> {
                     atuacao.setProfissional(profissionalSaude);
                     atuacoes.add(atuacao);
 
-                        EventBus.getDefault().post(new DatabaseEvent<>(atuacoes));
+                    Thread.sleep(2000);
+
+                    EventBus.getDefault().post(new DatabaseEvent<>(atuacoes));
                 }
             }
         );

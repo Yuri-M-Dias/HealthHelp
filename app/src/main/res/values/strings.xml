@@ -63,4 +63,9 @@
     <!-- Strings relacionadas à view de lista de locais de atendimento -->
     <string name="titulo_carregamento_locais">Carregando...</string>
     <string name="mensagem_carregamento_locais">Carregando lista de locais de atendimento</string>
+
+    <!-- Strings relacionadas à view de atuações de profissionais de saúde -->
+    <string name="atuacoes_profissionais_saude_titulo_activity">Profissionais de Saúde</string>
+    <string name="atuacoes_profissionais_saude_titulo_dialog">Carregando profissionais de saúde...</string>
+    <string name="atuacoes_profissionais_saude_mensagem_dialog">Aguarde enquanto o sistema carrega os a lista de profissionais de saúde dos locais de atendimento nos quais você trabalha</string>
 </resources>

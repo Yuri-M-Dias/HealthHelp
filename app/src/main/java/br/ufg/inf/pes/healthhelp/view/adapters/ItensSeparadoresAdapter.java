@@ -16,7 +16,7 @@ import br.ufg.inf.pes.healthhelp.model.LocalAtendimento;
 import br.ufg.pes.healthhelp.R;
 
 /**
- * Este adapter é responsável por controlar itens genéricos que de uma lista seccionada.
+ * Este adapter é responsável por controlar itens que de uma lista seccionada.
  */
 
 public abstract class ItensSeparadoresAdapter<T> extends ArrayAdapter<T> {
@@ -46,5 +46,9 @@ public abstract class ItensSeparadoresAdapter<T> extends ArrayAdapter<T> {
         return convertView;
     }
 
+    /**
+     * Preenche uma view de item da lista com o tipo de objeto a ser utilizado e a posição do objeto na lista.
+     * @param position Posição do objeto na lista.
+     */
     public abstract void preencherItem(int position);
 }

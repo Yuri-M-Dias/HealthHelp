@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.AdapterView;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import br.ufg.inf.pes.healthhelp.model.Atuacao;
@@ -15,34 +16,50 @@ import br.ufg.inf.pes.healthhelp.service.AtuacaoService;
 import br.ufg.inf.pes.healthhelp.view.adapters.ItensSeparadoresAdapter;
 import br.ufg.pes.healthhelp.R;
 
+/**
+ * Esta classe define a activity que exibe a lista de profissionais de saúde para os locais de atendimento onde uma secretária trabalha.
+ */
 public class AtuacoesProfissionaisSaudeActivity extends AbstractListActivity<Atuacao> {
 
+    public final static String ARG_LOCAIS_ATENDIMENTO = "lista_locais_atendimento";
+
+    private List<LocalAtendimento> locaisAtendimento;
     private AtuacaoService atuacaoService;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        getIntent().putExtra(AbstractListActivity.ARG_TITULO, "Profissionais de Saúde");
+        getIntent().putExtra(AbstractListActivity.ARG_TITULO, getString(R.string.atuacoes_profissionais_saude_titulo_activity));
         super.onCreate(savedInstanceState);
         atuacaoService = new AtuacaoService();
+        //TODO: Descomentar a linha abaixo para correta atribuição quando essa classe for chamada
+        //locaisAtendimento = (List<LocalAtendimento>) getIntent().getSerializableExtra(ARG_LOCAIS_ATENDIMENTO);
+        locaisAtendimento = criarLocaisAtendimento();
+    }
+
+    /**
+     * Cria uma lista de locais de atendimento para teste da activity.
+     * @return lista de locais de atendimento.
+     */
+    private List<LocalAtendimento> criarLocaisAtendimento() {
+        List<LocalAtendimento> locaisAtendimento = new ArrayList<>();
+        LocalAtendimento localAtendimento = new LocalAtendimento();
+        localAtendimento.setNome("Local Abacaxi");
+        locaisAtendimento.add(localAtendimento);
+
+        localAtendimento = new LocalAtendimento();
+        localAtendimento.setNome("Local Abacate");
+        locaisAtendimento.add(localAtendimento);
+
+        localAtendimento = new LocalAtendimento();
+        localAtendimento.setNome("Local AAA");
+        locaisAtendimento.add(localAtendimento);
+
+        return locaisAtendimento;
     }
 
     @Override
     public void recarregarItens() {
-        Log.i(TAG, "Carregando itens...");
-        iniciarProgresso("Meu titulo", "Minha mensagem de carregamento");
-        List<LocalAtendimento> locaisAtendimento = new ArrayList<>();
-        LocalAtendimento localAtendimento = new LocalAtendimento();
-        localAtendimento.setNome("Local1");
-        locaisAtendimento.add(localAtendimento);
-
-        localAtendimento = new LocalAtendimento();
-        localAtendimento.setNome("Local2");
-        locaisAtendimento.add(localAtendimento);
-
-        localAtendimento = new LocalAtendimento();
-        localAtendimento.setNome("Local3");
-        locaisAtendimento.add(localAtendimento);
-
+        iniciarProgresso(getString(R.string.atuacoes_profissionais_saude_titulo_dialog), getString(R.string.atuacoes_profissionais_saude_mensagem_dialog));
         atuacaoService.solicitarListaProfissionaisSaude(locaisAtendimento);
     }
 
@@ -71,6 +88,16 @@ public class AtuacoesProfissionaisSaudeActivity extends AbstractListActivity<Atu
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Log.i(TAG, "Tocando no item " + i);
+            }
+        };
+    }
+
+    @Override
+    public Comparator<Atuacao> obterComparador() {
+        return new Comparator<Atuacao>() {
+            @Override
+            public int compare(Atuacao atuacao, Atuacao t1) {
+                return atuacao.getLocalAtendimento().getNome().compareTo(t1.getLocalAtendimento().getNome());
             }
         };
     }
