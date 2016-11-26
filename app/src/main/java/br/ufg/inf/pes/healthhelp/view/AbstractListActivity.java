@@ -1,12 +1,10 @@
 package br.ufg.inf.pes.healthhelp.view;
 
 import android.app.ProgressDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -26,6 +24,7 @@ import br.ufg.pes.healthhelp.R;
 
 /**
  * Essa classe define e implementa grande parte das operações para activities que mostram listam seccionadas.
+ *
  * @param <T> Tipo de objeto que será exibido na lista seccionada.
  */
 public abstract class AbstractListActivity<T> extends AppCompatActivity {
@@ -76,10 +75,11 @@ public abstract class AbstractListActivity<T> extends AppCompatActivity {
 
     /**
      * Executa as operações que antecedem o carregamento da lista de itens a partir do banco de dados. Nessa implementação, a ação básica a ser executada é a exibição de um {@link ProgressDialog}, que será finalizado quando a resposta da requisição for recebida.
-     * @param titulo Título a ser exibido dentro do dialog.
+     *
+     * @param titulo   Título a ser exibido dentro do dialog.
      * @param mensagem Mensagem a ser exibida dentro do dialog.
      */
-    void iniciarProgresso(String titulo, String mensagem){
+    void iniciarProgresso(String titulo, String mensagem) {
         progressDialog = ProgressDialog.show(this, titulo, mensagem, true, true);
     }
 
@@ -97,6 +97,7 @@ public abstract class AbstractListActivity<T> extends AppCompatActivity {
 
     /**
      * Carrega uma lista de itens na activity.
+     *
      * @param itens lista de itens a ser carregada.
      */
     private void carregar(List<T> itens) {
@@ -115,6 +116,7 @@ public abstract class AbstractListActivity<T> extends AppCompatActivity {
 
     /**
      * Inicializa o adapter responsável pelo controle da exibição dos itens da lista. Na implementação desse método, o método {@link ItensSeparadoresAdapter#preencherItem(int)} do adapter é implementado para que seja possível apresentar os itens de forma correta.
+     *
      * @param itens Lista de itens a serem exibidos pelo adapater.
      * @return adapter responsável pelo controle da exibição dos itens da lista.
      */
@@ -122,12 +124,14 @@ public abstract class AbstractListActivity<T> extends AppCompatActivity {
 
     /**
      * Define o listener responsável por definir a ação a ser executada quando um determinado iem da lista é selecionado.
+     *
      * @return listener de controle de seleção de item da lista.
      */
     public abstract AdapterView.OnItemClickListener obterAcaoClique();
 
     /**
      * Define o comparador utilizado para se ordenar os itens da lista seccionada de forma correta.
+     *
      * @return comparador implementado para ordenação da lista seccionada.
      */
     public abstract Comparator<T> obterComparador();

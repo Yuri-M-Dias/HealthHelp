@@ -27,7 +27,7 @@ public class AtuacaoService {
         atuacaoDAO.buscarTodos();
     }
 
-    public void solicitarListaProfissionaisSaude(List<LocalAtendimento> locaisAtendimento){
+    public void solicitarListaProfissionaisSaude(List<LocalAtendimento> locaisAtendimento) {
         atuacaoDAO.buscarPorLocais(locaisAtendimento);
     }
 

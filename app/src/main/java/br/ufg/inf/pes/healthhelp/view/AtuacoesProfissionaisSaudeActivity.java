@@ -1,9 +1,7 @@
 package br.ufg.inf.pes.healthhelp.view;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 
@@ -39,6 +37,7 @@ public class AtuacoesProfissionaisSaudeActivity extends AbstractListActivity<Atu
 
     /**
      * Cria uma lista de locais de atendimento para teste da activity.
+     *
      * @return lista de locais de atendimento.
      */
     private List<LocalAtendimento> criarLocaisAtendimento() {
@@ -71,7 +70,7 @@ public class AtuacoesProfissionaisSaudeActivity extends AbstractListActivity<Atu
             public void preencherItem(int position) {
                 Atuacao atuacaoAtual = getItem(position);
 
-                if(position < 1 || !getItem(position-1).getLocalAtendimento().getNome().equals(atuacaoAtual.getLocalAtendimento().getNome())) {
+                if (position < 1 || !getItem(position - 1).getLocalAtendimento().getNome().equals(atuacaoAtual.getLocalAtendimento().getNome())) {
                     textoSeparador.setText(atuacaoAtual.getLocalAtendimento().getNome());
                 } else {
                     textoSeparador.setVisibility(View.GONE);
