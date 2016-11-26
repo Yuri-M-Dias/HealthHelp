@@ -1,6 +1,7 @@
 package br.ufg.inf.pes.healthhelp.view;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -87,7 +88,8 @@ public class AtuacoesProfissionaisSaudeActivity extends AbstractListActivity<Atu
         return new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Log.i(TAG, "Tocando no item " + i);
+                Intent intent = new Intent(AtuacoesProfissionaisSaudeActivity.this, AgendasActivity.class);
+                startActivity(intent);
             }
         };
     }
