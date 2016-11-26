@@ -33,7 +33,8 @@ import static junit.framework.Assert.assertTrue;
 import static junit.framework.Assert.fail;
 
 @RunWith(AndroidJUnit4.class)
-public class AgendaDAOTest {
+public class
+AgendaDAOTest {
 
     private AgendaDAO agendaDAO;
 
@@ -53,27 +54,11 @@ public class AgendaDAOTest {
                 FirebaseDatabase.getInstance().getReferenceFromUrl(
                         "https://health-help-8f985.firebaseio.com/") );
 
-
-
-
         agendaCriar = preencheAgenda();
         agendaCriar.setNome("Agenda Criar 1");
 
         agendasBusca = new ArrayList<>();
         eventoDao = null;
-
-
-        /*agendaAtualizar = preencheAgenda();
-        agendaAtualizar.setNome("Agenda Atualizar 1");
-
-        agendaRemover = preencheAgenda();
-        agendaRemover.setNome("Agenda Remover 1");
-
-        agendaBuscarPorId = preencheAgenda();
-        agendaBuscarPorId.setNome("Agenda Buscar por ID 1");
-
-        agendaBuscarPorNome = preencheAgenda();
-        agendaBuscarPorNome.setNome("Agenda Buscar por Nome 1");*/
 
     }
 
@@ -107,6 +92,11 @@ public class AgendaDAOTest {
         eventoDao = null;
 
         agendaDAO.buscarPelaId(agendaCriar.getId());
+        esperarEvento();
+        assertEquals(agendaCriar.getId(), ((Agenda)eventoDao).getId());
+        eventoDao = null;
+
+        agendaDAO.buscarPeloNome(agendaCriar.getNome());
         esperarEvento();
         assertEquals(agendaCriar.getId(), ((Agenda)eventoDao).getId());
         eventoDao = null;
