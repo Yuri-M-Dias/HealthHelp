@@ -40,11 +40,6 @@ public class PeriodoTempo implements Serializable {
         return TIME_FORMATTER.format(horaInicio.getTime());
     }
 
-    @Exclude
-    public void setHoraInicio(Calendar horaInicio) {
-        this.horaInicio = horaInicio;
-    }
-
     public void setHoraInicio(String horaInicio) {
         try {
             if (this.horaInicio == null) {
@@ -56,13 +51,13 @@ public class PeriodoTempo implements Serializable {
         }
     }
 
-    public String getHoraFim() {
-        return TIME_FORMATTER.format(horaFim.getTime());
+    @Exclude
+    public void setHoraInicio(Calendar horaInicio) {
+        this.horaInicio = horaInicio;
     }
 
-    @Exclude
-    public void setHoraFim(Calendar horaFim) {
-        this.horaFim = horaFim;
+    public String getHoraFim() {
+        return TIME_FORMATTER.format(horaFim.getTime());
     }
 
     public void setHoraFim(String horaFim) {
@@ -74,6 +69,11 @@ public class PeriodoTempo implements Serializable {
         } catch (ParseException e) {
             Log.i(getClass().getCanonicalName(), e.getMessage());
         }
+    }
+
+    @Exclude
+    public void setHoraFim(Calendar horaFim) {
+        this.horaFim = horaFim;
     }
 
     public void setDataInicio(String dataInicio) {
