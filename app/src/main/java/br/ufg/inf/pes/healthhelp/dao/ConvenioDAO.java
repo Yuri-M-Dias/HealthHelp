@@ -5,7 +5,6 @@ import android.util.Log;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import org.greenrobot.eventbus.EventBus;
@@ -16,15 +15,10 @@ import java.util.List;
 import br.ufg.inf.pes.healthhelp.model.Convenio;
 import br.ufg.inf.pes.healthhelp.model.event.DatabaseEvent;
 
-/**
- * Created by gleibson on 24/11/16.
- */
-
 public class ConvenioDAO extends AbstractDAO<Convenio> {
 
     public ConvenioDAO() {
-        super(ConvenioDAO.class.getCanonicalName(), "convenio");
-        setDatabaseReference(FirebaseDatabase.getInstance().getReference());
+        super(ConvenioDAO.class.getCanonicalName(), "convenio", Convenio.class);
     }
 
     /**
@@ -32,7 +26,7 @@ public class ConvenioDAO extends AbstractDAO<Convenio> {
      * @param reference referencia do database do firebase
      */
     public ConvenioDAO(DatabaseReference reference){
-        super(ConvenioDAO.class.getCanonicalName(), "convenio");
+        super(ConvenioDAO.class.getCanonicalName(), "convenio", Convenio.class);
         setDatabaseReference(reference);
     }
     @Override
