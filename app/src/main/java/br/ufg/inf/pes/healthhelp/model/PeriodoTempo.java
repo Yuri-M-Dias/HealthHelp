@@ -12,8 +12,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import br.ufg.inf.pes.healthhelp.model.enums.DayOfWeek;
-
 public class PeriodoTempo implements Serializable {
     public static final SimpleDateFormat TIME_FORMATTER = new SimpleDateFormat("HH:mm");
     public static final SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat("dd/MM/yyyy");
@@ -24,17 +22,17 @@ public class PeriodoTempo implements Serializable {
     private Calendar dataInicio;
     private Calendar dataFim;
 
-    private List<DayOfWeek> diasSemana;
+    private List<String> diasSemana;
 
     public PeriodoTempo() {
         diasSemana = new ArrayList<>();
     }
 
-    public PeriodoTempo(Calendar horaInicio, Calendar horaFim, Calendar dataInicio, Calendar dataFim, List<DayOfWeek> diasSemana) {
-        this.horaInicio = horaInicio;
-        this.horaFim = horaFim;
-        this.dataInicio = dataInicio;
-        this.dataFim = dataFim;
+    public PeriodoTempo(String horaInicio, String horaFim, String dataInicio, String dataFim, List<String> diasSemana) {
+        setHoraInicio(horaInicio);
+        setHoraFim(horaFim = horaFim);
+        setDataInicio(dataInicio);
+        setDataFim(dataFim);
         this.diasSemana = diasSemana;
     }
 
@@ -134,11 +132,11 @@ public class PeriodoTempo implements Serializable {
         this.dataFim = dataFim;
     }
 
-    public List<DayOfWeek> getDiasSemana() {
+    public List<String> getDiasSemana() {
         return diasSemana;
     }
 
-    public void setDiasSemana(List<DayOfWeek> diasSemana) {
+    public void setDiasSemana(List<String> diasSemana) {
         this.diasSemana = diasSemana;
     }
 
@@ -166,7 +164,7 @@ public class PeriodoTempo implements Serializable {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
         for (int index = 0; index < diasSemana.size(); index++) {
-            stringBuilder.append(diasSemana.get(index).getDisplayName());
+            stringBuilder.append(diasSemana.get(index));
             if (index < diasSemana.size() - 1) {
                 stringBuilder.append(" - ");
             }

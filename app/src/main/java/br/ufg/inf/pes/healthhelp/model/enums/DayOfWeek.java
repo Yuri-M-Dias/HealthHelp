@@ -16,6 +16,7 @@ public enum DayOfWeek {
     private int value;
     private String displayName;
 
+
     private DayOfWeek(int value, String displayName) {
         this.value = value;
         this.displayName = displayName;
