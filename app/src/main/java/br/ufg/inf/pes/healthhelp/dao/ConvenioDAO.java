@@ -5,6 +5,7 @@ import android.util.Log;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import org.greenrobot.eventbus.EventBus;
@@ -21,10 +22,19 @@ import br.ufg.inf.pes.healthhelp.model.event.DatabaseEvent;
 
 public class ConvenioDAO extends AbstractDAO<Convenio> {
 
-    public ConvenioDAO(String TAG, String DATABASE_CHILD) {
-        super(TAG, DATABASE_CHILD);
+    public ConvenioDAO() {
+        super(ConvenioDAO.class.getCanonicalName(), "convenio");
+        setDatabaseReference(FirebaseDatabase.getInstance().getReference());
     }
 
+    /**
+     * construtor para testes
+     * @param reference referencia do database do firebase
+     */
+    public ConvenioDAO(DatabaseReference reference){
+        super(ConvenioDAO.class.getCanonicalName(), "convenio");
+        setDatabaseReference(reference);
+    }
     @Override
     public void buscarTodos() {
         getDatabaseReference().child(DATABASE_CHILD).addListenerForSingleValueEvent(
@@ -41,13 +51,13 @@ public class ConvenioDAO extends AbstractDAO<Convenio> {
                             convenios.add(convenioRecebido);
                             Log.w(TAG, "Obtido: " + convenios.get(convenios.size() - 1).getId());
                         }
-                        EventBus.getDefault().post(new DatabaseEvent<>(convenios));
+                        EventBus.getDefault().post(convenios);
                     }
 
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
                         Log.e(TAG, "buscarTodos.setValueListener: onCancelled:", databaseError.toException());
-                        throw databaseError.toException();
+                        EventBus.getDefault().post(new DatabaseEvent<>(databaseError));
                     }
                 }
             );
@@ -61,14 +71,19 @@ public class ConvenioDAO extends AbstractDAO<Convenio> {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     Convenio convenioEncontrado = dataSnapshot.getValue(Convenio.class);
-                    Log.w(TAG, "buscaPorNome.OnDataChange: o convenio encontrado foi: " +
-                        convenioEncontrado.getNome());
+                    if(convenioEncontrado == null)
+                        Log.w(TAG, "convenio não encontrado");
+                    else {
+                        convenioEncontrado.setId(dataSnapshot.getKey());
+                        Log.w(TAG, "buscarPelaId.OnDataChange: o convenio encontrado foi: " +
+                            convenioEncontrado.getNome());
+                    }
                     EventBus.getDefault().post(convenioEncontrado);
                 }
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
                     Log.e(TAG, "buscaPorNome: onCancelled:", databaseError.toException());
-                    throw databaseError.toException();
+                    EventBus.getDefault().post(new DatabaseEvent<>(databaseError));
                 }
             });
     }
@@ -76,10 +91,29 @@ public class ConvenioDAO extends AbstractDAO<Convenio> {
     @Override
     public void inserir(Convenio convenio) {
         DatabaseReference registroConvenio = getDatabaseReference().child(DATABASE_CHILD).push();
-        Log.i(TAG, "Chave do novo convenio: " + registroConvenio);
+        Log.i(TAG, "Chave do novo convenio: " + registroConvenio.getKey());
         registroConvenio.setValue(convenio);
         convenio.setId(registroConvenio.getKey());
-        EventBus.getDefault().post(new DatabaseEvent<>("Convenio salvo"));
+        registroConvenio.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Convenio convenio = dataSnapshot.getValue(Convenio.class);
+
+                // não é uma remoção
+                if(convenio != null)
+                    convenio.setId(dataSnapshot.getKey().toString());
+
+                EventBus.getDefault().post(new DatabaseEvent<>("Convenio" + dataSnapshot.getKey().toString()));
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+                Log.e(TAG, "inserir, atualizar ou remover: onCancelled:", databaseError.toException());
+                EventBus.getDefault().post(new DatabaseEvent<>(databaseError));
+            }
+        });
     }
 
     @Override
@@ -96,6 +130,5 @@ public class ConvenioDAO extends AbstractDAO<Convenio> {
             .child(DATABASE_CHILD)
             .child(novoConvenio.getId())
             .setValue(novoConvenio);
-        EventBus.getDefault().post(new DatabaseEvent<>("Convenio salvo"));
     }
 }
