@@ -23,7 +23,7 @@
             app:navigationIcon="@drawable/ic_arrow_back_black_24dp"
             app:popupTheme="@style/AppTheme.PopupOverlay"
             app:subtitleTextColor="@android:color/background_light"
-            app:title="@string/hint_nome_local_atendimento"></android.support.v7.widget.Toolbar>
+            app:title="@string/hint_nome_local_atendimento" />
 
     </android.support.design.widget.AppBarLayout>
 

@@ -11,6 +11,10 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="HealthHelpTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="HealthHelpTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
     <!--
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
