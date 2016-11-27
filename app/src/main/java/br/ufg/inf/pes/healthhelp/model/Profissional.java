@@ -9,6 +9,8 @@ public abstract class Profissional extends BaseObject {
     private Date ultimoAcesso;
     private String profissao;
     private StatusProfissional statusProfissional;
+    private Usuario usuario;
+
 
     public Date getUltimoAcesso() {
         return ultimoAcesso;
@@ -32,5 +34,13 @@ public abstract class Profissional extends BaseObject {
 
     public void setProfissao(String profissao) {
         this.profissao = profissao;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }
