@@ -26,6 +26,7 @@ public class PaginadorDiasAdapter extends FragmentStatePagerAdapter {
     private final int numeroAbasAAdicionar = 7;
     private LinkedList<Calendar> intervaloVisualizacao;
     private boolean permiteVerPassado;
+    private final int QUANTIDADE_DIAS_MES_PADRAO = 30;
     private Calendar dataMudanca;
     private boolean precisaNovoCarregamento = false;
     private List<Agenda> agendas;
@@ -44,28 +45,21 @@ public class PaginadorDiasAdapter extends FragmentStatePagerAdapter {
     private void construirIntervaloVisualizacao(Calendar contextoTemporal) {
         intervaloVisualizacao = new LinkedList<>();
         Calendar dataInicial = (Calendar) contextoTemporal.clone();
-        int diaFinal = contextoTemporal.getActualMaximum(Calendar.DAY_OF_MONTH);
+        Calendar dataFinal = (Calendar) contextoTemporal.clone();
 
-        if (contextoTemporal.get(Calendar.YEAR) == Calendar.getInstance().get(Calendar.YEAR)
-            && contextoTemporal.get(Calendar.MONTH) == Calendar.getInstance().get(Calendar.MONTH)) {
-            if (permiteVerPassado) {
-                dataInicial.set(Calendar.DAY_OF_MONTH, contextoTemporal.getActualMinimum(Calendar.DAY_OF_MONTH));
-            } else {
-                dataInicial.set(Calendar.DAY_OF_MONTH, Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
-            }
-        } else if (contextoTemporal.before(Calendar.getInstance())) {
-            if (permiteVerPassado) {
-                dataInicial.set(Calendar.DAY_OF_MONTH, contextoTemporal.getActualMinimum(Calendar.DAY_OF_MONTH));
-            } else {
-                diaFinal = 0;
-            }
-        } else {
-            dataInicial.set(Calendar.DAY_OF_MONTH, contextoTemporal.getActualMinimum(Calendar.DAY_OF_MONTH));
+        Calendar hoje = Calendar.getInstance();
+
+        dataInicial.add(Calendar.DAY_OF_MONTH, -(QUANTIDADE_DIAS_MES_PADRAO/2));
+        dataFinal.add(Calendar.DAY_OF_MONTH, (QUANTIDADE_DIAS_MES_PADRAO/2));
+
+        if(!permiteVerPassado && dataInicial.before(hoje)){ //Esse before pode dar false
+            int diasAdicionais = (int) (hoje.getTimeInMillis() - dataInicial.getTimeInMillis())/(1000*60*60*24);
+            dataFinal.add(Calendar.DAY_OF_MONTH, diasAdicionais);
+            dataInicial = hoje;
         }
 
-        for (int diaCorrente = dataInicial.get(Calendar.DAY_OF_MONTH); diaCorrente <= diaFinal; diaCorrente++) {
-            intervaloVisualizacao.add((Calendar) dataInicial.clone());
-            dataInicial.add(Calendar.DAY_OF_MONTH, 1);
+        for (Calendar diaCorrente = dataInicial; diaCorrente.before(dataFinal); diaCorrente.add(Calendar.DAY_OF_MONTH, 1)) {
+            intervaloVisualizacao.add((Calendar) diaCorrente.clone());
         }
 
     }
