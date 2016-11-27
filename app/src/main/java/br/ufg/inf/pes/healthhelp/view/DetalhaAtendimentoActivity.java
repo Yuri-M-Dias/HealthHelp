@@ -1,7 +1,8 @@
 package br.ufg.inf.pes.healthhelp.view;
-
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import org.greenrobot.eventbus.EventBus;
 
 import br.ufg.pes.healthhelp.R;
 
@@ -12,5 +13,6 @@ public class DetalhaAtendimentoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalha_atendimento);
     }
+
 
 }
