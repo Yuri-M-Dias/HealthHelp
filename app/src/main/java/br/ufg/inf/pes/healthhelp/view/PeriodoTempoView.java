@@ -231,22 +231,29 @@ public class PeriodoTempoView extends LinearLayout {
 
                 }
 
-                if (((ToggleButton) view).isChecked()) {
-                    periodoTempo.getDiasSemana().add(String.valueOf(diaSemana.getValue()));
-                } else {
-                    periodoTempo.getDiasSemana().remove(String.valueOf(diaSemana.getValue()));
+                if (diaSemana != null) {
+                    if (((ToggleButton) view).isChecked()) {
+                        periodoTempo.getDiasSemana().add(String.valueOf(diaSemana.getValue()));
+                    } else {
+                        periodoTempo.getDiasSemana().remove(String.valueOf(diaSemana.getValue()));
+                    }
                 }
             }
         };
 
         LinearLayout containerDiasSemana = (LinearLayout) findViewById(R.id.container_dias_semana);
-        for (int posicao = 0; posicao < containerDiasSemana.getChildCount(); posicao++) {
+        for (
+            int posicao = 0;
+            posicao < containerDiasSemana.getChildCount(); posicao++)
+
+        {
             View botao = containerDiasSemana.getChildAt(posicao);
             Log.i(TAG, botao.getClass().getCanonicalName());
             if (botao instanceof ToggleButton) {
                 botao.setOnClickListener(acaoBotaoDiaSemana);
             }
         }
+
     }
 
     public PeriodoTempo getPeriodoTempo() {

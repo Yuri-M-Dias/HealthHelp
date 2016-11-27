@@ -14,6 +14,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import br.ufg.inf.pes.healthhelp.model.Agenda;
 import br.ufg.inf.pes.healthhelp.model.PeriodoTempo;
@@ -51,8 +52,8 @@ public class AgendaDAOTest {
 
     private Agenda preencheAgenda() {
         Agenda agendaPreenche = new Agenda();
-        ArrayList horariosAt = new ArrayList<PeriodoTempo>();
-        ArrayList diasSemana = new ArrayList<String>();
+        ArrayList<PeriodoTempo> horariosAt = new ArrayList<PeriodoTempo>();
+        ArrayList<String> diasSemana = new ArrayList<String>();
         diasSemana.add(String.valueOf(DayOfWeek.SUNDAY.getValue()));
         diasSemana.add(String.valueOf(DayOfWeek.MONDAY.getValue()));
         diasSemana.add(String.valueOf(DayOfWeek.TUESDAY.getValue()));
@@ -61,7 +62,7 @@ public class AgendaDAOTest {
 
         horariosAt.add(new PeriodoTempo("10:00", "17:00", "06/11/2016", "12/11/2016", diasSemana));
 
-        ArrayList horariosBloq = new ArrayList<PeriodoTempo>();
+        ArrayList<PeriodoTempo> horariosBloq = new ArrayList<PeriodoTempo>();
         horariosBloq.add(new PeriodoTempo("08:00", "18:00", "12/11/2016", "12/11/2016", diasSemana));
 
         agendaPreenche.setHorariosAtendimento(horariosAt);
@@ -112,23 +113,24 @@ public class AgendaDAOTest {
         agendaDAO.buscarTodos();
         esperarEvento();
 
-        assertTrue(buscouComSucesso());
+        List<Agenda> listaAgendasEncontradas = (ArrayList<Agenda>) eventoDao;
+        boolean buscouTodosComSucesso = buscouTodosComSucesso(listaAgendasEncontradas);
+        assertTrue(buscouTodosComSucesso);
 
 
     }
 
-    private boolean buscouComSucesso() {
-        boolean contemTodos = true;
+    private boolean buscouTodosComSucesso(List<Agenda> resultadoBuscado) {
+        //Não pode garantir ordem com ArrayList. Esse teste não faz sentido.
+        boolean contemTodos = false;
 
         for (Agenda agendaInserida : agendasBusca) {
-            // checa se cada elemento inserido foi buscado no firebase database
-            for (Agenda agenda :
-                (ArrayList<Agenda>) eventoDao) {
+            for (Agenda agenda : resultadoBuscado) {
                 contemTodos = false;
-                if (agendaInserida.getId().equals(agenda.getId()))
+                if (agendaInserida.getId().equals(agenda.getId())) {
                     contemTodos = true;
+                }
             }
-
         }
 
         return contemTodos;
