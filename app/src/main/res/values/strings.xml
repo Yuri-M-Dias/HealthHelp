@@ -48,4 +48,9 @@
     <!-- Strings relacionadas à view de lista de locais de atendimento -->
     <string name="titulo_carregamento_locais">Carregando...</string>
     <string name="mensagem_carregamento_locais">Carregando lista de locais de atendimento</string>
+
+
+    <!-- Strings relacionadas à view atuações -->
+    <string name="atuacoes">Atuações</string>
+
 </resources>

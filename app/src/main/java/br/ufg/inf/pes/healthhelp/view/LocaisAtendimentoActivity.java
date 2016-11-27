@@ -162,6 +162,11 @@ public class LocaisAtendimentoActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void atuacoes(View view) {
+        Intent intent = new Intent(this, AtuacoesActivity.class);
+        startActivity(intent);
+    }
+
     public void exibir(LocalAtendimento localAtendimento) {
         Intent localAtendimentoIntent = new Intent(LocaisAtendimentoActivity.this, LocalAtendimentoActivity.class);
         localAtendimentoIntent.putExtra(LocalAtendimentoActivity.LOCAL_ATENDIMENTO_INTENT_PARAMETER, localAtendimento);
