@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import br.ufg.inf.pes.healthhelp.model.enums.DayOfWeek;
+
 public class PeriodoTempo implements Serializable {
     public static final SimpleDateFormat TIME_FORMATTER = new SimpleDateFormat("HH:mm");
     public static final SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat("dd/MM/yyyy");
@@ -22,15 +24,15 @@ public class PeriodoTempo implements Serializable {
     private Calendar dataInicio;
     private Calendar dataFim;
 
-    private List<String> diasSemana;
+    private List<DayOfWeek> diasSemana;
 
     public PeriodoTempo() {
         diasSemana = new ArrayList<>();
     }
 
-    public PeriodoTempo(String horaInicio, String horaFim, String dataInicio, String dataFim, List<String> diasSemana) {
+    public PeriodoTempo(String horaInicio, String horaFim, String dataInicio, String dataFim, List<DayOfWeek> diasSemana) {
         setHoraInicio(horaInicio);
-        setHoraFim(horaFim = horaFim);
+        setHoraFim(horaFim);
         setDataInicio(dataInicio);
         setDataFim(dataFim);
         this.diasSemana = diasSemana;
@@ -132,11 +134,11 @@ public class PeriodoTempo implements Serializable {
         this.dataFim = dataFim;
     }
 
-    public List<String> getDiasSemana() {
+    public List<DayOfWeek> getDiasSemana() {
         return diasSemana;
     }
 
-    public void setDiasSemana(List<String> diasSemana) {
+    public void setDiasSemana(List<DayOfWeek> diasSemana) {
         this.diasSemana = diasSemana;
     }
 
@@ -164,7 +166,7 @@ public class PeriodoTempo implements Serializable {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
         for (int index = 0; index < diasSemana.size(); index++) {
-            stringBuilder.append(diasSemana.get(index));
+            stringBuilder.append(diasSemana.get(index).getDisplayName());
             if (index < diasSemana.size() - 1) {
                 stringBuilder.append(" - ");
             }

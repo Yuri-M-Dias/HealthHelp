@@ -52,13 +52,13 @@ public class AgendaDAOTest {
 
     private Agenda preencheAgenda() {
         Agenda agendaPreenche = new Agenda();
-        ArrayList<PeriodoTempo> horariosAt = new ArrayList<PeriodoTempo>();
-        ArrayList<String> diasSemana = new ArrayList<String>();
-        diasSemana.add(String.valueOf(DayOfWeek.SUNDAY.getValue()));
-        diasSemana.add(String.valueOf(DayOfWeek.MONDAY.getValue()));
-        diasSemana.add(String.valueOf(DayOfWeek.TUESDAY.getValue()));
-        diasSemana.add(String.valueOf(DayOfWeek.WEDNESDAY.getValue()));
-        diasSemana.add(String.valueOf(DayOfWeek.SATURDAY.getValue()));
+        ArrayList<PeriodoTempo> horariosAt = new ArrayList<>();
+        ArrayList<DayOfWeek> diasSemana = new ArrayList<>();
+        diasSemana.add(DayOfWeek.SUNDAY);
+        diasSemana.add(DayOfWeek.MONDAY);
+        diasSemana.add(DayOfWeek.TUESDAY);
+        diasSemana.add(DayOfWeek.WEDNESDAY);
+        diasSemana.add(DayOfWeek.SATURDAY);
 
         horariosAt.add(new PeriodoTempo("10:00", "17:00", "06/11/2016", "12/11/2016", diasSemana));
 
@@ -116,8 +116,6 @@ public class AgendaDAOTest {
         List<Agenda> listaAgendasEncontradas = (ArrayList<Agenda>) eventoDao;
         boolean buscouTodosComSucesso = buscouTodosComSucesso(listaAgendasEncontradas);
         assertTrue(buscouTodosComSucesso);
-
-
     }
 
     private boolean buscouTodosComSucesso(List<Agenda> resultadoBuscado) {

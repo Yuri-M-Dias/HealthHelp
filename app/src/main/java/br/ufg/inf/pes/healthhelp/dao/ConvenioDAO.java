@@ -110,19 +110,4 @@ public class ConvenioDAO extends AbstractDAO<Convenio> {
         });
     }
 
-    @Override
-    public void remover(Convenio convenioRemover) {
-        getDatabaseReference()
-            .child(DATABASE_CHILD)
-            .child(String.valueOf(convenioRemover.getId()))
-            .removeValue();
-    }
-
-    @Override
-    public void atualizar(Convenio novoConvenio) {
-        getDatabaseReference()
-            .child(DATABASE_CHILD)
-            .child(novoConvenio.getId())
-            .setValue(novoConvenio);
-    }
 }

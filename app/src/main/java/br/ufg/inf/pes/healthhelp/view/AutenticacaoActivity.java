@@ -51,6 +51,12 @@ public class AutenticacaoActivity extends AppCompatActivity {
         EventBus.getDefault().register(this);
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
+
     public void autenticar(View view) {
         boolean cancelar = false;
         View foco = null;

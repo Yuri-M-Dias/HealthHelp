@@ -1,7 +1,10 @@
 package br.ufg.inf.pes.healthhelp.dao;
 
+import android.support.annotation.NonNull;
 import android.util.Log;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -13,8 +16,8 @@ import org.greenrobot.eventbus.EventBus;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.ufg.inf.pes.healthhelp.excecao.ObjetoInexistenteException;
 import br.ufg.inf.pes.healthhelp.model.BaseObject;
-import br.ufg.inf.pes.healthhelp.model.event.DatabaseEvent;
 
 public abstract class AbstractDAO<T extends BaseObject> implements InterfaceDAO<T> {
 
@@ -66,34 +69,37 @@ public abstract class AbstractDAO<T extends BaseObject> implements InterfaceDAO<
         Log.i(TAG, "Chave do novo " + DATABASE_CHILD + ": " + registro.getKey());
         registro.setValue(objeto);
         objeto.setId(registro.getKey());
+        registro.addListenerForSingleValueEvent(getValueListenerGenerico("inserir"));
     }
 
     @Override
     public void remover(T objeto) {
+        final String idObjeto = String.valueOf(objeto.getId());
         getDatabaseReference()
             .child(DATABASE_CHILD)
-            .child(String.valueOf(objeto.getId()))
-            .removeValue();
+            .child(idObjeto)
+            .removeValue()
+            .addOnCompleteListener(getOnCompleteListenerGenerico(idObjeto));
     }
 
     @Override
     public void atualizar(T objeto) {
+        final String idObjeto = objeto.getId();
         getDatabaseReference()
             .child(DATABASE_CHILD)
-            .child(objeto.getId())
-            .setValue(objeto);
+            .child(idObjeto)
+            .setValue(objeto)
+            .addOnCompleteListener(getOnCompleteListenerGenerico(idObjeto));
     }
 
-    public ValueEventListener getValueListenerGenerico(final String nomeMetodo) {
+    protected ValueEventListener getValueListenerGenerico(final String nomeMetodo) {
         return new ValueEventListener() {
-
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (!dataSnapshot.exists()) {
-                    Log.w(TAG, DATABASE_CHILD + " " + nomeMetodo + " com falha");
-                    // Falta um melhor tratamento de erro
-                    EventBus.getDefault().post(null);
-                    return;
+                    String mensagemErro = DATABASE_CHILD + " " + nomeMetodo + " com falha";
+                    Log.w(TAG, mensagemErro);
+                    throw new ObjetoInexistenteException(mensagemErro);
                 }
                 long quantidadeChildren = dataSnapshot.getChildrenCount();
                 if (quantidadeChildren > 1) {
@@ -105,7 +111,7 @@ public abstract class AbstractDAO<T extends BaseObject> implements InterfaceDAO<
                         objetosEncontrados.add(objetoEncontrado);
                         Log.w(TAG, "Obtido " + DATABASE_CHILD + ": " + objetoEncontrado.getId());
                     }
-                    EventBus.getDefault().post(new DatabaseEvent<>(objetosEncontrados));
+                    EventBus.getDefault().post(objetosEncontrados);
                     return;
                 }
                 T objetoEncontrado = dataSnapshot.getValue(getTipoEntidade());
@@ -118,6 +124,21 @@ public abstract class AbstractDAO<T extends BaseObject> implements InterfaceDAO<
             public void onCancelled(DatabaseError databaseError) {
                 Log.e(TAG, DATABASE_CHILD + "buscaPelaId com falha: ", databaseError.toException());
                 throw databaseError.toException();
+            }
+        };
+    }
+
+    protected OnCompleteListener<Void> getOnCompleteListenerGenerico(final String idObjeto) {
+        return new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    Log.w(TAG, DATABASE_CHILD + " removido com sucesso: " + idObjeto);
+                } else {
+                    Log.w(TAG, DATABASE_CHILD + " removido com falha: " + idObjeto);
+                }
+                //Necessário informar sucesso ou falha...
+                EventBus.getDefault().post(idObjeto);
             }
         };
     }

@@ -95,11 +95,10 @@ public class PeriodoTempoView extends LinearLayout {
             ((Button) findViewById(R.id.botao_hora_final)).setText(periodoTempo.getHoraFim());
         }
 
-        for (String diaSemana : periodoTempo.getDiasSemana()) {
+        for (DayOfWeek diaSemana : periodoTempo.getDiasSemana()) {
             int recurso;
 
-            DayOfWeek dia = DayOfWeek.of(Integer.valueOf(diaSemana));
-            switch (dia) {
+            switch (diaSemana) {
                 case SUNDAY:
                     recurso = R.id.botao_domingo;
                     break;
@@ -233,20 +232,16 @@ public class PeriodoTempoView extends LinearLayout {
 
                 if (diaSemana != null) {
                     if (((ToggleButton) view).isChecked()) {
-                        periodoTempo.getDiasSemana().add(String.valueOf(diaSemana.getValue()));
+                        periodoTempo.getDiasSemana().add(diaSemana);
                     } else {
-                        periodoTempo.getDiasSemana().remove(String.valueOf(diaSemana.getValue()));
+                        periodoTempo.getDiasSemana().remove(diaSemana);
                     }
                 }
             }
         };
 
         LinearLayout containerDiasSemana = (LinearLayout) findViewById(R.id.container_dias_semana);
-        for (
-            int posicao = 0;
-            posicao < containerDiasSemana.getChildCount(); posicao++)
-
-        {
+        for (int posicao = 0; posicao < containerDiasSemana.getChildCount(); posicao++) {
             View botao = containerDiasSemana.getChildAt(posicao);
             Log.i(TAG, botao.getClass().getCanonicalName());
             if (botao instanceof ToggleButton) {

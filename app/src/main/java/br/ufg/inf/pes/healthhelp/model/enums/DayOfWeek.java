@@ -16,7 +16,6 @@ public enum DayOfWeek {
     private int value;
     private String displayName;
 
-
     DayOfWeek(int value, String displayName) {
         this.value = value;
         this.displayName = displayName;
@@ -25,17 +24,6 @@ public enum DayOfWeek {
     public static DayOfWeek of(final int dayOfWeek) {
         for (DayOfWeek dayOfWeekFinder : DayOfWeek.values()) {
             if (dayOfWeekFinder.getValue() == dayOfWeek) {
-                return dayOfWeekFinder;
-            }
-        }
-        throw new InvalidParameterException("Unable to convert to a DayOfWeek:" + dayOfWeek);
-    }
-
-    public static DayOfWeek of(final String dayOfWeek) {
-        String dayToLookForLowercase = dayOfWeek.toLowerCase();
-        for (DayOfWeek dayOfWeekFinder : DayOfWeek.values()) {
-            String currentComparingDayLowercase = dayOfWeekFinder.getDisplayName().toLowerCase();
-            if (currentComparingDayLowercase.equals(dayToLookForLowercase)) {
                 return dayOfWeekFinder;
             }
         }

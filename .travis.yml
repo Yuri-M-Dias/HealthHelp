@@ -38,6 +38,6 @@ before_install:
   - nodemon server.js &
   - "cd -"
 script:
-  - ./gradlew build connectedCheck jacocoTestReport --stacktrace
+  - ./gradlew build jacocoTestReport --stacktrace
 after_success:
   - bash <(curl -s https://codecov.io/bash)
