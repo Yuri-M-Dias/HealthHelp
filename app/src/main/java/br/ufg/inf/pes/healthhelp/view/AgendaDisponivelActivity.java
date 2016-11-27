@@ -100,12 +100,12 @@ public class AgendaDisponivelActivity extends AppCompatActivity {
         periodo.setDataFim("25/12/2016");
         periodo.setHoraInicio("08:00");
         periodo.setHoraFim("12:00");
-        List<DayOfWeek> diasSemana = new ArrayList<>();
-        diasSemana.add(DayOfWeek.MONDAY);
-        diasSemana.add(DayOfWeek.TUESDAY);
-        diasSemana.add(DayOfWeek.WEDNESDAY);
-        diasSemana.add(DayOfWeek.THURSDAY);
-        diasSemana.add(DayOfWeek.FRIDAY);
+        List<String>diasSemana = new ArrayList<>();
+        diasSemana.add(DayOfWeek.MONDAY.getDisplayName());
+        diasSemana.add(DayOfWeek.TUESDAY.getDisplayName());
+        diasSemana.add(DayOfWeek.WEDNESDAY.getDisplayName());
+        diasSemana.add(DayOfWeek.THURSDAY.getDisplayName());
+        diasSemana.add(DayOfWeek.FRIDAY.getDisplayName());
         periodo.setDiasSemana(diasSemana);
         horariosAtendimento.add(periodo);
 
@@ -115,7 +115,7 @@ public class AgendaDisponivelActivity extends AppCompatActivity {
         periodo.setHoraInicio("10:00");
         periodo.setHoraFim("16:00");
         diasSemana = new ArrayList<>();
-        diasSemana.add(DayOfWeek.SATURDAY);
+        diasSemana.add(DayOfWeek.SATURDAY.getDisplayName());
         periodo.setDiasSemana(diasSemana);
         horariosAtendimento.add(periodo);
 
@@ -137,11 +137,11 @@ public class AgendaDisponivelActivity extends AppCompatActivity {
         periodo.setHoraInicio("14:00");
         periodo.setHoraFim("20:00");
         diasSemana = new ArrayList<>();
-        diasSemana.add(DayOfWeek.MONDAY);
-        diasSemana.add(DayOfWeek.TUESDAY);
-        diasSemana.add(DayOfWeek.WEDNESDAY);
-        diasSemana.add(DayOfWeek.THURSDAY);
-        diasSemana.add(DayOfWeek.FRIDAY);
+        diasSemana.add(DayOfWeek.MONDAY.getDisplayName());
+        diasSemana.add(DayOfWeek.TUESDAY.getDisplayName());
+        diasSemana.add(DayOfWeek.WEDNESDAY.getDisplayName());
+        diasSemana.add(DayOfWeek.THURSDAY.getDisplayName());
+        diasSemana.add(DayOfWeek.FRIDAY.getDisplayName());
         periodo.setDiasSemana(diasSemana);
         horariosAtendimento.add(periodo);
 
