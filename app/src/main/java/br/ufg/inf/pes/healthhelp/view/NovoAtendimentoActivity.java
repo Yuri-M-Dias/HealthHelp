@@ -9,10 +9,12 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.TextView;
 
+import br.ufg.inf.pes.healthhelp.service.LocalAtendimentoService;
 import br.ufg.pes.healthhelp.R;
 
 public class NovoAtendimentoActivity extends AppCompatActivity {
 
+    private LocalAtendimentoService localAtendimentoService;
     private AutoCompleteTextView instituicao;
     private AutoCompleteTextView profissional;
     private TextView dataHorario;
@@ -27,7 +29,7 @@ public class NovoAtendimentoActivity extends AppCompatActivity {
         profissional = (AutoCompleteTextView) findViewById(R.id.autoCompleteProfissionalSaude);
         dataHorario = (TextView) findViewById(R.id.textView_dados_data_horario_atendimento);
 
-        //essas variáveis serão instanciadas chamando o método: getDados.
+        //essas variáveis serão instanciadas chamando o método: getNomesLocaisAtendimentos e getNomesProfissionais.
         String[] instituicoes = new String[] {"Hospital das Clínicas", "Hospinal Santa Genoveva",
             "Hospital HGG", "Hospital do Cancer", "Novo Hospital"};
         String[] profissionais = new String[] {"João não sei das quantas", "José Maria",
@@ -44,13 +46,19 @@ public class NovoAtendimentoActivity extends AppCompatActivity {
         return adaptador;
     }
 
-    public String[] getDados(String dado){
-        //TODO buscar no banco todos os nomes do "dado" solicitado para ser usado pelo adapter do AutoCompleteTextView
+    public String[] getNomesLocaisAtendimentos(String dado){
+        //TODO buscar no banco todos os nomes dos locais para ser usado pelo adapter do AutoCompleteTextView
+        localAtendimentoService.solicitarListaLocaisAtendimento();
+        return null;
+    }
+
+    public String[] getNomesProfissionais(String dado){
+        //TODO buscar no banco todos os nomes dos profissionais para ser usado pelo adapter do AutoCompleteTextView
         return null;
     }
 
     public String getHorarioAtendimento(){
-        //TODO buscar o horário de atendimento do hospital/profissional selecionado nas AutocompleteTestView
+        //TODO buscar o horário de atendimento do hospital/profissional selecionado nas AutoCompleteTestView
         return "";
     }
 
