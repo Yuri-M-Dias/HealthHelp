@@ -8,8 +8,10 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.DatePicker;
 
 import java.util.ArrayList;
@@ -30,8 +32,8 @@ public class AgendaDisponivelActivity extends AppCompatActivity {
     public static final String ARG_ATUACAO = "atuacao";
     public static final String ARG_ATENDIMENTO_AGENDADO = "atendimento-agendado";
 
-    private PaginadorDiasAdapter mSectionsPagerAdapter;
-    private ViewPager mViewPager;
+    private PaginadorDiasAdapter paginadorDiasAdapter;
+    private ViewPager paginadorDiasView;
 
     private Atuacao atuacao;
 
@@ -53,7 +55,7 @@ public class AgendaDisponivelActivity extends AppCompatActivity {
         Calendar contexto = Calendar.getInstance();
 
         atuacao = (Atuacao) getIntent().getSerializableExtra(ARG_ATUACAO);
-        criarAtuacao(); //Remover essa chamada e o método quando a linhaa acima retornar algo válido.
+        criarAtuacao(); //TODO: Remover essa chamada e o método quando a linhaa acima retornar algo válido.
 
         atendimentoService = new AtendimentoService();
         setContentView(R.layout.activity_agenda_disponivel);
@@ -63,24 +65,15 @@ public class AgendaDisponivelActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle("Selecionar horário de atendimento");
 
-        mSectionsPagerAdapter = new PaginadorDiasAdapter(getSupportFragmentManager(), false, contexto, atuacao.getAgendas());
+        paginadorDiasAdapter = new PaginadorDiasAdapter(getSupportFragmentManager(), true, contexto, atuacao.getAgendas());
 
-        mViewPager = (ViewPager) findViewById(R.id.container);
-        mViewPager.setAdapter(mSectionsPagerAdapter);
+        paginadorDiasView = (ViewPager) findViewById(R.id.container);
+
+        paginadorDiasView.setAdapter(paginadorDiasAdapter);
+        paginadorDiasView.setCurrentItem(paginadorDiasAdapter.getItemPosition(contexto));
 
         final TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
-        tabLayout.setupWithViewPager(mViewPager);
-
-        mSectionsPagerAdapter.registerDataSetObserver(new DataSetObserver() {
-            @Override
-            public void onChanged() {
-                mViewPager.setAdapter(mSectionsPagerAdapter);
-                int novaPosicao = mSectionsPagerAdapter.getItemPosition(mSectionsPagerAdapter.getDataMudanca());
-                mViewPager.setCurrentItem(novaPosicao - 1);
-                mViewPager.setCurrentItem(novaPosicao);
-            }
-        });
-
+        tabLayout.setupWithViewPager(paginadorDiasView);
     }
 
     //TODO: Remover a implementação abaixo quando as classes que chamam essa aqui estiverem prontas.
@@ -200,11 +193,11 @@ public class AgendaDisponivelActivity extends AppCompatActivity {
                 dataSelecionada.set(Calendar.YEAR, i);
                 dataSelecionada.set(Calendar.MONTH, i1);
                 dataSelecionada.set(Calendar.DAY_OF_MONTH, i2);
-                mSectionsPagerAdapter = new PaginadorDiasAdapter(getSupportFragmentManager(), false, dataSelecionada, atuacao.getAgendas());
-                mViewPager.setAdapter(mSectionsPagerAdapter);
+                paginadorDiasAdapter = new PaginadorDiasAdapter(getSupportFragmentManager(), true, dataSelecionada, atuacao.getAgendas());
+                paginadorDiasView.setAdapter(paginadorDiasAdapter);
                 TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
-                tabLayout.setupWithViewPager(mViewPager);
-                mViewPager.setCurrentItem(mSectionsPagerAdapter.getItemPosition(dataSelecionada));
+                tabLayout.setupWithViewPager(paginadorDiasView);
+                paginadorDiasView.setCurrentItem(paginadorDiasAdapter.getItemPosition(dataSelecionada));
             }
         }, dataSelecionada.get(Calendar.YEAR), dataSelecionada.get(Calendar.MONTH), dataSelecionada.get(Calendar.DAY_OF_MONTH));
         datePickerDialog.getDatePicker().setMinDate(Calendar.getInstance().getTimeInMillis());

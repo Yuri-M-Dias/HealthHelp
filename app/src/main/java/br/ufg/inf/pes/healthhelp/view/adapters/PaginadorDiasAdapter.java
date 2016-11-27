@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
+import android.view.View;
 import android.view.ViewGroup;
 
 import java.text.SimpleDateFormat;
@@ -27,22 +28,21 @@ public class PaginadorDiasAdapter extends FragmentStatePagerAdapter {
     private LinkedList<Calendar> intervaloVisualizacao;
     private boolean permiteVerPassado;
     private final int QUANTIDADE_DIAS_MES_PADRAO = 30;
-    private Calendar dataMudanca;
-    private boolean precisaNovoCarregamento = false;
+    private int indiceUltimaDataCarregada = -1;
     private List<Agenda> agendas;
 
     public PaginadorDiasAdapter(FragmentManager fm, boolean permiteVerPassado, Calendar contextoTemporal, List<Agenda> agendas) {
         super(fm);
         this.permiteVerPassado = permiteVerPassado;
         this.agendas = agendas;
-        construirIntervaloVisualizacao(contextoTemporal);
+        construirIntervaloPadraoVisualizacao(contextoTemporal);
     }
 
     /**
-     * Constrói o intervalo de tempo em dias que serão visualizados nas abas.
+     * Constrói o intervalo padrão de tempo em dias que serão visualizados nas abas.
      * @param contextoTemporal Dia dado como referência para construção do intervalo de tempo de visualização.
      */
-    private void construirIntervaloVisualizacao(Calendar contextoTemporal) {
+    private void construirIntervaloPadraoVisualizacao(Calendar contextoTemporal) {
         intervaloVisualizacao = new LinkedList<>();
         Calendar dataInicial = (Calendar) contextoTemporal.clone();
         Calendar dataFinal = (Calendar) contextoTemporal.clone();
@@ -52,7 +52,7 @@ public class PaginadorDiasAdapter extends FragmentStatePagerAdapter {
         dataInicial.add(Calendar.DAY_OF_MONTH, -(QUANTIDADE_DIAS_MES_PADRAO/2));
         dataFinal.add(Calendar.DAY_OF_MONTH, (QUANTIDADE_DIAS_MES_PADRAO/2));
 
-        if(!permiteVerPassado && dataInicial.before(hoje)){ //Esse before pode dar false
+        if(!permiteVerPassado && dataInicial.before(hoje)){
             int diasAdicionais = (int) (hoje.getTimeInMillis() - dataInicial.getTimeInMillis())/(1000*60*60*24);
             dataFinal.add(Calendar.DAY_OF_MONTH, diasAdicionais);
             dataInicial = hoje;
@@ -64,22 +64,20 @@ public class PaginadorDiasAdapter extends FragmentStatePagerAdapter {
 
     }
 
-    public Calendar getDataMudanca() {
-        return dataMudanca;
-    }
-
     @Override
     public int getItemPosition(Object object) {
         int posicao = super.getItemPosition(object);
         if (object instanceof Calendar) {
             Calendar dataProcurada = (Calendar) object;
+            int posicaoIteradora = 0;
             for (Calendar data : intervaloVisualizacao) {
                 if (dataProcurada.get(Calendar.YEAR) == data.get(Calendar.YEAR)
                     && dataProcurada.get(Calendar.MONTH) == data.get(Calendar.MONTH)
                     && dataProcurada.get(Calendar.DAY_OF_MONTH) == data.get(Calendar.DAY_OF_MONTH)) {
-                    posicao = intervaloVisualizacao.indexOf(data);
+                    posicao = posicaoIteradora;
                     break;
                 }
+                posicaoIteradora++;
             }
         }
 
@@ -89,64 +87,58 @@ public class PaginadorDiasAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
-        analisarNovoCarregamento(position);
+        Log.i(TAG, "instanciando item em " + position + " | " + getPageTitle(position));
         return super.instantiateItem(container, position);
-    }
-
-    /**
-     * Verifica se é necessário carregar mais abas de datas.
-     * @param ultimaPosicaoCarregada Índice da aba da última data visualizada.
-     */
-    private void analisarNovoCarregamento(int ultimaPosicaoCarregada) {
-        if (ultimaPosicaoCarregada >= intervaloVisualizacao.size() - 1) {
-            precisaNovoCarregamento = true;
-        } else if (ultimaPosicaoCarregada == 0 && permiteVerPassado) {
-            precisaNovoCarregamento = true;
-        }
     }
 
     @Override
     public void finishUpdate(ViewGroup container) {
         super.finishUpdate(container);
-        if (precisaNovoCarregamento) {
-            precisaNovoCarregamento = false;
-            ViewPager viewPager = (ViewPager) container;
-            viewPager.getCurrentItem();
-            int currentItem = ((ViewPager) container).getCurrentItem();
-            dataMudanca = intervaloVisualizacao.get(currentItem);
-            if (carregarNovasDatas(currentItem)) {
-                notifyDataSetChanged();
-            }
-        }
+        carregarNovasDatas((ViewPager) container);
+
     }
 
     /**
-     * Carrega novas abas com novas datas.
-     * @param indiceDataAtual Índice da aba da última data visualizada.
-     * @return TRUE se as abas foram carregadas com sucesso, FALSE caso contrário.
+     * Carrega novas abas no início ou fim da lista de abas com novas datas, caso necessário.
+     * @param container container que contém as abas e informações de gerenciamento das mesmas.
      */
-    private boolean carregarNovasDatas(int indiceDataAtual) {
-        boolean resultado;
+    private void carregarNovasDatas(ViewPager container) {
+        int indiceDataAtual = container.getCurrentItem();
+
         if (indiceDataAtual >= intervaloVisualizacao.size() - 2) {
+            Log.i(TAG, "Carregando mais abas no FINAL da lista");
+
             Calendar ultimaData = (Calendar) intervaloVisualizacao.getLast().clone();
             for (int contadorPosicao = 0; contadorPosicao < numeroAbasAAdicionar; contadorPosicao++) {
                 ultimaData.add(Calendar.DAY_OF_MONTH, 1);
                 intervaloVisualizacao.addLast((Calendar) ultimaData.clone());
             }
-            resultado = true;
-        } else if (indiceDataAtual < 1) {
-            Calendar primeiraData = (Calendar) intervaloVisualizacao.getFirst().clone();
-            for (int contadorPosicao = 0; contadorPosicao < numeroAbasAAdicionar; contadorPosicao++) {
-                primeiraData.add(Calendar.DAY_OF_MONTH, -1);
-                intervaloVisualizacao.addFirst((Calendar) primeiraData.clone());
-            }
-            resultado = true;
-        } else {
-            Log.i(TAG, "De acordo com o item atual, não é necessário carregar novas datas.");
-            resultado = false;
-        }
 
-        return resultado;
+            notifyDataSetChanged();
+            container.setCurrentItem(indiceDataAtual);
+
+        } else if (indiceDataAtual < 2 && permiteVerPassado) {
+
+            if(indiceUltimaDataCarregada >= indiceDataAtual){
+                container.computeScroll();
+                container.setCurrentItem(indiceUltimaDataCarregada);
+
+                indiceUltimaDataCarregada = -1;
+                Log.d(TAG, "Carregamento de abas no início finalizado.");
+            } else {
+                Log.i(TAG, "Carregando mais abas no INÍCIO da lista");
+                Calendar primeiraData = (Calendar) intervaloVisualizacao.getFirst().clone();
+                indiceDataAtual = getItemPosition(primeiraData) + numeroAbasAAdicionar + indiceDataAtual;
+
+                for (int contadorPosicao = 0; contadorPosicao < numeroAbasAAdicionar; contadorPosicao++) {
+                    primeiraData.add(Calendar.DAY_OF_MONTH, -1);
+                    intervaloVisualizacao.addFirst((Calendar) primeiraData.clone());
+                }
+
+                indiceUltimaDataCarregada = indiceDataAtual;
+                notifyDataSetChanged();
+            }
+        }
     }
 
     @Override
