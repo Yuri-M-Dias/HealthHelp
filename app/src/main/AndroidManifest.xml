@@ -15,13 +15,16 @@
         android:theme="@style/HealthHelpTheme">
         <activity android:name="br.ufg.inf.pes.healthhelp.view.LocalAtendimentoActivity" />
         <activity android:name="br.ufg.inf.pes.healthhelp.view.FormularioLocalAtendimentoActivity" />
+        <activity android:name="br.ufg.inf.pes.healthhelp.view.DetalhaAtendimentoActivity" />
         <activity android:name="br.ufg.inf.pes.healthhelp.view.AutenticacaoActivity" />
         <activity android:name="br.ufg.inf.pes.healthhelp.view.LocaisAtendimentoActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
+               <category android:name="android.intent.category.LAUNCHER" />
+
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>

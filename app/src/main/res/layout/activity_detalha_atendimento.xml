@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_detalha_atendimento"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context="br.ufg.inf.pes.healthhelp.view.DetalhaAtendimentoActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        android:id="@+id/appBarLayout">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar_detalhe_de_atendimento"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:elevation="4dp"
+            app:navigationIcon="@drawable/ic_arrow_back_black_24dp"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:subtitleTextColor="@android:color/background_light"
+            app:title="@string/activity_detalhe_de_atendimento"></android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
+
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:padding="10dp"
+        android:text="Local de Atendimento"
+        android:layout_marginTop="70dp"
+        android:textStyle="bold"
+        />
+    <ImageView
+        app:srcCompat="@drawable/mapslocalization"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:id="@+id/imageViewMaps"
+        android:layout_marginTop="100dp"
+        android:padding="@dimen/md_button_textpadding_horizontal"
+        />
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_marginTop="120dp"
+        android:text="Hospital das Clínicas"
+        android:textStyle="normal"
+        android:textSize="18sp"
+        android:textColor="@color/primary_text"
+        android:layout_toRightOf="@id/imageViewMaps"
+        android:maxLines="3"
+        android:singleLine="true"
+        android:ellipsize="end"
+        />
+
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:padding="10dp"
+        android:text="Profissional da Saúde"
+        android:layout_marginTop="190dp"
+        android:textStyle="bold"/>
+    <ImageView
+        app:srcCompat="@drawable/profissional_saude"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:id="@+id/imageViewProfissional"
+        android:layout_marginTop="230dp"
+        android:padding="@dimen/md_button_textpadding_horizontal"
+        />
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:padding="10dp"
+        android:layout_marginTop="240dp"
+        android:text="Dra Flávia Abreu"
+        android:textStyle="normal"
+        android:textColor="@color/primary_text"
+        android:layout_toRightOf="@id/imageViewProfissional"
+        android:maxLines="3"
+        android:singleLine="true"
+        android:ellipsize="end"
+        />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:padding="10dp"
+        android:layout_marginTop="310dp"
+        android:text="Data e Hora de Atendimento"
+        android:textStyle="bold"
+        />
+    <ImageView
+        app:srcCompat="@drawable/agenda_azul"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:id="@+id/imageViewAgenda"
+        android:layout_marginTop="350dp"
+        android:padding="@dimen/md_button_textpadding_horizontal"
+        />
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_marginTop="370dp"
+        android:text="30/11/2016
+das 08:00 às 20:00"
+        android:textStyle="normal"
+        android:textSize="18sp"
+        android:textColor="@color/primary_text"
+        android:layout_toRightOf="@id/imageViewAgenda"
+        android:maxLines="3"
+        android:ellipsize="end"
+        />
+
+    <Button
+        android:text="Remarcar Atendimento"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/button2"
+        android:layout_marginBottom="84dp"
+        android:layout_alignParentBottom="true"
+        android:layout_above="@id/imageViewAgenda"
+      />
+
+
+
+</RelativeLayout>
+
+
+

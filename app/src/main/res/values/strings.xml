@@ -26,6 +26,10 @@
     <string name="hint_nome_local_atendimento">Nome do Local de Atendimento</string>
     <string name="botao_adicionar_horario_atendimento_local">Adicionar Horário de Atendimento</string>
 
+    <!-- Strings relacionadas à view detalhe de atendimento -->
+    <string name="activity_detalhe_de_atendimento">Detalhe de Atendimento</string>
+
+
     <!-- Strings relacionadas à view de período de tempo -->
     <string name="excluir_periodo_tempo">Excluir período de tempo</string>
     <string name="botao_domingo">D</string>
