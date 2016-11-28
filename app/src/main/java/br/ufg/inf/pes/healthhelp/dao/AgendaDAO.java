@@ -35,7 +35,9 @@ public class AgendaDAO extends AbstractDAO<Agenda> {
                 @Override
                 public void run() throws Exception {
 
-                    List<Agenda> agendas = new LinkedList<Agenda>();
+                    List<Atuacao> atuacoes = new ArrayList<Atuacao>();
+                    Atuacao atuacao = new Atuacao();
+                    List<Agenda> agendas = new ArrayList<Agenda>();
                     Agenda agenda = new Agenda();
                     agenda.setNome("Cirurgias");
                     agenda.setId("22");
@@ -46,15 +48,29 @@ public class AgendaDAO extends AbstractDAO<Agenda> {
                     agenda.setId("33");
                     agendas.add(agenda);
 
+                    atuacao.setAgendas(agendas);
+                    atuacoes.add(atuacao);
+
+                    agendas = new ArrayList<Agenda>();
                     agenda = new Agenda();
                     agenda.setNome("teste");
                     agenda.setId("2");
                     agendas.add(agenda);
 
+                    atuacao = new Atuacao();
+                    atuacao.setAgendas(agendas);
+                    atuacoes.add(atuacao);
+
+                    agendas = new ArrayList<Agenda>();
                     agenda = new Agenda();
                     agenda.setNome("Consultas");
                     agenda.setId("30");
                     agendas.add(agenda);
+
+                    atuacao = new Atuacao();
+                    atuacao.setAgendas(agendas);
+                    atuacoes.add(atuacao);
+
 
                     Thread.sleep(2000);
 
