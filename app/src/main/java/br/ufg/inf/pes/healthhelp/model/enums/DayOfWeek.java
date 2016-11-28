@@ -16,24 +16,18 @@ public enum DayOfWeek {
     private int value;
     private String displayName;
 
-    private DayOfWeek(int value, String displayName) {
+    DayOfWeek(int value, String displayName) {
         this.value = value;
         this.displayName = displayName;
     }
 
     public static DayOfWeek of(final int dayOfWeek) {
-        DayOfWeek dayOfWeekReturn = null;
         for (DayOfWeek dayOfWeekFinder : DayOfWeek.values()) {
             if (dayOfWeekFinder.getValue() == dayOfWeek) {
                 return dayOfWeekFinder;
             }
         }
-        if (dayOfWeekReturn == null) {
-            throw new InvalidParameterException("Unable to convert to a DayOfWeek");
-        }
-
-        return dayOfWeekReturn;
-
+        throw new InvalidParameterException("Unable to convert to a DayOfWeek:" + dayOfWeek);
     }
 
     public int getValue() {

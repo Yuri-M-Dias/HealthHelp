@@ -1,15 +1,9 @@
 package br.ufg.inf.pes.healthhelp.model;
 
-import com.google.firebase.database.Exclude;
-
-import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-public class Atuacao implements Serializable {
-
-    @Exclude
-    private String id;
+public class Atuacao extends BaseObject {
 
     private Date dataInicio;
     private Date dataFim;
@@ -18,16 +12,6 @@ public class Atuacao implements Serializable {
     private List<PeriodoTempo> horariosAlmoco;
     private LocalAtendimento localAtendimento;
     private Profissional profissional;
-
-    @Exclude
-    public String getId() {
-        return id;
-    }
-
-    @Exclude
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public LocalAtendimento getLocalAtendimento() {
         return localAtendimento;

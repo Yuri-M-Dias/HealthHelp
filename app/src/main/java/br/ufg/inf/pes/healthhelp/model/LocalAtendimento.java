@@ -1,14 +1,8 @@
 package br.ufg.inf.pes.healthhelp.model;
 
-import com.google.firebase.database.Exclude;
-
-import java.io.Serializable;
 import java.util.List;
 
-public class LocalAtendimento implements Serializable {
-
-    @Exclude
-    private String id;
+public class LocalAtendimento extends BaseObject {
 
     private String endereco;
     private String nome;
@@ -26,16 +20,6 @@ public class LocalAtendimento implements Serializable {
         this.endereco = endereco;
         this.telefone = telefone;
 
-    }
-
-    @Exclude
-    public String getId() {
-        return id;
-    }
-
-    @Exclude
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getNome() {

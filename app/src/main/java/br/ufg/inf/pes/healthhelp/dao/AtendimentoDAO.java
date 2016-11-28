@@ -15,32 +15,7 @@ import br.ufg.inf.pes.healthhelp.model.event.PaginadorDiasEvent;
 public class AtendimentoDAO extends AbstractDAO {
 
     public AtendimentoDAO() {
-        super(AtendimentoDAO.class.getCanonicalName(), "atendimento");
-    }
-
-    @Override
-    public void buscarTodos() {
-        //TODO
-    }
-
-    @Override
-    public void buscarPelaId(String id) {
-        //TODO
-    }
-
-    @Override
-    public void inserir(Object objeto) {
-        //TODO
-    }
-
-    @Override
-    public void remover(Object objeto) {
-        //TODO
-    }
-
-    @Override
-    public void atualizar(Object objeto) {
-        //TODO
+        super(AtendimentoDAO.class.getCanonicalName(), "atendimento", Atendimento.class);
     }
 
     public void buscarAtendimentos(final Agenda[] agendas, final Calendar diaOcorrencia) {
