@@ -25,6 +25,7 @@ public class PaginadorDiasAdapter extends FragmentStatePagerAdapter {
 
     private final String TAG = PaginadorDiasAdapter.class.getName();
     private final int numeroAbasAAdicionar = 7;
+    private final Calendar hoje;
     private LinkedList<Calendar> intervaloVisualizacao;
     private boolean permiteVerPassado;
     private final int QUANTIDADE_DIAS_MES_PADRAO = 30;
@@ -33,6 +34,12 @@ public class PaginadorDiasAdapter extends FragmentStatePagerAdapter {
 
     public PaginadorDiasAdapter(FragmentManager fm, boolean permiteVerPassado, Calendar contextoTemporal, List<Agenda> agendas) {
         super(fm);
+        hoje = Calendar.getInstance();
+        hoje.set(Calendar.HOUR_OF_DAY, 0);
+        hoje.set(Calendar.MINUTE, 0);
+        hoje.set(Calendar.SECOND, 0);
+        hoje.set(Calendar.MILLISECOND, 0);
+
         this.permiteVerPassado = permiteVerPassado;
         this.agendas = agendas;
         construirIntervaloPadraoVisualizacao(contextoTemporal);
@@ -46,8 +53,6 @@ public class PaginadorDiasAdapter extends FragmentStatePagerAdapter {
         intervaloVisualizacao = new LinkedList<>();
         Calendar dataInicial = (Calendar) contextoTemporal.clone();
         Calendar dataFinal = (Calendar) contextoTemporal.clone();
-
-        Calendar hoje = Calendar.getInstance();
 
         dataInicial.add(Calendar.DAY_OF_MONTH, -(QUANTIDADE_DIAS_MES_PADRAO/2));
         dataFinal.add(Calendar.DAY_OF_MONTH, (QUANTIDADE_DIAS_MES_PADRAO/2));
@@ -84,13 +89,6 @@ public class PaginadorDiasAdapter extends FragmentStatePagerAdapter {
         return posicao;
     }
 
-
-    @Override
-    public Object instantiateItem(ViewGroup container, int position) {
-        Log.i(TAG, "instanciando item em " + position + " | " + getPageTitle(position));
-        return super.instantiateItem(container, position);
-    }
-
     @Override
     public void finishUpdate(ViewGroup container) {
         super.finishUpdate(container);
@@ -117,8 +115,7 @@ public class PaginadorDiasAdapter extends FragmentStatePagerAdapter {
             notifyDataSetChanged();
             container.setCurrentItem(indiceDataAtual);
 
-        } else if (indiceDataAtual < 2 && permiteVerPassado) {
-
+        } else if (indiceDataAtual < 2) {
             if(indiceUltimaDataCarregada >= indiceDataAtual){
                 container.computeScroll();
                 container.setCurrentItem(indiceUltimaDataCarregada);
@@ -128,15 +125,31 @@ public class PaginadorDiasAdapter extends FragmentStatePagerAdapter {
             } else {
                 Log.i(TAG, "Carregando mais abas no INÍCIO da lista");
                 Calendar primeiraData = (Calendar) intervaloVisualizacao.getFirst().clone();
-                indiceDataAtual = getItemPosition(primeiraData) + numeroAbasAAdicionar + indiceDataAtual;
+                indiceDataAtual = getItemPosition(primeiraData) + indiceDataAtual;///
 
-                for (int contadorPosicao = 0; contadorPosicao < numeroAbasAAdicionar; contadorPosicao++) {
+                int contadorPosicao;
+                boolean intervaloFoiModificado = false;
+                for (contadorPosicao = 0; contadorPosicao < numeroAbasAAdicionar; contadorPosicao++) {
                     primeiraData.add(Calendar.DAY_OF_MONTH, -1);
-                    intervaloVisualizacao.addFirst((Calendar) primeiraData.clone());
+                    if (primeiraData.before(hoje) && !permiteVerPassado) {
+                        if(intervaloFoiModificado) {
+                            Log.i(TAG, "Apenas algumas dias foram adicionados ao início da lista.");
+                        } else {
+                            Log.i(TAG, "Limite inferior (data corrente) já atingido.");
+                        }
+                        break;
+                    } else {
+                        intervaloVisualizacao.addFirst((Calendar) primeiraData.clone());
+                        intervaloFoiModificado = true;
+                    }
                 }
 
-                indiceUltimaDataCarregada = indiceDataAtual;
-                notifyDataSetChanged();
+                indiceDataAtual += contadorPosicao;
+                
+                if (intervaloFoiModificado) {
+                    indiceUltimaDataCarregada = indiceDataAtual;
+                    notifyDataSetChanged();
+                }
             }
         }
     }
