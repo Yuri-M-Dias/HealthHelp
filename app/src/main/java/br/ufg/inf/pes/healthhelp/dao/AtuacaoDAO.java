@@ -3,6 +3,7 @@ package br.ufg.inf.pes.healthhelp.dao;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.util.AsyncExecutor;
 
+import java.text.SimpleDateFormat;
 import java.util.LinkedList;
 import java.util.List;
 
