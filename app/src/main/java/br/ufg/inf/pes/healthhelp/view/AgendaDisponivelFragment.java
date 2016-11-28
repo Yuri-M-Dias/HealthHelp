@@ -31,42 +31,29 @@ import br.ufg.pes.healthhelp.R;
 
 public class AgendaDisponivelFragment extends AgendaFragment {
 
-    private static final String ARG_DATA = "data";
-    private static final String ARG_ATUACAO = "atuacao";
-
-    private Calendar data;
-    private Atuacao atuacao;
-
     private AgendaDisponivelActivity agendaDisponivelActivity;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         agendaDisponivelActivity = ((AgendaDisponivelActivity) getActivity());
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        LinearLayout rootView = (LinearLayout) inflater.inflate(R.layout.fragment_agenda_disponivel, container, false);
+        View view = super.onCreateView(inflater, container, savedInstanceState);
 
-        data = (Calendar) getArguments().getSerializable(ARG_DATA);
-        atuacao = (Atuacao) getArguments().getSerializable(ARG_ATUACAO);
+        agendaDisponivelActivity.getAtendimentoService().buscarAtendimentos(getAtuacao().getAgendas(), getData());
 
-        rootView.findViewById(R.id.listview_horarios).setVisibility(View.GONE);
-        rootView.findViewById(R.id.textview_sem_horarios_disponiveis).setVisibility(View.GONE);
-        rootView.findViewById(R.id.imagem_sem_horarios_disponiveis).setVisibility(View.GONE);
-
-        agendaDisponivelActivity.getAtendimentoService().buscarAtendimentos(atuacao.getAgendas(), data);
-
-        return rootView;
+        return view;
     }
 
+    @Override
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onDatabaseEvent(PaginadorDiasEvent<List<Atendimento>> paginadorDiasEvent) {
-        final LinkedList<Atendimento> listaAtendimentosDisponiveis = criarListaAtendimentos(atuacao.getAgendas());
-        if (paginadorDiasEvent.getFiltro().equals(data)) {
+        final LinkedList<Atendimento> listaAtendimentosDisponiveis = criarListaAtendimentos(getAtuacao().getAgendas());
+        if (paginadorDiasEvent.getFiltro().equals(getData())) {
 
             //TODO: Implementar adição e remoção de períodos de tempo baseado nos horários bloqueados e liberados.
 
@@ -92,43 +79,6 @@ public class AgendaDisponivelFragment extends AgendaFragment {
 
         }
 
-    }
-
-    /**
-     * Cria uma lista de horários disponíveis para atendimento com base nos períodos de tempo das atuacao de uma atuação.
-     *
-     * @param agendas Agendas a serem utilizadas para criar a lista de atendimentos disponíveis.
-     * @return Lista de atendimentos disponíveis para marcação.
-     */
-    private LinkedList<Atendimento> criarListaAtendimentos(List<Agenda> agendas) {
-        LinkedList<Atendimento> atendimentosVazios = new LinkedList<>();
-
-        for (Agenda agenda : agendas) {
-            for (PeriodoTempo periodoTempo : agenda.getHorariosAtendimento()) {
-                Calendar horaInicial = (Calendar) data.clone();
-
-                if (periodoTempo.getDiasSemana().contains(DayOfWeek.of(data.get(Calendar.DAY_OF_WEEK)))) {
-                    for (Calendar contador = (Calendar) periodoTempo.getHoraInicioCalendar().clone();
-                         !contador.after(periodoTempo.getHoraFimCalendar());
-                         contador.add(Calendar.MINUTE, agenda.getTempoPadraoMinutos())) {
-
-                        horaInicial.set(Calendar.HOUR_OF_DAY, contador.get(Calendar.HOUR_OF_DAY));
-                        horaInicial.set(Calendar.MINUTE, contador.get(Calendar.MINUTE));
-
-                        Atendimento atendimento = new Atendimento();
-                        atendimento.setAgenda(agenda);
-
-                        atendimento.setHoraInicio((Calendar) horaInicial.clone());
-
-                        horaInicial.add(Calendar.MINUTE, agenda.getTempoPadraoMinutos());
-                        atendimento.setHoraFim((Calendar) horaInicial.clone());
-
-                        atendimentosVazios.add(atendimento);
-                    }
-                }
-            }
-        }
-        return atendimentosVazios;
     }
 
     /**

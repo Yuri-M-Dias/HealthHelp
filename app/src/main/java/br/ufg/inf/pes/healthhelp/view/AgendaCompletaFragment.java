@@ -2,8 +2,6 @@ package br.ufg.inf.pes.healthhelp.view;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +20,6 @@ import java.util.List;
 
 import br.ufg.inf.pes.healthhelp.model.Agenda;
 import br.ufg.inf.pes.healthhelp.model.Atendimento;
-import br.ufg.inf.pes.healthhelp.model.Atuacao;
 import br.ufg.inf.pes.healthhelp.model.PeriodoTempo;
 import br.ufg.inf.pes.healthhelp.model.enums.DayOfWeek;
 import br.ufg.inf.pes.healthhelp.model.event.PaginadorDiasEvent;
@@ -31,53 +28,33 @@ import br.ufg.pes.healthhelp.R;
 
 public class AgendaCompletaFragment extends AgendaFragment {
 
-    private static final String ARG_DATA = "data";
-    private static final String ARG_ATUACAO = "atuacao";
-
-    private Calendar data;
-    private Atuacao atuacao;
-
-    private AgendaCompletaActivity agendaDisponivelActivity;
+    private AgendaCompletaActivity agendaCompletaActivity;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EventBus.getDefault().register(this);
-        agendaDisponivelActivity = ((AgendaCompletaActivity) getActivity());
-
-    }
-
-    @Override
-    public void onDestroy() {
-        EventBus.getDefault().unregister(this);
-        super.onDestroy();
+        agendaCompletaActivity = ((AgendaCompletaActivity) getActivity());
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        LinearLayout rootView = (LinearLayout) inflater.inflate(R.layout.fragment_agenda_disponivel, container, false);
+        View view = super.onCreateView(inflater, container, savedInstanceState);
 
-        data = (Calendar) getArguments().getSerializable(ARG_DATA);
-        atuacao = (Atuacao) getArguments().getSerializable(ARG_ATUACAO);
+        agendaCompletaActivity.getAtendimentoService().buscarAtendimentos(getAtuacao().getAgendas(), getData());
 
-        rootView.findViewById(R.id.listview_horarios).setVisibility(View.GONE);
-        rootView.findViewById(R.id.textview_sem_horarios_disponiveis).setVisibility(View.GONE);
-        rootView.findViewById(R.id.imagem_sem_horarios_disponiveis).setVisibility(View.GONE);
-
-        agendaDisponivelActivity.getAtendimentoService().buscarAtendimentos(atuacao.getAgendas(), data);
-
-        return rootView;
+        return view;
     }
 
+    @Override
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onDatabaseEvent(PaginadorDiasEvent<List<Atendimento>> paginadorDiasEvent) {
-        final LinkedList<Atendimento> listaAtendimentosDisponiveis = criarListaAtendimentos(atuacao.getAgendas());
-        if (paginadorDiasEvent.getFiltro().equals(data)) {
+        final LinkedList<Atendimento> listaAtendimentosDisponiveis = criarListaAtendimentos(getAtuacao().getAgendas());
+        if (paginadorDiasEvent.getFiltro().equals(getData())) {
 
             //TODO: Implementar adição e remoção de períodos de tempo baseado nos horários bloqueados e liberados.
 
-            eliminarHorariosAgendados(listaAtendimentosDisponiveis, paginadorDiasEvent.getObjeto());
+            List<Atendimento> atendimentosMarcados =  paginadorDiasEvent.getObjeto();
 
             getView().findViewById(R.id.carregamento_horarios_disponiveis).setVisibility(View.GONE);
             if (listaAtendimentosDisponiveis.isEmpty()) {
@@ -90,7 +67,7 @@ public class AgendaCompletaFragment extends AgendaFragment {
                 listaHorarios.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                        agendaDisponivelActivity.setAtendimento(listaAtendimentosDisponiveis.get(i));
+                        agendaCompletaActivity.setAtendimento(listaAtendimentosDisponiveis.get(i));
                     }
                 });
                 listaHorarios.setAdapter(agendaDiariaAdapter);
@@ -99,64 +76,6 @@ public class AgendaCompletaFragment extends AgendaFragment {
 
         }
 
-    }
-
-    /**
-     * Cria uma lista de horários disponíveis para atendimento com base nos períodos de tempo das atuacao de uma atuação.
-     *
-     * @param agendas Agendas a serem utilizadas para criar a lista de atendimentos disponíveis.
-     * @return Lista de atendimentos disponíveis para marcação.
-     */
-    private LinkedList<Atendimento> criarListaAtendimentos(List<Agenda> agendas) {
-        LinkedList<Atendimento> atendimentosVazios = new LinkedList<>();
-
-        for (Agenda agenda : agendas) {
-            for (PeriodoTempo periodoTempo : agenda.getHorariosAtendimento()) {
-                Calendar horaInicial = (Calendar) data.clone();
-
-                if (periodoTempo.getDiasSemana().contains(DayOfWeek.of(data.get(Calendar.DAY_OF_WEEK)))) {
-                    for (Calendar contador = (Calendar) periodoTempo.getHoraInicioCalendar().clone();
-                         !contador.after(periodoTempo.getHoraFimCalendar());
-                         contador.add(Calendar.MINUTE, agenda.getTempoPadraoMinutos())) {
-
-                        horaInicial.set(Calendar.HOUR_OF_DAY, contador.get(Calendar.HOUR_OF_DAY));
-                        horaInicial.set(Calendar.MINUTE, contador.get(Calendar.MINUTE));
-
-                        Atendimento atendimento = new Atendimento();
-                        atendimento.setAgenda(agenda);
-
-                        atendimento.setHoraInicio((Calendar) horaInicial.clone());
-
-                        horaInicial.add(Calendar.MINUTE, agenda.getTempoPadraoMinutos());
-                        atendimento.setHoraFim((Calendar) horaInicial.clone());
-
-                        atendimentosVazios.add(atendimento);
-                    }
-                }
-            }
-        }
-        return atendimentosVazios;
-    }
-
-    /**
-     * Elimina dos horários de atendimento que estão disponíveis, os horários de atendimento que já tem atendimentos marcados pra eles.
-     *
-     * @param atendimentosDisponiveis Lista de atendimentos com horário disponível a ser modificada.
-     * @param atendimentosAgendados   Lista de atendimentos já marcados.
-     */
-    private void eliminarHorariosAgendados(List<Atendimento> atendimentosDisponiveis, List<Atendimento> atendimentosAgendados) {
-        List<Atendimento> atendimentosARemover = new ArrayList<>();
-        for (Atendimento atendimentoMarcado : atendimentosAgendados) {
-            for (Atendimento atendimentoDisponivel : atendimentosDisponiveis) {
-                if (atendimentoMarcado.getHoraInicio().equals(atendimentoDisponivel.getHoraInicio())) {
-                    atendimentosARemover.add(atendimentoDisponivel);
-                }
-            }
-        }
-
-        for (Atendimento atendimentoARemover : atendimentosARemover) {
-            atendimentosDisponiveis.remove(atendimentoARemover);
-        }
     }
 
 }
