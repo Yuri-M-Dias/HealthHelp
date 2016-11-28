@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import br.ufg.inf.pes.healthhelp.model.Atuacao;
 import br.ufg.inf.pes.healthhelp.model.Sessao;
 import br.ufg.pes.healthhelp.R;
 
@@ -76,8 +77,8 @@ public class HomeActivity extends AppCompatActivity {
 
     public void visualizarAtuacoes(View view) {
 
-        CharSequence text = "Visualizar atuação nao implementado";
-        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, AtuacoesActivity.class);
+        startActivity(intent);
     }
 
     public void visualizarLocaisAtendimento(View view) {

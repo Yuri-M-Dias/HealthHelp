@@ -54,7 +54,12 @@ public class Atuacao implements Serializable {
     }
 
     public Date getDataFim() {
-        return dataFim;
+        if (dataFim == null) {
+            return new Date(System.currentTimeMillis());
+        }
+        else {
+            return dataFim;
+        }
     }
 
     public void setDataFim(Date dataFim) {

@@ -51,20 +51,6 @@
             app:fab_colorPressed="@color/accent"
             app:fab_colorRipple="@color/icons"
             app:fab_label="Novo posto de atendimento" />
-
-        <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/fab_item_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|right"
-            android:layout_marginBottom="8dp"
-            android:layout_marginRight="8dp"
-            android:onClick="atuacoes"
-            android:src="@drawable/ic_hospital"
-            app:fab_colorNormal="@color/icons"
-            app:fab_colorPressed="@color/accent"
-            app:fab_colorRipple="@color/icons"
-            app:fab_label="Atuações" />
     </com.github.clans.fab.FloatingActionMenu>
 
 </android.support.design.widget.CoordinatorLayout>

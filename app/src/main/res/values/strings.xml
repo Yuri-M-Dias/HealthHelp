@@ -67,7 +67,10 @@
 
     <!-- Strings relacionadas à view atuações -->
     <string name="atuacoes">Atuações</string>
-
+    <string name="atuacoes_titulo_dialog">Carregando atuações...</string>
+    <string name="atuacoes_mensagem_dialog">Aguarde enquanto o sistema carrega a lista atuações</string>
+    <string name="atuacoes_atuais">Atuações Atuais</string>
+    <string name="atuacoes_anteriores">Atuações Anteriores</string>
 
     <string name="action_settings">Settings</string>
 
