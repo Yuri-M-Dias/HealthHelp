@@ -87,7 +87,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" >
     <ImageView
-        app:srcCompat="@drawable/profissional_saude"
+        app:srcCompat="@drawable/profissional_saude_azul"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_width="70dp"
