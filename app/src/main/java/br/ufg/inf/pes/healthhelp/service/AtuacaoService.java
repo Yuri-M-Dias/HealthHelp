@@ -1,7 +1,10 @@
 package br.ufg.inf.pes.healthhelp.service;
 
+import java.util.List;
+
 import br.ufg.inf.pes.healthhelp.dao.AtuacaoDAO;
 import br.ufg.inf.pes.healthhelp.model.Atuacao;
+import br.ufg.inf.pes.healthhelp.model.LocalAtendimento;
 import br.ufg.inf.pes.healthhelp.model.Usuario;
 
 /**
@@ -20,15 +23,28 @@ public class AtuacaoService {
      *
      * @param usuario usuário pelo qual as ocupações serão procuradas.
      */
-    void solicitarListaAtuacoes(Usuario usuario) {
-        atuacaoDAO.buscarTodos();
+    public void solicitarListaAtuacoes(String id) {
+        atuacaoDAO.buscarPelaId(id);
     }
 
-    void salvar(Atuacao atuacao) {
+    public void solicitarListaAtuacoesPorUsuario(Usuario usuario) {
+        atuacaoDAO.buscarPorUsuario(usuario);
+    }
+
+    public void solicitarAtuacoesPorId(String id){
+        atuacaoDAO.buscarPelaId(id);
+    }
+
+    public void solicitarListaProfissionaisSaude(List<LocalAtendimento> locaisAtendimento) {
+        atuacaoDAO.buscarPorLocais(locaisAtendimento);
+    }
+
+    public void salvar(Atuacao atuacao) {
         if (atuacao.getId() == null) {
             atuacaoDAO.inserir(atuacao);
         } else {
             atuacaoDAO.atualizar(atuacao);
         }
     }
+
 }

@@ -1,6 +1,7 @@
 package br.ufg.inf.pes.healthhelp.service;
 
 import java.util.Calendar;
+import java.util.List;
 
 import br.ufg.inf.pes.healthhelp.dao.AtendimentoDAO;
 import br.ufg.inf.pes.healthhelp.model.Agenda;
@@ -16,7 +17,7 @@ public class AtendimentoService {
         atendimentoDAO = new AtendimentoDAO();
     }
 
-    public void buscarAtendimentos(Agenda[] agendas, Calendar diaOcorrencia) {
+    public void buscarAtendimentos(List<Agenda> agendas, Calendar diaOcorrencia) {
         atendimentoDAO.buscarAtendimentos(agendas, diaOcorrencia);
     }
 }

@@ -15,35 +15,10 @@ import br.ufg.inf.pes.healthhelp.model.event.PaginadorDiasEvent;
 public class AtendimentoDAO extends AbstractDAO {
 
     public AtendimentoDAO() {
-        super(AtendimentoDAO.class.getCanonicalName(), "atendimento");
+        super(AtendimentoDAO.class.getCanonicalName(), "atendimento", Atendimento.class);
     }
 
-    @Override
-    public void buscarTodos() {
-        //TODO
-    }
-
-    @Override
-    public void buscarPelaId(String id) {
-        //TODO
-    }
-
-    @Override
-    public void inserir(Object objeto) {
-        //TODO
-    }
-
-    @Override
-    public void remover(Object objeto) {
-        //TODO
-    }
-
-    @Override
-    public void atualizar(Object objeto) {
-        //TODO
-    }
-
-    public void buscarAtendimentos(final Agenda[] agendas, final Calendar diaOcorrencia) {
+    public void buscarAtendimentos(final List<Agenda> agendas, final Calendar diaOcorrencia) {
         //TODO: Substituir a implementação stub abaixo pela implementação correta
         AsyncExecutor.create().execute(
             new AsyncExecutor.RunnableEx() {
@@ -51,8 +26,9 @@ public class AtendimentoDAO extends AbstractDAO {
                 public void run() throws Exception {
                     List<Atendimento> atendimentos = new ArrayList<>();
                     Atendimento atendimento = new Atendimento();
-                    atendimento.setAgenda(agendas[0]);
+                    atendimento.setAgenda(agendas.get(0));
                     atendimento.setPaciente(new Paciente());
+                    atendimento.getPaciente().setNome("Patrícia Silva");
                     atendimento.setHoraInicio(Calendar.getInstance());
                     atendimento.getHoraInicioCalendar().set(Calendar.HOUR_OF_DAY, 9);
                     atendimento.getHoraInicioCalendar().set(Calendar.MINUTE, 0);
@@ -66,8 +42,9 @@ public class AtendimentoDAO extends AbstractDAO {
                     }
 
                     atendimento = new Atendimento();
-                    atendimento.setAgenda(agendas[1]);
+                    atendimento.setAgenda(agendas.get(1));
                     atendimento.setPaciente(new Paciente());
+                    atendimento.getPaciente().setNome("João Roberto");
                     atendimento.setHoraInicio(Calendar.getInstance());
                     atendimento.getHoraInicioCalendar().set(Calendar.HOUR_OF_DAY, 15);
                     atendimento.getHoraInicioCalendar().set(Calendar.MINUTE, 00);
@@ -80,7 +57,7 @@ public class AtendimentoDAO extends AbstractDAO {
                         atendimentos.add(atendimento);
                     }
 
-                    Thread.sleep(2000);
+                    Thread.sleep(500);
 
                     EventBus.getDefault().post(new PaginadorDiasEvent<>(atendimentos, diaOcorrencia));
                 }
