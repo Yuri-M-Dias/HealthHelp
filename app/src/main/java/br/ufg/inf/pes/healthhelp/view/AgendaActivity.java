@@ -157,10 +157,18 @@ public class AgendaActivity extends AppCompatActivity {
         PeriodoTempo periodoAlmoco = new PeriodoTempo();
         periodoAlmoco.setHoraInicio(Calendar.getInstance());
         periodoAlmoco.getHoraInicioCalendar().set(Calendar.HOUR_OF_DAY, 12);
-        periodoAlmoco.getHoraInicioCalendar().set(Calendar.MINUTE, 21);
+        periodoAlmoco.getHoraInicioCalendar().set(Calendar.MINUTE, 20);
         periodoAlmoco.setHoraFim(Calendar.getInstance());
         periodoAlmoco.getHoraFimCalendar().set(Calendar.HOUR_OF_DAY, 14);
         periodoAlmoco.getHoraFimCalendar().set(Calendar.MINUTE, 00);
+        diasSemana = new ArrayList<>();
+        diasSemana.add(DayOfWeek.MONDAY);
+        diasSemana.add(DayOfWeek.TUESDAY);
+        diasSemana.add(DayOfWeek.WEDNESDAY);
+        diasSemana.add(DayOfWeek.THURSDAY);
+        diasSemana.add(DayOfWeek.FRIDAY);
+        diasSemana.add(DayOfWeek.SATURDAY);
+        periodoAlmoco.setDiasSemana(diasSemana);
         atuacao.setHorariosAlmoco(new ArrayList<PeriodoTempo>());
         atuacao.getHorariosAlmoco().add(periodoAlmoco);
 

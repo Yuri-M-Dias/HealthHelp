@@ -19,6 +19,7 @@ import java.util.List;
 import br.ufg.inf.pes.healthhelp.model.Atendimento;
 import br.ufg.inf.pes.healthhelp.model.Atuacao;
 import br.ufg.inf.pes.healthhelp.model.PeriodoTempo;
+import br.ufg.inf.pes.healthhelp.model.enums.DayOfWeek;
 import br.ufg.pes.healthhelp.R;
 
 /**
@@ -33,7 +34,7 @@ public class AgendaDiariaCompletaAdapter extends AgendaDiariaAdapter {
         List<Atendimento> atendimentosCompletos = combinarAtendimentos(atendimentosPossiveis, atendimentosMarcados);
         getFonteDados().clear();
         getFonteDados().addAll(atendimentosCompletos);
-        getFonteDados().addAll(atuacao.getHorariosAlmoco());
+        getFonteDados().addAll(filtrarHorariosAlmoco(atuacao.getHorariosAlmoco(), data));
 
         Collections.sort(getFonteDados(), new Comparator() {
             @Override
@@ -119,6 +120,23 @@ public class AgendaDiariaCompletaAdapter extends AgendaDiariaAdapter {
 
         return listaAtendimentosCombinados;
 
+    }
+
+    /**
+     * Filtra os horários de almoço para para exibiçãoa na agenda, evitando que um dia mostre horário de almoço que não existe para data.
+     * @param horariosAlmoco lista de horários de almoço.
+     * @param data data a ser utilizada como filtro.
+     * @return lista de horários de almoço filtrada.
+     */
+    private List<PeriodoTempo> filtrarHorariosAlmoco(List<PeriodoTempo> horariosAlmoco, Calendar data){
+        DayOfWeek dayOfWeek = DayOfWeek.of(data.get(Calendar.DAY_OF_WEEK));
+        List<PeriodoTempo> horariosFiltrados = new ArrayList<>();
+        for(PeriodoTempo horarioAlmoco : horariosAlmoco) {
+            if(horarioAlmoco.getDiasSemana().contains(dayOfWeek)) {
+                horariosFiltrados.add(horarioAlmoco);
+            }
+        }
+        return horariosFiltrados;
     }
 
 }
