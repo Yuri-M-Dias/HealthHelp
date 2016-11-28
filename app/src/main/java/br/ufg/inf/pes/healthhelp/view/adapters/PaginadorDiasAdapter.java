@@ -19,7 +19,7 @@ import br.ufg.inf.pes.healthhelp.view.AgendaFragment;
  * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
  * one of the sections/tabs/pages.
  */
-public class PaginadorDiasAdapter extends FragmentStatePagerAdapter {
+public class PaginadorDiasAdapter<T extends AgendaFragment> extends FragmentStatePagerAdapter {
 
     private final String TAG = PaginadorDiasAdapter.class.getName();
     private final int numeroAbasAAdicionar = 7;
@@ -29,9 +29,8 @@ public class PaginadorDiasAdapter extends FragmentStatePagerAdapter {
     private final int QUANTIDADE_DIAS_MES_PADRAO = 30;
     private int indiceUltimaDataCarregada = -1;
     private Atuacao atuacao;
-    private Class<AgendaFragment> tipoAgenda;
 
-    public PaginadorDiasAdapter(FragmentManager fm, boolean permiteVerPassado, Calendar contextoTemporal, Atuacao atuacao, Class<AgendaFragment> tipoAgenda ) {
+    public PaginadorDiasAdapter(FragmentManager fm, boolean permiteVerPassado, Calendar contextoTemporal, Atuacao atuacao) {
         super(fm);
         hoje = Calendar.getInstance();
         hoje.set(Calendar.HOUR_OF_DAY, 0);
@@ -41,7 +40,6 @@ public class PaginadorDiasAdapter extends FragmentStatePagerAdapter {
 
         this.permiteVerPassado = permiteVerPassado;
         this.atuacao = atuacao;
-        this.tipoAgenda = tipoAgenda;
         construirIntervaloPadraoVisualizacao(contextoTemporal);
     }
 
@@ -170,11 +168,7 @@ public class PaginadorDiasAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        if (tipoAgenda == AgendaFragment.class ){
-            return AgendaFragment.newInstance(intervaloVisualizacao.get(position), atuacao);
-        } else {
-            return null;
-        }
+        return T.newInstance(intervaloVisualizacao.get(position), atuacao);
     }
 
     @Override

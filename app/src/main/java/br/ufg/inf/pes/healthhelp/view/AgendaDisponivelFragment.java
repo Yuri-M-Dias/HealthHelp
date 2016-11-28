@@ -28,7 +28,7 @@ import br.ufg.inf.pes.healthhelp.model.event.PaginadorDiasEvent;
 import br.ufg.inf.pes.healthhelp.view.adapters.AgendaDiariaAdapter;
 import br.ufg.pes.healthhelp.R;
 
-public class AgendaFragment extends Fragment {
+public class AgendaDisponivelFragment extends AgendaFragment {
 
     private static final String ARG_DATA = "data";
     private static final String ARG_ATUACAO = "atuacao";
@@ -36,15 +36,17 @@ public class AgendaFragment extends Fragment {
     private Calendar data;
     private Atuacao atuacao;
 
-    public AgendaFragment() {
+    private AgendaDisponivelActivity agendaDisponivelActivity;
+
+    public AgendaDisponivelFragment() {
     }
 
     /**
      * Returns a new instance of this fragment for the given section
      * number.
      */
-    public static AgendaFragment newInstance(Calendar data, Atuacao atuacao) {
-        AgendaFragment fragment = new AgendaFragment();
+    public static AgendaDisponivelFragment newInstance(Calendar data, Atuacao atuacao) {
+        AgendaDisponivelFragment fragment = new AgendaDisponivelFragment();
         Bundle args = new Bundle();
         args.putSerializable(ARG_DATA, data);
         args.putSerializable(ARG_ATUACAO, atuacao);
@@ -56,6 +58,8 @@ public class AgendaFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EventBus.getDefault().register(this);
+        agendaDisponivelActivity = ((AgendaDisponivelActivity) getActivity());
+
     }
 
     @Override
@@ -76,7 +80,7 @@ public class AgendaFragment extends Fragment {
         rootView.findViewById(R.id.textview_sem_horarios_disponiveis).setVisibility(View.GONE);
         rootView.findViewById(R.id.imagem_sem_horarios_disponiveis).setVisibility(View.GONE);
 
-        //agendaDisponivelActivity.getAtendimentoService().buscarAtendimentos(atuacao.getAgendas(), data);
+        agendaDisponivelActivity.getAtendimentoService().buscarAtendimentos(atuacao.getAgendas(), data);
 
         return rootView;
     }
@@ -101,8 +105,8 @@ public class AgendaFragment extends Fragment {
                 listaHorarios.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                        //agendaDisponivelActivity.setAtendimento(listaAtendimentosDisponiveis.get(i));
-                        //agendaDisponivelActivity.concluirSelecaoAtendimento();
+                        agendaDisponivelActivity.setAtendimento(listaAtendimentosDisponiveis.get(i));
+                        agendaDisponivelActivity.concluirSelecaoAtendimento();
                     }
                 });
                 listaHorarios.setAdapter(agendaDiariaAdapter);
