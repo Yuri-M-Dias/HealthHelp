@@ -23,8 +23,16 @@ public class AtuacaoService {
      *
      * @param usuario usuário pelo qual as ocupações serão procuradas.
      */
-    public void solicitarListaAtuacoes(Usuario usuario) {
-        atuacaoDAO.buscarTodos();
+    public void solicitarListaAtuacoes(String id) {
+        atuacaoDAO.buscarPelaId(id);
+    }
+
+    public void solicitarListaAtuacoesPorUsuario(Usuario usuario) {
+        atuacaoDAO.buscarPorUsuario(usuario);
+    }
+
+    public void solicitarAtuacoesPorId(String id){
+        atuacaoDAO.buscarPelaId(id);
     }
 
     public void solicitarListaProfissionaisSaude(List<LocalAtendimento> locaisAtendimento) {
