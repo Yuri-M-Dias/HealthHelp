@@ -1,5 +1,6 @@
 package br.ufg.inf.pes.healthhelp.view.adapters;
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -13,13 +14,15 @@ import java.util.Calendar;
 import java.util.LinkedList;
 
 import br.ufg.inf.pes.healthhelp.model.Atuacao;
+import br.ufg.inf.pes.healthhelp.view.AgendaCompletaFragment;
+import br.ufg.inf.pes.healthhelp.view.AgendaDisponivelFragment;
 import br.ufg.inf.pes.healthhelp.view.AgendaFragment;
 
 /**
  * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
  * one of the sections/tabs/pages.
  */
-public class PaginadorDiasAdapter<T extends AgendaFragment> extends FragmentStatePagerAdapter {
+public class PaginadorDiasAdapter extends FragmentStatePagerAdapter {
 
     private final String TAG = PaginadorDiasAdapter.class.getName();
     private final int numeroAbasAAdicionar = 7;
@@ -29,8 +32,9 @@ public class PaginadorDiasAdapter<T extends AgendaFragment> extends FragmentStat
     private final int QUANTIDADE_DIAS_MES_PADRAO = 30;
     private int indiceUltimaDataCarregada = -1;
     private Atuacao atuacao;
+    private Class<AgendaFragment> tipoAgenda;
 
-    public PaginadorDiasAdapter(FragmentManager fm, boolean permiteVerPassado, Calendar contextoTemporal, Atuacao atuacao) {
+    public PaginadorDiasAdapter(FragmentManager fm, boolean permiteVerPassado, Calendar contextoTemporal, Atuacao atuacao, Class<AgendaFragment> tipoAgenda) {
         super(fm);
         hoje = Calendar.getInstance();
         hoje.set(Calendar.HOUR_OF_DAY, 0);
@@ -40,6 +44,8 @@ public class PaginadorDiasAdapter<T extends AgendaFragment> extends FragmentStat
 
         this.permiteVerPassado = permiteVerPassado;
         this.atuacao = atuacao;
+        this.tipoAgenda = tipoAgenda;
+
         construirIntervaloPadraoVisualizacao(contextoTemporal);
     }
 
@@ -168,7 +174,22 @@ public class PaginadorDiasAdapter<T extends AgendaFragment> extends FragmentStat
 
     @Override
     public Fragment getItem(int position) {
-        return T.newInstance(intervaloVisualizacao.get(position), atuacao);
+        //TODO: Provavelmente existe uma forma melhor de fazer isso aqui. Pesquisar e modificar
+        AgendaFragment agendaFragment = null;
+        Bundle args = new Bundle();
+        args.putSerializable(AgendaFragment.ARG_DATA, intervaloVisualizacao.get(position));
+        args.putSerializable(AgendaFragment.ARG_ATUACAO, atuacao);
+
+        try {
+            agendaFragment = tipoAgenda.newInstance();
+            agendaFragment.setArguments(args);
+        } catch (InstantiationException e) {
+            Log.e(TAG, "Erro ao instanciar " + tipoAgenda.getName() + ". Erro: " + e.getMessage());
+        } catch (IllegalAccessException e) {
+            Log.e(TAG, "Erro ao instanciar " + tipoAgenda.getName() + ". Erro: " + e.getMessage());
+        }
+
+        return agendaFragment;
     }
 
     @Override

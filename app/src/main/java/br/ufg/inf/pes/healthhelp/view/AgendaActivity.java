@@ -27,16 +27,18 @@ import br.ufg.inf.pes.healthhelp.service.AtendimentoService;
 import br.ufg.inf.pes.healthhelp.view.adapters.PaginadorDiasAdapter;
 import br.ufg.pes.healthhelp.R;
 
-public class AgendaActivity<T extends AgendaFragment> extends AppCompatActivity {
+public class AgendaActivity extends AppCompatActivity {
 
     public static final String ARG_ATUACAO = "atuacao";
     public static final String ARG_ATENDIMENTO_AGENDADO = "atendimento-agendado";
     public static final String ARG_PERMITE_PASSADO = "permite-ver-passado";
+    public static final String ARG_TIPO_AGENDA = "tipo-agenda";
 
-    private PaginadorDiasAdapter<T> paginadorDiasAdapter;
+    private PaginadorDiasAdapter paginadorDiasAdapter;
     private ViewPager paginadorDiasView;
 
     private Atuacao atuacao;
+    Class<AgendaFragment> tipoAgenda;
 
     private Atendimento atendimento;
     private AtendimentoService atendimentoService;
@@ -65,6 +67,7 @@ public class AgendaActivity<T extends AgendaFragment> extends AppCompatActivity 
 
         permiteVerPassado = getIntent().getBooleanExtra(ARG_PERMITE_PASSADO, false);
         atuacao = (Atuacao) getIntent().getSerializableExtra(ARG_ATUACAO);
+        tipoAgenda = (Class<AgendaFragment>) getIntent().getSerializableExtra(ARG_TIPO_AGENDA);
 
         criarAtuacao(); //TODO: Remover essa chamada e o método quando a linhaa acima retornar algo válido.
 
@@ -76,7 +79,7 @@ public class AgendaActivity<T extends AgendaFragment> extends AppCompatActivity 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
-        paginadorDiasAdapter = new PaginadorDiasAdapter<T>(getSupportFragmentManager(), permiteVerPassado, contexto, atuacao);
+        paginadorDiasAdapter = new PaginadorDiasAdapter(getSupportFragmentManager(), permiteVerPassado, contexto, atuacao, tipoAgenda);
 
         paginadorDiasView = (ViewPager) findViewById(R.id.container);
 
@@ -191,7 +194,7 @@ public class AgendaActivity<T extends AgendaFragment> extends AppCompatActivity 
                 dataSelecionada.set(Calendar.MONTH, mes);
                 dataSelecionada.set(Calendar.DAY_OF_MONTH, dia);
 
-                paginadorDiasAdapter = new PaginadorDiasAdapter(getSupportFragmentManager(), permiteVerPassado, dataSelecionada, atuacao);
+                paginadorDiasAdapter = new PaginadorDiasAdapter(getSupportFragmentManager(), permiteVerPassado, dataSelecionada, atuacao, tipoAgenda);
                 paginadorDiasView.setAdapter(paginadorDiasAdapter);
 
                 TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);

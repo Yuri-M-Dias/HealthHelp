@@ -3,6 +3,7 @@ package br.ufg.inf.pes.healthhelp.view;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,22 +38,6 @@ public class AgendaCompletaFragment extends AgendaFragment {
     private Atuacao atuacao;
 
     private AgendaCompletaActivity agendaDisponivelActivity;
-
-    public AgendaCompletaFragment() {
-    }
-
-    /**
-     * Returns a new instance of this fragment for the given section
-     * number.
-     */
-    public static AgendaCompletaFragment newInstance(Calendar data, Atuacao atuacao) {
-        AgendaCompletaFragment fragment = new AgendaCompletaFragment();
-        Bundle args = new Bundle();
-        args.putSerializable(ARG_DATA, data);
-        args.putSerializable(ARG_ATUACAO, atuacao);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

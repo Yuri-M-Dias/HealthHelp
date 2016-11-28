@@ -3,6 +3,7 @@ package br.ufg.inf.pes.healthhelp.view;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,34 +39,11 @@ public class AgendaDisponivelFragment extends AgendaFragment {
 
     private AgendaDisponivelActivity agendaDisponivelActivity;
 
-    public AgendaDisponivelFragment() {
-    }
-
-    /**
-     * Returns a new instance of this fragment for the given section
-     * number.
-     */
-    public static AgendaDisponivelFragment newInstance(Calendar data, Atuacao atuacao) {
-        AgendaDisponivelFragment fragment = new AgendaDisponivelFragment();
-        Bundle args = new Bundle();
-        args.putSerializable(ARG_DATA, data);
-        args.putSerializable(ARG_ATUACAO, atuacao);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EventBus.getDefault().register(this);
         agendaDisponivelActivity = ((AgendaDisponivelActivity) getActivity());
 
-    }
-
-    @Override
-    public void onDestroy() {
-        EventBus.getDefault().unregister(this);
-        super.onDestroy();
     }
 
     @Override
@@ -93,7 +71,6 @@ public class AgendaDisponivelFragment extends AgendaFragment {
             //TODO: Implementar adição e remoção de períodos de tempo baseado nos horários bloqueados e liberados.
 
             eliminarHorariosAgendados(listaAtendimentosDisponiveis, paginadorDiasEvent.getObjeto());
-
             getView().findViewById(R.id.carregamento_horarios_disponiveis).setVisibility(View.GONE);
             if (listaAtendimentosDisponiveis.isEmpty()) {
                 getView().findViewById(R.id.textview_sem_horarios_disponiveis).setVisibility(View.VISIBLE);

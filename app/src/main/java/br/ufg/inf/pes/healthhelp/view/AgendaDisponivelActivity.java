@@ -3,11 +3,12 @@ package br.ufg.inf.pes.healthhelp.view;
 import android.content.Intent;
 import android.os.Bundle;
 
-public class AgendaDisponivelActivity extends AgendaActivity<AgendaDisponivelFragment> {
+public class AgendaDisponivelActivity extends AgendaActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         getIntent().putExtra(AgendaActivity.ARG_PERMITE_PASSADO, false);
+        getIntent().putExtra(AgendaActivity.ARG_TIPO_AGENDA, AgendaDisponivelFragment.class);
         super.onCreate(savedInstanceState);
         getSupportActionBar().setTitle("Selecionar horário de atendimento");
     }

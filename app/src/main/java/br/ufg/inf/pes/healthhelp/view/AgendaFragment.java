@@ -3,6 +3,7 @@ package br.ufg.inf.pes.healthhelp.view;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,8 +31,8 @@ import br.ufg.pes.healthhelp.R;
 
 public class AgendaFragment extends Fragment {
 
-    private static final String ARG_DATA = "data";
-    private static final String ARG_ATUACAO = "atuacao";
+    public static final String ARG_DATA = "data";
+    public static final String ARG_ATUACAO = "atuacao";
 
     private Calendar data;
     private Atuacao atuacao;
@@ -49,6 +50,7 @@ public class AgendaFragment extends Fragment {
         args.putSerializable(ARG_DATA, data);
         args.putSerializable(ARG_ATUACAO, atuacao);
         fragment.setArguments(args);
+        Log.i("minha tag qualquer", "obtendo nova instancia da agenda fragment");
         return fragment;
     }
 
