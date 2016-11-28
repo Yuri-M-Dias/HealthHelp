@@ -14,6 +14,8 @@ public abstract class Profissional {
     private Date ultimoAcesso;
     private String profissao;
     private StatusProfissional statusProfissional;
+    private Usuario usuario;
+
 
     @Exclude
     public String getId() {
@@ -47,5 +49,13 @@ public abstract class Profissional {
 
     public void setProfissao(String profissao) {
         this.profissao = profissao;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }

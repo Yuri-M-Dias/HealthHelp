@@ -1,16 +1,16 @@
 <resources>
-    <string name="app_name">Health Help</string>
+    <string name="app_name">HealthHelp</string>
+    <string name="novo_local">Novo Local de Atendimento</string>
     <string name="descricao_logo">Logo do Sistema Health Help</string>
     <string name="locais_atendimento">Locais de Atendimento</string>
     <string name="hospital">Local de Atendimento</string>
     <string name="acao_indefinida">Indefinido</string>
     <string name="acao_salvar">Salvar</string>
+    <string name="salvar">SALVAR</string>
     <string name="acao_editar">Editar</string>
     <string name="endereco">Endereço</string>
     <string name="telefone">Telefone</string>
-
-    <!-- Strings relacionadas a formulários em geral -->
-    <string name="erro_campo_obrigatorio">Este campo é obrigatório</string>
+    <string name="button_cards_Agendar">Agendar</string>
 
     <!-- Strings relacionadas à autenticação -->
     <string name="hint_login">login</string>
@@ -20,6 +20,18 @@
     <string name="titulo_autenticando">Autenticação</string>
     <string name="mensagem_autenticando">Por favor, aguarde enquanto o sistema realiza sua autenticação...</string>
     <string name="mensagem_autenticacao_sucesso">Autenticação bem sucedida</string>
+
+    <!-- Strings relacionadas a formulários em geral -->
+    <string name="erro_campo_obrigatorio">Este campo é obrigatório</string>
+
+    <!-- Strings para cards -->
+    <string name="visitas_medicas">Visitas Medicas</string>
+    <string name="descricao_visitas_medicas">Veja visitas realizadas e futuras, e ainda agende novas</string>
+    <string name="agenda_card">Agendas</string>
+    <string name="descricao_agenda_card">Visualize suas agendas para diferentes intervalos de tempo</string>
+    <string name="atuacao_card">Atuações</string>
+    <string name="descricao_atuacao">Gerencie os locais onde você trabalha e as agendas para cada um deles</string>
+    <string name="descricao_locais_atendimento">Gerencie os locais de atendimento disponíveis no sistema</string>
 
     <!-- Strings relacionadas ao formulário de local de atendimento -->
     <string name="activity_novo_local_atendimento">Novo Local de Atendimento</string>
@@ -49,7 +61,23 @@
     <string name="erro_titulo_horario_atendimento_incompleto">Horário de Atendimento Incompleto</string>
     <string name="erro_dias_semana_vazio">É necessário informar pelo menos 1 dia da semana para cada horário de atendimento</string>
 
+    <!-- Strings relacionados a menus -->
+    <string name="logout">Logout</string>
+
     <!-- Strings relacionadas à view de lista de locais de atendimento -->
     <string name="titulo_carregamento_locais">Carregando...</string>
     <string name="mensagem_carregamento_locais">Carregando lista de locais de atendimento</string>
+
+    <string name="action_settings">Settings</string>
+
+    <!-- Strings relacionadas à view de agenda -->
+    <string name="acao_selecionar_data">Selecionar Data</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="mensagem_sem_horarios_disponiveis">Não existem horários disponíveis para essa data</string>
+
+    <!-- Strings relacionadas à view de atuações de profissionais de saúde -->
+    <string name="atuacoes_profissionais_saude_titulo_activity">Profissionais de Saúde</string>
+    <string name="atuacoes_profissionais_saude_titulo_dialog">Carregando profissionais de saúde...</string>
+    <string name="atuacoes_profissionais_saude_mensagem_dialog">Aguarde enquanto o sistema carrega os a lista de profissionais de saúde dos locais de atendimento nos quais você trabalha</string>
+
 </resources>
