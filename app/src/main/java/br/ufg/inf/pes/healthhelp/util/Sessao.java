@@ -1,10 +1,12 @@
-package br.ufg.inf.pes.healthhelp.model;
+package br.ufg.inf.pes.healthhelp.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.google.gson.Gson;
+
+import br.ufg.inf.pes.healthhelp.model.Usuario;
 
 public class Sessao {
     private static String CHAVE_ARQUIVO_SESSAO = "sessao";

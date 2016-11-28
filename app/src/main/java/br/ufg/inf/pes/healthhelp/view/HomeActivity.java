@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.Toast;
 
 import br.ufg.inf.pes.healthhelp.model.Atuacao;
-import br.ufg.inf.pes.healthhelp.model.Sessao;
 import br.ufg.pes.healthhelp.R;
 
 

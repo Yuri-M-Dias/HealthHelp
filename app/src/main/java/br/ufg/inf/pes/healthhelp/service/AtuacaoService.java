@@ -46,4 +46,5 @@ public class AtuacaoService {
             atuacaoDAO.atualizar(atuacao);
         }
     }
+
 }

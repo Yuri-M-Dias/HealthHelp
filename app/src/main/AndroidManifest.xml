@@ -14,24 +14,28 @@
         android:supportsRtl="true"
         android:theme="@style/HealthHelpTheme">
 
-        <activity android:name="br.ufg.inf.pes.healthhelp.view.AtuacoesActivity" />
+        <activity android:name="br.ufg.inf.pes.healthhelp.view.HomeActivity" />
         <activity android:name="br.ufg.inf.pes.healthhelp.view.LocalAtendimentoActivity" />
         <activity android:name="br.ufg.inf.pes.healthhelp.view.FormularioLocalAtendimentoActivity" />
         <activity android:name="br.ufg.inf.pes.healthhelp.view.AutenticacaoActivity" />
-        <activity android:name="br.ufg.inf.pes.healthhelp.view.AgendaDisponivelActivity"/>
         <activity android:name="br.ufg.inf.pes.healthhelp.view.LocaisAtendimentoActivity" />
+        <activity android:name="br.ufg.inf.pes.healthhelp.view.AtuacoesActivity" />
         <activity
-            android:name="br.ufg.inf.pes.healthhelp.view.HomeActivity"
+            android:name="br.ufg.inf.pes.healthhelp.view.AgendaDisponivelActivity"
             android:theme="@style/HealthHelpTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
+        </activity>
+
+        <!-- ATTENTION: This was auto-generated to add Google Play services to your project for
      App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+
     </application>
 
 </manifest>

@@ -3,17 +3,11 @@ package br.ufg.inf.pes.healthhelp.dao;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.util.AsyncExecutor;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
 import br.ufg.inf.pes.healthhelp.model.Atuacao;
 import br.ufg.inf.pes.healthhelp.model.LocalAtendimento;
-import br.ufg.inf.pes.healthhelp.model.PeriodoTempo;
 import br.ufg.inf.pes.healthhelp.model.ProfissionalSaude;
 import br.ufg.inf.pes.healthhelp.model.Usuario;
 import br.ufg.inf.pes.healthhelp.model.event.DatabaseEvent;
@@ -22,18 +16,9 @@ import br.ufg.inf.pes.healthhelp.model.event.DatabaseEvent;
  * Esta classe é responsável por operações de banco de dados relacionadas a uma {@link Atuacao}.
  */
 public class AtuacaoDAO extends AbstractDAO<Atuacao> {
-    public AtuacaoDAO() {
-        super(AtuacaoDAO.class.getCanonicalName(), "atuacao");
-    }
 
-    @Override
-    public void buscarTodos() {
-        //TODO
-    }
-
-    @Override
-    public void buscarPelaId(String id) {
-        //TODO
+    public AtuacaoDAO(){
+        super(AtuacaoDAO.class.getCanonicalName(), "atuacao", Atuacao.class);
     }
 
     /**
@@ -108,22 +93,6 @@ public class AtuacaoDAO extends AbstractDAO<Atuacao> {
             }
         );
     }
-
-    @Override
-    public void inserir(Atuacao objeto) {
-        //TODO
-    }
-
-    @Override
-    public void remover(Atuacao objeto) {
-        //TODO
-    }
-
-    @Override
-    public void atualizar(Atuacao objeto) {
-        //TODO
-    }
-
 
     /**
      * Busca todos todas as atuações de profissionais de saúde que trabalham em determinados locais de atendimento.
