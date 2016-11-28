@@ -1,5 +1,7 @@
 package br.ufg.inf.pes.healthhelp.service;
 
+import java.util.List;
+
 import br.ufg.inf.pes.healthhelp.dao.AgendaDAO;
 import br.ufg.inf.pes.healthhelp.model.Agenda;
 
@@ -12,6 +14,10 @@ public class AgendaService {
 
     public AgendaService() {
         this.agendaDAO = new AgendaDAO();
+    }
+
+    public void solicitarAgenda(String id) {
+        agendaDAO.buscarPelaId(id);
     }
 
     void salvar(Agenda agenda) {

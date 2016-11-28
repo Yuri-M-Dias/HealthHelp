@@ -1,7 +1,7 @@
 package br.ufg.inf.pes.healthhelp.view;
 
 /**
- * Created by Renan O on 27/11/2016.
+ * Classe criada meramente para testes, podendo ser implementada mais tarde
  */
 
 public class AgendaCompletaActivity {
