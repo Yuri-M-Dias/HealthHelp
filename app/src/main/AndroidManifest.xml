@@ -20,6 +20,7 @@
         <activity android:name="br.ufg.inf.pes.healthhelp.view.LocaisAtendimentoActivity" />
         <activity
             android:name="br.ufg.inf.pes.healthhelp.view.AgendaDisponivelActivity"
+
             android:theme="@style/HealthHelpTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
