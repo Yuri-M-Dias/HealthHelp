@@ -2,6 +2,7 @@ package br.ufg.inf.pes.healthhelp.view;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,27 +55,43 @@ public class AgendaCompletaFragment extends AgendaFragment {
 
             //TODO: Implementar adição e remoção de períodos de tempo baseado nos horários bloqueados e liberados.
 
-            List<Atendimento> atendimentosMarcados =  paginadorDiasEvent.getObjeto();
-
             getView().findViewById(R.id.carregamento_horarios_disponiveis).setVisibility(View.GONE);
-            if (listaAtendimentosDisponiveis.isEmpty()) {
-                getView().findViewById(R.id.textview_sem_horarios_disponiveis).setVisibility(View.VISIBLE);
-                getView().findViewById(R.id.imagem_sem_horarios_disponiveis).setVisibility(View.VISIBLE);
-            } else {
-                AgendaDiariaAdapter agendaDiariaAdapter = new AgendaDiariaAdapter(getActivity(), R.layout.item_atendimento, listaAtendimentosDisponiveis);
+            AgendaDiariaAdapter agendaDiariaAdapter = new AgendaDiariaAdapter(getActivity(), R.layout.item_atendimento,
+                combinarAtendimentos(listaAtendimentosDisponiveis, paginadorDiasEvent.getObjeto()), true);
 
-                final ListView listaHorarios = (ListView) getView().findViewById(R.id.listview_horarios);
-                listaHorarios.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                        agendaCompletaActivity.setAtendimento(listaAtendimentosDisponiveis.get(i));
-                    }
-                });
-                listaHorarios.setAdapter(agendaDiariaAdapter);
-                listaHorarios.setVisibility(View.VISIBLE);
-            }
+            final ListView listaHorarios = (ListView) getView().findViewById(R.id.listview_horarios);
+            listaHorarios.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    agendaCompletaActivity.setAtendimento(listaAtendimentosDisponiveis.get(i));
+                }
+            });
+            listaHorarios.setAdapter(agendaDiariaAdapter);
+            listaHorarios.setVisibility(View.VISIBLE);
 
         }
+
+    }
+
+    /**
+     * Combina a lista de atendimentos disponíveis com os atendimentos a lista de atendimentos agendados em uma única lista.
+     *
+     * @param atendimentosDisponiveis Lista de atendimentos com horário disponível.
+     * @param atendimentosAgendados Lista de atendimentos já marcados.
+     * @return lista de atendimentos combinados.
+     */
+    private List<Atendimento> combinarAtendimentos(List<Atendimento> atendimentosDisponiveis, List<Atendimento> atendimentosAgendados) {
+        List<Atendimento> listaAtendimentosCombinados = new ArrayList<>();
+        for (Atendimento atendimentoDisponivel : atendimentosDisponiveis) {
+            listaAtendimentosCombinados.add(atendimentoDisponivel);
+            for (Atendimento atendimentoMarcado : atendimentosAgendados) {
+                if (atendimentoMarcado.getHoraInicio().equals(atendimentoDisponivel.getHoraInicio())) {
+                    listaAtendimentosCombinados.set(listaAtendimentosCombinados.size() - 1, atendimentoMarcado);
+                }
+            }
+        }
+
+        return listaAtendimentosCombinados;
 
     }
 

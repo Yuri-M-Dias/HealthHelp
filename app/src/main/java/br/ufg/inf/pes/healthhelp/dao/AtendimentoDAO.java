@@ -53,6 +53,7 @@ public class AtendimentoDAO extends AbstractDAO {
                     Atendimento atendimento = new Atendimento();
                     atendimento.setAgenda(agendas.get(0));
                     atendimento.setPaciente(new Paciente());
+                    atendimento.getPaciente().setNome("Patrícia Silva");
                     atendimento.setHoraInicio(Calendar.getInstance());
                     atendimento.getHoraInicioCalendar().set(Calendar.HOUR_OF_DAY, 9);
                     atendimento.getHoraInicioCalendar().set(Calendar.MINUTE, 0);
@@ -68,6 +69,7 @@ public class AtendimentoDAO extends AbstractDAO {
                     atendimento = new Atendimento();
                     atendimento.setAgenda(agendas.get(1));
                     atendimento.setPaciente(new Paciente());
+                    atendimento.getPaciente().setNome("João Roberto");
                     atendimento.setHoraInicio(Calendar.getInstance());
                     atendimento.getHoraInicioCalendar().set(Calendar.HOUR_OF_DAY, 15);
                     atendimento.getHoraInicioCalendar().set(Calendar.MINUTE, 00);
@@ -80,7 +82,7 @@ public class AtendimentoDAO extends AbstractDAO {
                         atendimentos.add(atendimento);
                     }
 
-                    Thread.sleep(2000);
+                    Thread.sleep(500);
 
                     EventBus.getDefault().post(new PaginadorDiasEvent<>(atendimentos, diaOcorrencia));
                 }

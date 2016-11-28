@@ -63,7 +63,7 @@ public class AgendaDisponivelFragment extends AgendaFragment {
                 getView().findViewById(R.id.textview_sem_horarios_disponiveis).setVisibility(View.VISIBLE);
                 getView().findViewById(R.id.imagem_sem_horarios_disponiveis).setVisibility(View.VISIBLE);
             } else {
-                AgendaDiariaAdapter agendaDiariaAdapter = new AgendaDiariaAdapter(getActivity(), R.layout.item_atendimento, listaAtendimentosDisponiveis);
+                AgendaDiariaAdapter agendaDiariaAdapter = new AgendaDiariaAdapter(getActivity(), R.layout.item_atendimento, listaAtendimentosDisponiveis, true);
 
                 final ListView listaHorarios = (ListView) getView().findViewById(R.id.listview_horarios);
                 listaHorarios.setOnItemClickListener(new AdapterView.OnItemClickListener() {

@@ -22,9 +22,11 @@ public class AgendaDiariaAdapter extends ArrayAdapter<Atendimento> {
 
     public final SimpleDateFormat TIME_FORMATTER = new SimpleDateFormat("HH:mm");
     private List<Atendimento> locaisAtendimentoExibidos;
+    private boolean eCompleta;
 
-    public AgendaDiariaAdapter(Context context, int resource, List<Atendimento> objects) {
+    public AgendaDiariaAdapter(Context context, int resource, List<Atendimento> objects, boolean eCompleta) {
         super(context, resource, objects);
+        this.eCompleta = eCompleta;
         locaisAtendimentoExibidos = objects;
     }
 
@@ -40,7 +42,19 @@ public class AgendaDiariaAdapter extends ArrayAdapter<Atendimento> {
         horarioCompletoAtendimento.setText(TIME_FORMATTER.format(getItem(position).getHoraInicioCalendar().getTime())
             + "\n" + TIME_FORMATTER.format(getItem(position).getHoraFimCalendar().getTime()));
 
-        ((TextView) convertView.findViewById(R.id.disponibilidade_item_atendimento)).setText("[" + getItem(position).getAgenda().getNome() + "]");
+        TextView descricao = ((TextView) convertView.findViewById(R.id.disponibilidade_item_atendimento));
+        if(eCompleta) {
+            if(getItem(position).getPaciente() == null) {
+                descricao.setText("Horário Disponível");
+                //TODO: Substituir método depreciado abaixo
+                convertView.setBackgroundColor(getContext().getResources().getColor(R.color.primary_light));
+            } else {
+                descricao.setText("Atendimento de " + getItem(position).getPaciente().getNome());
+                convertView.setBackgroundColor(getContext().getResources().getColor(R.color.icons));
+            }
+        } else {
+            descricao.setText("[" + getItem(position).getAgenda().getNome() + "]");
+        }
 
         return convertView;
     }
