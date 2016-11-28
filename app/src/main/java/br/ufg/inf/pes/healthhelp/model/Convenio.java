@@ -1,23 +1,8 @@
 package br.ufg.inf.pes.healthhelp.model;
 
-import com.google.firebase.database.Exclude;
-
-public class Convenio {
-
-    @Exclude
-    private String id;
+public class Convenio extends BaseObject {
 
     private String nome;
-
-    @Exclude
-    public String getId() {
-        return id;
-    }
-
-    @Exclude
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getNome() {
         return nome;

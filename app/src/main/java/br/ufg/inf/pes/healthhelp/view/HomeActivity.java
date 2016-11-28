@@ -9,7 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import br.ufg.inf.pes.healthhelp.model.Sessao;
+import br.ufg.inf.pes.healthhelp.util.Sessao;
 import br.ufg.pes.healthhelp.R;
 
 
@@ -17,18 +17,15 @@ public class HomeActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_activity);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_homeactivity);
         setSupportActionBar(toolbar);
-
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-
         if (!Sessao.estaAtiva(this)) {
             Intent intent = new Intent(this, AutenticacaoActivity.class);
             startActivity(intent);
@@ -37,14 +34,12 @@ public class HomeActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-
         getMenuInflater().inflate(R.menu.menu_homeactivity, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
         switch (item.getItemId()) {
 
             case R.id.logout:
@@ -57,40 +52,34 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void visualizarVisitasMedicas(View view) {
-
         CharSequence text = "Visualizar visitas medicas nao implementado";
         Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
     }
 
     public void agendarVisitaMedica(View view) {
-
         CharSequence text = "Agendar visitas medicas nao implementado";
         Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
     }
 
     public void visualizarAgendas(View view) {
-
         CharSequence text = "Visualizar agenda nao implementado";
         Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
     }
 
     public void visualizarAtuacoes(View view) {
-
-        CharSequence text = "Visualizar atuação nao implementado";
-        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, AtuacoesActivity.class);
+        startActivity(intent);
     }
 
     public void visualizarLocaisAtendimento(View view) {
-
         Intent intent = new Intent(this, LocaisAtendimentoActivity.class);
         startActivity(intent);
     }
 
     private void logout() {
-
         Sessao.finalizarSessao(this);
-
         Intent intent = new Intent(this, AutenticacaoActivity.class);
         startActivity(intent);
     }
+
 }

@@ -38,10 +38,6 @@
     <string name="hint_nome_local_atendimento">Nome do Local de Atendimento</string>
     <string name="botao_adicionar_horario_atendimento_local">Adicionar Horário de Atendimento</string>
 
-    <!-- Strings relacionadas à view detalhe de atendimento -->
-    <string name="activity_detalhe_de_atendimento">Detalhe de Atendimento</string>
-
-
     <!-- Strings relacionadas à view de período de tempo -->
     <string name="excluir_periodo_tempo">Excluir período de tempo</string>
     <string name="botao_domingo">D</string>
@@ -68,6 +64,14 @@
     <string name="titulo_carregamento_locais">Carregando...</string>
     <string name="mensagem_carregamento_locais">Carregando lista de locais de atendimento</string>
 
+
+    <!-- Strings relacionadas à view atuações -->
+    <string name="atuacoes">Atuações</string>
+    <string name="atuacoes_titulo_dialog">Carregando atuações...</string>
+    <string name="atuacoes_mensagem_dialog">Aguarde enquanto o sistema carrega a lista atuações</string>
+    <string name="atuacoes_atuais">Atuações Atuais</string>
+    <string name="atuacoes_anteriores">Atuações Anteriores</string>
+
     <string name="action_settings">Settings</string>
 
     <!-- Strings relacionadas à view de agenda -->
@@ -79,5 +83,6 @@
     <string name="atuacoes_profissionais_saude_titulo_activity">Profissionais de Saúde</string>
     <string name="atuacoes_profissionais_saude_titulo_dialog">Carregando profissionais de saúde...</string>
     <string name="atuacoes_profissionais_saude_mensagem_dialog">Aguarde enquanto o sistema carrega os a lista de profissionais de saúde dos locais de atendimento nos quais você trabalha</string>
+    <string name="activity_detalhe_de_atendimento">Detalhe de Atendimento</string>
 
 </resources>

@@ -1,30 +1,13 @@
 package br.ufg.inf.pes.healthhelp.model;
 
-import com.google.firebase.database.Exclude;
-
-import java.io.Serializable;
 import java.util.List;
 
-public class Agenda implements Serializable {
-
-
-    @Exclude
-    private String id;
+public class Agenda extends BaseObject {
 
     private String nome;
     private int tempoPadraoMinutos;
     private List<PeriodoTempo> horariosAtendimento;
     private List<PeriodoTempo> horariosBloqueados;
-
-    @Exclude
-    public String getId() {
-        return id;
-    }
-
-    @Exclude
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public List<PeriodoTempo> getHorariosBloqueados() {
         return horariosBloqueados;
