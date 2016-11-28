@@ -9,6 +9,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
 import org.greenrobot.eventbus.EventBus;
@@ -101,8 +102,7 @@ public abstract class AbstractDAO<T extends BaseObject> implements InterfaceDAO<
                     Log.w(TAG, mensagemErro);
                     throw new ObjetoInexistenteException(mensagemErro);
                 }
-                T objetoEncontrado = dataSnapshot.getValue(getTipoEntidade());
-                objetoEncontrado.setId(dataSnapshot.getKey());
+                T objetoEncontrado = construirObjetoFirebase(dataSnapshot);
                 Log.w(TAG, DATABASE_CHILD + " " + nomeMetodo + " com sucesso: " + objetoEncontrado.getId());
                 EventBus.getDefault().post(objetoEncontrado);
             }
@@ -128,8 +128,7 @@ public abstract class AbstractDAO<T extends BaseObject> implements InterfaceDAO<
                 Log.w(TAG, "Obtida lista de " + DATABASE_CHILD + ", com tamanho: " + quantidadeChildren);
                 List<T> objetosEncontrados = new ArrayList<>();
                 for (DataSnapshot localSnapshot : dataSnapshot.getChildren()) {
-                    T objetoEncontrado = localSnapshot.getValue(getTipoEntidade());
-                    objetoEncontrado.setId(localSnapshot.getKey());
+                    T objetoEncontrado = construirObjetoFirebase(localSnapshot);
                     objetosEncontrados.add(objetoEncontrado);
                     Log.w(TAG, "Obtido " + DATABASE_CHILD + ": " + objetoEncontrado.getId());
                 }
@@ -157,6 +156,22 @@ public abstract class AbstractDAO<T extends BaseObject> implements InterfaceDAO<
                 EventBus.getDefault().post(idObjeto);
             }
         };
+    }
+
+    protected T construirObjetoFirebase(DataSnapshot snapshot){
+        T objetoEncontrado = null;
+        GenericTypeIndicator tipoParaConverter = getTipoEntidadeConstrucao();
+        if(tipoParaConverter != null){
+            objetoEncontrado = (T) snapshot.getValue(tipoParaConverter);
+        } else {
+            objetoEncontrado = snapshot.getValue(getTipoEntidade());
+        }
+        objetoEncontrado.setId(snapshot.getKey());
+        return objetoEncontrado;
+    }
+
+    protected GenericTypeIndicator<T> getTipoEntidadeConstrucao() {
+        return null;
     }
 
 }
