@@ -64,7 +64,10 @@ public class AgendaCompletaFragment extends AgendaFragment {
                 listaHorarios.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                        //agendaCompletaActivity.setAtendimento(listaAtendimentosDisponiveis.get(i));
+                        //TODO: Dependendo do tipo de dado na célula, deve-se abrir alguma activity.
+                        //Se for um atendimento vazio, abre-se a tela de cadastro de atendimento.
+                        //Se for um atendimento de algum paciente, abre a tela de detalhamento do atendimento.
+                        //Se for um horário de almoço, nada é feito.
                     }
                 });
                 listaHorarios.setAdapter(agendaDiariaDisponivelAdapter);
