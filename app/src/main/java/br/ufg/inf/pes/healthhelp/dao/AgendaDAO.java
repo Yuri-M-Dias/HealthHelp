@@ -1,11 +1,13 @@
 package br.ufg.inf.pes.healthhelp.dao;
 
+import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.util.AsyncExecutor;
 
 import java.util.LinkedList;
 import java.util.List;
 
 import br.ufg.inf.pes.healthhelp.model.Agenda;
+import br.ufg.inf.pes.healthhelp.model.event.DatabaseEvent;
 
 /**
  * Esta classe é responsável por operações de banco de dados relacionadas a uma {@link Agenda}.
@@ -35,6 +37,10 @@ public class AgendaDAO extends AbstractDAO<Agenda> {
                     agenda.setNome("Cirurgias");
                     agenda.setId("22");
                     agendas.add(agenda);
+
+                    Thread.sleep(2000);
+
+                    EventBus.getDefault().post(new DatabaseEvent<>(agendas));
                 }
             }
         );
