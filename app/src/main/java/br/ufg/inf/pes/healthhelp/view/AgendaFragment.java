@@ -21,6 +21,7 @@ import java.util.List;
 
 import br.ufg.inf.pes.healthhelp.model.Agenda;
 import br.ufg.inf.pes.healthhelp.model.Atendimento;
+import br.ufg.inf.pes.healthhelp.model.Atuacao;
 import br.ufg.inf.pes.healthhelp.model.PeriodoTempo;
 import br.ufg.inf.pes.healthhelp.model.enums.DayOfWeek;
 import br.ufg.inf.pes.healthhelp.model.event.PaginadorDiasEvent;
@@ -30,12 +31,12 @@ import br.ufg.pes.healthhelp.R;
 public class AgendaFragment extends Fragment {
 
     private static final String ARG_DATA = "data";
-    private static final String ARG_AGENDAS = "agenda";
+    private static final String ARG_ATUACAO = "atuacao";
 
     private Calendar data;
-    private Agenda[] agendas;
+    private Atuacao atuacao;
 
-    private AgendaDisponivelActivity agendaDisponivelActivity;
+    private AgendaDisponiveActivity agendaDisponivelActivity;
 
     public AgendaFragment() {
     }
@@ -44,11 +45,11 @@ public class AgendaFragment extends Fragment {
      * Returns a new instance of this fragment for the given section
      * number.
      */
-    public static AgendaFragment newInstance(Calendar data, Agenda[] agendas) {
+    public static AgendaFragment newInstance(Calendar data, Atuacao atuacao) {
         AgendaFragment fragment = new AgendaFragment();
         Bundle args = new Bundle();
         args.putSerializable(ARG_DATA, data);
-        args.putSerializable(ARG_AGENDAS, agendas);
+        args.putSerializable(ARG_ATUACAO, atuacao);
         fragment.setArguments(args);
         return fragment;
     }
@@ -57,7 +58,7 @@ public class AgendaFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EventBus.getDefault().register(this);
-        agendaDisponivelActivity = ((AgendaDisponivelActivity) getActivity());
+        agendaDisponivelActivity = ((AgendaDisponiveActivity) getActivity());
 
     }
 
@@ -73,20 +74,20 @@ public class AgendaFragment extends Fragment {
         LinearLayout rootView = (LinearLayout) inflater.inflate(R.layout.fragment_agenda_disponivel, container, false);
 
         data = (Calendar) getArguments().getSerializable(ARG_DATA);
-        agendas = (Agenda[]) getArguments().getSerializable(ARG_AGENDAS);
+        atuacao = (Atuacao) getArguments().getSerializable(ARG_ATUACAO);
 
         rootView.findViewById(R.id.listview_horarios).setVisibility(View.GONE);
         rootView.findViewById(R.id.textview_sem_horarios_disponiveis).setVisibility(View.GONE);
         rootView.findViewById(R.id.imagem_sem_horarios_disponiveis).setVisibility(View.GONE);
 
-        agendaDisponivelActivity.getAtendimentoService().buscarAtendimentos(agendas, data);
+        agendaDisponivelActivity.getAtendimentoService().buscarAtendimentos(atuacao.getAgendas(), data);
 
         return rootView;
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onDatabaseEvent(PaginadorDiasEvent<List<Atendimento>> paginadorDiasEvent) {
-        final LinkedList<Atendimento> listaAtendimentosDisponiveis = criarListaAtendimentos(agendas);
+        final LinkedList<Atendimento> listaAtendimentosDisponiveis = criarListaAtendimentos(atuacao.getAgendas());
         if (paginadorDiasEvent.getFiltro().equals(data)) {
 
             //TODO: Implementar adição e remoção de períodos de tempo baseado nos horários bloqueados e liberados.
@@ -117,12 +118,12 @@ public class AgendaFragment extends Fragment {
     }
 
     /**
-     * Cria uma lista de horários disponíveis para atendimento com base nos períodos de tempo das agendas de uma atuação.
+     * Cria uma lista de horários disponíveis para atendimento com base nos períodos de tempo das atuacao de uma atuação.
      *
      * @param agendas Agendas a serem utilizadas para criar a lista de atendimentos disponíveis.
      * @return Lista de atendimentos disponíveis para marcação.
      */
-    private LinkedList<Atendimento> criarListaAtendimentos(Agenda[] agendas) {
+    private LinkedList<Atendimento> criarListaAtendimentos(List<Agenda> agendas) {
         LinkedList<Atendimento> atendimentosVazios = new LinkedList<>();
 
         for (Agenda agenda : agendas) {

@@ -6,15 +6,13 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
-import android.view.View;
 import android.view.ViewGroup;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.LinkedList;
-import java.util.List;
 
-import br.ufg.inf.pes.healthhelp.model.Agenda;
+import br.ufg.inf.pes.healthhelp.model.Atuacao;
 import br.ufg.inf.pes.healthhelp.view.AgendaFragment;
 
 /**
@@ -30,9 +28,10 @@ public class PaginadorDiasAdapter extends FragmentStatePagerAdapter {
     private boolean permiteVerPassado;
     private final int QUANTIDADE_DIAS_MES_PADRAO = 30;
     private int indiceUltimaDataCarregada = -1;
-    private List<Agenda> agendas;
+    private Atuacao atuacao;
+    private Class<AgendaFragment> tipoAgenda;
 
-    public PaginadorDiasAdapter(FragmentManager fm, boolean permiteVerPassado, Calendar contextoTemporal, List<Agenda> agendas) {
+    public PaginadorDiasAdapter(FragmentManager fm, boolean permiteVerPassado, Calendar contextoTemporal, Atuacao atuacao, Class<AgendaFragment> tipoAgenda ) {
         super(fm);
         hoje = Calendar.getInstance();
         hoje.set(Calendar.HOUR_OF_DAY, 0);
@@ -41,7 +40,8 @@ public class PaginadorDiasAdapter extends FragmentStatePagerAdapter {
         hoje.set(Calendar.MILLISECOND, 0);
 
         this.permiteVerPassado = permiteVerPassado;
-        this.agendas = agendas;
+        this.atuacao = atuacao;
+        this.tipoAgenda = tipoAgenda;
         construirIntervaloPadraoVisualizacao(contextoTemporal);
     }
 
@@ -67,6 +67,15 @@ public class PaginadorDiasAdapter extends FragmentStatePagerAdapter {
             intervaloVisualizacao.add((Calendar) diaCorrente.clone());
         }
 
+    }
+
+    /**
+     * Obtém a data selecionada (atual) no paginador.
+     * @param container Container contendo informações sobre o paginador.
+     * @return data selecionada (atual) no paginador.
+     */
+    public Calendar getDataSelecionada(ViewPager container){
+        return intervaloVisualizacao.get(container.getCurrentItem());
     }
 
     @Override
@@ -125,7 +134,7 @@ public class PaginadorDiasAdapter extends FragmentStatePagerAdapter {
             } else {
                 Log.i(TAG, "Carregando mais abas no INÍCIO da lista");
                 Calendar primeiraData = (Calendar) intervaloVisualizacao.getFirst().clone();
-                indiceDataAtual = getItemPosition(primeiraData) + indiceDataAtual;///
+                indiceDataAtual = getItemPosition(primeiraData) + indiceDataAtual;
 
                 int contadorPosicao;
                 boolean intervaloFoiModificado = false;
@@ -145,7 +154,7 @@ public class PaginadorDiasAdapter extends FragmentStatePagerAdapter {
                 }
 
                 indiceDataAtual += contadorPosicao;
-                
+
                 if (intervaloFoiModificado) {
                     indiceUltimaDataCarregada = indiceDataAtual;
                     notifyDataSetChanged();
@@ -161,7 +170,11 @@ public class PaginadorDiasAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        return AgendaFragment.newInstance(intervaloVisualizacao.get(position), agendas.toArray(new Agenda[agendas.size()]));
+        if (tipoAgenda == AgendaFragment.class ){
+            return AgendaFragment.newInstance(intervaloVisualizacao.get(position), atuacao);
+        } else {
+            return null;
+        }
     }
 
     @Override

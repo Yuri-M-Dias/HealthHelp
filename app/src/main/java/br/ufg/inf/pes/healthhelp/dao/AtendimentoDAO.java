@@ -43,7 +43,7 @@ public class AtendimentoDAO extends AbstractDAO {
         //TODO
     }
 
-    public void buscarAtendimentos(final Agenda[] agendas, final Calendar diaOcorrencia) {
+    public void buscarAtendimentos(final List<Agenda> agendas, final Calendar diaOcorrencia) {
         //TODO: Substituir a implementação stub abaixo pela implementação correta
         AsyncExecutor.create().execute(
             new AsyncExecutor.RunnableEx() {
@@ -51,7 +51,7 @@ public class AtendimentoDAO extends AbstractDAO {
                 public void run() throws Exception {
                     List<Atendimento> atendimentos = new ArrayList<>();
                     Atendimento atendimento = new Atendimento();
-                    atendimento.setAgenda(agendas[0]);
+                    atendimento.setAgenda(agendas.get(0));
                     atendimento.setPaciente(new Paciente());
                     atendimento.setHoraInicio(Calendar.getInstance());
                     atendimento.getHoraInicioCalendar().set(Calendar.HOUR_OF_DAY, 9);
@@ -66,7 +66,7 @@ public class AtendimentoDAO extends AbstractDAO {
                     }
 
                     atendimento = new Atendimento();
-                    atendimento.setAgenda(agendas[1]);
+                    atendimento.setAgenda(agendas.get(1));
                     atendimento.setPaciente(new Paciente());
                     atendimento.setHoraInicio(Calendar.getInstance());
                     atendimento.getHoraInicioCalendar().set(Calendar.HOUR_OF_DAY, 15);

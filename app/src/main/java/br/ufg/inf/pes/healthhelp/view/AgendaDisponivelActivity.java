@@ -31,15 +31,21 @@ public class AgendaDisponivelActivity extends AppCompatActivity {
 
     public static final String ARG_ATUACAO = "atuacao";
     public static final String ARG_ATENDIMENTO_AGENDADO = "atendimento-agendado";
+    public static final String ARG_PERMITE_PASSADO = "permite-ver-passado";
+    public static final String ARG_TIPO_AGENDA = "tipo-agenda";
 
     private PaginadorDiasAdapter paginadorDiasAdapter;
     private ViewPager paginadorDiasView;
 
     private Atuacao atuacao;
 
-    private Calendar dataSelecionada;
     private Atendimento atendimento;
     private AtendimentoService atendimentoService;
+    private boolean permiteVerPassado;
+
+    public Atendimento getAtendimento() {
+        return atendimento;
+    }
 
     public void setAtendimento(Atendimento atendimento) {
         this.atendimento = atendimento;
@@ -54,7 +60,10 @@ public class AgendaDisponivelActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Calendar contexto = Calendar.getInstance();
 
+        permiteVerPassado = getIntent().getBooleanExtra(ARG_PERMITE_PASSADO, false);
         atuacao = (Atuacao) getIntent().getSerializableExtra(ARG_ATUACAO);
+        Class<AgendaFragment> tipoAgenda= (Class<AgendaFragment>) getIntent().getSerializableExtra(ARG_TIPO_AGENDA);
+
         criarAtuacao(); //TODO: Remover essa chamada e o método quando a linhaa acima retornar algo válido.
 
         atendimentoService = new AtendimentoService();
@@ -63,9 +72,8 @@ public class AgendaDisponivelActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        setTitle("Selecionar horário de atendimento");
 
-        paginadorDiasAdapter = new PaginadorDiasAdapter(getSupportFragmentManager(), true, contexto, atuacao.getAgendas());
+        paginadorDiasAdapter = new PaginadorDiasAdapter(getSupportFragmentManager(), permiteVerPassado, contexto, atuacao, tipoAgenda);
 
         paginadorDiasView = (ViewPager) findViewById(R.id.container);
 
@@ -146,7 +154,6 @@ public class AgendaDisponivelActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_opcao_unica_simple, menu);
         MenuItem menuItem = menu.getItem(0);
         menuItem.setTitle(getText(R.string.acao_selecionar_data));
@@ -170,37 +177,31 @@ public class AgendaDisponivelActivity extends AppCompatActivity {
     }
 
     /**
-     * Conclui o processo de seleção de um horário de atendimento para um agendamente, enviando um valor de retorno para a classe que chamou essa classe.
-     */
-    public void concluirSelecaoAtendimento() {
-        Intent intent = new Intent();
-        intent.putExtra(ARG_ATENDIMENTO_AGENDADO, atendimento);
-        setResult(RESULT_OK, intent);
-        finish();
-    }
-
-
-    /**
-     * Executa o processo de seleção de data para a marcar uma consulta através da seleção no calendário de um dia específico.
+     * Executa o processo de seleção de data para a marcar uma consulta através da seleção no calendário de um dia específico, redefinindo a lista de dias visíveis.
      */
     public void definirDataBusca() {
-        if (dataSelecionada == null) {
-            dataSelecionada = Calendar.getInstance();
-        }
+        final Calendar dataSelecionada = paginadorDiasAdapter.getDataSelecionada(paginadorDiasView);
         DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
-            public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-                dataSelecionada.set(Calendar.YEAR, i);
-                dataSelecionada.set(Calendar.MONTH, i1);
-                dataSelecionada.set(Calendar.DAY_OF_MONTH, i2);
-                paginadorDiasAdapter = new PaginadorDiasAdapter(getSupportFragmentManager(), true, dataSelecionada, atuacao.getAgendas());
+            public void onDateSet(DatePicker datePicker, int ano, int mes, int dia) {
+                dataSelecionada.set(Calendar.YEAR, ano);
+                dataSelecionada.set(Calendar.MONTH, mes);
+                dataSelecionada.set(Calendar.DAY_OF_MONTH, dia);
+
+                paginadorDiasAdapter = new PaginadorDiasAdapter(getSupportFragmentManager(), permiteVerPassado, dataSelecionada, atuacao, AgendaFragment.class);
                 paginadorDiasView.setAdapter(paginadorDiasAdapter);
+
                 TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
                 tabLayout.setupWithViewPager(paginadorDiasView);
+
                 paginadorDiasView.setCurrentItem(paginadorDiasAdapter.getItemPosition(dataSelecionada));
             }
         }, dataSelecionada.get(Calendar.YEAR), dataSelecionada.get(Calendar.MONTH), dataSelecionada.get(Calendar.DAY_OF_MONTH));
-        datePickerDialog.getDatePicker().setMinDate(Calendar.getInstance().getTimeInMillis());
+
+        if(!permiteVerPassado) {
+            datePickerDialog.getDatePicker().setMinDate(Calendar.getInstance().getTimeInMillis());
+        }
+
         datePickerDialog.show();
     }
 
