@@ -74,4 +74,6 @@ public class UsuarioDAO extends AbstractDAO<Usuario> {
         );
     }
 
+    public void inativar(Usuario usuario) { }
+
 }

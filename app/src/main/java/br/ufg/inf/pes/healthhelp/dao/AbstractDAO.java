@@ -51,15 +51,14 @@ public abstract class AbstractDAO<T extends BaseObject> implements InterfaceDAO<
     public void buscarTodos() {
         getDatabaseReference()
             .child(DATABASE_CHILD)
-            .addListenerForSingleValueEvent(getValueListenerGenerico("buscar todos"));
+            .addListenerForSingleValueEvent(getValueListenerGenericoLista("buscar todos"));
     }
 
     @Override
     public void buscarPelaId(final String id) {
         getDatabaseReference()
             .child(DATABASE_CHILD)
-            .orderByChild("id")
-            .equalTo(id)
+            .child(id)
             .addListenerForSingleValueEvent(getValueListenerGenerico("buscar pela id"));
     }
 
@@ -84,6 +83,7 @@ public abstract class AbstractDAO<T extends BaseObject> implements InterfaceDAO<
 
     @Override
     public void atualizar(T objeto) {
+        //Devia postar o objeto atualizado
         final String idObjeto = objeto.getId();
         getDatabaseReference()
             .child(DATABASE_CHILD)
@@ -101,23 +101,39 @@ public abstract class AbstractDAO<T extends BaseObject> implements InterfaceDAO<
                     Log.w(TAG, mensagemErro);
                     throw new ObjetoInexistenteException(mensagemErro);
                 }
-                long quantidadeChildren = dataSnapshot.getChildrenCount();
-                if (quantidadeChildren > 1) {
-                    Log.w(TAG, "Obtida lista de " + DATABASE_CHILD + ", com tamanho: " + quantidadeChildren);
-                    List<T> objetosEncontrados = new ArrayList<>();
-                    for (DataSnapshot localSnapshot : dataSnapshot.getChildren()) {
-                        T objetoEncontrado = localSnapshot.getValue(getTipoEntidade());
-                        objetoEncontrado.setId(localSnapshot.getKey());
-                        objetosEncontrados.add(objetoEncontrado);
-                        Log.w(TAG, "Obtido " + DATABASE_CHILD + ": " + objetoEncontrado.getId());
-                    }
-                    EventBus.getDefault().post(objetosEncontrados);
-                    return;
-                }
                 T objetoEncontrado = dataSnapshot.getValue(getTipoEntidade());
                 objetoEncontrado.setId(dataSnapshot.getKey());
                 Log.w(TAG, DATABASE_CHILD + " " + nomeMetodo + " com sucesso: " + objetoEncontrado.getId());
                 EventBus.getDefault().post(objetoEncontrado);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.e(TAG, DATABASE_CHILD + "buscaPelaId com falha: ", databaseError.toException());
+                throw databaseError.toException();
+            }
+        };
+    }
+
+    protected ValueEventListener getValueListenerGenericoLista(final String nomeMetodo) {
+        return new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (!dataSnapshot.exists()) {
+                    String mensagemErro = DATABASE_CHILD + " " + nomeMetodo + " com falha";
+                    Log.w(TAG, mensagemErro);
+                    throw new ObjetoInexistenteException(mensagemErro);
+                }
+                long quantidadeChildren = dataSnapshot.getChildrenCount();
+                Log.w(TAG, "Obtida lista de " + DATABASE_CHILD + ", com tamanho: " + quantidadeChildren);
+                List<T> objetosEncontrados = new ArrayList<>();
+                for (DataSnapshot localSnapshot : dataSnapshot.getChildren()) {
+                    T objetoEncontrado = localSnapshot.getValue(getTipoEntidade());
+                    objetoEncontrado.setId(localSnapshot.getKey());
+                    objetosEncontrados.add(objetoEncontrado);
+                    Log.w(TAG, "Obtido " + DATABASE_CHILD + ": " + objetoEncontrado.getId());
+                }
+                EventBus.getDefault().post(objetosEncontrados);
             }
 
             @Override

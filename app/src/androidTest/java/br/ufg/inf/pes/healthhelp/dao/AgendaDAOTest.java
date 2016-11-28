@@ -15,11 +15,11 @@ import org.junit.runner.RunWith;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import br.ufg.inf.pes.healthhelp.model.Agenda;
 import br.ufg.inf.pes.healthhelp.model.PeriodoTempo;
 import br.ufg.inf.pes.healthhelp.model.enums.DayOfWeek;
-import br.ufg.inf.pes.healthhelp.model.event.DatabaseEvent;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
@@ -76,35 +76,34 @@ public class AgendaDAOTest {
     public void daoIsCorrect() {
         agendaDAO.inserir(agendaCriar);
         esperarEvento();
-        assertEquals("Agenda" + agendaCriar.getId(), eventoDao);
+        Agenda eventoCriado = (Agenda) eventoDao;
+        assertEquals(agendaCriar.getId(), eventoCriado.getId());
         eventoDao = null;
 
         agendaDAO.buscarPelaId(agendaCriar.getId());
         esperarEvento();
-        assertEquals(agendaCriar.getId(), ((Agenda) eventoDao).getId());
-        eventoDao = null;
-
-        agendaDAO.buscarPeloNome(agendaCriar.getNome());
-        esperarEvento();
-        assertEquals(agendaCriar.getId(), ((Agenda) eventoDao).getId());
+        eventoCriado = (Agenda) eventoDao;
+        assertEquals(agendaCriar.getId(), eventoCriado.getId());
         eventoDao = null;
 
         Agenda agendaAtualizar = agendaCriar;
         agendaAtualizar.setNome("Agenda Atualizar 1");
         agendaDAO.atualizar(agendaAtualizar);
         esperarEvento();
-        assertEquals("Agenda" + agendaAtualizar.getId(), eventoDao);
+        String idEventoCriado = (String) eventoDao;
+        assertEquals(agendaAtualizar.getId(), idEventoCriado);
         eventoDao = null;
 
         agendaDAO.remover(agendaAtualizar);
         esperarEvento();
-        assertEquals("Agenda" + agendaAtualizar.getId(), eventoDao);
+        idEventoCriado = (String) eventoDao;
+        assertEquals(agendaAtualizar.getId(), idEventoCriado);
         eventoDao = null;
 
 
         for (int i = 0; i < 4; i++) {
             agendasBusca.add(preencheAgenda());
-            agendasBusca.get(i).setNome("Agenda lista " + (i + 1));
+            agendasBusca.get(i).setNome(UUID.randomUUID().toString());
             agendaDAO.inserir(agendasBusca.get(i));
             esperarEvento();
             eventoDao = null;
@@ -116,6 +115,9 @@ public class AgendaDAOTest {
         List<Agenda> listaAgendasEncontradas = (ArrayList<Agenda>) eventoDao;
         boolean buscouTodosComSucesso = buscouTodosComSucesso(listaAgendasEncontradas);
         assertTrue(buscouTodosComSucesso);
+        for (Agenda agendaLocal: agendasBusca) {
+            agendaDAO.remover(agendaLocal);
+        }
     }
 
     private boolean buscouTodosComSucesso(List<Agenda> resultadoBuscado) {
@@ -142,8 +144,8 @@ public class AgendaDAOTest {
     }
 
     @Subscribe
-    public void onDatabaseEvent(DatabaseEvent<String> databaseEvent) {
-        eventoDao = databaseEvent.getObjeto();
+    public void onDatabaseEvent(String databaseEvent) {
+        eventoDao = databaseEvent;
     }
 
     @Subscribe
