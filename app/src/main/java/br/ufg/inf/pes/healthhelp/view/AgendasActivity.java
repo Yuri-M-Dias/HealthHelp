@@ -16,7 +16,7 @@ import br.ufg.inf.pes.healthhelp.service.AgendaService;
 import br.ufg.inf.pes.healthhelp.view.adapters.ItensSeparadoresAdapter;
 import br.ufg.pes.healthhelp.R;
 
-public class AgendasActivity extends AbstractListActivity<Agenda> {
+public class AgendasActivity extends AbstractListActivity<Atuacao> {
 
     public static final String ARG_PROFISSIONAL = "profissional";
 
@@ -41,14 +41,13 @@ public class AgendasActivity extends AbstractListActivity<Agenda> {
     }
 
     @Override
-    public ItensSeparadoresAdapter<Agenda> inicializarAdapter(List<Agenda> itens) {
-        return new ItensSeparadoresAdapter<Agenda>(this, R.layout.item_separador_icone_nome_generico, itens) {
+    public ItensSeparadoresAdapter<Atuacao> inicializarAdapter(List<Atuacao> itens) {
+        return new ItensSeparadoresAdapter<Atuacao>(this, R.layout.item_separador_icone_nome_generico, itens) {
             @Override
             public void preencherItem(int position) {
 
-                Agenda agenda = getItem(position);
-                Atuacao atuacaoatual =
-                String nomeagendaatual = atuacaoatual.getAgendas().get(0).getNome();
+                Atuacao atuacao = getItem(position);
+                String nomeagendaatual = atuacao.getAgendas().get(0).getNome();
 
                 if (position < 1 || !getItem(position - 1).getAgendas().get(position-1).getNome().equals(nomeagendaatual)) {
                     textoSeparador.setText(nomeagendaatual);
@@ -74,11 +73,11 @@ public class AgendasActivity extends AbstractListActivity<Agenda> {
     }
 
     @Override
-    public Comparator<Agenda> obterComparador() {
-        return new Comparator<Agenda>() {
+    public Comparator<Atuacao> obterComparador() {
+        return new Comparator<Atuacao>() {
             @Override
-            public int compare(Agenda agenda, Agenda rhs) {
-                return agenda.getNome().compareTo(rhs.getNome());
+            public int compare(Atuacao atuacao, Atuacao outraAtuacao) {
+                return atuacao.getLocalAtendimento().getNome().compareTo(outraAtuacao.getLocalAtendimento().getNome());
             }
         };
     }
