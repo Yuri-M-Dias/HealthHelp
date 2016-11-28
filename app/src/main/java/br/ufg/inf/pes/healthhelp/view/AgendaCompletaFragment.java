@@ -2,11 +2,13 @@ package br.ufg.inf.pes.healthhelp.view;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -48,19 +50,26 @@ public class AgendaCompletaFragment extends AgendaFragment {
 
             //TODO: Implementar adição e remoção de períodos de tempo baseado nos horários bloqueados e liberados.
 
-            getView().findViewById(R.id.carregamento_horarios_disponiveis).setVisibility(View.GONE);
             AgendaDiariaCompletaAdapter agendaDiariaDisponivelAdapter = new AgendaDiariaCompletaAdapter(getActivity(), R.layout.item_atendimento, getAtuacao(), paginadorDiasEvent.getObjeto(), getData());
 
-            final ListView listaHorarios = (ListView) getView().findViewById(R.id.listview_horarios);
-            listaHorarios.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                    //agendaCompletaActivity.setAtendimento(listaAtendimentosDisponiveis.get(i));
-                }
-            });
-            listaHorarios.setAdapter(agendaDiariaDisponivelAdapter);
-            listaHorarios.setVisibility(View.VISIBLE);
+            getView().findViewById(R.id.carregamento_horarios_disponiveis).setVisibility(View.GONE);
+            if(agendaDiariaDisponivelAdapter.getFonteDados().isEmpty()){
+                TextView textView = (TextView) getView().findViewById(R.id.textview_sem_horarios_disponiveis);
+                textView.setVisibility(View.VISIBLE);
+                textView.setText("Não existem horários para este dia.");
+                getView().findViewById(R.id.imagem_sem_horarios_disponiveis).setVisibility(View.VISIBLE);
+            } else {
 
+                final ListView listaHorarios = (ListView) getView().findViewById(R.id.listview_horarios);
+                listaHorarios.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        //agendaCompletaActivity.setAtendimento(listaAtendimentosDisponiveis.get(i));
+                    }
+                });
+                listaHorarios.setAdapter(agendaDiariaDisponivelAdapter);
+                listaHorarios.setVisibility(View.VISIBLE);
+            }
         }
 
     }
