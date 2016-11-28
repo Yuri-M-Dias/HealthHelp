@@ -2,6 +2,7 @@ package br.ufg.inf.pes.healthhelp.view.adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +14,10 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import br.ufg.inf.pes.healthhelp.model.Atendimento;
 import br.ufg.inf.pes.healthhelp.model.Atuacao;
@@ -24,8 +28,6 @@ import br.ufg.pes.healthhelp.R;
  */
 
 public class AgendaDiariaDisponivelAdapter extends AgendaDiariaAdapter<Atendimento> {
-
-    private List<Atendimento> atendimentosDisponiveis;
 
     public AgendaDiariaDisponivelAdapter(Context context, int resource, Atuacao atuacao, List<Atendimento> atendimentosMarcados, Calendar data) {
         super(context, resource, new ArrayList<Atendimento>(), data);
@@ -70,12 +72,19 @@ public class AgendaDiariaDisponivelAdapter extends AgendaDiariaAdapter<Atendimen
      * @return lista de atendimentos disponíveis para marcação.
      */
     private List<Atendimento> eliminarHorariosAgendados(List<Atendimento> atendimentosDisponiveis, List<Atendimento> atendimentosAgendados) {
-        List<Atendimento> atendimentosDisponiveisFinal = new ArrayList<>();
+        List<Atendimento> atendimentosARemover = new ArrayList<>();
         for (Atendimento atendimentoMarcado : atendimentosAgendados) {
             for (Atendimento atendimentoDisponivel : atendimentosDisponiveis) {
-                if (!atendimentoMarcado.getHoraInicio().equals(atendimentoDisponivel.getHoraInicio())) {
-                    atendimentosDisponiveisFinal.add(atendimentoDisponivel);
+                if (atendimentoMarcado.getHoraInicio().equals(atendimentoDisponivel.getHoraInicio())) {
+                    atendimentosARemover.add(atendimentoDisponivel);
                 }
+            }
+        }
+
+        List<Atendimento> atendimentosDisponiveisFinal = new ArrayList<>();
+        for(Atendimento atendimento: atendimentosDisponiveis){
+            if(!atendimentosARemover.contains(atendimento)){
+                atendimentosDisponiveisFinal.add(atendimento);
             }
         }
         return atendimentosDisponiveisFinal;
