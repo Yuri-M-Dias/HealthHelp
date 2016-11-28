@@ -20,6 +20,14 @@ import br.ufg.inf.pes.healthhelp.model.PeriodoTempo;
 import br.ufg.inf.pes.healthhelp.model.enums.DayOfWeek;
 import br.ufg.pes.healthhelp.R;
 
+import static br.ufg.inf.pes.healthhelp.model.enums.DayOfWeek.FRIDAY;
+import static br.ufg.inf.pes.healthhelp.model.enums.DayOfWeek.MONDAY;
+import static br.ufg.inf.pes.healthhelp.model.enums.DayOfWeek.SATURDAY;
+import static br.ufg.inf.pes.healthhelp.model.enums.DayOfWeek.SUNDAY;
+import static br.ufg.inf.pes.healthhelp.model.enums.DayOfWeek.THURSDAY;
+import static br.ufg.inf.pes.healthhelp.model.enums.DayOfWeek.TUESDAY;
+import static br.ufg.inf.pes.healthhelp.model.enums.DayOfWeek.WEDNESDAY;
+
 public class PeriodoTempoView extends LinearLayout {
 
     private static final String TAG = PeriodoTempoView.class.getCanonicalName();
@@ -89,6 +97,7 @@ public class PeriodoTempoView extends LinearLayout {
 
         for (DayOfWeek diaSemana : periodoTempo.getDiasSemana()) {
             int recurso;
+
             switch (diaSemana) {
                 case SUNDAY:
                     recurso = R.id.botao_domingo;
@@ -198,33 +207,35 @@ public class PeriodoTempoView extends LinearLayout {
                 DayOfWeek diaSemana = null;
                 switch (view.getId()) {
                     case R.id.botao_domingo:
-                        diaSemana = DayOfWeek.SUNDAY;
+                        diaSemana = SUNDAY;
                         break;
                     case R.id.botao_segunda:
-                        diaSemana = DayOfWeek.MONDAY;
+                        diaSemana = MONDAY;
                         break;
                     case R.id.botao_terca:
-                        diaSemana = DayOfWeek.TUESDAY;
+                        diaSemana = TUESDAY;
                         break;
                     case R.id.botao_quarta:
-                        diaSemana = DayOfWeek.WEDNESDAY;
+                        diaSemana = WEDNESDAY;
                         break;
                     case R.id.botao_quinta:
-                        diaSemana = DayOfWeek.THURSDAY;
+                        diaSemana = THURSDAY;
                         break;
                     case R.id.botao_sexta:
-                        diaSemana = DayOfWeek.FRIDAY;
+                        diaSemana = FRIDAY;
                         break;
                     case R.id.botao_sabado:
-                        diaSemana = DayOfWeek.SATURDAY;
+                        diaSemana = SATURDAY;
                         break;
 
                 }
 
-                if (((ToggleButton) view).isChecked()) {
-                    periodoTempo.getDiasSemana().add(diaSemana);
-                } else {
-                    periodoTempo.getDiasSemana().remove(diaSemana);
+                if (diaSemana != null) {
+                    if (((ToggleButton) view).isChecked()) {
+                        periodoTempo.getDiasSemana().add(diaSemana);
+                    } else {
+                        periodoTempo.getDiasSemana().remove(diaSemana);
+                    }
                 }
             }
         };
@@ -237,6 +248,7 @@ public class PeriodoTempoView extends LinearLayout {
                 botao.setOnClickListener(acaoBotaoDiaSemana);
             }
         }
+
     }
 
     public PeriodoTempo getPeriodoTempo() {
