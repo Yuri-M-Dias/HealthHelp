@@ -4,6 +4,7 @@ import java.util.List;
 
 import br.ufg.inf.pes.healthhelp.dao.AgendaDAO;
 import br.ufg.inf.pes.healthhelp.model.Agenda;
+import br.ufg.inf.pes.healthhelp.model.LocalAtendimento;
 
 /**
  * Esta classe é responsável por prover serviços relacionados a uma {@link Agenda}.
@@ -18,6 +19,10 @@ public class AgendaService {
 
     public void solicitarAgenda(String id) {
         agendaDAO.buscarPelaId(id);
+    }
+
+    public void solicitarListaAgendas(List<LocalAtendimento> locais){
+        agendaDAO.buscarPorAgendas(locais);
     }
 
     void salvar(Agenda agenda) {

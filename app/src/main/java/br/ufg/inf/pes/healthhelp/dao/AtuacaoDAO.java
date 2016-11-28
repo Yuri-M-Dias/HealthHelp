@@ -62,7 +62,7 @@ public class AtuacaoDAO extends AbstractDAO<Atuacao> {
      */
     public void buscarPorLocais(final List<LocalAtendimento> locaisAtendimento) {
         //TODO: Substituir a implementação stub abaixo pela implementação correta quando a DAO for desenvolvida.
-        AsyncExecutor.create().execute(
+            AsyncExecutor.create().execute(
             new AsyncExecutor.RunnableEx() {
                 @Override
                 public void run() throws Exception {
