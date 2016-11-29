@@ -1,8 +1,8 @@
 package br.ufg.inf.pes.healthhelp.view;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -10,10 +10,8 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -24,10 +22,7 @@ import br.ufg.inf.pes.healthhelp.model.Atendimento;
 import br.ufg.inf.pes.healthhelp.model.Atuacao;
 import br.ufg.inf.pes.healthhelp.model.PeriodoTempo;
 import br.ufg.inf.pes.healthhelp.model.enums.DayOfWeek;
-import br.ufg.inf.pes.healthhelp.service.LocalAtendimentoService;
 import br.ufg.pes.healthhelp.R;
-
-import static br.ufg.inf.pes.healthhelp.view.AgendaActivity.ARG_ATENDIMENTO_AGENDADO;
 
 public class NovoAtendimentoActivity extends AppCompatActivity {
 
@@ -47,32 +42,32 @@ public class NovoAtendimentoActivity extends AppCompatActivity {
         dataHorario = (Button) findViewById(R.id.button_dados_data_horario_atendimento);
 
         //essas variáveis serão instanciadas chamando os métodos: getNomesLocaisAtendimentos e getNomesProfissionais.
-        String[] instituicoes = new String[] {"Hospital das Clínicas", "Hospinal Santa Genoveva",
+        String[] instituicoes = new String[]{"Hospital das Clínicas", "Hospinal Santa Genoveva",
             "Hospital HGG", "Hospital do Cancer", "Novo Hospital"};
-        String[] profissionais = new String[] {"João não sei das quantas", "José Maria",
+        String[] profissionais = new String[]{"João não sei das quantas", "José Maria",
             "Açogueiro do pará", "Médico bom", "Enfermeiro"};
 
         instituicao.setAdapter(adapter(instituicoes));
         profissional.setAdapter(adapter(profissionais));
     }
 
-    public ArrayAdapter<String> adapter(String[] listaDados){
+    public ArrayAdapter<String> adapter(String[] listaDados) {
         ArrayAdapter<String> adaptador = new ArrayAdapter<String>(this,
             android.R.layout.simple_dropdown_item_1line, listaDados);
         return adaptador;
     }
 
-    public String[] getNomesLocaisAtendimentos(String dado){
+    public String[] getNomesLocaisAtendimentos(String dado) {
         //buscar no banco todos os nomes dos locais para ser usado pelo adapter do AutoCompleteTextView
         return null;
     }
 
-    public String[] getNomesProfissionais(String dado){
+    public String[] getNomesProfissionais(String dado) {
         //buscar no banco todos os nomes dos profissionais para ser usado pelo adapter do AutoCompleteTextView
         return null;
     }
 
-    public void horarioAtendimento(View view){
+    public void horarioAtendimento(View view) {
         Intent intent = new Intent(this, AgendaDisponivelActivity.class);
         intent.putExtra(AgendaActivity.ARG_ATUACAO, criarAtuacao());
         startActivityForResult(intent, AgendaActivity.SELECIONAR_HORARIO_REQUEST);
@@ -97,20 +92,20 @@ public class NovoAtendimentoActivity extends AppCompatActivity {
         }
     }
 
-    public String setHorarioAtendimento(){
+    public String setHorarioAtendimento() {
         //SimpleDateFormat data = new SimpleDateFormat("HH:mm");
         //String horaData = "Das " + data.format(atendimento.getHoraInicio()) + " às " +
-         //   data.format(atendimento.getHoraFim());
+        //   data.format(atendimento.getHoraFim());
         return " ";
     }
 
-    public void marcar(){
+    public void marcar() {
         CharSequence text = "Atendimento marcado com sucesso";
         Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
         finish();
     }
 
-    public void initToolbar(){
+    public void initToolbar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_novo_atendimento);
         setSupportActionBar(toolbar);
     }
