@@ -88,7 +88,9 @@
                 android:textSize="16dp"
                 android:shadowColor="@color/cardview_light_background"
                 android:background="@color/cardview_light_background"
-                android:onClick="horarioAtendimento"/>
+                android:onClick="horarioAtendimento"
+                style="@style/Widget.AppCompat.Button"
+                android:textAllCaps="false" />
 
         </LinearLayout>
 

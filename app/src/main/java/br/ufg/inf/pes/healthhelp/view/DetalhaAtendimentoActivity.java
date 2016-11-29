@@ -157,7 +157,6 @@ public class DetalhaAtendimentoActivity extends AppCompatActivity {
 
             ((TextView) findViewById(R.id.momento_atendimento)).setText(stringBuilder.toString());
 
-            Log.i(getClass().getCanonicalName(), "Atendimento carregado com sucesso!");
             super.onActivityResult(requestCode, resultCode, data);
         }
     }

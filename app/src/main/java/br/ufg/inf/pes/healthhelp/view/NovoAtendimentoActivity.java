@@ -54,7 +54,6 @@ public class NovoAtendimentoActivity extends AppCompatActivity {
 
         instituicao.setAdapter(adapter(instituicoes));
         profissional.setAdapter(adapter(profissionais));
-        dataHorario.setText(setHorarioAtendimento());
     }
 
     public ArrayAdapter<String> adapter(String[] listaDados){
@@ -75,16 +74,27 @@ public class NovoAtendimentoActivity extends AppCompatActivity {
 
     public void horarioAtendimento(View view){
         Intent intent = new Intent(this, AgendaDisponivelActivity.class);
-        //intent.putExtra(AgendaActivity.ARG_ATUACAO, criarAtuacao());
-        startActivityForResult(intent, 1);
+        intent.putExtra(AgendaActivity.ARG_ATUACAO, criarAtuacao());
+        startActivityForResult(intent, AgendaActivity.SELECIONAR_HORARIO_REQUEST);
     }
 
     @Override
-    public void startActivityForResult(Intent intent, int requestCode) {
-        super.startActivityForResult(intent, requestCode);
-        //Serializable at = intent.getSerializableExtra(ARG_ATENDIMENTO_AGENDADO);
-        //atendimento = ((Atendimento) at);
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == AgendaActivity.SELECIONAR_HORARIO_REQUEST && resultCode == RESULT_OK) {
+            SimpleDateFormat dataFormatter = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat horaFormatter = new SimpleDateFormat("HH:mm");
+            Atendimento atendimento = (Atendimento) data.getSerializableExtra(AgendaActivity.ARG_ATENDIMENTO_AGENDADO);
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append(dataFormatter.format(atendimento.getHoraInicioCalendar().getTime()));
+            stringBuilder.append(", das ");
+            stringBuilder.append(horaFormatter.format(atendimento.getHoraInicioCalendar().getTime()));
+            stringBuilder.append(" às ");
+            stringBuilder.append(horaFormatter.format(atendimento.getHoraFimCalendar().getTime()));
 
+            dataHorario.setText(stringBuilder.toString());
+
+            super.onActivityResult(requestCode, resultCode, data);
+        }
     }
 
     public String setHorarioAtendimento(){
