@@ -1,17 +1,13 @@
 package br.ufg.inf.pes.healthhelp.view;
 
 import android.app.DatePickerDialog;
-import android.content.Intent;
-import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.DatePicker;
 
 import java.util.ArrayList;
@@ -34,12 +30,11 @@ public class AgendaActivity extends AppCompatActivity {
     public static final String ARG_PERMITE_PASSADO = "permite-ver-passado";
     public static final String ARG_TIPO_AGENDA = "tipo-agenda";
 
+    public static final int SELECIONAR_HORARIO_REQUEST = 100;
+    Class<AgendaFragment> tipoAgenda;
     private PaginadorDiasAdapter paginadorDiasAdapter;
     private ViewPager paginadorDiasView;
-
     private Atuacao atuacao;
-    Class<AgendaFragment> tipoAgenda;
-
     private Atendimento atendimento;
     private AtendimentoService atendimentoService;
     private boolean permiteVerPassado;
@@ -68,8 +63,12 @@ public class AgendaActivity extends AppCompatActivity {
         permiteVerPassado = getIntent().getBooleanExtra(ARG_PERMITE_PASSADO, false);
         atuacao = (Atuacao) getIntent().getSerializableExtra(ARG_ATUACAO);
         tipoAgenda = (Class<AgendaFragment>) getIntent().getSerializableExtra(ARG_TIPO_AGENDA);
+        atuacao = (Atuacao) getIntent().getSerializableExtra(ARG_ATUACAO);
 
-        criarAtuacao(); //TODO: Remover essa chamada e o método quando a linhaa acima retornar algo válido.
+        if (atuacao == null) {
+            atuacao = criarAtuacao();
+        }
+
 
         atendimentoService = new AtendimentoService();
         setContentView(R.layout.activity_agenda_disponivel);
@@ -90,9 +89,8 @@ public class AgendaActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(paginadorDiasView);
     }
 
-    //TODO: Remover a implementação abaixo quando as classes que chamam essa aqui estiverem prontas.
-    private void criarAtuacao() {
-        atuacao = new Atuacao();
+    private Atuacao criarAtuacao() {
+        Atuacao atuacao = new Atuacao();
         atuacao.setAgendas(new ArrayList<Agenda>());
         Agenda agenda = new Agenda();
         agenda.setNome("Atendimento Geral");
@@ -174,6 +172,8 @@ public class AgendaActivity extends AppCompatActivity {
 
         agenda.setHorariosAtendimento(horariosAtendimento);
 
+        return atuacao;
+
     }
 
     @Override
@@ -222,7 +222,7 @@ public class AgendaActivity extends AppCompatActivity {
             }
         }, dataSelecionada.get(Calendar.YEAR), dataSelecionada.get(Calendar.MONTH), dataSelecionada.get(Calendar.DAY_OF_MONTH));
 
-        if(!permiteVerPassado) {
+        if (!permiteVerPassado) {
             datePickerDialog.getDatePicker().setMinDate(Calendar.getInstance().getTimeInMillis());
         }
 

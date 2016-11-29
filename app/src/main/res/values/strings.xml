@@ -88,5 +88,6 @@
     <string name="atuacoes_profissionais_saude_titulo_activity">Profissionais de Saúde</string>
     <string name="atuacoes_profissionais_saude_titulo_dialog">Carregando profissionais de saúde...</string>
     <string name="atuacoes_profissionais_saude_mensagem_dialog">Aguarde enquanto o sistema carrega os a lista de profissionais de saúde dos locais de atendimento nos quais você trabalha</string>
+    <string name="activity_detalhe_de_atendimento">Detalhe de Atendimento</string>
 
 </resources>

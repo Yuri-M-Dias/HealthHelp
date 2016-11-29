@@ -5,10 +5,8 @@ import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -24,8 +22,6 @@ import br.ufg.pes.healthhelp.R;
  */
 
 public class AgendaDiariaDisponivelAdapter extends AgendaDiariaAdapter<Atendimento> {
-
-    private List<Atendimento> atendimentosDisponiveis;
 
     public AgendaDiariaDisponivelAdapter(Context context, int resource, Atuacao atuacao, List<Atendimento> atendimentosMarcados, Calendar data) {
         super(context, resource, new ArrayList<Atendimento>(), data);
@@ -70,12 +66,19 @@ public class AgendaDiariaDisponivelAdapter extends AgendaDiariaAdapter<Atendimen
      * @return lista de atendimentos disponíveis para marcação.
      */
     private List<Atendimento> eliminarHorariosAgendados(List<Atendimento> atendimentosDisponiveis, List<Atendimento> atendimentosAgendados) {
-        List<Atendimento> atendimentosDisponiveisFinal = new ArrayList<>();
+        List<Atendimento> atendimentosARemover = new ArrayList<>();
         for (Atendimento atendimentoMarcado : atendimentosAgendados) {
             for (Atendimento atendimentoDisponivel : atendimentosDisponiveis) {
-                if (!atendimentoMarcado.getHoraInicio().equals(atendimentoDisponivel.getHoraInicio())) {
-                    atendimentosDisponiveisFinal.add(atendimentoDisponivel);
+                if (atendimentoMarcado.getHoraInicio().equals(atendimentoDisponivel.getHoraInicio())) {
+                    atendimentosARemover.add(atendimentoDisponivel);
                 }
+            }
+        }
+
+        List<Atendimento> atendimentosDisponiveisFinal = new ArrayList<>();
+        for (Atendimento atendimento : atendimentosDisponiveis) {
+            if (!atendimentosARemover.contains(atendimento)) {
+                atendimentosDisponiveisFinal.add(atendimento);
             }
         }
         return atendimentosDisponiveisFinal;

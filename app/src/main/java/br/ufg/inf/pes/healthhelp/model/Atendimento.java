@@ -44,6 +44,11 @@ public class Atendimento implements Serializable {
         return DATETIME_FORMATTER.format(horaInicio.getTime());
     }
 
+    @Exclude
+    public void setHoraInicio(Calendar horaInicio) {
+        this.horaInicio = horaInicio;
+    }
+
     public void setHoraInicio(String horaInicio) {
         try {
             if (this.horaInicio == null) {
@@ -55,17 +60,17 @@ public class Atendimento implements Serializable {
         }
     }
 
-    @Exclude
-    public void setHoraInicio(Calendar horaInicio) {
-        this.horaInicio = horaInicio;
-    }
-
     public Calendar getHoraFimCalendar() {
         return horaFim;
     }
 
     public String getHoraFim() {
         return DATETIME_FORMATTER.format(horaInicio.getTime());
+    }
+
+    @Exclude
+    public void setHoraFim(Calendar horaFim) {
+        this.horaFim = horaFim;
     }
 
     public void setHoraFim(String horaFim) {
@@ -77,11 +82,6 @@ public class Atendimento implements Serializable {
         } catch (ParseException e) {
             Log.i(getClass().getCanonicalName(), e.getMessage());
         }
-    }
-
-    @Exclude
-    public void setHoraFim(Calendar horaFim) {
-        this.horaFim = horaFim;
     }
 
     public boolean mesmaDataInicio(Calendar data) {
