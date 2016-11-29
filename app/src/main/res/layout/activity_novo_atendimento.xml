@@ -80,14 +80,15 @@
                 android:padding="16dp"
                 android:textSize="16dp"/>
 
-            <TextView
-                android:id="@+id/textView_dados_data_horario_atendimento"
+            <Button
+                android:id="@+id/button_dados_data_horario_atendimento"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint=""
-                android:textStyle="bold"
-                android:padding="16dp"
-                android:textSize="16dp"/>
+                android:hint="Selecione a Data e Horário"
+                android:textSize="16dp"
+                android:shadowColor="@color/cardview_light_background"
+                android:background="@color/cardview_light_background"
+                android:onClick="horarioAtendimento"/>
 
         </LinearLayout>
 

@@ -33,6 +33,7 @@
         <activity android:name="br.ufg.inf.pes.healthhelp.view.AutenticacaoActivity" />
         <activity android:name="br.ufg.inf.pes.healthhelp.view.LocaisAtendimentoActivity" />
         <activity android:name="br.ufg.inf.pes.healthhelp.view.AtuacoesActivity" />
+        <activity android:name="br.ufg.inf.pes.healthhelp.view.NovoAtendimentoActivity" />
 
         <!-- ATTENTION: This was auto-generated to add Google Play services to your project for
      App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
