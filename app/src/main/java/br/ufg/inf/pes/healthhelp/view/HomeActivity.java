@@ -62,8 +62,8 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void visualizarAgendas(View view) {
-        CharSequence text = "Visualizar agenda nao implementado";
-        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, AgendaCompletaActivity.class);
+        startActivity(intent);
     }
 
     public void visualizarAtuacoes(View view) {
