@@ -34,6 +34,8 @@ public class AgendaActivity extends AppCompatActivity {
     public static final String ARG_PERMITE_PASSADO = "permite-ver-passado";
     public static final String ARG_TIPO_AGENDA = "tipo-agenda";
 
+    public static final int SELECIONAR_HORARIO_REQUEST = 100;
+
     private PaginadorDiasAdapter paginadorDiasAdapter;
     private ViewPager paginadorDiasView;
 

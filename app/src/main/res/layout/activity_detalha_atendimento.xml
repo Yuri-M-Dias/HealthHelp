@@ -136,7 +136,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:text="Dia 31/12/2016 das 8:00 às 18:00"
+            android:text="31/12/2016\ndas 8:00 às 18:00"
             android:textStyle="normal"
             android:textColor="@color/primary_text"
             android:layout_toRightOf="@id/imageViewAgenda"

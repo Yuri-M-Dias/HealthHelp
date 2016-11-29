@@ -121,25 +121,26 @@ public class DetalhaAtendimentoActivity extends AppCompatActivity {
         Atuacao atuacao = criarAtuacao();
         Intent agendaDisponivelIntent = new Intent(this, AgendaDisponivelActivity.class);
         agendaDisponivelIntent.putExtra(AgendaActivity.ARG_ATUACAO, atuacao);
-        startActivityForResult(agendaDisponivelIntent, RESULT_OK);
+        startActivityForResult(agendaDisponivelIntent, AgendaActivity.SELECIONAR_HORARIO_REQUEST);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        SimpleDateFormat dataFormatter = new SimpleDateFormat("dd/MM");
-        SimpleDateFormat horaFormatter = new SimpleDateFormat("HH:mm");
-        Atendimento atendimento = (Atendimento) data.getSerializableExtra(AgendaActivity.ARG_ATENDIMENTO_AGENDADO);
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(dataFormatter.format(atendimento.getHoraInicioCalendar().getTime()));
-        stringBuilder.append("\ndas ");
-        stringBuilder.append(horaFormatter.format(atendimento.getHoraInicioCalendar().getTime()));
-        stringBuilder.append(" às ");
-        stringBuilder.append(horaFormatter.format(atendimento.getHoraFimCalendar().getTime()));
+            SimpleDateFormat dataFormatter = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat horaFormatter = new SimpleDateFormat("HH:mm");
+            Atendimento atendimento = (Atendimento) data.getSerializableExtra(AgendaActivity.ARG_ATENDIMENTO_AGENDADO);
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append(dataFormatter.format(atendimento.getHoraInicioCalendar().getTime()));
+            stringBuilder.append("\ndas ");
+            stringBuilder.append(horaFormatter.format(atendimento.getHoraInicioCalendar().getTime()));
+            stringBuilder.append(" às ");
+            stringBuilder.append(horaFormatter.format(atendimento.getHoraFimCalendar().getTime()));
 
-        ((TextView) findViewById(R.id.momento_atendimento)).setText(stringBuilder.toString());
+            ((TextView) findViewById(R.id.momento_atendimento)).setText(stringBuilder.toString());
 
-        Log.i(getClass().getCanonicalName(), "Atendimento recebido com sucesso!");
-        super.onActivityResult(requestCode, resultCode, data);
+            Log.i(getClass().getCanonicalName(), "Atendimento carregado com sucesso!");
+            super.onActivityResult(requestCode, resultCode, data);
     }
+
 }
