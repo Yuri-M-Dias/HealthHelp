@@ -11,14 +11,10 @@ import android.widget.LinearLayout;
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.Calendar;
-import java.util.LinkedList;
 import java.util.List;
 
-import br.ufg.inf.pes.healthhelp.model.Agenda;
 import br.ufg.inf.pes.healthhelp.model.Atendimento;
 import br.ufg.inf.pes.healthhelp.model.Atuacao;
-import br.ufg.inf.pes.healthhelp.model.PeriodoTempo;
-import br.ufg.inf.pes.healthhelp.model.enums.DayOfWeek;
 import br.ufg.inf.pes.healthhelp.model.event.PaginadorDiasEvent;
 import br.ufg.pes.healthhelp.R;
 

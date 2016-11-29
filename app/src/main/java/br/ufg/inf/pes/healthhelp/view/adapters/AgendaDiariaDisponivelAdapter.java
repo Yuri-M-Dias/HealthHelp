@@ -2,22 +2,16 @@ package br.ufg.inf.pes.healthhelp.view.adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 import br.ufg.inf.pes.healthhelp.model.Atendimento;
 import br.ufg.inf.pes.healthhelp.model.Atuacao;
@@ -82,8 +76,8 @@ public class AgendaDiariaDisponivelAdapter extends AgendaDiariaAdapter<Atendimen
         }
 
         List<Atendimento> atendimentosDisponiveisFinal = new ArrayList<>();
-        for(Atendimento atendimento: atendimentosDisponiveis){
-            if(!atendimentosARemover.contains(atendimento)){
+        for (Atendimento atendimento : atendimentosDisponiveis) {
+            if (!atendimentosARemover.contains(atendimento)) {
                 atendimentosDisponiveisFinal.add(atendimento);
             }
         }

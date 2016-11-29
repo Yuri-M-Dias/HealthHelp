@@ -2,7 +2,6 @@ package br.ufg.inf.pes.healthhelp.view;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
 public class AgendaDisponivelActivity extends AgendaActivity {
 

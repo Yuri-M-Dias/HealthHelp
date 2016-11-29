@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -40,13 +39,13 @@ public class AgendaDiariaCompletaAdapter extends AgendaDiariaAdapter {
             @Override
             public int compare(Object objeto, Object outroObjeto) {
                 Calendar horaInicioObjeto, horaInicioOutroObjeto;
-                if(objeto instanceof Atendimento){
+                if (objeto instanceof Atendimento) {
                     horaInicioObjeto = ((Atendimento) objeto).getHoraInicioCalendar();
                 } else {
                     horaInicioObjeto = ((PeriodoTempo) objeto).getHoraInicioCalendar();
                 }
 
-                if(objeto instanceof Atendimento){
+                if (objeto instanceof Atendimento) {
                     horaInicioOutroObjeto = ((Atendimento) objeto).getHoraInicioCalendar();
                 } else {
                     horaInicioOutroObjeto = ((PeriodoTempo) objeto).getHoraInicioCalendar();
@@ -68,9 +67,9 @@ public class AgendaDiariaCompletaAdapter extends AgendaDiariaAdapter {
 
         String textoHorario, textoDescricao = "";
         int corBackground = 0;
-        if(getItem(position) instanceof Atendimento) {
+        if (getItem(position) instanceof Atendimento) {
             Atendimento atendimento = (Atendimento) getItem(position);
-            textoHorario = construirStringHorario(atendimento .getHoraInicioCalendar(), atendimento .getHoraFimCalendar());
+            textoHorario = construirStringHorario(atendimento.getHoraInicioCalendar(), atendimento.getHoraFimCalendar());
             if (atendimento.getPaciente() == null) {
                 textoDescricao = "Horário Disponível";
                 corBackground = R.color.primary_light;
@@ -78,7 +77,7 @@ public class AgendaDiariaCompletaAdapter extends AgendaDiariaAdapter {
                 textoDescricao = "Atendimento de " + atendimento.getPaciente().getNome();
                 corBackground = R.color.icons;
             }
-        } else if(getItem(position) instanceof PeriodoTempo){
+        } else if (getItem(position) instanceof PeriodoTempo) {
             PeriodoTempo periodoTempo = (PeriodoTempo) getItem(position);
             textoHorario = construirStringHorario(periodoTempo.getHoraInicioCalendar(), periodoTempo.getHoraFimCalendar());
             textoDescricao = "HORÁRIO DE ALMOÇO";
@@ -104,7 +103,7 @@ public class AgendaDiariaCompletaAdapter extends AgendaDiariaAdapter {
      * Combina a lista de atendimentos disponíveis com os atendimentos a lista de atendimentos agendados em uma única lista.
      *
      * @param atendimentosDisponiveis Lista de atendimentos com horário disponível.
-     * @param atendimentosAgendados Lista de atendimentos já marcados.
+     * @param atendimentosAgendados   Lista de atendimentos já marcados.
      * @return lista de atendimentos combinados.
      */
     private List<Atendimento> combinarAtendimentos(List<Atendimento> atendimentosDisponiveis, List<Atendimento> atendimentosAgendados) {
@@ -124,15 +123,16 @@ public class AgendaDiariaCompletaAdapter extends AgendaDiariaAdapter {
 
     /**
      * Filtra os horários de almoço para para exibiçãoa na agenda, evitando que um dia mostre horário de almoço que não existe para data.
+     *
      * @param horariosAlmoco lista de horários de almoço.
-     * @param data data a ser utilizada como filtro.
+     * @param data           data a ser utilizada como filtro.
      * @return lista de horários de almoço filtrada.
      */
-    private List<PeriodoTempo> filtrarHorariosAlmoco(List<PeriodoTempo> horariosAlmoco, Calendar data){
+    private List<PeriodoTempo> filtrarHorariosAlmoco(List<PeriodoTempo> horariosAlmoco, Calendar data) {
         DayOfWeek dayOfWeek = DayOfWeek.of(data.get(Calendar.DAY_OF_WEEK));
         List<PeriodoTempo> horariosFiltrados = new ArrayList<>();
-        for(PeriodoTempo horarioAlmoco : horariosAlmoco) {
-            if(horarioAlmoco.getDiasSemana().contains(dayOfWeek)) {
+        for (PeriodoTempo horarioAlmoco : horariosAlmoco) {
+            if (horarioAlmoco.getDiasSemana().contains(dayOfWeek)) {
                 horariosFiltrados.add(horarioAlmoco);
             }
         }

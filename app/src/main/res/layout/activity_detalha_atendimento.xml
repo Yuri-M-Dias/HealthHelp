@@ -11,10 +11,10 @@
     tools:context="br.ufg.inf.pes.healthhelp.view.DetalhaAtendimentoActivity">
 
     <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay"
-        android:id="@+id/appBarLayout">
+        android:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar_detalhe_de_atendimento"
@@ -28,136 +28,139 @@
             app:title="@string/activity_detalhe_de_atendimento"></android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="@dimen/activity_vertical_margin">
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:gravity="left"
-        android:text="Local de Atendimento"
-        android:textStyle="bold"
-        android:layout_marginTop="10dp"
-        />
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
-    <ImageView
-        app:srcCompat="@drawable/mapslocalization"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:id="@+id/imageViewMaps"
-        android:layout_marginTop="10dp"
-        android:layout_gravity="left"
-        android:layout_margin="@dimen/activity_horizontal_margin"
-        />
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:text="Hospital das Clínicas"
-        android:textStyle="normal"
-        android:textSize="18sp"
-        android:textColor="@color/primary_text"
-        android:layout_toRightOf="@id/imageViewMaps"
-        android:maxLines="3"
-        android:singleLine="true"
-        android:ellipsize="end"
-        android:id="@+id/textView5"
-        android:layout_centerVertical="true"
-        />
-    </RelativeLayout>
 
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:gravity="left"
-        android:text="Profissional da Saúde"
-        android:textStyle="bold"
-        android:layout_marginTop="10dp"/>
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="left"
+                android:text="Local de Atendimento"
+                android:textStyle="bold" />
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
-    <ImageView
-        app:srcCompat="@drawable/profissional_saude_azul"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:id="@+id/imageViewProfissional"
-        android:layout_gravity="left"
-        android:layout_margin="@dimen/activity_horizontal_margin"
-        />
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:text="Dra Flávia Abreu"
-        android:textStyle="normal"
-        android:textColor="@color/primary_text"
-        android:layout_toRightOf="@id/imageViewProfissional"
-        android:maxLines="3"
-        android:singleLine="true"
-        android:ellipsize="end"
-        android:layout_centerVertical="true"
-        />
-    </RelativeLayout>
+            <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:gravity="left"
-        android:text="Data e Hora de Atendimento"
-        android:textStyle="bold"
-        android:layout_marginTop="10dp"/>
+                <ImageView
+                    android:id="@+id/imageViewMaps"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_gravity="left"
+                    android:layout_margin="@dimen/activity_horizontal_margin"
+                    android:layout_marginTop="10dp"
+                    app:srcCompat="@drawable/mapslocalization" />
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
-        <ImageView
-            app:srcCompat="@drawable/agenda_azul"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:id="@+id/imageViewAgenda"
-            android:layout_gravity="left"
-            android:layout_margin="@dimen/activity_horizontal_margin"
-            />
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:text="31/12/2016\ndas 8:00 às 18:00"
-            android:textStyle="normal"
-            android:textColor="@color/primary_text"
-            android:layout_toRightOf="@id/imageViewAgenda"
-            android:maxLines="3"
-            android:ellipsize="end"
-            android:layout_centerVertical="true"
-            android:id="@+id/momento_atendimento" />
-    </RelativeLayout>
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/imageViewMaps"
+                    android:ellipsize="end"
+                    android:maxLines="3"
+                    android:padding="10dp"
+                    android:singleLine="true"
+                    android:text="Hospital das Clínicas"
+                    android:textColor="@color/primary_text"
+                    android:textSize="18sp"
+                    android:textStyle="normal" />
+            </RelativeLayout>
 
-    <Button
-        android:text="Remarcar Atendimento"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/button2"
-        android:layout_alignParentBottom="true"
-        android:layout_above="@id/imageViewAgenda"
-        android:layout_marginTop="10dp"
-        android:onClick="selecionarHorarioAtendimento"
-      />
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="left"
+                android:text="Profissional da Saúde"
+                android:textStyle="bold" />
 
-         </LinearLayout>
+            <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/imageViewProfissional"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_gravity="left"
+                    android:layout_margin="@dimen/activity_horizontal_margin"
+                    app:srcCompat="@drawable/profissional_saude_azul" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/imageViewProfissional"
+                    android:ellipsize="end"
+                    android:maxLines="3"
+                    android:singleLine="true"
+                    android:text="Dra Flávia Abreu"
+                    android:textColor="@color/primary_text"
+                    android:textSize="18sp"
+                    android:textStyle="normal" />
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="left"
+                android:text="Data e Hora de Atendimento"
+                android:textStyle="bold" />
+
+            <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/imageViewAgenda"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_gravity="left"
+                    android:layout_margin="@dimen/activity_horizontal_margin"
+                    app:srcCompat="@drawable/agenda_azul" />
+
+                <TextView
+                    android:id="@+id/momento_atendimento"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/imageViewAgenda"
+                    android:ellipsize="end"
+                    android:maxLines="3"
+                    android:text="31/12/2016\ndas 8:00 às 18:00"
+                    android:textColor="@color/primary_text"
+                    android:textSize="18sp"
+                    android:textStyle="normal" />
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/imageViewAgenda"
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="10dp"
+                android:onClick="selecionarHorarioAtendimento"
+                android:text="Remarcar Atendimento" />
+
+        </LinearLayout>
 
     </ScrollView>
 </LinearLayout>

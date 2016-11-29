@@ -12,9 +12,10 @@ public class PacienteDAO extends AbstractDAO<Paciente> {
 
     /**
      * construtor de testes
+     *
      * @param reference referencia do banco de dados do firebase a ser utilizado
      */
-    public PacienteDAO(DatabaseReference reference){
+    public PacienteDAO(DatabaseReference reference) {
         super(PacienteDAO.class.getCanonicalName(), "paciente", Paciente.class);
         setDatabaseReference(reference);
     }

@@ -18,7 +18,7 @@ import br.ufg.inf.pes.healthhelp.model.event.DatabaseEvent;
  */
 public class AtuacaoDAO extends AbstractDAO<Atuacao> {
 
-    public AtuacaoDAO(){
+    public AtuacaoDAO() {
         super(AtuacaoDAO.class.getCanonicalName(), "atuacao", Atuacao.class);
     }
 

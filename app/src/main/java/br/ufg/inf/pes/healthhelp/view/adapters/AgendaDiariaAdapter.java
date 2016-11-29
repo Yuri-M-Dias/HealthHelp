@@ -4,14 +4,12 @@ import android.content.Context;
 import android.widget.ArrayAdapter;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
 
 import br.ufg.inf.pes.healthhelp.model.Agenda;
 import br.ufg.inf.pes.healthhelp.model.Atendimento;
-import br.ufg.inf.pes.healthhelp.model.Atuacao;
 import br.ufg.inf.pes.healthhelp.model.PeriodoTempo;
 import br.ufg.inf.pes.healthhelp.model.enums.DayOfWeek;
 
@@ -73,7 +71,7 @@ public class AgendaDiariaAdapter<T> extends ArrayAdapter<T> {
         return atendimentosVazios;
     }
 
-    protected String construirStringHorario(Calendar horaInicio, Calendar horaFim){
+    protected String construirStringHorario(Calendar horaInicio, Calendar horaFim) {
         return TIME_FORMATTER.format(horaInicio.getTime()) + "\n" + TIME_FORMATTER.format(horaFim.getTime());
     }
 

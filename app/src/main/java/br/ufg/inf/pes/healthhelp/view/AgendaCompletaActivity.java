@@ -1,6 +1,5 @@
 package br.ufg.inf.pes.healthhelp.view;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 public class AgendaCompletaActivity extends AgendaActivity {
@@ -12,7 +11,6 @@ public class AgendaCompletaActivity extends AgendaActivity {
         super.onCreate(savedInstanceState);
         getSupportActionBar().setTitle("Agenda " + getAtuacao().getAgendas().get(0).getNome());
     }
-
 
 
 }

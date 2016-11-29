@@ -1,12 +1,11 @@
 package br.ufg.inf.pes.healthhelp.view;
+
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-
-import org.greenrobot.eventbus.EventBus;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -119,7 +118,7 @@ public class DetalhaAtendimentoActivity extends AppCompatActivity {
     }
 
 
-    void selecionarHorarioAtendimento(View view){
+    void selecionarHorarioAtendimento(View view) {
         Atuacao atuacao = criarAtuacao();
         Intent agendaDisponivelIntent = new Intent(this, AgendaDisponivelActivity.class);
         agendaDisponivelIntent.putExtra(AgendaActivity.ARG_ATUACAO, atuacao);
@@ -129,20 +128,20 @@ public class DetalhaAtendimentoActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-            SimpleDateFormat dataFormatter = new SimpleDateFormat("dd/MM/yyyy");
-            SimpleDateFormat horaFormatter = new SimpleDateFormat("HH:mm");
-            Atendimento atendimento = (Atendimento) data.getSerializableExtra(AgendaActivity.ARG_ATENDIMENTO_AGENDADO);
-            StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.append(dataFormatter.format(atendimento.getHoraInicioCalendar().getTime()));
-            stringBuilder.append("\ndas ");
-            stringBuilder.append(horaFormatter.format(atendimento.getHoraInicioCalendar().getTime()));
-            stringBuilder.append(" às ");
-            stringBuilder.append(horaFormatter.format(atendimento.getHoraFimCalendar().getTime()));
+        SimpleDateFormat dataFormatter = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat horaFormatter = new SimpleDateFormat("HH:mm");
+        Atendimento atendimento = (Atendimento) data.getSerializableExtra(AgendaActivity.ARG_ATENDIMENTO_AGENDADO);
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(dataFormatter.format(atendimento.getHoraInicioCalendar().getTime()));
+        stringBuilder.append("\ndas ");
+        stringBuilder.append(horaFormatter.format(atendimento.getHoraInicioCalendar().getTime()));
+        stringBuilder.append(" às ");
+        stringBuilder.append(horaFormatter.format(atendimento.getHoraFimCalendar().getTime()));
 
-            ((TextView) findViewById(R.id.momento_atendimento)).setText(stringBuilder.toString());
+        ((TextView) findViewById(R.id.momento_atendimento)).setText(stringBuilder.toString());
 
-            Log.i(getClass().getCanonicalName(), "Atendimento carregado com sucesso!");
-            super.onActivityResult(requestCode, resultCode, data);
+        Log.i(getClass().getCanonicalName(), "Atendimento carregado com sucesso!");
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
 }

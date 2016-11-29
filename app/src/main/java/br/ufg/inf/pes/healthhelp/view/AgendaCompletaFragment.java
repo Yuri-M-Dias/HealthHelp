@@ -3,7 +3,6 @@ package br.ufg.inf.pes.healthhelp.view;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,14 +13,11 @@ import android.widget.TextView;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 import br.ufg.inf.pes.healthhelp.model.Atendimento;
 import br.ufg.inf.pes.healthhelp.model.event.PaginadorDiasEvent;
 import br.ufg.inf.pes.healthhelp.view.adapters.AgendaDiariaCompletaAdapter;
-import br.ufg.inf.pes.healthhelp.view.adapters.AgendaDiariaDisponivelAdapter;
 import br.ufg.pes.healthhelp.R;
 
 public class AgendaCompletaFragment extends AgendaFragment {
@@ -54,7 +50,7 @@ public class AgendaCompletaFragment extends AgendaFragment {
             final AgendaDiariaCompletaAdapter agendaDiariaDisponivelAdapter = new AgendaDiariaCompletaAdapter(getActivity(), R.layout.item_atendimento, getAtuacao(), paginadorDiasEvent.getObjeto(), getData());
 
             getView().findViewById(R.id.carregamento_horarios_disponiveis).setVisibility(View.GONE);
-            if(agendaDiariaDisponivelAdapter.getFonteDados().isEmpty()){
+            if (agendaDiariaDisponivelAdapter.getFonteDados().isEmpty()) {
                 TextView textView = (TextView) getView().findViewById(R.id.textview_sem_horarios_disponiveis);
                 textView.setVisibility(View.VISIBLE);
                 textView.setText("Não existem horários para este dia.");
@@ -68,9 +64,9 @@ public class AgendaCompletaFragment extends AgendaFragment {
                         //TODO: Dependendo do tipo de dado na célula, deve-se abrir alguma activity.
                         //Se for um atendimento vazio, abre-se a tela de cadastro de atendimento.
                         //Se for um horário de almoço, nada é feito.
-                        if(adapterView.getItemAtPosition(i) instanceof Atendimento){
+                        if (adapterView.getItemAtPosition(i) instanceof Atendimento) {
                             Atendimento atendimento = (Atendimento) adapterView.getItemAtPosition(i);
-                            if(atendimento.getPaciente() != null) {
+                            if (atendimento.getPaciente() != null) {
                                 Intent intent = new Intent(AgendaCompletaFragment.this.getContext(), DetalhaAtendimentoActivity.class);
                                 intent.putExtra(DetalhaAtendimentoActivity.ARG_ATENDIMENTO, atendimento);
                                 startActivity(intent);
@@ -84,7 +80,6 @@ public class AgendaCompletaFragment extends AgendaFragment {
         }
 
     }
-
 
 
 }

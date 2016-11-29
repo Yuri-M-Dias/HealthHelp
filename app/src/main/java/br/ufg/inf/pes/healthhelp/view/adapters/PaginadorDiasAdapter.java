@@ -14,8 +14,6 @@ import java.util.Calendar;
 import java.util.LinkedList;
 
 import br.ufg.inf.pes.healthhelp.model.Atuacao;
-import br.ufg.inf.pes.healthhelp.view.AgendaCompletaFragment;
-import br.ufg.inf.pes.healthhelp.view.AgendaDisponivelFragment;
 import br.ufg.inf.pes.healthhelp.view.AgendaFragment;
 
 /**
@@ -27,9 +25,9 @@ public class PaginadorDiasAdapter extends FragmentStatePagerAdapter {
     private final String TAG = PaginadorDiasAdapter.class.getName();
     private final int numeroAbasAAdicionar = 7;
     private final Calendar hoje;
+    private final int QUANTIDADE_DIAS_MES_PADRAO = 30;
     private LinkedList<Calendar> intervaloVisualizacao;
     private boolean permiteVerPassado;
-    private final int QUANTIDADE_DIAS_MES_PADRAO = 30;
     private int indiceUltimaDataCarregada = -1;
     private Atuacao atuacao;
     private Class<AgendaFragment> tipoAgenda;
@@ -51,6 +49,7 @@ public class PaginadorDiasAdapter extends FragmentStatePagerAdapter {
 
     /**
      * Constrói o intervalo padrão de tempo em dias que serão visualizados nas abas.
+     *
      * @param contextoTemporal Dia dado como referência para construção do intervalo de tempo de visualização.
      */
     private void construirIntervaloPadraoVisualizacao(Calendar contextoTemporal) {
@@ -58,11 +57,11 @@ public class PaginadorDiasAdapter extends FragmentStatePagerAdapter {
         Calendar dataInicial = (Calendar) contextoTemporal.clone();
         Calendar dataFinal = (Calendar) contextoTemporal.clone();
 
-        dataInicial.add(Calendar.DAY_OF_MONTH, -(QUANTIDADE_DIAS_MES_PADRAO/2));
-        dataFinal.add(Calendar.DAY_OF_MONTH, (QUANTIDADE_DIAS_MES_PADRAO/2));
+        dataInicial.add(Calendar.DAY_OF_MONTH, -(QUANTIDADE_DIAS_MES_PADRAO / 2));
+        dataFinal.add(Calendar.DAY_OF_MONTH, (QUANTIDADE_DIAS_MES_PADRAO / 2));
 
-        if(!permiteVerPassado && dataInicial.before(hoje)){
-            int diasAdicionais = (int) (hoje.getTimeInMillis() - dataInicial.getTimeInMillis())/(1000*60*60*24);
+        if (!permiteVerPassado && dataInicial.before(hoje)) {
+            int diasAdicionais = (int) (hoje.getTimeInMillis() - dataInicial.getTimeInMillis()) / (1000 * 60 * 60 * 24);
             dataFinal.add(Calendar.DAY_OF_MONTH, diasAdicionais);
             dataInicial = hoje;
         }
@@ -75,10 +74,11 @@ public class PaginadorDiasAdapter extends FragmentStatePagerAdapter {
 
     /**
      * Obtém a data selecionada (atual) no paginador.
+     *
      * @param container Container contendo informações sobre o paginador.
      * @return data selecionada (atual) no paginador.
      */
-    public Calendar getDataSelecionada(ViewPager container){
+    public Calendar getDataSelecionada(ViewPager container) {
         return intervaloVisualizacao.get(container.getCurrentItem());
     }
 
@@ -111,6 +111,7 @@ public class PaginadorDiasAdapter extends FragmentStatePagerAdapter {
 
     /**
      * Carrega novas abas no início ou fim da lista de abas com novas datas, caso necessário.
+     *
      * @param container container que contém as abas e informações de gerenciamento das mesmas.
      */
     private void carregarNovasDatas(ViewPager container) {
@@ -129,7 +130,7 @@ public class PaginadorDiasAdapter extends FragmentStatePagerAdapter {
             container.setCurrentItem(indiceDataAtual);
 
         } else if (indiceDataAtual < 2) {
-            if(indiceUltimaDataCarregada >= indiceDataAtual){
+            if (indiceUltimaDataCarregada >= indiceDataAtual) {
                 container.computeScroll();
                 container.setCurrentItem(indiceUltimaDataCarregada);
 
@@ -145,7 +146,7 @@ public class PaginadorDiasAdapter extends FragmentStatePagerAdapter {
                 for (contadorPosicao = 0; contadorPosicao < numeroAbasAAdicionar; contadorPosicao++) {
                     primeiraData.add(Calendar.DAY_OF_MONTH, -1);
                     if (primeiraData.before(hoje) && !permiteVerPassado) {
-                        if(intervaloFoiModificado) {
+                        if (intervaloFoiModificado) {
                             Log.i(TAG, "Apenas algumas dias foram adicionados ao início da lista.");
                         } else {
                             Log.i(TAG, "Limite inferior (data corrente) já atingido.");

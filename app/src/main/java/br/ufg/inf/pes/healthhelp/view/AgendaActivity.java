@@ -1,17 +1,13 @@
 package br.ufg.inf.pes.healthhelp.view;
 
 import android.app.DatePickerDialog;
-import android.content.Intent;
-import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.DatePicker;
 
 import java.util.ArrayList;
@@ -35,13 +31,10 @@ public class AgendaActivity extends AppCompatActivity {
     public static final String ARG_TIPO_AGENDA = "tipo-agenda";
 
     public static final int SELECIONAR_HORARIO_REQUEST = 100;
-
+    Class<AgendaFragment> tipoAgenda;
     private PaginadorDiasAdapter paginadorDiasAdapter;
     private ViewPager paginadorDiasView;
-
     private Atuacao atuacao;
-    Class<AgendaFragment> tipoAgenda;
-
     private Atendimento atendimento;
     private AtendimentoService atendimentoService;
     private boolean permiteVerPassado;
@@ -72,7 +65,7 @@ public class AgendaActivity extends AppCompatActivity {
         tipoAgenda = (Class<AgendaFragment>) getIntent().getSerializableExtra(ARG_TIPO_AGENDA);
         atuacao = (Atuacao) getIntent().getSerializableExtra(ARG_ATUACAO);
 
-        if(atuacao == null){
+        if (atuacao == null) {
             atuacao = criarAtuacao();
         }
 
@@ -229,7 +222,7 @@ public class AgendaActivity extends AppCompatActivity {
             }
         }, dataSelecionada.get(Calendar.YEAR), dataSelecionada.get(Calendar.MONTH), dataSelecionada.get(Calendar.DAY_OF_MONTH));
 
-        if(!permiteVerPassado) {
+        if (!permiteVerPassado) {
             datePickerDialog.getDatePicker().setMinDate(Calendar.getInstance().getTimeInMillis());
         }
 

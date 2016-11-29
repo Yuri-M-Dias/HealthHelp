@@ -24,10 +24,8 @@ public abstract class AbstractDAO<T extends BaseObject> implements InterfaceDAO<
 
     protected final String TAG;
     protected final String DATABASE_CHILD;
-
-    protected DatabaseReference databaseReference;
-
     protected final Class<T> tipoEntidade;
+    protected DatabaseReference databaseReference;
 
     public AbstractDAO(String TAG, String DATABASE_CHILD, Class<T> tipoEntidade) {
         this.TAG = TAG;
@@ -158,10 +156,10 @@ public abstract class AbstractDAO<T extends BaseObject> implements InterfaceDAO<
         };
     }
 
-    protected T construirObjetoFirebase(DataSnapshot snapshot){
+    protected T construirObjetoFirebase(DataSnapshot snapshot) {
         T objetoEncontrado = null;
         GenericTypeIndicator tipoParaConverter = getTipoEntidadeConstrucao();
-        if(tipoParaConverter != null){
+        if (tipoParaConverter != null) {
             objetoEncontrado = (T) snapshot.getValue(tipoParaConverter);
         } else {
             objetoEncontrado = snapshot.getValue(getTipoEntidade());

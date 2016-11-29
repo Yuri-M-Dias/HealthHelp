@@ -52,7 +52,7 @@ public class AtuacoesActivity extends AbstractListActivity<Atuacao> {
     @Override
     public ItensSeparadoresAdapter<Atuacao> inicializarAdapter(List<Atuacao> itens) {
         return new ItensSeparadoresAdapter<Atuacao>(this,
-                R.layout.item_separador_icone_nome_generico, ordenaAtuacoesDataFinalDecrescente(itens)) {
+            R.layout.item_separador_icone_nome_generico, ordenaAtuacoesDataFinalDecrescente(itens)) {
             @Override
             public void preencherItem(int position) {
                 Atuacao atuacaoAtual = getItem(position);
@@ -92,7 +92,6 @@ public class AtuacoesActivity extends AbstractListActivity<Atuacao> {
     }
 
 
-
     @Override
     public Comparator<Atuacao> obterComparador() {
         return new Comparator<Atuacao>() {
@@ -103,7 +102,7 @@ public class AtuacoesActivity extends AbstractListActivity<Atuacao> {
         };
     }
 
-    private List<Atuacao> ordenaAtuacoesDataFinalDecrescente(List<Atuacao> atuacoes){
+    private List<Atuacao> ordenaAtuacoesDataFinalDecrescente(List<Atuacao> atuacoes) {
         Collections.sort(atuacoes, new Comparator<Atuacao>() {
             @Override
             public int compare(Atuacao lhs, Atuacao rhs) {
@@ -114,21 +113,21 @@ public class AtuacoesActivity extends AbstractListActivity<Atuacao> {
         return atuacoes;
     }
 
-    private Date removeHora(Date date){
+    private Date removeHora(Date date) {
         Calendar calendar = GregorianCalendar.getInstance();
         calendar.setTime(date);
         Calendar dateCalendar = new GregorianCalendar(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
         return dateCalendar.getTime();
     }
 
-    private String abreviaLocalAtuacao(String localAtuacao){
+    private String abreviaLocalAtuacao(String localAtuacao) {
         if (localAtuacao.length() > 30)
-            return localAtuacao.substring(0,30).concat("...");
+            return localAtuacao.substring(0, 30).concat("...");
         else
             return localAtuacao;
     }
 
-    private String geraResumoSubTituloAtuacaoData(Date dataInicio, Date dataFinal){
+    private String geraResumoSubTituloAtuacaoData(Date dataInicio, Date dataFinal) {
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yy");
         String saida = "De: ";
         saida = saida.concat(format.format(removeHora(dataInicio)));
@@ -138,8 +137,8 @@ public class AtuacoesActivity extends AbstractListActivity<Atuacao> {
         return saida;
     }
 
-    private String geraSubTituloAtuacao(Atuacao atuacao){
+    private String geraSubTituloAtuacao(Atuacao atuacao) {
         return abreviaLocalAtuacao(atuacao.getLocalAtendimento().getNome())
-            + '\n' + geraResumoSubTituloAtuacaoData(atuacao.getDataInicio(),atuacao.getDataFim());
+            + '\n' + geraResumoSubTituloAtuacaoData(atuacao.getDataInicio(), atuacao.getDataFim());
     }
 }
