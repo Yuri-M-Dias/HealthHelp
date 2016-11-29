@@ -13,4 +13,6 @@ public class AgendaCompletaActivity extends AgendaActivity {
         getSupportActionBar().setTitle("Agenda " + getAtuacao().getAgendas().get(0).getNome());
     }
 
+
+
 }

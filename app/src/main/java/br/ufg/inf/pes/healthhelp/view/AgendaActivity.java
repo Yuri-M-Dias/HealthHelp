@@ -72,6 +72,11 @@ public class AgendaActivity extends AppCompatActivity {
         tipoAgenda = (Class<AgendaFragment>) getIntent().getSerializableExtra(ARG_TIPO_AGENDA);
         atuacao = (Atuacao) getIntent().getSerializableExtra(ARG_ATUACAO);
 
+        if(atuacao == null){
+            atuacao = criarAtuacao();
+        }
+
+
         atendimentoService = new AtendimentoService();
         setContentView(R.layout.activity_agenda_disponivel);
 
@@ -91,7 +96,92 @@ public class AgendaActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(paginadorDiasView);
     }
 
+    private Atuacao criarAtuacao() {
+        Atuacao atuacao = new Atuacao();
+        atuacao.setAgendas(new ArrayList<Agenda>());
+        Agenda agenda = new Agenda();
+        agenda.setNome("Atendimento Geral");
+        agenda.setId("id_agenda_atendimento_geral");
+        agenda.setHorariosBloqueados(new ArrayList<PeriodoTempo>());
+        agenda.setTempoPadraoMinutos(20);
 
+        List<PeriodoTempo> horariosAtendimento = new ArrayList<>();
+
+        PeriodoTempo periodo = new PeriodoTempo();
+        periodo.setDataInicio("25/11/2016");
+        periodo.setDataFim("25/12/2016");
+        periodo.setHoraInicio("08:00");
+        periodo.setHoraFim("12:00");
+        List<DayOfWeek> diasSemana = new ArrayList<>();
+        diasSemana.add(DayOfWeek.MONDAY);
+        diasSemana.add(DayOfWeek.TUESDAY);
+        diasSemana.add(DayOfWeek.WEDNESDAY);
+        diasSemana.add(DayOfWeek.THURSDAY);
+        diasSemana.add(DayOfWeek.FRIDAY);
+        periodo.setDiasSemana(diasSemana);
+        horariosAtendimento.add(periodo);
+
+        periodo = new PeriodoTempo();
+        periodo.setDataInicio("25/11/2016");
+        periodo.setDataFim("25/12/2016");
+        periodo.setHoraInicio("10:00");
+        periodo.setHoraFim("16:00");
+        diasSemana = new ArrayList<>();
+        diasSemana.add(DayOfWeek.SATURDAY);
+        periodo.setDiasSemana(diasSemana);
+        horariosAtendimento.add(periodo);
+
+        agenda.setHorariosAtendimento(horariosAtendimento);
+
+        atuacao.getAgendas().add(agenda);
+
+        agenda = new Agenda();
+        agenda.setNome("Cirurgias");
+        agenda.setId("id_agenda_cirurgias");
+        agenda.setHorariosBloqueados(new ArrayList<PeriodoTempo>());
+        agenda.setTempoPadraoMinutos(60);
+
+        horariosAtendimento = new ArrayList<>();
+
+        periodo = new PeriodoTempo();
+        periodo.setDataInicio("25/11/2016");
+        periodo.setDataFim("25/12/2016");
+        periodo.setHoraInicio("14:00");
+        periodo.setHoraFim("20:00");
+        diasSemana = new ArrayList<>();
+        diasSemana.add(DayOfWeek.MONDAY);
+        diasSemana.add(DayOfWeek.TUESDAY);
+        diasSemana.add(DayOfWeek.WEDNESDAY);
+        diasSemana.add(DayOfWeek.THURSDAY);
+        diasSemana.add(DayOfWeek.FRIDAY);
+        periodo.setDiasSemana(diasSemana);
+        horariosAtendimento.add(periodo);
+
+        atuacao.getAgendas().add(agenda);
+
+        PeriodoTempo periodoAlmoco = new PeriodoTempo();
+        periodoAlmoco.setHoraInicio(Calendar.getInstance());
+        periodoAlmoco.getHoraInicioCalendar().set(Calendar.HOUR_OF_DAY, 12);
+        periodoAlmoco.getHoraInicioCalendar().set(Calendar.MINUTE, 20);
+        periodoAlmoco.setHoraFim(Calendar.getInstance());
+        periodoAlmoco.getHoraFimCalendar().set(Calendar.HOUR_OF_DAY, 14);
+        periodoAlmoco.getHoraFimCalendar().set(Calendar.MINUTE, 00);
+        diasSemana = new ArrayList<>();
+        diasSemana.add(DayOfWeek.MONDAY);
+        diasSemana.add(DayOfWeek.TUESDAY);
+        diasSemana.add(DayOfWeek.WEDNESDAY);
+        diasSemana.add(DayOfWeek.THURSDAY);
+        diasSemana.add(DayOfWeek.FRIDAY);
+        diasSemana.add(DayOfWeek.SATURDAY);
+        periodoAlmoco.setDiasSemana(diasSemana);
+        atuacao.setHorariosAlmoco(new ArrayList<PeriodoTempo>());
+        atuacao.getHorariosAlmoco().add(periodoAlmoco);
+
+        agenda.setHorariosAtendimento(horariosAtendimento);
+
+        return atuacao;
+
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

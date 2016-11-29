@@ -1,5 +1,6 @@
 package br.ufg.inf.pes.healthhelp.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -50,7 +51,7 @@ public class AgendaCompletaFragment extends AgendaFragment {
 
             //TODO: Implementar adição e remoção de períodos de tempo baseado nos horários bloqueados e liberados.
 
-            AgendaDiariaCompletaAdapter agendaDiariaDisponivelAdapter = new AgendaDiariaCompletaAdapter(getActivity(), R.layout.item_atendimento, getAtuacao(), paginadorDiasEvent.getObjeto(), getData());
+            final AgendaDiariaCompletaAdapter agendaDiariaDisponivelAdapter = new AgendaDiariaCompletaAdapter(getActivity(), R.layout.item_atendimento, getAtuacao(), paginadorDiasEvent.getObjeto(), getData());
 
             getView().findViewById(R.id.carregamento_horarios_disponiveis).setVisibility(View.GONE);
             if(agendaDiariaDisponivelAdapter.getFonteDados().isEmpty()){
@@ -66,8 +67,15 @@ public class AgendaCompletaFragment extends AgendaFragment {
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                         //TODO: Dependendo do tipo de dado na célula, deve-se abrir alguma activity.
                         //Se for um atendimento vazio, abre-se a tela de cadastro de atendimento.
-                        //Se for um atendimento de algum paciente, abre a tela de detalhamento do atendimento.
                         //Se for um horário de almoço, nada é feito.
+                        if(adapterView.getItemAtPosition(i) instanceof Atendimento){
+                            Atendimento atendimento = (Atendimento) adapterView.getItemAtPosition(i);
+                            if(atendimento.getPaciente() != null) {
+                                Intent intent = new Intent(AgendaCompletaFragment.this.getContext(), DetalhaAtendimentoActivity.class);
+                                intent.putExtra(DetalhaAtendimentoActivity.ARG_ATENDIMENTO, atendimento);
+                                startActivity(intent);
+                            }
+                        }
                     }
                 });
                 listaHorarios.setAdapter(agendaDiariaDisponivelAdapter);

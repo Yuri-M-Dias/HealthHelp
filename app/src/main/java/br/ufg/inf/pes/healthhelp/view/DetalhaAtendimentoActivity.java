@@ -22,6 +22,8 @@ import br.ufg.pes.healthhelp.R;
 
 public class DetalhaAtendimentoActivity extends AppCompatActivity {
 
+    public static final String ARG_ATENDIMENTO = "atendimento";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
