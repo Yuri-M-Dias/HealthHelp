@@ -80,5 +80,6 @@
     <string name="agendas_profissional_titulo_activity">Agendas</string>
     <string name="agendas_profissional_titulo_dialog">Carregando agendas...</string>
     <string name="agendas_profissional_mensagem_dialog">Aguarde enquando o sistema busca suas agendas</string>
+    <string name="agenda_profissionais">Agendas de Profissionais</string>
 
 </resources>

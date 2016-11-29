@@ -4,12 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.FrameLayout;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-import br.ufg.inf.pes.healthhelp.model.Agenda;
 import br.ufg.inf.pes.healthhelp.model.Atuacao;
 import br.ufg.inf.pes.healthhelp.model.LocalAtendimento;
 import br.ufg.inf.pes.healthhelp.service.AgendaService;
@@ -28,6 +30,18 @@ public class AgendasActivity extends AbstractListActivity<Atuacao> {
 
         getIntent().putExtra(AbstractListActivity.ARG_TITULO, getString(R.string.agendas_profissional_titulo_activity));
         super.onCreate(savedInstanceState);
+        Serializable serializable = getIntent().getSerializableExtra(ARG_PROFISSIONAL);
+
+        if(getIntent().getSerializableExtra(ARG_PROFISSIONAL) != null){
+
+            FrameLayout container = (FrameLayout) findViewById(R.id.container);
+
+            Button button = new Button(this);
+            button.setLayoutParams(new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT));
+            button.setText(R.string.agenda_profissionais);
+
+            container.addView(button);
+        }
 
         service = new AgendaService();
         locais = criarLocaisAtendimento();

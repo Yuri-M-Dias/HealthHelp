@@ -2,12 +2,15 @@ package br.ufg.inf.pes.healthhelp.view;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
+
+import java.io.Serializable;
 
 import br.ufg.inf.pes.healthhelp.model.Sessao;
 import br.ufg.pes.healthhelp.R;
@@ -71,6 +74,7 @@ public class HomeActivity extends AppCompatActivity {
     public void visualizarAgendas(View view) {
 
         Intent intent = new Intent(this, AgendasActivity.class);
+        intent.putExtra(AgendasActivity.ARG_PROFISSIONAL, (Serializable[]) null);
         startActivity(intent);
     }
 
