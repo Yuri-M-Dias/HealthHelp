@@ -40,8 +40,7 @@ public class Atuacao extends BaseObject {
     public Date getDataFim() {
         if (dataFim == null) {
             return new Date(System.currentTimeMillis());
-        }
-        else {
+        } else {
             return dataFim;
         }
     }

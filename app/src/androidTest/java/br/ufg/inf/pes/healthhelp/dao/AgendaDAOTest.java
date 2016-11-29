@@ -115,7 +115,7 @@ public class AgendaDAOTest {
         List<Agenda> listaAgendasEncontradas = (ArrayList<Agenda>) eventoDao;
         boolean buscouTodosComSucesso = buscouTodosComSucesso(listaAgendasEncontradas);
         assertTrue(buscouTodosComSucesso);
-        for (Agenda agendaLocal: agendasBusca) {
+        for (Agenda agendaLocal : agendasBusca) {
             agendaDAO.remover(agendaLocal);
         }
     }

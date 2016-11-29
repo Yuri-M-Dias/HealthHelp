@@ -16,10 +16,10 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 import org.greenrobot.eventbus.util.ThrowableFailureEvent;
 
-import br.ufg.inf.pes.healthhelp.util.Sessao;
 import br.ufg.inf.pes.healthhelp.model.Usuario;
 import br.ufg.inf.pes.healthhelp.model.event.DatabaseEvent;
 import br.ufg.inf.pes.healthhelp.service.AutenticacaoService;
+import br.ufg.inf.pes.healthhelp.util.Sessao;
 import br.ufg.pes.healthhelp.R;
 
 public class AutenticacaoActivity extends AppCompatActivity {

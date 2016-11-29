@@ -32,7 +32,8 @@ public class UsuarioDAO extends AbstractDAO<Usuario> {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         GenericTypeIndicator<HashMap<String, Usuario>> genericTypeIndicator =
-                            new GenericTypeIndicator<HashMap<String, Usuario>>() { };
+                            new GenericTypeIndicator<HashMap<String, Usuario>>() {
+                            };
                         HashMap<String, Usuario> usuarioHashMap = dataSnapshot.
                             getValue(genericTypeIndicator);
                         Usuario usuarioEncontrado = usuarioHashMap.values().iterator().next();
@@ -74,6 +75,7 @@ public class UsuarioDAO extends AbstractDAO<Usuario> {
         );
     }
 
-    public void inativar(Usuario usuario) { }
+    public void inativar(Usuario usuario) {
+    }
 
 }

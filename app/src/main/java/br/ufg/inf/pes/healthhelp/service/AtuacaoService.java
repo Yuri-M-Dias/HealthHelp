@@ -31,7 +31,7 @@ public class AtuacaoService {
         atuacaoDAO.buscarPorUsuario(usuario);
     }
 
-    public void solicitarAtuacoesPorId(String id){
+    public void solicitarAtuacoesPorId(String id) {
         atuacaoDAO.buscarPelaId(id);
     }
 
