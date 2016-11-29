@@ -144,21 +144,22 @@ public class DetalhaAtendimentoActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == AgendaActivity.SELECIONAR_HORARIO_REQUEST && resultCode == RESULT_OK) {
+            SimpleDateFormat dataFormatter = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat horaFormatter = new SimpleDateFormat("HH:mm");
+            Atendimento atendimento = (Atendimento) data.getSerializableExtra(AgendaActivity.ARG_ATENDIMENTO_AGENDADO);
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append(dataFormatter.format(atendimento.getHoraInicioCalendar().getTime()));
+            stringBuilder.append("\ndas ");
+            stringBuilder.append(horaFormatter.format(atendimento.getHoraInicioCalendar().getTime()));
+            stringBuilder.append(" às ");
+            stringBuilder.append(horaFormatter.format(atendimento.getHoraFimCalendar().getTime()));
 
-        SimpleDateFormat dataFormatter = new SimpleDateFormat("dd/MM/yyyy");
-        SimpleDateFormat horaFormatter = new SimpleDateFormat("HH:mm");
-        Atendimento atendimento = (Atendimento) data.getSerializableExtra(AgendaActivity.ARG_ATENDIMENTO_AGENDADO);
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(dataFormatter.format(atendimento.getHoraInicioCalendar().getTime()));
-        stringBuilder.append("\ndas ");
-        stringBuilder.append(horaFormatter.format(atendimento.getHoraInicioCalendar().getTime()));
-        stringBuilder.append(" às ");
-        stringBuilder.append(horaFormatter.format(atendimento.getHoraFimCalendar().getTime()));
+            ((TextView) findViewById(R.id.momento_atendimento)).setText(stringBuilder.toString());
 
-        ((TextView) findViewById(R.id.momento_atendimento)).setText(stringBuilder.toString());
-
-        Log.i(getClass().getCanonicalName(), "Atendimento carregado com sucesso!");
-        super.onActivityResult(requestCode, resultCode, data);
+            Log.i(getClass().getCanonicalName(), "Atendimento carregado com sucesso!");
+            super.onActivityResult(requestCode, resultCode, data);
+        }
     }
 
 }
