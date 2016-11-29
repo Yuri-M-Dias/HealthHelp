@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_novo_atendimento"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context="br.ufg.inf.pes.healthhelp.view.NovoAtendimentoActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar_novo_atendimento"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:elevation="4dp"
+            app:navigationIcon="@drawable/ic_arrow_back_black_24dp"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:subtitleTextColor="@android:color/background_light"
+            app:title="@string/activity_novo_atenidmento"></android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/activity_vertical_margin">
+
+            <TextView
+                android:id="@+id/textView_nome_local"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="@string/local_atendimento"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteLocalAtendimento"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Local"
+                android:padding="16dp"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/textView_profissional_saude"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="@string/profissional_saude"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteProfissionalSaude"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Profissional"
+                android:padding="16dp"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/textView_data_horario_atendimento"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="@string/data_horario_atendimento"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/button_dados_data_horario_atendimento"
+                style="@style/Widget.AppCompat.Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/cardview_light_background"
+                android:hint="Selecione a Data e Horário"
+                android:onClick="horarioAtendimento"
+                android:shadowColor="@color/cardview_light_background"
+                android:textAllCaps="false"
+                android:textSize="16dp" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

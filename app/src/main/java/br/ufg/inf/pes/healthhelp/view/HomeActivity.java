@@ -57,8 +57,8 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void agendarVisitaMedica(View view) {
-        CharSequence text = "Agendar visitas medicas nao implementado";
-        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, NovoAtendimentoActivity.class);
+        startActivity(intent);
     }
 
     public void visualizarAgendas(View view) {

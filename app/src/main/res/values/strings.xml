@@ -6,6 +6,7 @@
     <string name="hospital">Local de Atendimento</string>
     <string name="acao_indefinida">Indefinido</string>
     <string name="acao_salvar">Salvar</string>
+    <string name="acao_marcar">Marcar</string>
     <string name="salvar">SALVAR</string>
     <string name="acao_editar">Editar</string>
     <string name="endereco">Endereço</string>
@@ -23,6 +24,10 @@
 
     <!-- Strings relacionadas a formulários em geral -->
     <string name="erro_campo_obrigatorio">Este campo é obrigatório</string>
+    <string name="activity_novo_atenidmento">Novo Atendimento</string>
+    <string name="local_atendimento">Local Atendimento</string>
+    <string name="profissional_saude">Profissional de Saúde</string>
+    <string name="data_horario_atendimento">Data e Horário de Atendimento</string>
 
     <!-- Strings para cards -->
     <string name="visitas_medicas">Visitas Medicas</string>
