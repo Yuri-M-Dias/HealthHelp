@@ -22,7 +22,6 @@ import java.util.ArrayList;
 
 import br.ufg.inf.pes.healthhelp.model.LocalAtendimento;
 import br.ufg.inf.pes.healthhelp.model.PeriodoTempo;
-import br.ufg.inf.pes.healthhelp.model.event.DatabaseEvent;
 import br.ufg.inf.pes.healthhelp.service.LocalAtendimentoService;
 import br.ufg.pes.healthhelp.R;
 
@@ -190,10 +189,11 @@ public class FormularioLocalAtendimentoActivity extends AppCompatActivity {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onDatabaseEvent(DatabaseEvent<String> databaseEvent) {
+    public void onDatabaseEvent(String databaseEvent) {
         progressDialog.dismiss();
-        Toast.makeText(this, databaseEvent.getObjeto(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, databaseEvent, Toast.LENGTH_SHORT).show();
         EventBus.getDefault().unregister(this);
         finish();
     }
+
 }

@@ -88,8 +88,11 @@ public class LocalAtendimentoActivity extends AppCompatActivity {
         ((TextView) findViewById(R.id.telefone_hospital)).setText(localAtendimento.getTelefone());
 
         String horariosAtendimentoLegivel = "";
-        for (PeriodoTempo periodoTempo : localAtendimento.getHorariosAtendimento()) {
-            horariosAtendimentoLegivel += periodoTempo.toString() + "\n";
+
+        if (localAtendimento.getHorariosAtendimento() != null) {
+            for (PeriodoTempo periodoTempo : localAtendimento.getHorariosAtendimento()) {
+                horariosAtendimentoLegivel += periodoTempo.toString() + "\n";
+            }
         }
         ((TextView) findViewById(R.id.agendamento_hospital)).setText(horariosAtendimentoLegivel);
 

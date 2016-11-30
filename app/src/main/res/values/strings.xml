@@ -6,6 +6,7 @@
     <string name="hospital">Local de Atendimento</string>
     <string name="acao_indefinida">Indefinido</string>
     <string name="acao_salvar">Salvar</string>
+    <string name="acao_marcar">Marcar</string>
     <string name="salvar">SALVAR</string>
     <string name="acao_editar">Editar</string>
     <string name="endereco">Endereço</string>
@@ -23,6 +24,10 @@
 
     <!-- Strings relacionadas a formulários em geral -->
     <string name="erro_campo_obrigatorio">Este campo é obrigatório</string>
+    <string name="activity_novo_atenidmento">Novo Atendimento</string>
+    <string name="local_atendimento">Local Atendimento</string>
+    <string name="profissional_saude">Profissional de Saúde</string>
+    <string name="data_horario_atendimento">Data e Horário de Atendimento</string>
 
     <!-- Strings para cards -->
     <string name="visitas_medicas">Visitas Medicas</string>
@@ -64,6 +69,14 @@
     <string name="titulo_carregamento_locais">Carregando...</string>
     <string name="mensagem_carregamento_locais">Carregando lista de locais de atendimento</string>
 
+
+    <!-- Strings relacionadas à view atuações -->
+    <string name="atuacoes">Atuações</string>
+    <string name="atuacoes_titulo_dialog">Carregando atuações...</string>
+    <string name="atuacoes_mensagem_dialog">Aguarde enquanto o sistema carrega a lista atuações</string>
+    <string name="atuacoes_atuais">Atuações Atuais</string>
+    <string name="atuacoes_anteriores">Atuações Anteriores</string>
+
     <string name="action_settings">Settings</string>
 
     <!-- Strings relacionadas à view de agenda -->
@@ -75,6 +88,7 @@
     <string name="atuacoes_profissionais_saude_titulo_activity">Profissionais de Saúde</string>
     <string name="atuacoes_profissionais_saude_titulo_dialog">Carregando profissionais de saúde...</string>
     <string name="atuacoes_profissionais_saude_mensagem_dialog">Aguarde enquanto o sistema carrega os a lista de profissionais de saúde dos locais de atendimento nos quais você trabalha</string>
+    <string name="activity_detalhe_de_atendimento">Detalhe de Atendimento</string>
 
     <!-- Strings relacionados à view de agendas dos profissionais -->
     <string name="agendas_profissional_titulo_activity">Agendas</string>

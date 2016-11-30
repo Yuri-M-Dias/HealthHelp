@@ -30,11 +30,11 @@ public class PeriodoTempo implements Serializable {
         diasSemana = new ArrayList<>();
     }
 
-    public PeriodoTempo(Calendar horaInicio, Calendar horaFim, Calendar dataInicio, Calendar dataFim, List<DayOfWeek> diasSemana) {
-        this.horaInicio = horaInicio;
-        this.horaFim = horaFim;
-        this.dataInicio = dataInicio;
-        this.dataFim = dataFim;
+    public PeriodoTempo(String horaInicio, String horaFim, String dataInicio, String dataFim, List<DayOfWeek> diasSemana) {
+        setHoraInicio(horaInicio);
+        setHoraFim(horaFim);
+        setDataInicio(dataInicio);
+        setDataFim(dataFim);
         this.diasSemana = diasSemana;
     }
 

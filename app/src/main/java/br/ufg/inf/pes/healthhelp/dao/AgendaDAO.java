@@ -1,5 +1,18 @@
 package br.ufg.inf.pes.healthhelp.dao;
 
+import android.util.Log;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.GenericTypeIndicator;
+import com.google.firebase.database.ValueEventListener;
+
+import org.greenrobot.eventbus.EventBus;
+
+import java.util.HashMap;
+import java.util.Iterator;
+
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.util.AsyncExecutor;
 
@@ -12,115 +25,66 @@ import br.ufg.inf.pes.healthhelp.model.Atuacao;
 import br.ufg.inf.pes.healthhelp.model.LocalAtendimento;
 import br.ufg.inf.pes.healthhelp.model.event.DatabaseEvent;
 
-/**
- * Esta classe é responsável por operações de banco de dados relacionadas a uma {@link Agenda}.
- */
 public class AgendaDAO extends AbstractDAO<Agenda> {
 
     public AgendaDAO() {
-        super(AgendaDAO.class.getCanonicalName(), "agenda");
+        super(AgendaDAO.class.getCanonicalName(), "agenda", Agenda.class);
     }
 
-    @Override
-    public void buscarTodos() {
-        //TODO
+    /**
+     * construtor usado para testes
+     *
+     * @param reference referencia do database do firebase
+     */
+    public AgendaDAO(DatabaseReference reference) {
+        super(AgendaDAO.class.getCanonicalName(), "agenda", Agenda.class);
+        setDatabaseReference(reference);
     }
 
-    @Override
-    public void buscarPelaId(String id) {
-        //TODO
-        AsyncExecutor.create().execute(
-            new AsyncExecutor.RunnableEx() {
+    /**
+     * Este método cria um evento com a primeira agenda que corresponde ao nome no firebase,
+     * mesmo que mais de um seja encontrada
+     *
+     * @param nomeAgenda nome da agenda que se deseja obter
+     */
+    public void buscarPeloNome(String nomeAgenda) {
+        getDatabaseReference()
+            .child(DATABASE_CHILD)
+            .orderByChild("nome")
+            .equalTo(nomeAgenda)
+            .addListenerForSingleValueEvent(
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        Log.w(TAG, "SNAPSHOT: " + dataSnapshot);
+                        // Agenda agenda = dataSnapshot.getValue(Agenda.class);
+                        GenericTypeIndicator<HashMap<String, Agenda>> t =
+                            new GenericTypeIndicator<HashMap<String, Agenda>>() {
+                            };
+                        HashMap<String, Agenda> agendasEncontradas = dataSnapshot.getValue(t);
 
-                @Override
-                public void run() throws Exception {
+                        Iterator it = agendasEncontradas.values().iterator();
 
-                    List<Atuacao> atuacoes = new ArrayList<Atuacao>();
-                    Atuacao atuacao = new Atuacao();
-                    List<Agenda> agendas = new ArrayList<Agenda>();
-                    Agenda agenda = new Agenda();
-                    agenda.setNome("Cirurgias");
-                    agenda.setId("22");
-                    agendas.add(agenda);
+                        Agenda agenda = null;
+                        if (it.hasNext()) {
+                            agenda = (Agenda) it.next();
+                            //Salva no objeto agenda o id do banco gerado pelo firebase
+                            agenda.setId(agendasEncontradas.keySet().iterator().next());
+                            Log.w(TAG, "agenda buscada pelo nome: " + agenda.getId());
+                        } else {
+                            Log.w(TAG, "agenda não encontrada");
+                        }
 
-                    agenda = new Agenda();
-                    agenda.setNome("Consultas");
-                    agenda.setId("33");
-                    agendas.add(agenda);
+                        EventBus.getDefault().post(agenda);
+                    }
 
-                    atuacao.setAgendas(agendas);
-                    atuacoes.add(atuacao);
-
-                    agendas = new ArrayList<Agenda>();
-                    agenda = new Agenda();
-                    agenda.setNome("teste");
-                    agenda.setId("2");
-                    agendas.add(agenda);
-
-                    atuacao = new Atuacao();
-                    atuacao.setAgendas(agendas);
-                    atuacoes.add(atuacao);
-
-                    agendas = new ArrayList<Agenda>();
-                    agenda = new Agenda();
-                    agenda.setNome("Consultas");
-                    agenda.setId("30");
-                    agendas.add(agenda);
-
-                    atuacao = new Atuacao();
-                    atuacao.setAgendas(agendas);
-                    atuacoes.add(atuacao);
-
-
-                    Thread.sleep(2000);
-
-                    EventBus.getDefault().post(new DatabaseEvent<>(agendas));
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        Log.e(TAG, "ValueListener: onCancelled:", databaseError.toException());
+                        EventBus.getDefault().post(new DatabaseEvent<>(databaseError));
+                    }
                 }
-            }
-        );
-    }
-
-    public void buscarPorAgendas(final List<LocalAtendimento> localAtendimentos){
-
-        AsyncExecutor.create().execute(
-            new AsyncExecutor.RunnableEx(){
-
-                @Override
-                public void run() throws Exception {
-
-                    List<Atuacao> atuacoes = new ArrayList<Atuacao>();
-                    List<Agenda> agendas = new ArrayList<Agenda>();
-                    Atuacao atuacao = new Atuacao();
-
-                    Agenda agenda = new Agenda();
-                    agenda.setNome("Cirurgias");
-                    agendas.add(agenda);
-
-                    agenda = new Agenda();
-                    agenda.setNome("Consultas");
-                    agendas.add(agenda);
-
-                    atuacao.setLocalAtendimento(localAtendimentos.get(0));
-                    atuacao.setAgendas(agendas);
-                    atuacoes.add(atuacao);
-                }
-            }
-        );
-    }
-
-    @Override
-    public void inserir(Agenda objeto) {
-        //TODO
-    }
-
-    @Override
-    public void remover(Agenda objeto) {
-        //TODO
-    }
-
-    @Override
-    public void atualizar(Agenda objeto) {
-        //TODO
+            );
     }
 
 }
