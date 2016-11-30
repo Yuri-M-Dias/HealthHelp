@@ -14,7 +14,11 @@ import java.util.List;
 
 import br.ufg.inf.pes.healthhelp.model.Atuacao;
 import br.ufg.inf.pes.healthhelp.model.LocalAtendimento;
+import br.ufg.inf.pes.healthhelp.model.Profissional;
+import br.ufg.inf.pes.healthhelp.model.Secretaria;
+import br.ufg.inf.pes.healthhelp.model.Usuario;
 import br.ufg.inf.pes.healthhelp.service.AgendaService;
+import br.ufg.inf.pes.healthhelp.util.Sessao;
 import br.ufg.inf.pes.healthhelp.view.adapters.ItensSeparadoresAdapter;
 import br.ufg.pes.healthhelp.R;
 
@@ -28,19 +32,20 @@ public class AgendasActivity extends AbstractListActivity<Atuacao> {
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
-        getIntent().putExtra(AbstractListActivity.ARG_TITULO, getString(R.string.agendas_profissional_titulo_activity));
+        //getIntent().putExtra(AbstractListActivity.ARG_TITULO, getString(R.string.agendas_profissional_titulo_activity));
         super.onCreate(savedInstanceState);
-        Serializable serializable = getIntent().getSerializableExtra(ARG_PROFISSIONAL);
 
-        if(getIntent().getSerializableExtra(ARG_PROFISSIONAL) != null){
+        Usuario usuariologado = Sessao.getUsuario(this);
+        for (Profissional profissional: usuariologado.getOcupacoes()){
+            if (profissional instanceof Secretaria){
+                FrameLayout container = (FrameLayout) findViewById(R.id.container);
 
-            FrameLayout container = (FrameLayout) findViewById(R.id.container);
+                Button button = new Button(this);
+                button.setLayoutParams(new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT));
+                button.setText(R.string.agenda_profissionais);
 
-            Button button = new Button(this);
-            button.setLayoutParams(new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT));
-            button.setText(R.string.agenda_profissionais);
-
-            container.addView(button);
+                container.addView(button);
+            }
         }
 
         service = new AgendaService();

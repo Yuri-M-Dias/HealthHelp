@@ -21,8 +21,8 @@ public class AgendaService {
         agendaDAO.buscarPelaId(id);
     }
 
-    public void solicitarListaAgendas(List<LocalAtendimento> locais){
-        agendaDAO.buscarPorAgendas(locais);
+    public void solicitarListaAgendas(List<LocalAtendimento> locais) {
+
     }
 
     void salvar(Agenda agenda) {
